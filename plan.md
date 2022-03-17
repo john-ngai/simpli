@@ -69,8 +69,19 @@ You need to design the database ERD and define what are the tables and their rel
 What are the technologies you’re going to use to develop for your app. You need to think about:
 
 * Front-End
+  * React
+  * Material UI
+  * SASS (maybe)
+  * react-dnd (stretch)
+
 * Back-End
+  * Express
+  * bcrypt
+  * cookie-session
+  * Node.js
+
 * Database
+  * PostgreSQL or MongoDB
 
 **Deliverable:** Stack choices document
 
