@@ -18,15 +18,37 @@ In the planning phase, you’ll prepare several documents to help guide your tea
 You should have a document describing your project idea. In other words, what your project is all about. It should contain at least the following:
 
 * Project title
+  * Project Tracker (better name TBA)
 * Project description - What problem your app solves
+  * Description:
+    * General all-purpose project tracker, ranging from small personal goals to large-scale
+    enterprise projects.
+  * Solutions:
+    1. Plan deliverables
+    2. Tracking tasks and progress
+    3. Assign and track tasks to team members
 * Target audience - Your app will be useful to whom?
+  * Everyone
 * Team members
+  * Neale Taylor, Vivian Zhang, John Ming
 
 **Deliverable:** Project description document
 
 ## b) User Stories
 
 User stories allow you to draft the high-level requirements based on the user needs. It should describe the interaction of the user and the app.
+
+* Users can create a new project title, description, category.
+* Users can create, update, or delete project deliverables.
+* Users can create, update, or delete tasks.
+* Tasks can be assigned a priority status.
+* **Stretch:** Tasks can be assigned a task order number or assigned as unordered.
+* Users can register and login/logout of an account.
+* Users can add other registered users as team members
+* Users can assign tasks to the scheduler.
+* **Stretch:** Users can mark a estimated completion date for each task.
+* **Stretch:** Users can mark a task on the scheduler as not started, in progress, completed.
+* User can navigate to a home page and see a project's summary (i.e. Name, deliverables, tasks, progress percentage/bars)
 
 **Deliverable:** User stories document
 
