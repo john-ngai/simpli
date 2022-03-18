@@ -13,14 +13,12 @@ function App() {
   });
 
   useEffect(() => {
-    axios.get('http://localhost:8080/users')
+    axios.get('/users')
     .then(res => {
-
       setState(prev => ({
         ...prev,
         users: res.data
       }));
-
     })
   }, [])
 
