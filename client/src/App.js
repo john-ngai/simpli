@@ -70,9 +70,11 @@ function App() {
       
       </section>
       <section className="deliverables">
-        <DeliverableList 
-          deliverables={getDeliverablesForProject(state, state.project)}
-        />
+        <nav>
+          <DeliverableList 
+            deliverables={getDeliverablesForProject(state, state.project)}
+          />
+        </nav>
       </section>
     </main>
   );
