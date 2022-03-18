@@ -58,13 +58,13 @@ function App() {
           <nav>
             <li className="project_list_item">
               <span className="project_name">
-                <Link to="/register">Register</Link>
+
               </span>
             </li>
 
             <li className="project_list_item">
               <span className="project_name">
-                <Link to="/login">Login</Link>
+
               </span>
             </li>
           </nav>
