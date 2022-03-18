@@ -5,19 +5,26 @@ import useAppData from './hooks/useAppData';
 import ProjectList from './components/ProjectList';
 
 function App() {
-  const { state } = useAppData();
+  const { 
+    state, 
+    setProject 
+  } = useAppData();
 
   // const userList = (state.users).map((user) => {
   //   console.log(user)
   //   return (user.name)
   // })
 
+
+  
   return (
     <main className="layout">
       <section className="projects">
         <nav>
           <ProjectList 
             projects={state.projects}
+            value={state.project}
+            onChange={setProject}
           />
         </nav>
       </section>

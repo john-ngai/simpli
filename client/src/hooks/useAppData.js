@@ -12,6 +12,8 @@ export default function useAppData() {
     users: [],
   });
 
+  const setProject = project => setState({ ...state, project });
+
   useEffect(() => {
     Promise.all([
       axios.get('/projects'),
@@ -28,5 +30,9 @@ export default function useAppData() {
 
   appData.state = state;
   
-  return appData;
+  // return appData
+  return {
+    state, 
+    setProject
+  };
 }
