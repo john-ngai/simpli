@@ -21,8 +21,10 @@ function App() {
             projects={state.projects}
           />
         </nav>
+        
+        
+        {/* REMINDER: Remove test code */}
         <nav>
-          {/* REMINDER: Remove test code */}
           <li className="project_list_item">
             <span className="project_name">
               <Link to="/register">Register</Link>
@@ -34,8 +36,10 @@ function App() {
               <Link to="/login">Login</Link>
             </span>
           </li>
-          {/* REMINDER: Remove test code */}
         </nav>
+        {/* REMINDER: Remove test code */}
+      
+      
       </section>
       <section className="deliverables">
         <nav>
