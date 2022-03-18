@@ -18,6 +18,25 @@ function App() {
   // })
 
 
+  const getDeliverablesForProject = function(state, project) {
+    let result = [];
+    let projects = state.projects
+    let deliverables = state.deliverables
+
+    for (const selectedProject of projects) {
+      if (selectedProject.name === project) {
+        // console.log(selectedProject)
+        for (const selectedDelivs of deliverables) {
+          if (selectedDelivs.project_id === selectedProject.id) {
+            console.log("Deliverable: ", selectedDelivs)
+            result.push(selectedDelivs)
+          }
+        }
+      }
+    }
+    return result
+  }
+
   
   return (
     <main className="layout">
@@ -32,7 +51,7 @@ function App() {
       </section>
       <section className="deliverables">
         <DeliverableList 
-          deliverables={state.deliverables}
+          deliverables={getDeliverablesForProject(state, state.project)}
         />
       </section>
     </main>

@@ -5,6 +5,7 @@ export default function useAppData() {
   const appData = {};
 
   const [state, setState] = useState({
+    project: 'Spring Cleaning',
     projects: [],
     deliverables: [],
     tasks: [],
