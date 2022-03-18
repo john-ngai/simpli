@@ -20,5 +20,4 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter(db));
-
 module.exports = app;
