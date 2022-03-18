@@ -15,18 +15,20 @@ function App() {
   
 
   useEffect(() => {
-    axios.get('/users')
-    .then(res => {
-      // console.log(res.data) 
-      setState(prev => ({...prev, users: res.data}))
-      console.log(state.users)
+    Promise.all([
+      axios.get('/users')
+    ])
+    .then((all) => {
+      console.log(all[0].data) 
+      setState(prev => ({...prev, users: all[0].data}))
     })
   }, [])
 
   return (
     <div className="App">
       <h1>Hello World</h1>
-      <p>{!data ? "Loading.." : data}</p>
+      {console.log(state.users[0].name)}
+      <p>{state.users[0].email}</p>
     </div>
   );
 }
