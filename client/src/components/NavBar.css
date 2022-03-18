@@ -10,3 +10,7 @@
 .login-nav {
   flex-direction: flex-end;
 }
+
+.login-nav :link {
+  padding: 10px;
+}
