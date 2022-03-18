@@ -13,7 +13,7 @@ export default function ProjectList(props) {
   })
 
   return (
-    <ul>
+    <ul className="project_item_list">
       {projectInfo}
     </ul>
   )

@@ -14,16 +14,24 @@ function App() {
 
   return (
     <main className="layout">
-      <section className="sidebar">
-        <h1>Hello World</h1>
+      <section className="projects">
         <nav>
-        <ProjectList 
-          projects={state.projects}
-        />
+          <ProjectList 
+            projects={state.projects}
+          />
         </nav>
       </section>
-      <section className="summary">
-        {/* {userList} */}
+      <section className="deliverables">
+        <nav>
+          <li className="deliverable_list_item">
+            <span className="deliverable_name">Clean master bedroom</span>
+            <span className="deliverable_description"></span>
+          </li>
+          <li className="deliverable_list_item">
+            <span className="deliverable_name">Clean master bedroom</span>
+            <span className="deliverable_description"></span>
+          </li>
+        </nav>
       </section>
     </main>
   );

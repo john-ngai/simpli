@@ -1,0 +1,81 @@
+.layout {
+  border: 5px solid black;
+  display: flex;
+  flex-direction: row;
+  margin: 75px 10px 0 10px;
+  height: 1000px;
+
+}
+
+.projects {
+  border: 5px solid gray;
+  width: 20%;
+}
+
+.deliverables {
+  border: 5px solid gray;
+  width: 80%;
+}
+
+.project_list_item {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 100%;
+  margin-bottom: 1px;
+  transition: 0.2s;
+}
+
+.deliverable_list_item {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  width: 100%;
+  margin-bottom: 1px;
+  transition: 0.2s;
+}
+
+.project_list_item:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+.deliverable_list_item:hover {
+  /* background-color: rgb(200, 200, 200); */
+  background-color: lightcyan;
+}
+
+.project_name {
+  /* border: 1px solid blue; */
+  height: 50%;
+  margin: 0 5px 0 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.deliverable_name {
+  /* border: 1px solid blue; */
+  height: 50%;
+  margin: 0 5px 0 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.project_description {
+  /* border: 1px solid blue; */
+  height: 50%;
+  margin: 0 10px 0 10px;
+  font-size: 12px;
+}
+
+.deliverable_description {
+  /* border: 1px solid blue; */
+  height: 50%;
+  margin: 0 10px 0 10px;
+  font-size: 12px;
+}
+
+.project_item_list {
+  padding: 0;
+}
