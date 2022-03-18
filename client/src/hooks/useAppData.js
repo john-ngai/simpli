@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useAppData() {
   const appData = {};
 
   const [state, setState] = useState({
-    project: "Spring Cleaning",
     projects: [],
     deliverables: [],
     tasks: [],
     teams: [],
-    users: []
+    users: [],
   });
 
   useEffect(() => {
@@ -19,7 +18,15 @@ export default function useAppData() {
       axios.get('/deliverables'),
       axios.get('/tasks'),
       axios.get('/teams'),
-      axios.get('/user'),
-    ]).then(/**/)
-  })
+      axios.get('/users')
+    ])
+    .then((all) => {
+      const [projects, deliverables, tasks, teams, users] = all;
+      setState(prev => ({...prev, projects: projects.data, deliverables: deliverables.data, tasks: tasks.data, teams: teams.data, users: users.data}))
+    })
+  }, [])
+
+  appData.state = state;
+  
+  return appData;
 }
