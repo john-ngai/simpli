@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const user = props.users[0].name;
   return (
     <nav>
       <div className="top-nav">
@@ -17,6 +18,7 @@ export default function Navbar() {
           <Link to="/login">Login</Link>
           {/* <Link to="/logout"> Logout</Link> */}
         </span>
+        <p className="nav-tab">Logged in as: {user}</p>
       </div>
     </nav>
   )
