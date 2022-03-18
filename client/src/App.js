@@ -7,10 +7,10 @@ import ProjectList from './components/ProjectList';
 function App() {
   const { state } = useAppData();
 
-  const userList = (state.users).map((user) => {
-    console.log(user)
-    return (user.name)
-  })
+  // const userList = (state.users).map((user) => {
+  //   console.log(user)
+  //   return (user.name)
+  // })
 
   return (
     <main className="layout">
@@ -23,7 +23,7 @@ function App() {
         </nav>
       </section>
       <section className="summary">
-        {userList}
+        {/* {userList} */}
       </section>
     </main>
   );
