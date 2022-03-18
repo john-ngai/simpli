@@ -3,13 +3,23 @@ import {React, useState, useEffect} from 'react';
 import axios from 'axios';
 
 function App() {
-  const [data, setData] = useState("nothing");
+  const [data, setData] = useState("");
+  const [state, setState] = useState({
+    projects: [],
+    deliverables: [],
+    tasks: [],
+    teams: [],
+    users: [],
+  });
+
+  
 
   useEffect(() => {
     axios.get('/users')
     .then(res => {
-      console.log(res.data[0]) 
-      setData(res.data[0].email)
+      // console.log(res.data) 
+      setState(prev => ({...prev, users: res.data}))
+      console.log(state.users)
     })
   }, [])
 
