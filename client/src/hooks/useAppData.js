@@ -23,7 +23,14 @@ export default function useAppData() {
     ])
     .then((all) => {
       const [projects, deliverables, tasks, teams, users] = all;
-      setState(prev => ({...prev, projects: projects.data, deliverables: deliverables.data, tasks: tasks.data, teams: teams.data, users: users.data}))
+      setState(prev => ({
+        ...prev,
+        projects: projects.data,
+        deliverables: deliverables.data,
+        tasks: tasks.data,
+        teams: teams.data,
+        users: users.data
+      }))
     })
   }, [])
 
