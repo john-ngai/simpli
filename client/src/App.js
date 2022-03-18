@@ -12,21 +12,23 @@ function App() {
     users: [],
   });
 
-  
-
   useEffect(() => {
-    axios.get('/users')
+    axios.get('http://localhost:8080/users')
     .then(res => {
-      // console.log(res.data) 
-      setState(prev => ({...prev, users: res.data}))
-      console.log(state.users)
+
+      setState(prev => ({
+        ...prev,
+        users: res.data
+      }));
+
     })
   }, [])
 
   return (
     <div className="App">
       <h1>Hello World</h1>
-      <p>{!data ? "Loading.." : data}</p>
+      {/* <p>{!data.name ? "Loading.." : data.name}</p>  */}
+      {console.log(state.users)}
     </div>
   );
 }
