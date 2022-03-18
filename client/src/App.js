@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar users={state.users} />
       <main className="layout">
         <section className="projects">
           <nav>
