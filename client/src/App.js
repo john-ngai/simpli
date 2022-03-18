@@ -53,24 +53,6 @@ function App() {
             />
           </nav>
 
-
-          {/* REMINDER: Remove test code */}
-          <nav>
-            <li className="project_list_item">
-              <span className="project_name">
-
-              </span>
-            </li>
-
-            <li className="project_list_item">
-              <span className="project_name">
-
-              </span>
-            </li>
-          </nav>
-          {/* REMINDER: Remove test code */}
-
-
         </section>
         <section className="deliverables">
           <nav>
