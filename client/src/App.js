@@ -12,23 +12,24 @@ function App() {
     users: [],
   });
 
-  
-
   useEffect(() => {
     Promise.all([
+      axios.get('/projects'),
+      axios.get('/deliverables'),
+      axios.get('/tasks'),
+      axios.get('/teams'),
       axios.get('/users')
     ])
     .then((all) => {
-      console.log(all[0].data) 
-      setState(prev => ({...prev, users: all[0].data}))
+      const [projects, deliverables, tasks, teams, users] = all;
+      setState(prev => ({...prev, projects: projects.data, deliverables: deliverables.data, tasks: tasks.data, teams: teams.data, users: users.data}))
     })
   }, [])
-
   return (
     <div className="App">
       <h1>Hello World</h1>
-      {console.log(state.users[0].name)}
-      <p>{state.users[0].email}</p>
+      {console.log(state)}
+      {/* {state.users[0].name} */}
     </div>
   );
 }
