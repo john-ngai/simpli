@@ -8,6 +8,8 @@ export default function ProjectList(props) {
         key={project.id}
         name={project.name}
         description={project.description}
+        selected={project.name === props.value}
+        setProject={props.onChange}
       />
     )
   })
