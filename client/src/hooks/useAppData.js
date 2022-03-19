@@ -14,7 +14,6 @@ export default function useAppData() {
   });
 
   const setProject = project => setState({ ...state, project });
-  const setUser = user => setState({ ...state, user });
 
   useEffect(() => {
     Promise.all([
@@ -42,7 +41,6 @@ export default function useAppData() {
   // return appData
   return {
     state,
-    setProject,
-    setUser
+    setProject
   };
 }
