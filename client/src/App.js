@@ -12,7 +12,8 @@ import TaskList from './components/TaskList';
 function App() {
   const {
     state,
-    setProject
+    setProject,
+    setDeliverable
   } = useAppData();
 
   // const userList = (state.users).map((user) => {
@@ -81,6 +82,8 @@ function App() {
           <nav>
             <DeliverableList
               deliverables={getDeliverablesForProject(state, state.project)}
+              value={state.deliverable}
+              onChange={setDeliverable}
             />
           </nav>
         </section>

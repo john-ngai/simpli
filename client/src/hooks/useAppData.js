@@ -14,6 +14,8 @@ export default function useAppData() {
   });
 
   const setProject = project => setState({ ...state, project });
+  const setDeliverable = deliverable => setState({ ...state, deliverable });
+
 
   useEffect(() => {
     Promise.all([
@@ -41,6 +43,7 @@ export default function useAppData() {
   // return appData
   return {
     state, 
-    setProject
+    setProject,
+    setDeliverable
   };
 }
