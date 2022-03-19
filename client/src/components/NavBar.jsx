@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "./NavBar.css";
 
 export default function Navbar(props) {
-  console.log(props.users[0]);
+  // console.log(props.users[0]);
   // const user = props.users[0].name;
   return (
     <nav>

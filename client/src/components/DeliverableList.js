@@ -8,6 +8,8 @@ export default function DeliverableList(props) {
         key={deliverable.id}
         name={deliverable.name}
         description={deliverable.description}
+        selected={deliverable.name === props.value}
+        setDeliverable={props.onChange}
       />
     )
   })
