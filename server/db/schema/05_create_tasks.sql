@@ -5,6 +5,7 @@ CREATE TABLE tasks (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
+  priority BOOLEAN,
   status VARCHAR(255) NOT NULL,
   deliverable_id INTEGER REFERENCES deliverables (id) ON DELETE CASCADE
 );
