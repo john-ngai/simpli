@@ -3,21 +3,10 @@ import axios from 'axios';
 import useAppData from '../hooks/useAppData';
 
 export default function Register() {
-  const {
-    state,
-    setUser
-  } = useAppData();
+  const { state } = useAppData();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-
-  function handleChange(event) {
-    event.preventDefault();
-    // const value = event.target.value;
-
-  }
-
 
   return (
     <main>
@@ -25,15 +14,15 @@ export default function Register() {
       <div>
         <form onSubmit={(e) => e.preventDefault()} >
           <label>Name:
-          <input type="text" value={name} onChange={handleChange} />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
           </label>
           <br />
           <label>Email:
-            <input type="text" user='email' value={email} />
+            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
           </label>
           <br />
           <label>Password:
-            <input type="text" user='password' value={password} />
+            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
           </label>
           <br />
           <button type="submit">Register</button>
