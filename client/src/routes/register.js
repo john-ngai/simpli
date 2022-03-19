@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { FormGroup, FormControl, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { FormGroup, FormControl, TextField } from '@mui/material';
 import useAppData from '../hooks/useAppData';
 
 export default function Register() {
@@ -45,8 +45,8 @@ export default function Register() {
     }
     console.log("New user registered!", user);
 
-    return axios.put('http://localhost:8080/users', { user })
-      .then(res => console.log('success?', res))
+    axios.put('http://localhost:8080/register/users', { user })
+      .then(res => console.log('success?', res.data))
       .then(navigate('/'))
       .catch(err => console.log('failed?', err));
 
