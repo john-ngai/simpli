@@ -10,7 +10,8 @@ module.exports = (db) => {
   });
 
   // PUT /users
-  router.put('/users', (req, res) => {
+  router.put('/', (req, res) => {
+    console.log("Inside PUT /register");
     const { name, email, password, team_id } = req.body;
     const values = [name, email, password, team_id];
     const command = `
@@ -18,10 +19,9 @@ module.exports = (db) => {
     VALUES ($1, $2, $3, $4)
     RETURNING *;
     `;
-    // return db.query(command, values)
-    //   .then(data => res.send(data.rows[0]))
-    //   .catch(err => console.log(err));
-    console.log("PUT/users");
+    return db.query(command, values)
+      .then(data => res.send(data.rows[0]))
+      .catch(err => console.log(err));
   })
 
   return router;
