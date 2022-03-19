@@ -5,12 +5,13 @@ import axios from 'axios';
 import useAppData from './hooks/useAppData';
 
 import ProjectList from './components/ProjectList';
+import NavBar from './components/NavBar';
 import DeliverableList from './components/DeliverableList';
 
 function App() {
-  const { 
-    state, 
-    setProject 
+  const {
+    state,
+    setProject
   } = useAppData();
 
   // const userList = (state.users).map((user) => {
@@ -38,45 +39,30 @@ function App() {
     return result
   }
 
-  
-  return (
-    <main className="layout">
-      <section className="projects">
-        <nav>
-          <ProjectList
-            projects={state.projects}
-            value={state.project}
-            onChange={setProject}
-          />
-        </nav>
-        
-        
-        {/* REMINDER: Remove test code */}
-        <nav>
-          <li className="project_list_item">
-            <span className="project_name">
-              <Link to="/register">Register</Link>
-            </span>
-          </li>
 
-          <li className="project_list_item">
-            <span className="project_name">
-              <Link to="/login">Login</Link>
-            </span>
-          </li>
-        </nav>
-        {/* REMINDER: Remove test code */}
-      
-      
-      </section>
-      <section className="deliverables">
-        <nav>
-          <DeliverableList 
-            deliverables={getDeliverablesForProject(state, state.project)}
-          />
-        </nav>
-      </section>
-    </main>
+  return (
+    <div>
+      <NavBar users={state.users} />
+      <main className="layout">
+        <section className="projects">
+          <nav>
+            <ProjectList
+              projects={state.projects}
+              value={state.project}
+              onChange={setProject}
+            />
+          </nav>
+
+        </section>
+        <section className="deliverables">
+          <nav>
+            <DeliverableList
+              deliverables={getDeliverablesForProject(state, state.project)}
+            />
+          </nav>
+        </section>
+      </main>
+    </div>
   );
 }
 
