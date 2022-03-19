@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function NewProject() {
   const { state } = useAppData();
   const navigate = useNavigate();
-  
+
   const projects = state.projects;
 
   const [name, setName] = useState('');
