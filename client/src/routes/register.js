@@ -24,6 +24,9 @@ export default function Register() {
       setError("A password is required");
       return;
     }
+
+    setError("");
+
   }
 
   return (
@@ -33,18 +36,18 @@ export default function Register() {
         <section className="user_validation">{error}</section>
         <form onSubmit={(e) => e.preventDefault()} >
           <label>Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
           </label>
           <br />
           <label>Email:
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
           </label>
           <br />
           <label>Password:
-            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
           </label>
           <br />
-          <button type="submit">Register</button>
+          <button type="submit" onChange={validation}>Register</button>
         </form>
       </div>
     </main >
