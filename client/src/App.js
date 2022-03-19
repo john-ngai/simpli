@@ -53,7 +53,8 @@ function App() {
           if (selectedDelivs.project_id === selectedProject.id) {
             for (const selectedTasks of tasks) {
               if (selectedTasks.deliverable_id === selectedDelivs.id) {
-                console.log(selectedTasks);
+                console.log("Task: ", selectedTasks)
+                result.push(selectedTasks)
               } 
             }
           }
@@ -85,6 +86,11 @@ function App() {
               value={state.deliverable}
               onChange={setDeliverable}
             />
+            {/* Need to hide and reveal when clicked--figure it out */}
+            <TaskList 
+              tasks={getTasksForDeliverable(state, state.project, state.deliverable)}
+            />
+            {/* ------------------ */}
           </nav>
         </section>
       </main>
