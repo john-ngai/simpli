@@ -5,7 +5,7 @@ CREATE TABLE deliverables (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
-  priority BOOLEAN,
+  priority BOOLEAN NOT NULL,
   status VARCHAR(255) NOT NULL,
   project_id INTEGER REFERENCES projects (id) ON DELETE CASCADE
 );
