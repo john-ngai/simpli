@@ -42,13 +42,8 @@ export default function useAppData() {
 
   // return appData
   return {
-<<<<<<< HEAD
-    state,
-    setProject
-=======
     state, 
     setProject,
     setDeliverable
->>>>>>> main
   };
 }
