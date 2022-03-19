@@ -8,5 +8,10 @@ module.exports = (db) => {
       return res.json(data.rows);
     });
   });
+
+  router.put('/test', (req, res) => {
+    console.log('Success - Inside PUT /projects');
+  })
+
   return router;
 };
