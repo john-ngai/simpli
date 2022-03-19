@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { FormGroup, FormControl, InputLabel, OutlinedInput, TextField } from '@mui/material';
 import useAppData from '../hooks/useAppData';
 
 export default function Register() {
@@ -62,21 +63,17 @@ export default function Register() {
       <div>
         <section className="user_validation">{error}</section>
         <br />
-        <form onSubmit={(e) => e.preventDefault()} >
-          <label>Name:
-          <input type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
-          </label>
-          <br />
-          <label>Email:
-            <input type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <br />
-          <label>Password:
-            <input type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-          </label>
-          <br />
-          <button type="submit" onClick={validation}>Register</button>
-        </form>
+        <FormGroup onSubmit={(e) => e.preventDefault()} >
+          <FormControl>
+            <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
+            <br />
+            <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
+            <br />
+            <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+            <br />
+            <button type="submit" onClick={validation}>Register</button>
+          </FormControl>
+        </FormGroup>
       </div>
     </main >
   );
