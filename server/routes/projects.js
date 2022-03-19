@@ -9,8 +9,8 @@ module.exports = (db) => {
     });
   });
 
-  router.put('/test', (req, res) => {
-    console.log('Success - Inside PUT /projects');
+  router.put('/new', (req, res) => {
+    console.log('req.body =', req.body);
   })
 
   return router;
