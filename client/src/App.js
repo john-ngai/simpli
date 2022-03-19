@@ -7,6 +7,7 @@ import useAppData from './hooks/useAppData';
 import ProjectList from './components/ProjectList';
 import NavBar from './components/NavBar';
 import DeliverableList from './components/DeliverableList';
+import TaskList from './components/TaskList';
 
 function App() {
   const {
