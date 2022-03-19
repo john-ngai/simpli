@@ -51,8 +51,13 @@ export default function Register() {
 
   }
 
+  function handleClick() {
+    navigate('/');
+  }
+
   return (
     <main>
+      <button onClick={handleClick}>Back to Home</button>
       <h1>Register Page</h1>
       <div>
         <section className="user_validation">{error}</section>
