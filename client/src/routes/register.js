@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 import useAppData from '../hooks/useAppData';
 
 export default function Register() {
@@ -8,6 +9,8 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  let navigate = useNavigate();
 
   const validation = () => {
     // check if all input fields have valid info from user, if not, error messages will be displayed
@@ -40,6 +43,11 @@ export default function Register() {
       team_id: 1 //temporary id assigned. Will need to update later
     }
     console.log("New user registered!", user);
+
+    return axios.put('http://localhost:8080/users', { user })
+      .then(res => console.log('success?', res))
+      .then(navigate('/'))
+      .catch(err => console.log('failed?', err));
 
   }
 
