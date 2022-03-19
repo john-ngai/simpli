@@ -6,6 +6,21 @@ export default function Register() {
   return (
     <main>
       <h1>Register Page</h1>
-    </main>
+      <div>
+        <form>
+          <label>Name:
+          <input type="text" />
+          </label>
+          <br />
+          <label>Email:
+            <input type="text" />
+          </label>
+          <br />
+          <label>Password:
+            <input type="text" />
+          </label>
+        </form>
+      </div>
+    </main >
   );
 }
