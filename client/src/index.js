@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import Register from './routes/register';
-import Login from './routes/login';
+import Register from './routes/Register';
+import Login from './routes/Login';
 import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById('root');
