@@ -23,8 +23,8 @@ function App() {
 
   const getDeliverablesForProject = function(state, project) {
     let result = [];
-    let projects = state.projects
-    let deliverables = state.deliverables
+    let projects = state.projects;
+    let deliverables = state.deliverables;
 
     for (const selectedProject of projects) {
       if (selectedProject.name === project) {
@@ -33,6 +33,28 @@ function App() {
           if (selectedDelivs.project_id === selectedProject.id) {
             console.log("Deliverable: ", selectedDelivs)
             result.push(selectedDelivs)
+          }
+        }
+      }
+    }
+    return result
+  }
+
+  const getTasksForDeliverable = function(state, project, deliverable) {
+    let result = [];
+    let projects = state.projects;
+    let deliverables = state.deliverables;
+    let tasks = state.tasks
+
+    for (const selectedProject of projects) {
+      if (selectedProject.name === project) {
+        for (const selectedDelivs of deliverables) {
+          if (selectedDelivs.project_id === selectedProject.id) {
+            for (const selectedTasks of tasks) {
+              if (selectedTasks.deliverable_id === selectedDelivs.id) {
+                console.log(selectedTasks);
+              } 
+            }
           }
         }
       }
