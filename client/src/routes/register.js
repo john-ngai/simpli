@@ -45,11 +45,9 @@ export default function Register() {
     }
     console.log("New user registered!", user);
 
-    axios.put('http://localhost:8080/register/users', { user })
+    axios.put('/register', user)
       .then(res => console.log('success?', res.data))
       .then(navigate('/'))
-      .catch(err => console.log('failed?', err));
-
   }
 
   function handleClick() {
@@ -63,6 +61,7 @@ export default function Register() {
       <div>
         <section className="user_validation">{error}</section>
         <br />
+        
         <FormGroup onSubmit={(e) => e.preventDefault()} >
           <FormControl>
             <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
@@ -74,6 +73,7 @@ export default function Register() {
             <button type="submit" onClick={validation}>Register</button>
           </FormControl>
         </FormGroup>
+      
       </div>
     </main >
   );
