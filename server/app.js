@@ -13,6 +13,7 @@ const deliverablesRouter = require('./routes/deliverables');
 const tasksRouter = require('./routes/tasks');
 const teamsRouter = require('./routes/teams');
 const usersRouter = require('./routes/users');
+const registerRouter = require('./routes/register');
 
 const app = express();
 
@@ -29,5 +30,6 @@ app.use('/deliverables', deliverablesRouter(db));
 app.use('/tasks', tasksRouter(db));
 app.use('/teams', teamsRouter(db));
 app.use('/users', usersRouter(db));
+app.use('/register', registerRouter(db));
 
 module.exports = app;
