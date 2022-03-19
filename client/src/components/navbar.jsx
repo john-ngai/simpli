@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import "./NavBar.css";
 
 export default function Navbar(props) {
-  const user = props.users[0].name;
+  console.log(props.users[0]);
+  // const user = props.users[0].name;
   return (
     <nav>
       <div className="top-nav">
@@ -18,7 +19,7 @@ export default function Navbar(props) {
           <Link to="/login">Login</Link>
           {/* <Link to="/logout"> Logout</Link> */}
         </span>
-        <p className="nav-tab">Logged in as: {user}</p>
+        <p className="nav-tab">Logged in as:</p>
       </div>
     </nav>
   )
