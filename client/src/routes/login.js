@@ -23,6 +23,7 @@ export default function Login() {
 
     // clears errors messages
     setError("");
+    // will need to update with cookies later on
     loginUser(email, password);
 
   }
@@ -36,7 +37,8 @@ export default function Login() {
 
     axios.get('/login', user)
       .then(res => console.log("success?", res.data))
-      .catch(err => console.log("failed", err));
+      .then(navigate('/'));
+    // .catch(err => console.log("failed", err));
   }
 
   const handleClick = () => {
