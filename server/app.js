@@ -14,6 +14,7 @@ const tasksRouter = require('./routes/tasks');
 const teamsRouter = require('./routes/teams');
 const usersRouter = require('./routes/users');
 const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use('/tasks', tasksRouter(db));
 app.use('/teams', teamsRouter(db));
 app.use('/users', usersRouter(db));
 app.use('/register', registerRouter(db));
+app.use('/login', loginRouter(db));
 
 module.exports = app;
