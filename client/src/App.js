@@ -19,7 +19,8 @@ export default function App() {
     state,
     setProject, setDeliverable,
     getDeliverables, getTasks,
-    setDeliverablesPriority
+    setDeliverablesPriority,
+    setTaskPriority
   } = useAppData();
 
   const { mode, transition } = useVisualMode(null);
@@ -51,6 +52,7 @@ export default function App() {
           />}
           {mode === TASKS && <TaskList
             tasks={tasks}
+            onToggle={setTaskPriority}
           />}
         </section>
       </main>
