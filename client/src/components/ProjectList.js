@@ -9,9 +9,11 @@ export default function ProjectList(props) {
         id={project.id}
         name={project.name}
         description={project.description}
-        selected={project.name === props.value}
-        setProject={props.onChange}
-        transition={props.onClick}
+        selected={project.id === props.value}
+        setProject={() => {
+          props.onChange(project.id);
+          props.transition('DELIVERABLES');
+        }}
       />
     )
   })
