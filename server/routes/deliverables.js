@@ -8,5 +8,20 @@ module.exports = (db) => {
       return res.json(data.rows);
     });
   });
+
+  // PUT /deliverables/new
+  router.put('/new', (req, res) => {
+    const { name, description, priority, status, project_id } = req.body;
+    const values = [name, description, priority, status, project_id];
+    const command = `
+      INSERT INTO deliverables (name, description, priority, status, project_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+    return db.query(command, values)
+      .then(data => res.send(data.rows[0]));
+  });
+
   return router;
 };
+
