@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
+import NewDeliverable from './components/NewDeliverable';
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const TASKS = 'TASKS';
@@ -41,6 +42,9 @@ export default function App() {
           </nav>
         </section>
         <section className="deliverables">
+          <NewDeliverable 
+            project={state.project}
+          />
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
