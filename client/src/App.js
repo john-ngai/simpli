@@ -51,6 +51,7 @@ export default function App() {
             deliverables={deliverables}
             onChange={setDeliverable}
             onClick={transition}
+            onToggle={setDeliverablesPriority}
           />}
           {mode === TASKS && <TaskList
             tasks={tasks}

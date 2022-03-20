@@ -11,6 +11,7 @@ export default function DeliverableList(props) {
       description={deliverable.description}
       setDeliverable={props.onChange}
       transition={props.onClick}
+      onToggle={props.onToggle}
     />
   );
 
