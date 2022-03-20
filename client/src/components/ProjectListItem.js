@@ -7,15 +7,19 @@ export default function ProjectListItem(props) {
   const projectClass = classNames('project_list_item', {
     'project_list_item--selected': props.selected
   });
-  
+
   return (
     <li className={projectClass} onClick={props.setProject}>
       <span className="project_name">{props.name}</span>
       <span className="project_description">{props.description}</span>
-      <span className="project_edit">
-        <EditIcon className="mui_icons EditIcon"/>
-        <DeleteIcon className="mui_icons DeleteIcon"/>
-      </span>
+      {props.selected &&
+        <span className="project_edit">
+          <EditIcon className="mui_icons EditIcon" />
+          <DeleteIcon className="mui_icons DeleteIcon"
+            onClick={() => props.getSelectedProject()}
+          />
+        </span>
+      }
     </li>
   );
 };
