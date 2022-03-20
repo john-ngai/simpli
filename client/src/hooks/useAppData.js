@@ -53,7 +53,7 @@ export default function useAppData() {
       // If the project's id is not equal to the selected project id,
       if (project.id !== project_id) {
         // Add the project to the projects array.
-        projects.push([project]);
+        projects.push(project);
       }
     }
 
