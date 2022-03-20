@@ -28,6 +28,14 @@
   transition: 0.2s;
 }
 
+.project_list_item:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+.project_list_item--selected {
+  background-color: rgb(200, 200, 200);
+}
+
 .deliverable_list_item {
   border: 2px solid black;
   display: flex;
@@ -38,9 +46,6 @@
   transition: 0.2s;
 }
 
-.project_list_item:hover {
-  background-color: rgb(200, 200, 200);
-}
 
 .deliverable_list_item:hover {
   /* background-color: rgb(200, 200, 200); */
