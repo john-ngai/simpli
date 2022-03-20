@@ -7,7 +7,9 @@ import useAppData from './hooks/useAppData';
 import ProjectList from './components/ProjectList';
 import NavBar from './components/NavBar';
 import DeliverableList from './components/DeliverableList';
+import TempDeliverables from './components/TempDeliverables'; // Remove test code.
 import TaskList from './components/TaskList';
+import TempTasks from './components/TempTasks'; // Remove test code.
 
 function App() {
   const {
@@ -16,7 +18,7 @@ function App() {
     setDeliverable
   } = useAppData();
 
-  const getDeliverablesForProject = function(state, project) {
+  const getDeliverablesForProject = function (state, project) {
     let result = [];
     let projects = state.projects;
     let deliverables = state.deliverables;
@@ -34,7 +36,7 @@ function App() {
     return result
   }
 
-  const getTasksForDeliverable = function(state, project, deliverable) {
+  const getTasksForDeliverable = function (state, project, deliverable) {
     let result = [];
     let projects = state.projects;
     let deliverables = state.deliverables
@@ -49,7 +51,7 @@ function App() {
               if (selectedTasks.deliverable_id === selectedDelivs.id) {
                 console.log("Task: ", selectedTasks)
                 result.push(selectedTasks)
-              } 
+              }
             }
           }
         }
@@ -57,6 +59,9 @@ function App() {
     }
     return result
   }
+
+
+
 
 
   return (
@@ -71,23 +76,14 @@ function App() {
               onChange={setProject}
             />
           </nav>
-
         </section>
+
         <section className="deliverables">
-          <nav>
-            <DeliverableList
-              deliverables={getDeliverablesForProject(state, state.project)}
-              value={state.deliverable}
-              onChange={setDeliverable}
-            />
-            {/* Need to hide and reveal when clicked */}
-            <TaskList 
-              tasks={getTasksForDeliverable(state, state.project, state.deliverables)}
-            />
-            {/* ------------------ */}
-          </nav>
+          {/* <TempDeliverables /> */}
+          {/* <TempTasks /> */}
         </section>
       </main>
+
     </div>
   );
 }
