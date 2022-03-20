@@ -6,6 +6,8 @@ export default function TaskList(props) {
     return (
       <TaskListItem
         key={task.id}
+        id={task.id}
+        task={task}
         name={task.name}
         description={task.description}
         onToggle={props.onToggle}

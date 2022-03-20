@@ -111,6 +111,12 @@ export default function useAppData() {
   }
   appData.setDeliverablesPriority = setDeliverablesPriority;
 
+  const getTask = (id) => {
+    state.tasks.find((task) => task.id === id)
+  }
+  appData.getTask = getTask;
+
+
   const setTaskPriority = (id) => {
     console.log("TASK ID =", id);
 
