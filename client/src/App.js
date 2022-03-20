@@ -15,8 +15,13 @@ const DELIVERABLES = 'DELIVERABLES';
 const TASKS = 'TASKS';
 
 export default function App() {
-  const { state, setProject, setDeliverable, getDeliverables, getTasks } = useAppData();
-  const { mode, transition } = useVisualMode(DELIVERABLES);
+  const {
+    state,
+    setProject, setDeliverable,
+    getDeliverables, getTasks,
+  } = useAppData();
+  
+  const { mode, transition } = useVisualMode(null);
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
