@@ -6,6 +6,7 @@ export default function ProjectList(props) {
     return (
       <ProjectListItem 
         key={project.id}
+        id={project.id}
         name={project.name}
         description={project.description}
         selected={project.name === props.value}
