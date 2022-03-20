@@ -44,7 +44,7 @@ export default function useAppData() {
   appData.setProject = setProject;
 
   // Delete the currently selected project id.
-  const deleteProject = (state, project_id) => {
+  const deleteProject = project_id => {
     // Declare a new projects array to hold the updated projects data.
     const projects = [];
   
@@ -56,9 +56,9 @@ export default function useAppData() {
         projects.push([project]);
       }
     }
-    // console.log('project_id =', project_id); // Remove test code.
 
-    
+    return axios.delete(`/projects/${project_id}`)
+      .then(() => setState({ ...state, projects }));
   }
   appData.deleteProject = deleteProject;
 
