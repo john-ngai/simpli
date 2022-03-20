@@ -19,6 +19,7 @@
 
 .project_list_item {
   border: 2px solid black;
+  /* border: 2px solid red; */
   display: flex;
   flex-direction: column;
   height: 100px;
@@ -54,6 +55,34 @@
   font-weight: bold;
 }
 
+.project_description {
+  /* border: 1px solid blue; */
+  height: 30%;
+  margin: 0 10px 0 10px;
+  font-size: 12px;
+}
+
+.project_edit {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 20%;
+  margin: 0 5px 0 5px;
+}
+
+.mui_icons {
+  /* border: 1px solid red; */
+  color: rgb(140, 140, 140);
+  transform: scale(0.7);
+}
+
+.mui_icons:hover {
+  color: white;
+  cursor: pointer;
+}
+
 .deliverable_name {
   /* border: 1px solid blue; */
   height: 50%;
@@ -62,12 +91,6 @@
   font-weight: bold;
 }
 
-.project_description {
-  /* border: 1px solid blue; */
-  height: 50%;
-  margin: 0 10px 0 10px;
-  font-size: 12px;
-}
 
 .deliverable_description {
   /* border: 1px solid blue; */
