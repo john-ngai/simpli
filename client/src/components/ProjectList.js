@@ -14,7 +14,6 @@ export default function ProjectList(props) {
           props.onChange(project.id);
           props.transition('DELIVERABLES');
         }}
-        getSelectedProject={props.getSelectedProject}
       />
     )
   })
