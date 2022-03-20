@@ -1,24 +1,22 @@
 import React from 'react';
 import DeliverableListItem from './DeliverableListItem';
 
+// Container for each DeliverableListItem.
 export default function DeliverableList(props) {
-  const deliverableInfo = props.deliverables.map(deliverable => {
-    return (
-      <DeliverableListItem
-        key={deliverable.id}
-        id={deliverable.id}
-        name={deliverable.name}
-        description={deliverable.description}
-        selected={deliverable.name === props.value}
-        setDeliverable={props.onChange}
-        onToggle={props.onToggle}
-      />
-    )
-  })
+  const listItem = props.deliverables.map(deliverable =>
+    <DeliverableListItem
+      key={deliverable.id}
+      id={deliverable.id}
+      name={deliverable.name}
+      description={deliverable.description}
+      setDeliverable={props.onChange}
+      transition={props.onClick}
+    />
+  );
 
   return (
     <ul className="deliverable_item_list">
-      {deliverableInfo}
+      { listItem}
     </ul>
-  )
+  );
 }

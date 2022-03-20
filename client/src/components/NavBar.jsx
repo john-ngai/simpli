@@ -14,6 +14,10 @@ export default function Navbar(props) {
         {/* <Link to="/schedule" className="nav-tab">Schedule</Link> */}
         <span className="nav-tab">Schedule</span>
 
+        <span className="nav-tab">
+          <Link to="/projects/new">New Project</Link>
+        </span>
+
         <span className="login-nav">
           <Link to="/register">Register</Link>
           <Link to="/login">Login</Link>

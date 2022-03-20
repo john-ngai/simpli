@@ -1,68 +1,30 @@
+// Dependencies
+import React from 'react';
+// Stylesheets
 import './App.css';
-import { React, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+// Hooks
 import useAppData from './hooks/useAppData';
-
-import ProjectList from './components/ProjectList';
+import useVisualMode from './hooks/useVisualMode';
+// Components
 import NavBar from './components/NavBar';
+import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
+// Modes
+const DELIVERABLES = 'DELIVERABLES';
+const TASKS = 'TASKS';
 
-function App() {
+export default function App() {
   const {
     state,
-    setProject,
-    setDeliverable
+    setProject, setDeliverable,
+    getDeliverables, getTasks,
   } = useAppData();
 
-  // const userList = (state.users).map((user) => {
-  //   console.log(user)
-  //   return (user.name)
-  // })
+  const { mode, transition } = useVisualMode(null);
 
-  const getDeliverablesForProject = function(state, project) {
-    let result = [];
-    let projects = state.projects;
-    let deliverables = state.deliverables;
-
-    for (const selectedProject of projects) {
-      if (selectedProject.name === project) {
-        for (const selectedDelivs of deliverables) {
-          if (selectedDelivs.project_id === selectedProject.id) {
-            console.log("Deliverable: ", selectedDelivs)
-            result.push(selectedDelivs)
-          }
-        }
-      }
-    }
-    return result
-  }
-
-  const getTasksForDeliverable = function(state, project, deliverable) {
-    let result = [];
-    let projects = state.projects;
-    let deliverables = state.deliverables
-    let tasks = state.tasks
-    // This can be compressed a lot by calling getDeliverablesForProject, I just hadn't done it yet for testing purposes
-    for (const selectedProject of projects) {
-      if (selectedProject.name === project) {
-        for (const selectedDelivs of deliverables) {
-          if (selectedDelivs.project_id === selectedProject.id) {
-            for (const selectedTasks of tasks) {
-              // Need the second half of this if statement to get the selected deliverable rather than selectedDelivs(which returns all delivs for given project)(I kind of messed up on the naming convention here)
-              if (selectedTasks.deliverable_id === selectedDelivs.id) {
-                console.log("Task: ", selectedTasks)
-                result.push(selectedTasks)
-              }
-            }
-          }
-        }
-      }
-    }
-    return result
-  }
-
+  const deliverables = getDeliverables(state, state.project);
+  const tasks = getTasks(state, state.deliverable);
 
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
@@ -80,29 +42,21 @@ function App() {
               projects={state.projects}
               value={state.project}
               onChange={setProject}
+              onClick={transition}
             />
           </nav>
-
         </section>
         <section className="deliverables">
-          <nav>
-            <DeliverableList
-              id={state.deliverables.id}
-              deliverables={getDeliverablesForProject(state, state.project)}
-              value={state.deliverable}
-              onChange={setDeliverable}
-              onToggle={setDeliverablesPriority}
-            />
-            {/* Need to hide and reveal when clicked */}
-            <TaskList
-              tasks={getTasksForDeliverable(state, state.project, state.deliverables)}
-            />
-            {/* ------------------ */}
-          </nav>
+          {mode === DELIVERABLES && <DeliverableList
+            deliverables={deliverables}
+            onChange={setDeliverable}
+            onClick={transition}
+          />}
+          {mode === TASKS && <TaskList
+            tasks={tasks}
+          />}
         </section>
       </main>
     </div>
   );
 }
-
-export default App;
