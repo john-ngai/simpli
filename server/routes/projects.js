@@ -3,7 +3,7 @@ const router = require('express').Router();
 module.exports = (db) => {
   // GET /projects
   router.get('/', (req, res) => {
-    const command = "SELECT projects.*, COUNT(deliverables.id) FROM projects JOIN deliverables ON projects.id = project_id GROUP BY projects.id";
+    const command = "SELECT projects.*, COUNT(deliverables.id) FROM projects LEFT JOIN deliverables ON projects.id = project_id GROUP BY projects.id";
     db.query(command).then(data => {
       return res.json(data.rows);
     });
@@ -20,7 +20,7 @@ module.exports = (db) => {
     `;
     return db.query(command, values)
       .then(data => res.send(data.rows[0]));
-  })
+  });
 
   return router;
 };
