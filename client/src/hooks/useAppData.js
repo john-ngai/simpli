@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useAppData() {
+  // Container for state and all helper functions.
   const appData = {};
 
-  // Default state.
+  // Empty state structure.
   const [state, setState] = useState({
     project: null,
     projects: [],
@@ -38,9 +39,11 @@ export default function useAppData() {
   }, [])
   appData.state = state;
 
+  // Set the currently selected project id.
   const setProject = project => setState({ ...state, project });
   appData.setProject = setProject;
 
+  // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
 
