@@ -20,10 +20,17 @@ export default function Login() {
     if (!password) {
       return setError("A password is required");
     }
+
+
+  }
+
+  const handleClick = () => {
+    navigate('/');
   }
 
   return (
     <main>
+      <button onClick={handleClick}>Back to Home</button>
       <h1>Login Page</h1>
 
       <div>
