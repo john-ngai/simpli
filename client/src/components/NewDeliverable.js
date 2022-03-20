@@ -21,6 +21,8 @@ export default function NewDeliverable() {
       status: status,
       project_id: state.projects.id
     }
+    axios.put('/deliverables/new', deliverable)
+      .then(res => console.log('res: ', res.data));
   }
 
   return (
