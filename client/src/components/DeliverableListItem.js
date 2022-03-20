@@ -15,6 +15,7 @@ export default function DeliverableListItem(props) {
       <PriorityHighIcon onDoubleClick={() => onToggle(id)} />
       <span className="deliverable_name">{props.name}</span>
       <span className="deliverable_description">{props.description}</span>
+      <aside>Tasks remaining: {props.count}</aside>
     </li>
   )
 }
