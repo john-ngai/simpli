@@ -14,7 +14,6 @@ import useVisualMode from './hooks/useVisualMode';
 import ProjectList from './components/ProjectList';
 import NavBar from './components/NavBar';
 import DeliverableList from './components/DeliverableList';
-import TempDeliverables from './components/TempDeliverables'; // Remove test code.
 import TaskList from './components/TaskList';
 import TempTasks from './components/TempTasks'; // Remove test code.
 
