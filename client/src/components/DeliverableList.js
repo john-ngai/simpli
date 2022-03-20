@@ -6,6 +6,7 @@ export default function DeliverableList(props) {
   const listItem = props.deliverables.map(deliverable =>
     <DeliverableListItem
       key={deliverable.id}
+      id={deliverable.id}
       name={deliverable.name}
       description={deliverable.description}
       setDeliverable={props.onChange}
