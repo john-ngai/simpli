@@ -54,7 +54,7 @@ function App() {
               if (selectedTasks.deliverable_id === selectedDelivs.id) {
                 console.log("Task: ", selectedTasks)
                 result.push(selectedTasks)
-              } 
+              }
             }
           }
         }
@@ -63,6 +63,12 @@ function App() {
     return result
   }
 
+
+  // toggle deliverables priority
+  const setDeliverablesPriority = (id) => {
+    console.log("TEST", id);
+
+  }
 
   return (
     <div>
@@ -81,12 +87,14 @@ function App() {
         <section className="deliverables">
           <nav>
             <DeliverableList
+              id={state.deliverables.id}
               deliverables={getDeliverablesForProject(state, state.project)}
               value={state.deliverable}
               onChange={setDeliverable}
+              onToggle={setDeliverablesPriority}
             />
             {/* Need to hide and reveal when clicked */}
-            <TaskList 
+            <TaskList
               tasks={getTasksForDeliverable(state, state.project, state.deliverables)}
             />
             {/* ------------------ */}
