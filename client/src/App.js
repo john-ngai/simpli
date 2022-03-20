@@ -12,20 +12,23 @@ import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
+const PROJECTS = 'PROJECTS';
 const TASKS = 'TASKS';
+const SAVING = 'SAVING';
 
 export default function App() {
   const {
     state,
     setProject, setDeliverable,
     getDeliverables, getTasks,
+    deleteProject,
   } = useAppData();
-  
+
   const { mode, transition } = useVisualMode(null);
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-  
+
   return (
     <div>
       <NavBar users={state.users} />
@@ -37,6 +40,7 @@ export default function App() {
               value={state.project}
               onChange={setProject}
               transition={transition}
+              deleteProject={deleteProject}
             />
           </nav>
         </section>
