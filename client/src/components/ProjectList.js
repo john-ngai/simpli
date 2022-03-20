@@ -9,6 +9,7 @@ export default function ProjectList(props) {
         id={project.id}
         name={project.name}
         description={project.description}
+        count={project.count}
         selected={project.name === props.value}
         setProject={props.onChange}
         transition={props.onClick}
