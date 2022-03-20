@@ -6,6 +6,7 @@ export default function DeliverableList(props) {
     return (
       <DeliverableListItem
         key={deliverable.id}
+        id={deliverable.id}
         name={deliverable.name}
         description={deliverable.description}
         selected={deliverable.name === props.value}
