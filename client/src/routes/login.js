@@ -21,7 +21,21 @@ export default function Login() {
       return setError("A password is required");
     }
 
+    // clears errors messages
+    setError("");
 
+  }
+
+  const loginUser = (email, password) => {
+    // user data
+    const user = {
+      email: email,
+      password: password
+    }
+
+    axios.get('/login', user)
+      .then(res => console.log("success?", res.data))
+      .catch(err => console.log("failed", err));
   }
 
   const handleClick = () => {
