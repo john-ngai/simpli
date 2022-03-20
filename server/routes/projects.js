@@ -32,7 +32,9 @@ module.exports = (db) => {
       DELETE FROM projects
       WHERE id = $1;
     `;
-    return db.query(command, values);
+    return db.query(command, values)
+      .then(() => res.send())
+      .catch(() => res.status(500).send());
   });
 
   return router;
