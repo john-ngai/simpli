@@ -47,7 +47,7 @@ export default function useAppData() {
   const deleteProject = project_id => {
     // Declare a new projects array to hold the updated projects data.
     const projects = [];
-  
+
     // Loop through each project from state,
     for (const project of state.projects) {
       // If the project's id is not equal to the selected project id,
@@ -100,7 +100,7 @@ export default function useAppData() {
 
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
-    console.log("TEST", id);
+    console.log("TEST ID", id);
 
     // map through the deliverables state
     state.deliverables.map((deliverable) =>
@@ -112,6 +112,10 @@ export default function useAppData() {
   appData.setDeliverablesPriority = setDeliverablesPriority;
 
   const setTaskPriority = (id) => {
+    console.log("TASK ID =", id);
+
+    // map through the tasks state
+    state.tasks.map((task) => task.id === id ? { ...task, priority: !task.priority } : task)
 
   }
   appData.setTaskPriority = setTaskPriority;
