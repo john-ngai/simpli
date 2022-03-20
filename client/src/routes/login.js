@@ -23,6 +23,7 @@ export default function Login() {
 
     // clears errors messages
     setError("");
+    loginUser(email, password);
 
   }
 
