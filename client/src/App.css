@@ -4,7 +4,6 @@
   flex-direction: row;
   margin: 75px 10px 0 10px;
   height: 1000px;
-
 }
 
 .projects {
@@ -45,7 +44,6 @@
   margin-bottom: 1px;
   transition: 0.2s;
 }
-
 
 .deliverable_list_item:hover {
   /* background-color: rgb(200, 200, 200); */
@@ -96,7 +94,6 @@
   font-weight: bold;
 }
 
-
 .deliverable_description {
   /* border: 1px solid blue; */
   height: 50%;
@@ -106,4 +103,12 @@
 
 .project_item_list {
   padding: 0;
+}
+
+.PriorityHighIcon {
+  color: black;
+}
+
+.PriorityHighIcon.priority {
+  color: red;
 }
