@@ -26,6 +26,8 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
+  console.log('state.project =', state.project);
+
   return (
     <div>
       <NavBar users={state.users} />
@@ -36,7 +38,7 @@ export default function App() {
               projects={state.projects}
               value={state.project}
               onChange={setProject}
-              onClick={transition}
+              transition={transition}
             />
           </nav>
         </section>
