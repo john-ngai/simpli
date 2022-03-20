@@ -83,6 +83,12 @@ export default function useAppData() {
   const setDeliverablesPriority = (id) => {
     console.log("TEST", id);
 
+    // map through the deliverables state
+    state.deliverables.map((deliverable) =>
+      // if the deliverable matches the current deliverable id selected, set the deliverable's priority to the opposite of what it is
+      deliverable.id === id ? { ...deliverable, priority: !deliverable.priority } : deliverable
+    )
+
   }
   appData.setDeliverablesPriority = setDeliverablesPriority;
 
