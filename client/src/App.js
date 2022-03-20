@@ -1,9 +1,16 @@
-import './App.css';
+// Dependencies
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import useAppData from './hooks/useAppData';
 
+// Stylesheets
+import './App.css';
+
+// Hooks
+import useAppData from './hooks/useAppData';
+import useVisualMode from './hooks/useVisualMode';
+
+// Components
 import ProjectList from './components/ProjectList';
 import NavBar from './components/NavBar';
 import DeliverableList from './components/DeliverableList';
@@ -11,12 +18,14 @@ import TempDeliverables from './components/TempDeliverables'; // Remove test cod
 import TaskList from './components/TaskList';
 import TempTasks from './components/TempTasks'; // Remove test code.
 
-function App() {
-  const {
-    state,
-    setProject,
-    setDeliverable
-  } = useAppData();
+// Modes
+const DELIVERABLES = 'DELIVERABLE';
+const TASKS = 'TASKS';
+
+
+export default function App() {
+  const { state, setProject, setDeliverable } = useAppData();
+  const { mode, transition } = useVisualMode(DELIVERABLES);
 
   const getDeliverablesForProject = function (state, project) {
     let result = [];
@@ -87,5 +96,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
