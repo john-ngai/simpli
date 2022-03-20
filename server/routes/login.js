@@ -4,6 +4,7 @@ module.exports = (db) => {
   // all routes will go here
   router.get('/', (req, res) => {
     // WILL NEED TO UPDATE WITH COOKIES LATER 
+    // will need another route to validate user info
     const { email } = req.body;
     const values = [email];
     const command = "SELECT * FROM users WHERE email = $1";
