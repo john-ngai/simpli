@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useAppData() {
-  // Container for state and all helper functions.
+  // Container for the state and all helper functions.
   const appData = {};
 
   // Empty state structure.
