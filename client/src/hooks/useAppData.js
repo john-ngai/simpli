@@ -24,26 +24,26 @@ export default function useAppData() {
       axios.get('/teams'),
       axios.get('/users')
     ])
-    .then((all) => {
-      const [projects, deliverables, tasks, teams, users] = all;
-      setState(prev => ({
-        ...prev,
-        projects: projects.data,
-        deliverables: deliverables.data,
-        tasks: tasks.data,
-        teams: teams.data,
-        users: users.data
-      }))
-    })
+      .then((all) => {
+        const [projects, deliverables, tasks, teams, users] = all;
+        setState(prev => ({
+          ...prev,
+          projects: projects.data,
+          deliverables: deliverables.data,
+          tasks: tasks.data,
+          teams: teams.data,
+          users: users.data
+        }))
+      })
   }, [])
   appData.state = state;
-  
+
   const setProject = project => setState({ ...state, project });
   appData.setProject = setProject;
-  
+
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
-  
+
   // Return an array of deliverables matching the selected project id.
   const getDeliverables = (state, project_id) => {
     const allDeliverables = state.deliverables;
@@ -59,6 +59,22 @@ export default function useAppData() {
     return selectedDeliverables;
   }
   appData.getDeliverables = getDeliverables;
+
+  // Return an array of tasks matching the selected deliverable id.
+  const getTasks = (state, deliverable_id) => {
+    const allTasks = state.tasks;
+    const selectedTasks = [];
+    // Loop through each task from state,
+    for (const task of allTasks) {
+      // If the task's deliverable id matches the current deliverable_id,
+      if (task.deliverable_id === deliverable_id) {
+        // Add the task to the selectedTasks array.
+        selectedTasks.push(task);
+      }
+    }
+    return selectedTasks;
+  }
+  appData.getTasks = getTasks;
 
   return appData;
 }
