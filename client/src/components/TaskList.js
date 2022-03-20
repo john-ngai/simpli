@@ -4,10 +4,11 @@ import TaskListItem from './TaskListItem';
 export default function TaskList(props) {
   const taskInfo = props.tasks.map(task => {
     return (
-      <TaskListItem 
+      <TaskListItem
         key={task.id}
         name={task.name}
         description={task.description}
+        onToggle={props.onToggle}
       />
     )
   })
