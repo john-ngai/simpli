@@ -16,11 +16,6 @@ function App() {
     setDeliverable
   } = useAppData();
 
-  // const userList = (state.users).map((user) => {
-  //   console.log(user)
-  //   return (user.name)
-  // })
-
   const getDeliverablesForProject = function(state, project) {
     let result = [];
     let projects = state.projects;
