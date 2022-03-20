@@ -36,7 +36,7 @@ export default function NewDeliverable(props) {
           <label>Description:</label>
           <input name="description" type="text" placeholder="Enter Deliverable Description" value={description} onChange={event => setDescription(event.target.value)}>
           </input>
-          {/* Priority -- checkbox: https://stackoverflow.com/questions/40359800/how-to-toggle-boolean-state-of-a-react-component */}
+          {/* Priority */}
           <label>High Priority?:</label>
           <input name="priority" type="checkbox" value={priority} onChange={event => setPriority(prevCheck => !prevCheck)}>
           </input>
