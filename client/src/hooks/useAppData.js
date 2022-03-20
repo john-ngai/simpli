@@ -92,5 +92,10 @@ export default function useAppData() {
   }
   appData.setDeliverablesPriority = setDeliverablesPriority;
 
+  const setTaskPriority = (id) => {
+
+  }
+  appData.setTaskPriority = setTaskPriority;
+
   return appData;
 }
