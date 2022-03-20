@@ -12,7 +12,7 @@ export default function DeliverableListItem(props) {
         props.transition('TASKS');
       }}
     >
-      <PriorityHighIcon onClick={() => onToggle(id)} />
+      <PriorityHighIcon onDoubleClick={() => onToggle(id)} />
       <span className="deliverable_name">{props.name}</span>
       <span className="deliverable_description">{props.description}</span>
     </li>
