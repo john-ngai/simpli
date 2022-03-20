@@ -61,7 +61,7 @@ export default function Register() {
       <div>
         <section className="user_validation">{error}</section>
         <br />
-        
+
         <FormGroup onSubmit={(e) => e.preventDefault()} >
           <FormControl>
             <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
@@ -73,7 +73,7 @@ export default function Register() {
             <button type="submit" onClick={validation}>Register</button>
           </FormControl>
         </FormGroup>
-      
+
       </div>
     </main >
   );
