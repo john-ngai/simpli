@@ -11,6 +11,7 @@ export default function ProjectList(props) {
         description={project.description}
         selected={project.name === props.value}
         setProject={props.onChange}
+        transition={props.onClick}
       />
     )
   })

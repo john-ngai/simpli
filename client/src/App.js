@@ -18,7 +18,7 @@ import TaskList from './components/TaskList';
 import TempTasks from './components/TempTasks'; // Remove test code.
 
 // Modes
-const DELIVERABLES = 'DELIVERABLE';
+const DELIVERABLES = 'DELIVERABLES';
 const TASKS = 'TASKS';
 
 
@@ -70,8 +70,8 @@ export default function App() {
     <div>
       <NavBar users={state.users} />
 
-      <button onClick={() => transition(DELIVERABLES)}>Deliverables</button>
-      <button onClick={() => transition(TASKS)}>Tasks</button>
+      {/* <button onClick={() => transition(DELIVERABLES)}>Deliverables</button> */}
+      {/* <button onClick={() => transition(TASKS)}>Tasks</button> */}
       
       <main className="layout">
         <section className="projects">
@@ -80,6 +80,7 @@ export default function App() {
               projects={state.projects}
               value={state.project}
               onChange={setProject}
+              onClick={transition}
             />
           </nav>
         </section>
