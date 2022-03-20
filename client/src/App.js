@@ -27,25 +27,16 @@ export default function App() {
   const { mode, transition } = useVisualMode(DELIVERABLES);
 
   const deliverables = getDeliverables(state, state.project);
-  console.log('deliverables =', deliverables);
 
-  const getDeliverablesForProject = function (state, project) {
-    let result = [];
-    let projects = state.projects;
-    let deliverables = state.deliverables;
+  
 
-    for (const selectedProject of projects) {
-      if (selectedProject.name === project) {
-        for (const selectedDelivs of deliverables) {
-          if (selectedDelivs.project_id === selectedProject.id) {
-            // console.log("Deliverable: ", selectedDelivs)
-            result.push(selectedDelivs)
-          }
-        }
-      }
-    }
-    return result
-  }
+
+
+
+
+
+
+
 
   const getTasksForDeliverable = function (state, project, deliverable) {
     let result = [];
@@ -97,6 +88,7 @@ export default function App() {
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
+            onClick={transition}
           /> }
           {/* {mode === DELIVERABLES && <DeliverableList /> } */}
           {mode === TASKS && <TempTasks /> }
