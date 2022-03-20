@@ -22,7 +22,7 @@ export default function App() {
     setProject, setDeliverable,
     getDeliverables, getTasks,
     setDeliverablesPriority,
-    setTaskPriority
+    setTaskPriority,
     deleteProject,
   } = useAppData();
 
