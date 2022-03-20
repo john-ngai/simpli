@@ -19,6 +19,7 @@ export default function App() {
     state,
     setProject, setDeliverable,
     getDeliverables, getTasks,
+    setDeliverablesPriority
   } = useAppData();
 
   const { mode, transition } = useVisualMode(null);
@@ -26,11 +27,6 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
-  // toggle deliverables priority
-  const setDeliverablesPriority = (id) => {
-    console.log("TEST", id);
-
-  }
 
   return (
     <div>

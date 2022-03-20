@@ -79,5 +79,12 @@ export default function useAppData() {
   }
   appData.getTasks = getTasks;
 
+  // toggle deliverables priority
+  const setDeliverablesPriority = (id) => {
+    console.log("TEST", id);
+
+  }
+  appData.setDeliverablesPriority = setDeliverablesPriority;
+
   return appData;
 }
