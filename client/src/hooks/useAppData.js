@@ -8,6 +8,7 @@ export default function useAppData() {
   const [state, setState] = useState({
     project: null,
     projects: [],
+    deliverable: null,
     deliverables: [],
     tasks: [],
     teams: [],
@@ -39,6 +40,7 @@ export default function useAppData() {
   
   const setProject = project => setState({ ...state, project });
   appData.setProject = setProject;
+  
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
   
