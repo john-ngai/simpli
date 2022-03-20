@@ -9,6 +9,7 @@ export default function DeliverableList(props) {
       id={deliverable.id}
       name={deliverable.name}
       description={deliverable.description}
+      count={deliverable.count}
       setDeliverable={props.onChange}
       transition={props.onClick}
     />

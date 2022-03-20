@@ -11,6 +11,7 @@ export default function ProjectListItem(props) {
     >
       <span className="project_name">{props.name}</span>
       <span className="project_description">{props.description}</span>
+      <aside>Deliverables: {props.count}</aside>
     </li>
   );
 };

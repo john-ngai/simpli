@@ -10,6 +10,7 @@ export default function DeliverableListItem(props) {
     >
       <span className="deliverable_name">{props.name}</span>
       <span className="deliverable_description">{props.description}</span>
+      <aside>Tasks remaining: {props.count}</aside>
     </li>
   )
 }
