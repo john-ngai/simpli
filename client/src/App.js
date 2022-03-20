@@ -15,7 +15,6 @@ import ProjectList from './components/ProjectList';
 import NavBar from './components/NavBar';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
-import TempTasks from './components/TempTasks'; // Remove test code.
 
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
@@ -23,13 +22,23 @@ const TASKS = 'TASKS';
 
 
 export default function App() {
-  const { state, setProject, setDeliverable, getDeliverables } = useAppData();
+  const { state, setProject, setDeliverable, getDeliverables, getTasks } = useAppData();
   const { mode, transition } = useVisualMode(DELIVERABLES);
 
   const deliverables = getDeliverables(state, state.project);
+  const tasks = getTasks(state, state.deliverable);
 
-  
-
+  /* 
+  Example task:
+    {
+      id: 8,
+      name: 'Setup React',
+      description: '',
+      priority: false,
+      status: 'not started',
+      deliverable_id: 4
+    }  
+  */
 
 
 
@@ -84,18 +93,17 @@ export default function App() {
             />
           </nav>
         </section>
-
         <section className="deliverables">
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
             onClick={transition}
-          /> }
-          {/* {mode === DELIVERABLES && <DeliverableList /> } */}
-          {mode === TASKS && <TempTasks /> }
+          />}
+          {mode === TASKS && <TaskList
+            tasks={tasks}
+          />}
         </section>
       </main>
-
     </div>
   );
 }
