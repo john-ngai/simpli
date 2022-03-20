@@ -15,7 +15,9 @@ export default function ProjectListItem(props) {
       {props.selected &&
         <span className="project_edit">
           <EditIcon className="mui_icons EditIcon" />
-          <DeleteIcon className="mui_icons DeleteIcon"/>
+          <DeleteIcon className="mui_icons DeleteIcon"
+            onClick={props.deleteProject}
+          />
         </span>
       }
     </li>
