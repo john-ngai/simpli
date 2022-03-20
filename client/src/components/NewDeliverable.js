@@ -2,9 +2,8 @@ import { React, useState } from "react";
 import axios from "axios";
 import useAppData from "../hooks/useAppData";
 
-export default function NewDeliverable() {
+export default function NewDeliverable(props) {
   const { state } = useAppData();
-  
   const deliverables = state.deliverables;
 
   const [name, setName] = useState('');
@@ -19,7 +18,7 @@ export default function NewDeliverable() {
       description: description,
       priority: priority,
       status: status,
-      project_id: state.projects.id
+      project_id: props.project
     }
     axios.put('/deliverables/new', deliverable)
       .then(res => console.log('res: ', res.data));
