@@ -76,6 +76,10 @@ export default function App() {
   return (
     <div>
       <NavBar users={state.users} />
+
+      <button onClick={() => transition(DELIVERABLES)}>Deliverables</button>
+      <button onClick={() => transition(TASKS)}>Tasks</button>
+      
       <main className="layout">
         <section className="projects">
           <nav>
@@ -88,8 +92,8 @@ export default function App() {
         </section>
 
         <section className="deliverables">
-          {/* <TempDeliverables /> */}
-          {/* <TempTasks /> */}
+          {mode === DELIVERABLES && <TempDeliverables /> }
+          {mode === TASKS && <TempTasks /> }
         </section>
       </main>
 
