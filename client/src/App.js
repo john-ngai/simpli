@@ -28,7 +28,6 @@ export default function App() {
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-// console.log(percentComplete(state, state.project))
   return (
     <div>
       <NavBar users={state.users} />
