@@ -27,6 +27,25 @@ module.exports = (db) => {
       .then(data => res.send(data.rows[0]));
   });
 
+  router.put('/:id', (req, res) => {
+    console.log("SUCCES IN PUT del/:id");
+    const delID = req.params.id;
+    const { priority } = req.body;
+    const values = [delID, priority];
+    const command = `
+      UPDATE deliverables
+      SET priority = $2
+      WHERE id = $1;
+      `;
+
+    return db.query(command, values)
+      .then(data => {
+        console.log("DATA SUCCESS", data);
+        res.send();
+      })
+      .catch(err => console.log(err));
+  })
+
   return router;
 };
 
