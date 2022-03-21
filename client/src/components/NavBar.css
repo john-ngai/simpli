@@ -1,8 +1,19 @@
-.top-nav {
-  padding: 10px;
+#navbar {
+  border: 2px solid red;
+  background-color: lightblue; 
+  padding: 15px 0 15px 0;
+  width: 100%;
 }
 
-.nav-tab {
+#app_name {
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.nav_item {
+  /* border: 2px solid red; */
   display: inline;
   padding: 10px;
 }

@@ -1,7 +1,8 @@
 // Dependencies
 import React from 'react';
 // Stylesheets
-import './App.css';
+// import './App.css';
+import './DevApp.scss'; // Remove test code or rename file to App.css/scss .
 // Hooks
 import useAppData from './hooks/useAppData';
 import useVisualMode from './hooks/useVisualMode';
@@ -21,7 +22,7 @@ const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_DELIVERABLE = 'NEW_DELIVERABLE';
 const NEW_TASK = 'NEW_TASK';
 
-export default function App() {
+export default function DevApp() {
   const {
     state,
     saveProject,
@@ -35,46 +36,56 @@ export default function App() {
   const tasks = getTasks(state, state.deliverable);
 
   return (
-    <div>
-      <NavBar users={state.users} />
-      
-      <button onClick={() => transition(NEW_PROJECT)}>NEW_PROJECT</button>
+    <body>
+        <NavBar users={state.users} />
 
-      <main className="layout">
-        <section className="projects">
-          <nav>
-            <ProjectList
-              projects={Object.values(state.projects)}
-              value={state.project}
-              onChange={setProject}
-              transition={transition}
-              deleteProject={deleteProject}
-            />
-          </nav>
-        </section>
-        <section className="deliverables">
+      <main>
 
-          {mode === NEW_PROJECT && <Project
-            saveProject={saveProject}
-            back={back}
-          />}
-
-          {mode === DELIVERABLES && <DeliverableList
-            deliverables={deliverables}
-            onChange={setDeliverable}
-            onClick={transition}
-            project={state.project}
-            showFormBoolean={state.showDelivForm}
-            showDelivForm={showDelivForm}
-          />}
-          {mode === TASKS && <TaskList
-            tasks={tasks}
-            deliverable={state.deliverable}
-            showFormBoolean={state.showTaskForm}
-            showTaskForm={showTaskForm}
-          />}
-        </section>
       </main>
-    </div>
+    </body>
   );
+
+
+  // return (
+  //   <div>
+  //     <NavBar users={state.users} />
+  //     <button onClick={() => transition(NEW_PROJECT)}>NEW_PROJECT</button>
+
+  //     <main className="layout">
+  //       <section className="projects">
+  //         <nav>
+  //           <ProjectList
+  //             projects={Object.values(state.projects)}
+  //             value={state.project}
+  //             onChange={setProject}
+  //             transition={transition}
+  //             deleteProject={deleteProject}
+  //           />
+  //         </nav>
+  //       </section>
+  //       <section className="deliverables">
+
+  //         {mode === NEW_PROJECT && <Project
+  //           saveProject={saveProject}
+  //           back={back}
+  //         />}
+
+  //         {mode === DELIVERABLES && <DeliverableList
+  //           deliverables={deliverables}
+  //           onChange={setDeliverable}
+  //           onClick={transition}
+  //           project={state.project}
+  //           showFormBoolean={state.showDelivForm}
+  //           showDelivForm={showDelivForm}
+  //         />}
+  //         {mode === TASKS && <TaskList
+  //           tasks={tasks}
+  //           deliverable={state.deliverable}
+  //           showFormBoolean={state.showTaskForm}
+  //           showTaskForm={showTaskForm}
+  //         />}
+  //       </section>
+  //     </main>
+  //   </div>
+  // );
 }
