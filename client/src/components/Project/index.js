@@ -38,13 +38,7 @@ export default function Project(props) {
     }
     // Clear any previous error messages before saving.
     setError('')
-
-    // REMINDER: Change from log to function call.
-    if (!props.id) {
-      console.log('save()');
-    } else {
-      console.log('edit()');
-    }
+    save();
   };
 
   return (
