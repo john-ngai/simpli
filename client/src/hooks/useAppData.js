@@ -84,7 +84,7 @@ export default function useAppData() {
 
   // Return an array of tasks matching the selected deliverable id.
   const getTasks = (state, deliverable_id) => {
-    const allTasks = state.tasks;
+    const allTasks = Object.values(state.tasks);
     const selectedTasks = [];
     // Loop through each task from state,
     for (const task of allTasks) {
