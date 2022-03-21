@@ -11,6 +11,7 @@ import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import NewDeliverable from './components/NewDeliverable';
+import NewTask from './components/NewTask';
 
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
@@ -50,6 +51,13 @@ export default function App() {
           {state.showForm &&
           <NewDeliverable 
             project={state.project}
+          />}
+          <button className="newTaskButton" onClick={() => {
+            showForm(); transition('TASKS')}}>New Task
+          </button>
+          {state.showForm &&
+          <NewTask 
+            deliverable={state.deliverable}
           />}
         </div>
           {mode === DELIVERABLES && <DeliverableList
