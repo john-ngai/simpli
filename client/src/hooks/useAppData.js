@@ -132,5 +132,23 @@ export default function useAppData() {
   }
   appData.percentComplete = percentComplete
 
+  const deliverablePercentComplete = (state, deliverable)  => {
+    // const allDelivs = Object.values(state.deliverables)
+    const selectedTasks = getTasks(state, deliverable)
+    // The following numbers are conditional on the current seeds.
+    let numCompleted = 0;
+    let numNotCompleted = 0;
+    selectedTasks.forEach(task => {
+      if(task.status === 'completed') {
+        numCompleted++;
+      } else {
+        numNotCompleted++;
+      }
+    })
+    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100) ;
+  }
+  appData.deliverablePercentComplete = deliverablePercentComplete
+
+
   return appData;
 }
