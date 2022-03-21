@@ -15,7 +15,9 @@ export default function ProjectListItem(props) {
       <aside>Deliverables: {props.count}</aside>
       {props.selected &&
         <span className="project_edit">
-          <EditIcon className="mui_icons EditIcon" />
+          <EditIcon className="mui_icons EditIcon"
+            onClick={props.editProject}
+          />
           <DeleteIcon className="mui_icons DeleteIcon"
             onClick={props.deleteProject}
           />
@@ -23,4 +25,4 @@ export default function ProjectListItem(props) {
       }
     </li>
   );
-};
+};  
