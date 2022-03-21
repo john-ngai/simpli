@@ -21,14 +21,14 @@ export default function App() {
   const {
     state,
     setProject, setDeliverable,
-    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject
+    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete
   } = useAppData();
 
   const { mode, transition } = useVisualMode(null);
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-
+// console.log(percentComplete(state, state.project))
   return (
     <div>
       <NavBar users={state.users} />
@@ -41,6 +41,7 @@ export default function App() {
               onChange={setProject}
               transition={transition}
               deleteProject={deleteProject}
+              percentComplete={percentComplete}
             />
           </nav>
         </section>
