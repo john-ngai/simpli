@@ -44,7 +44,7 @@ export default function App() {
           </nav>
         </section>
         <section className="deliverables">
-        <div>
+        {/* <div>
           <button className="newDeliverableButton" onClick={() => {
             showDelivForm(); transition('DELIVERABLES')}}>New Deliverable
           </button>
@@ -59,11 +59,14 @@ export default function App() {
           <NewTask 
             deliverable={state.deliverable}
           />}
-        </div>
+        </div> */}
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
             onClick={transition}
+            project={state.project}
+            showFormBoolean={state.showDelivForm}
+            showDelivForm={showDelivForm}
           />}
           {mode === TASKS && <TaskList
             tasks={tasks}
