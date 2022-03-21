@@ -8,8 +8,8 @@ export default function Project(props) {
   const { state } = useAppData();
   const projects = state.projects;
   
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState(props.name || '');
+  const [description, setDescription] = useState(props.description || '');
   const [error, setError] = useState('');
   
   const save = () => {
@@ -38,12 +38,18 @@ export default function Project(props) {
     }
     // Clear any previous error messages before saving.
     setError('')
-    save();
+
+    // REMINDER: Change from log to function call.
+    if (!props.id) {
+      console.log('save()');
+    } else {
+      console.log('edit()');
+    }
   };
 
   return (
     <div>
-      <h1>Create a New Project</h1>
+      <h1>{props.id ? 'Edit Project' : 'Create a New Project'}</h1>
 
       <span className="project_validation"><b>{error}</b></span>
 
