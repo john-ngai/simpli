@@ -68,7 +68,7 @@ export default function useAppData() {
 
   // Return an array of deliverables matching the selected project id.
   const getDeliverables = (state, project_id) => {
-    const allDeliverables = state.deliverables;
+    const allDeliverables = Object.values(state.deliverables);
     const selectedDeliverables = [];
     // Loop through each deliverable from state,
     for (const deliverable of allDeliverables) {
