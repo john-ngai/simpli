@@ -1,5 +1,5 @@
 import React from 'react';
-import className from 'classnames';
+import classNames from 'classnames';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 export default function TaskListItem(props) {
