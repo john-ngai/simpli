@@ -35,26 +35,11 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
-  // START - Get the selected project's details.
-  const project_id = state.project;
-  let project_name = '';
-  let project_description = '';
-  for (const project of state.projects) {
-    if (project.id === project_id) {
-      project_name = project.name;
-      project_description = project.description;
-    }
-  }
-  // END - Get the selected project's details.
-
   return (
     <div>
       <NavBar users={state.users} />
       
       <button onClick={() => transition(NEW_PROJECT)}>NEW_PROJECT</button>
-      <button onClick={() => transition(NEW_DELIVERABLE)}>NEW_DELIVERABLE</button>
-      <button onClick={() => transition(NEW_TASK)}>NEW_TASK</button>
-      <button onClick={() => transition(EDIT_PROJECT)}>EDIT_PROJECT</button>
 
       <main className="layout">
         <section className="projects">
@@ -73,14 +58,6 @@ export default function App() {
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}
             back={back}
-          />}
-
-          {mode === EDIT_PROJECT && <Project
-            saveProject={saveProject}
-            back={back}
-            id={project_id}
-            name={project_name}
-            description={project_description}
           />}
 
           {mode === DELIVERABLES && <DeliverableList
