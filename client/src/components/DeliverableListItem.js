@@ -11,7 +11,7 @@ export default function DeliverableListItem(props) {
   })
 
   const priorityIcon = classNames("PriorityHighIcon", {
-    "PriorityHighIcon--selected"
+    "PriorityHighIcon--selected": props.selected
   })
 
   return (
