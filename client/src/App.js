@@ -21,7 +21,7 @@ export default function App() {
   const {
     state,
     setProject, setDeliverable,
-    getDeliverables, getTasks, showForm
+    getDeliverables, getTasks, showDelivForm, showTaskForm
   } = useAppData();
   
   const { mode, transition } = useVisualMode(null);
@@ -46,16 +46,16 @@ export default function App() {
         <section className="deliverables">
         <div>
           <button className="newDeliverableButton" onClick={() => {
-            showForm(); transition('DELIVERABLES')}}>New Deliverable
+            showDelivForm(); transition('DELIVERABLES')}}>New Deliverable
           </button>
-          {state.showForm &&
+          {state.showDelivForm &&
           <NewDeliverable 
             project={state.project}
           />}
           <button className="newTaskButton" onClick={() => {
-            showForm(); transition('TASKS')}}>New Task
+            showTaskForm(); transition('TASKS')}}>New Task
           </button>
-          {state.showForm &&
+          {state.showTaskForm &&
           <NewTask 
             deliverable={state.deliverable}
           />}
