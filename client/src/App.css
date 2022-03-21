@@ -109,6 +109,6 @@
   color: black;
 }
 
-.PriorityHighIcon.priority {
+.PriorityHighIcon--selected {
   color: red;
 }
