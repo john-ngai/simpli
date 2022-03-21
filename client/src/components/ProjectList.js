@@ -12,9 +12,7 @@ export default function ProjectList(props) {
         props.onChange(project.id);
         props.transition('DELIVERABLES');
       }}
-      deleteProject={() => {
-        props.deleteProject(props.value);
-      }}
+      deleteProject={() => props.deleteProject(props.value)}
     />
   );
 
