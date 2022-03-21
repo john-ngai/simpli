@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
+
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
@@ -20,8 +21,7 @@ export default function App() {
   const {
     state,
     setProject, setDeliverable,
-    getDeliverables, getTasks,
-    deleteProject,
+    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject
   } = useAppData();
 
   const { mode, transition } = useVisualMode(null);
@@ -49,9 +49,15 @@ export default function App() {
             deliverables={deliverables}
             onChange={setDeliverable}
             onClick={transition}
+            project={state.project}
+            showFormBoolean={state.showDelivForm}
+            showDelivForm={showDelivForm}
           />}
           {mode === TASKS && <TaskList
             tasks={tasks}
+            deliverable={state.deliverable}
+            showFormBoolean={state.showTaskForm}
+            showTaskForm={showTaskForm}
           />}
         </section>
       </main>
