@@ -32,6 +32,7 @@ export default function App() {
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
+  console.log("TASK STATE", state.tasks);
 
 
   return (
@@ -64,12 +65,15 @@ export default function App() {
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
           />}
-          {mode === TASKS && <TaskList
+          {/* {mode === TASKS && <TaskList
             tasks={tasks}
+            onToggle={setTaskPriority}
+            onClick={transition}
+            project={state.project}
             deliverable={state.deliverable}
             showFormBoolean={state.showTaskForm}
             showTaskForm={showTaskForm}
-          />}
+          />} */}
         </section>
       </main>
     </div>

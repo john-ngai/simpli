@@ -75,12 +75,12 @@ export default function useAppData() {
   }
   appData.showDelivForm = showDelivForm
 
-    // Set showTaskForm 
-    const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
-    const showTaskForm = () => {
-      setShowTaskForm(!state.showTaskForm)
-    }
-    appData.showTaskForm = showTaskForm
+  // Set showTaskForm 
+  const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
+  const showTaskForm = () => {
+    setShowTaskForm(!state.showTaskForm)
+  }
+  appData.showTaskForm = showTaskForm
 
   // Return an array of deliverables matching the selected project id.
   const getDeliverables = (state, project_id) => {
@@ -128,7 +128,8 @@ export default function useAppData() {
   appData.setDeliverablesPriority = setDeliverablesPriority;
 
   const getTask = (id) => {
-    return state.tasks.find((task) => task.id === id);
+    const allTasks = Object.values(state.tasks);
+    return allTasks.find((task) => task.id === id);
   }
   appData.getTask = getTask;
 
@@ -139,18 +140,29 @@ export default function useAppData() {
     // get the task selected
     const taskToSet = getTask(id);
     console.log("getTask ID:", taskToSet);
+
+    const allTasks = Object.values(state.tasks);
     // new task data with the priority set to the opposite of what it is
-    const updateTask = state.tasks.map((task) => task.id === id ? { ...task, priority: !task.priority } : task)
+    let updateTask;
+    allTasks.forEach(task => {
+      if (task.id === id) {
+        console.log('BEFORE task =', task); // Remove test code.
+        task.priority = !task.priority;
+        updateTask = task;
+        console.log('AFTER task =', task); // Remove test code.
+      }
+    });
+
 
     const tasks = {
       ...state.tasks,
       [id]: updateTask
     }
-
+    console.log("updateTask:", updateTask);
     // make an axios PUT req to update the task data
-    axios.put(`/tasks/${id}`, tasks)
+    axios.put(`/tasks/${id}`, updateTask)
       .then(() => {
-        // console.log("PENDING...?");
+        console.log("PENDING...?",);
         setState({ ...state, tasks });
       })
       .catch(err => console.log("ERROR:", err));
