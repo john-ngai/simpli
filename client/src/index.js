@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import DevApp from './DevApp'; // Remove test code or change component name to 'App'.
 import Register from './routes/register';
 import Login from './routes/login';
 import NewProject from './routes/project_new';
@@ -13,7 +14,7 @@ const rootElement = document.getElementById('root');
 render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}/>
+      <Route path="/" element={<DevApp />}/>
       <Route path="register" element={<Register />}/>
       <Route path="login" element={<Login />}/>
       <Route path="projects/new" element={<NewProject />}/>
