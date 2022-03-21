@@ -21,7 +21,7 @@ export default function App() {
   const {
     state,
     setProject, setDeliverable,
-    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete
+    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete, deliverablePercentComplete
   } = useAppData();
 
   const { mode, transition } = useVisualMode(null);
@@ -52,6 +52,7 @@ export default function App() {
             project={state.project}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
+            deliverablePercentComplete={deliverablePercentComplete}
           />}
           {mode === TASKS && <TaskList
             tasks={tasks}
