@@ -76,7 +76,7 @@ export default function useAppData() {
   appData.showDelivForm = showDelivForm
 
   // Set showTaskForm 
-  const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
+  const setShowTaskForm = showTaskForm => setState({ ...state, showTaskForm });
   const showTaskForm = () => {
     setShowTaskForm(!state.showTaskForm)
   }
@@ -116,14 +116,34 @@ export default function useAppData() {
 
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
-    console.log("TEST ID", id);
+    console.log("DEL ID", id);
 
-    // map through the deliverables state
-    state.deliverables.map((deliverable) =>
-      // if the deliverable matches the current deliverable id selected, set the deliverable's priority to the opposite of what it is
-      deliverable.id === id ? { ...deliverable, priority: !deliverable.priority } : deliverable
-    )
+    const allDeliverables = Object.values(state.deliverables);
 
+    let updDeliverable;
+
+    allDeliverables.forEach(deliverable => {
+      if (deliverable.id === id) {
+        console.log("BEFORE del:", deliverable);
+        deliverable.priority = !deliverable.priority;
+        updDeliverable = deliverable;
+        console.log("AFTER del:", deliverable);
+      }
+    });
+
+    const deliverables = {
+      ...state.deliverables,
+      [id]: updDeliverable
+    }
+
+    console.log("UPDATED del:", updDeliverable);
+
+    axios.put(`/deliverables/${id}`, updDeliverable)
+      .then(() => {
+        console.log("UPDATING deliverable...");
+
+      })
+      .catch(err => console.log(err));
   }
   appData.setDeliverablesPriority = setDeliverablesPriority;
 
@@ -135,21 +155,21 @@ export default function useAppData() {
 
 
   const setTaskPriority = (id) => {
-    console.log("TASK ID:", id);
+    // console.log("TASK ID:", id);
 
     // get the task selected
     const taskToSet = getTask(id);
-    console.log("getTask ID:", taskToSet);
+    // console.log("getTask ID:", taskToSet);
 
     const allTasks = Object.values(state.tasks);
     // new task data with the priority set to the opposite of what it is
     let updateTask;
     allTasks.forEach(task => {
       if (task.id === id) {
-        console.log('BEFORE task =', task); // Remove test code.
+        // console.log('BEFORE task =', task); // Remove test code.
         task.priority = !task.priority;
         updateTask = task;
-        console.log('AFTER task =', task); // Remove test code.
+        // console.log('AFTER task =', task); // Remove test code.
       }
     });
 
@@ -158,7 +178,7 @@ export default function useAppData() {
       ...state.tasks,
       [id]: updateTask
     }
-    console.log("updateTask:", updateTask);
+    // console.log("updateTask:", updateTask);
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
       .then(() => {
