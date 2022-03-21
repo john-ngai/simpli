@@ -10,20 +10,16 @@ export default function DeliverableListItem(props) {
     "deliverable_list_item--selected": props.selected
   })
 
-  const priorityIcon = classNames("PriorityHighIcon", {
-    "PriorityHighIcon--selected": props.selected
-  })
-
   return (
     <li className={deliverableClass} onClick={props.setDeliverable}>
       <span className="deliverable_name">{props.name}</span>
       <span className="deliverable_description">{props.description}</span>
       <aside>Tasks remaining: {props.count}</aside>
-      {props.selected &&
-        <span className="deliverable_edit">
-          <PriorityHighIcon className="PriorityHighIcon" onDoubleClick={() => onToggle(id)} />
-        </span>
-      }
+      {/* {props.selected &&
+      <span className="deliverable_edit"> */}
+      <PriorityHighIcon className={props.selected ? "high_priority" : "low_priority"} onClick={() => onToggle(id)} />
+      {/* </span>
+      } */}
     </li >
   )
 }
