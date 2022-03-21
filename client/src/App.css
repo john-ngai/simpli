@@ -105,10 +105,10 @@
   padding: 0;
 }
 
-.PriorityHighIcon {
-  color: black;
+.high_priority {
+  color: red;
 }
 
-.PriorityHighIcon--selected {
-  color: red;
+.low_priority {
+  color: black;
 }
