@@ -51,7 +51,7 @@ export default function useAppData() {
     const projects = [];
   
     // Loop through each project from state,
-    for (const project of state.projects) {
+    for (const project of Object.values(state.projects)) {
       // If the project's id is not equal to the selected project id,
       if (project.id !== project_id) {
         // Add the project to the projects array.
