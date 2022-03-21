@@ -1,5 +1,7 @@
-import React from 'react';
+import { React } from 'react';
 import DeliverableListItem from './DeliverableListItem';
+import NewDeliverable from './NewDeliverable';
+
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
@@ -14,10 +16,22 @@ export default function DeliverableList(props) {
       transition={props.onClick}
     />
   );
-  
+
   return (
-    <ul className="deliverable_item_list">
-      { listItem }
-    </ul>
+    <div>
+      <button className="newDeliverableButton" 
+      onClick={props.showDelivForm}
+      >New Deliverable
+      </button>
+
+      {props.showFormBoolean &&
+        <NewDeliverable 
+          project={props.project}
+        />}
+
+      <ul className="deliverable_item_list">
+        { listItem }
+      </ul>
+    </div>
   );
 }
