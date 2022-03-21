@@ -7,7 +7,12 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     const command = "SELECT projects.*, COUNT(deliverables.id) FROM projects LEFT JOIN deliverables ON projects.id = project_id GROUP BY projects.id";
     db.query(command).then(data => {
-      return res.json(data.rows);
+      const projectsArray = data.rows;
+      const projectsObj = {};
+      for (const e of projectsArray) {
+        projectsObj[e.id] = e;
+      }
+      return res.json(projectsObj);
     });
   });
 

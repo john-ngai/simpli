@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskListItem from './TaskListItem';
+import NewTask from './NewTask';
 
 export default function TaskList(props) {
   const taskInfo = props.tasks.map(task => {
@@ -16,8 +17,20 @@ export default function TaskList(props) {
   })
 
   return (
-    <ul className="task_item_list">
-      {taskInfo}
-    </ul>
+    <div>
+      <button className="newTaskButton" 
+      onClick={props.showTaskForm}
+      >New Task
+      </button>
+
+      {props.showFormBoolean &&
+        <NewTask 
+          deliverable={props.deliverable}
+        />}
+
+      <ul className="task_item_list">
+        {taskInfo}
+      </ul>
+    </div>
   )
 }

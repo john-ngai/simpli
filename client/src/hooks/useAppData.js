@@ -8,12 +8,14 @@ export default function useAppData() {
   // Empty state structure.
   const [state, setState] = useState({
     project: null,
-    projects: [],
+    projects: {},
     deliverable: null,
-    deliverables: [],
-    tasks: [],
-    teams: [],
-    users: [],
+    deliverables: {},
+    tasks: {},
+    teams: {},
+    users: {},
+    showDelivForm: false,
+    showTaskForm: false
   });
 
   // GET state data.
@@ -66,9 +68,23 @@ export default function useAppData() {
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
 
+  // Set showDelivForm 
+  const setShowDelivForm = showDelivForm => setState({ ...state, showDelivForm });
+  const showDelivForm = () => {
+    setShowDelivForm(!state.showDelivForm)
+  }
+  appData.showDelivForm = showDelivForm
+
+    // Set showTaskForm 
+    const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
+    const showTaskForm = () => {
+      setShowTaskForm(!state.showTaskForm)
+    }
+    appData.showTaskForm = showTaskForm
+
   // Return an array of deliverables matching the selected project id.
   const getDeliverables = (state, project_id) => {
-    const allDeliverables = state.deliverables;
+    const allDeliverables = Object.values(state.deliverables);
     const selectedDeliverables = [];
     // Loop through each deliverable from state,
     for (const deliverable of allDeliverables) {
@@ -84,7 +100,7 @@ export default function useAppData() {
 
   // Return an array of tasks matching the selected deliverable id.
   const getTasks = (state, deliverable_id) => {
-    const allTasks = state.tasks;
+    const allTasks = Object.values(state.tasks);
     const selectedTasks = [];
     // Loop through each task from state,
     for (const task of allTasks) {
