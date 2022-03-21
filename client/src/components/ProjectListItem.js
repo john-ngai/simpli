@@ -12,7 +12,7 @@ export default function ProjectListItem(props) {
       <span className="project_name">{props.name}</span>
       <span className="project_description">{props.description}</span>
       <aside>Deliverables: {props.count}</aside>
-      {props.count > 0 ? <aside>Percent Complete: {props.percentComplete}%</aside> : <aside>No Progress Yet! </aside>}
+      {props.count > 0 ? <aside>Percent Complete: {props.percentComplete}%</aside> : <aside>No Deliverables Yet! </aside>}
       {props.selected &&
         <span className="project_edit">
           <EditIcon className="mui_icons EditIcon" />
