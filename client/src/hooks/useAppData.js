@@ -8,12 +8,12 @@ export default function useAppData() {
   // Empty state structure.
   const [state, setState] = useState({
     project: null,
-    projects: [],
+    projects: {},
     deliverable: null,
-    deliverables: [],
-    tasks: [],
-    teams: [],
-    users: [],
+    deliverables: {},
+    tasks: {},
+    teams: {},
+    users: {},
   });
 
   // GET state data.
