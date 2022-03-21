@@ -21,14 +21,11 @@ export default function App() {
   const {
     state,
     setProject, setDeliverable,
-<<<<<<< HEAD
     getDeliverables, getTasks,
     setDeliverablesPriority,
     setTaskPriority,
     deleteProject,
-=======
-    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject
->>>>>>> 664a5e8dbb3130a1250135954948c5de8ea6fe5d
+    showDelivForm, showTaskForm
   } = useAppData();
 
   const { mode, transition } = useVisualMode(null);
