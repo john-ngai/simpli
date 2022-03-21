@@ -7,12 +7,12 @@ export default function ProjectListItem(props) {
   const projectClass = classNames('project_list_item', {
     'project_list_item--selected': props.selected
   });
-
   return (
     <li className={projectClass} onClick={props.setProject}>
       <span className="project_name">{props.name}</span>
       <span className="project_description">{props.description}</span>
       <aside>Deliverables: {props.count}</aside>
+      <aside>Percent Complete: {props.percentComplete}</aside>
       {props.selected &&
         <span className="project_edit">
           <EditIcon className="mui_icons EditIcon" />
