@@ -23,12 +23,13 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
+    saveProject,
     setProject, setDeliverable,
     getDeliverables, getTasks,
     deleteProject,
   } = useAppData();
 
-  const { mode, transition } = useVisualMode(null);
+  const { mode, transition, back } = useVisualMode(null);
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
@@ -55,7 +56,10 @@ export default function App() {
         </section>
         <section className="deliverables">
 
-          {mode === NEW_PROJECT && <Project />}
+          {mode === NEW_PROJECT && <Project
+            saveProject={saveProject}
+            back={back}
+          />}
 
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
