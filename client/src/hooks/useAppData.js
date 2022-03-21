@@ -14,6 +14,7 @@ export default function useAppData() {
     tasks: [],
     teams: [],
     users: [],
+    showForm: false
   });
 
   // GET state data.
@@ -46,6 +47,13 @@ export default function useAppData() {
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
+
+  // Set showForm 
+  const setShowForm = showForm => setState({ ...state, showForm });
+  const showForm = () => {
+    setShowForm(!state.showForm)
+  }
+  appData.showForm = showForm
 
   // Return an array of deliverables matching the selected project id.
   const getDeliverables = (state, project_id) => {
