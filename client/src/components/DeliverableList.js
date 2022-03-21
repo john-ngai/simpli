@@ -20,7 +20,7 @@ export default function DeliverableList(props) {
   );
 
   return (
-    <section id="deliverables_list">
+    <section>
       <div id="project_details">
         <span id="project_name">Project Name</span>
         <span id="project_description">Project Description</span>
