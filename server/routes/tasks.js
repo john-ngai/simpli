@@ -14,16 +14,19 @@ module.exports = (db) => {
     });
 
     router.put('/:id', (req, res) => {
-      // const taskID = req.params.id;
-      const { id, priority } = req.body;
-      const values = [id, priority];
+      const taskID = req.params.id;
+      const { priority } = req.body;
+      const values = [taskID, priority];
       const command = `
       UPDATE tasks
       SET priority = $2
       WHERE id = $1;
       `;
       return db.query(command, values)
-        .then(data => res.send(data.rows[0]))
+        .then(data => {
+          console.log("success??", data);
+          res.send(data.rows[0]);
+        })
         .catch(err => console.log(err));
     })
   });
