@@ -1,0 +1,60 @@
+#new_project {
+  height: 50px;
+  width: 100%;
+}
+
+#edit_project {
+  // border: 1px solid black; // Remove test code.
+  transform: scale(0.8);
+  margin-top: -2px;
+}
+
+#delete_project {
+  // border: 1px solid black; // Remove test code.
+  transform: scale(0.8);
+  margin-top: -2px;
+}
+
+.project_list_item {
+  border: 2px solid grey;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  margin-bottom: 1px;
+}
+
+.project_list_item:hover {
+  background-color: rgb(193, 239, 255);
+}
+
+.project_list_item--selected {
+  background-color: rgb(193, 239, 255);
+}
+
+.project_name {
+  // border: 1px solid red; // Remove test code.
+  height: 40%;
+  word-wrap: normal;
+  font-weight: bold;
+}
+
+.project_description {
+  // border: 1px solid red; // Remove test code.
+  height: 20%;
+  font-size: 13px;
+}
+
+.project_deliverables {
+  // border: 1px solid red; // Remove test code.
+  height: 20%;
+  font-size: 13px;
+}
+
+.project_edit {
+  // border: 1px solid red; // Remove test code.
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 20%;
+}
