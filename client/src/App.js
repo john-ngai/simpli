@@ -70,6 +70,9 @@ export default function App() {
           />}
           {mode === TASKS && <TaskList
             tasks={tasks}
+            deliverable={state.deliverable}
+            showFormBoolean={state.showTaskForm}
+            showTaskForm={showTaskForm}
           />}
         </section>
       </main>
