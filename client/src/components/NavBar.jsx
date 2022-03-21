@@ -8,21 +8,18 @@ export default function Navbar(props) {
   return (
     <nav id="navbar">
       <span id="app_name">Project Tracker</span>
-      
-      <span className="nav_item">Summary</span>
-      {/* <Link to="/schedule" className="nav_item">Schedule</Link> */}
-      <span className="nav_item">Schedule</span>
-
       <span className="nav_item">
-        <Link to="/projects/new">New Project</Link>
+        <Link to="/">Summary</Link>
       </span>
-
+      <span className="nav_item">
+        <Link to="/schedule">Schedule</Link>
+      </span>
       <span className="login-nav">
         <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
         {/* <Link to="/logout"> Logout</Link> */}
       </span>
-      <p className="nav_item">Logged in as:</p>
+      <span className="nav_item">Logged in as:</span>
     </nav>
   )
 }
