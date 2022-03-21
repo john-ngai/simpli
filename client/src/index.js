@@ -14,7 +14,7 @@ const rootElement = document.getElementById('root');
 render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}/>
+      <Route path="/" element={<DevApp />}/>
       <Route path="register" element={<Register />}/>
       <Route path="login" element={<Login />}/>
       <Route path="projects/new" element={<NewProject />}/>
