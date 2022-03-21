@@ -10,6 +10,7 @@ export default function TaskList(props) {
         id={task.id}
         task={task}
         name={task.name}
+        selected={task.priority}
         description={task.description}
         onToggle={props.onToggle}
       />
@@ -18,13 +19,13 @@ export default function TaskList(props) {
 
   return (
     <div>
-      <button className="newTaskButton" 
-      onClick={props.showTaskForm}
+      <button className="newTaskButton"
+        onClick={props.showTaskForm}
       >New Task
       </button>
 
       {props.showFormBoolean &&
-        <NewTask 
+        <NewTask
           deliverable={props.deliverable}
         />}
 
