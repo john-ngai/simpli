@@ -128,13 +128,14 @@ export default function useAppData() {
 
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
-      .then(data => {
-        state.tasks.map((task) => task.id === id ? { ...task, priority: data.priority } : task)
+      .then(() => {
+        console.log("PENDING...?", data);
+        setState({ ...state, tasks });
       })
       .catch(err => console.log("ERROR:", err));
 
     // map through the tasks state with the updated task data
-    // state.tasks.map((task) => task.id === id ? { ...task, priority: !task.priority } : task)
+    // state.tasks.map((task) => task.id === id ? { ...task, priority: task.priority } : task)
   }
   appData.setTaskPriority = setTaskPriority;
 
