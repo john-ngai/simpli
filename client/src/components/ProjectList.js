@@ -1,5 +1,6 @@
 import React from "react";
 import ProjectListItem from "./ProjectListItem";
+import { Link } from 'react-router-dom';
 
 export default function ProjectList(props) {
   const listItem = props.projects.map(project =>
@@ -19,8 +20,13 @@ export default function ProjectList(props) {
   );
 
   return (
-    <ul className="project_item_list">
-      {listItem}
-    </ul>
+    <div>
+      <span className="nav-tab">
+        <Link to="/projects/new">New Project</Link>
+      </span>
+      <ul className="project_item_list">
+        {listItem}
+      </ul>
+    </div>
   );
 }
