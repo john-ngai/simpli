@@ -10,11 +10,15 @@ import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
+import Project from './components/Project';
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
 const TASKS = 'TASKS';
 const SAVING = 'SAVING';
+const NEW_PROJECT = 'NEW_PROJECT';
+const NEW_DELIVERABLE = 'NEW_DELIVERABLE';
+const NEW_TASK = 'NEW_TASK';
 
 export default function App() {
   const {
@@ -32,6 +36,11 @@ export default function App() {
   return (
     <div>
       <NavBar users={state.users} />
+      
+      <button onClick={() => transition(NEW_PROJECT)}>NEW_PROJECT</button>
+      <button onClick={() => transition(NEW_DELIVERABLE)}>NEW_DELIVERABLE</button>
+      <button onClick={() => transition(NEW_TASK)}>NEW_TASK</button>
+
       <main className="layout">
         <section className="projects">
           <nav>
@@ -45,6 +54,9 @@ export default function App() {
           </nav>
         </section>
         <section className="deliverables">
+
+          {mode === NEW_PROJECT && <Project />}
+
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
