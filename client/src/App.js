@@ -10,11 +10,7 @@ import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
-<<<<<<< HEAD
-
-=======
 import Project from './components/Project';
->>>>>>> john/forms
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
