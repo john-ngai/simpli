@@ -116,9 +116,7 @@ export default function useAppData() {
 
 
   const percentComplete = (state, project)  => {
-    // const allDelivs = Object.values(state.deliverables)
     const selectedDelivs = getDeliverables(state, project)
-    // The following numbers are conditional on the current seeds.
     let numCompleted = 0;
     let numNotCompleted = 0;
     selectedDelivs.forEach(deliv => {
@@ -133,9 +131,7 @@ export default function useAppData() {
   appData.percentComplete = percentComplete
 
   const deliverablePercentComplete = (state, deliverable)  => {
-    // const allDelivs = Object.values(state.deliverables)
     const selectedTasks = getTasks(state, deliverable)
-    // The following numbers are conditional on the current seeds.
     let numCompleted = 0;
     let numNotCompleted = 0;
     selectedTasks.forEach(task => {
