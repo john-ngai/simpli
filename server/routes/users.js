@@ -5,7 +5,12 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     const command = "SELECT * FROM users";
     db.query(command).then(data => {
-      return res.json(data.rows);
+      const usersArray = data.rows;
+      const usersObj = {};
+      for (const e of usersArray) {
+        usersObj[e.id] = e;
+      }
+      return res.json(usersObj);
     });
   });
   return router;

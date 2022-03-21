@@ -5,7 +5,12 @@ module.exports = (db) => {
   router.get('/', (req, res) => {
     const command = "SELECT * FROM tasks";
     db.query(command).then(data => {
-      return res.json(data.rows);
+      const tasksArray = data.rows;
+      const tasksObj = {};
+      for (const e of tasksArray) {
+        tasksObj[e.id] = e;
+      }
+      return res.json(tasksObj);
     });
   });
   return router;
