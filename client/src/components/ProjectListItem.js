@@ -2,6 +2,7 @@ import React from "react";
 import classNames from 'classnames';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import './ProjectListItem.scss';
 
 export default function ProjectListItem(props) {
   const projectClass = classNames('project_list_item', {
@@ -12,17 +13,33 @@ export default function ProjectListItem(props) {
     <li className={projectClass} onClick={props.setProject}>
       <span className="project_name">{props.name}</span>
       <span className="project_description">{props.description}</span>
-      <aside>Deliverables: {props.count}</aside>
+      <span className="project_deliverables">{props.count} Deliverables</span>
       {props.selected &&
         <span className="project_edit">
-          <EditIcon className="mui_icons EditIcon"
+          <EditIcon id="edit_project" className="mui_icons"
             onClick={props.editProject}
           />
-          <DeleteIcon className="mui_icons DeleteIcon"
+          <DeleteIcon id="delete_project" className="mui_icons"
             onClick={props.deleteProject}
           />
         </span>
       }
     </li>
+
+    // <li className={projectClass} onClick={props.setProject}>
+    //   <span className="project_name">{props.name}</span>
+    //   <span className="project_description">{props.description}</span>
+    //   <aside>Deliverables: {props.count}</aside>
+    //   {props.selected &&
+    //     <span className="project_edit">
+    //       <EditIcon className="mui_icons EditIcon"
+    //         onClick={props.editProject}
+    //       />
+    //       <DeleteIcon className="mui_icons DeleteIcon"
+    //         onClick={props.deleteProject}
+    //       />
+    //     </span>
+    //   }
+    // </li>
   );
 };  

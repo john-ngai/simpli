@@ -1,5 +1,7 @@
 import React from "react";
 import ProjectListItem from "./ProjectListItem";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import './ProjectList.scss';
 
 export default function ProjectList(props) {
   const listItem = props.projects.map(project =>
@@ -12,19 +14,18 @@ export default function ProjectList(props) {
         props.onChange(project.id);
         props.transition('DELIVERABLES');
       }}
-
       editProject={() => {
         console.log('hello');
         props.transition('EDIT_PROJECT');
       }}
-
       deleteProject={() => props.deleteProject(props.value)}
-    />
+    />  
   );
 
   return (
-    <ul className="project_item_list">
+    <aside id="projects_list">
+      <AddCircleIcon id="new_project" className="mui_icons" />
       {listItem}
-    </ul>
+    </aside>
   );
 }
