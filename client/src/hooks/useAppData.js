@@ -121,7 +121,7 @@ export default function useAppData() {
     let numCompleted = 0;
     let numNotCompleted = 0;
     selectedDelivs.forEach(deliv => {
-      if(deliv.status === 'complete') {
+      if(deliv.status === 'completed') {
         numCompleted++;
       } else {
         numNotCompleted++;
