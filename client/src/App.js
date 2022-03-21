@@ -36,7 +36,7 @@ export default function App() {
         <section className="projects">
           <nav>
             <ProjectList
-              projects={state.projects}
+              projects={Object.values(state.projects)}
               value={state.project}
               onChange={setProject}
               transition={transition}
