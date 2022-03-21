@@ -9,9 +9,9 @@ module.exports = (db) => {
     });
 
     router.put('/:id', (req, res) => {
-      const taskID = req.params.id;
-      const { priority } = req.body;
-      const values = [taskID, priority];
+      // const taskID = req.params.id;
+      const { id, priority } = req.body;
+      const values = [id, priority];
       const command = `
       UPDATE tasks
       SET priority = $2
