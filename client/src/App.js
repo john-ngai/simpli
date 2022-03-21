@@ -11,6 +11,7 @@ import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import NewDeliverable from './components/NewDeliverable';
+
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const TASKS = 'TASKS';
@@ -19,7 +20,7 @@ export default function App() {
   const {
     state,
     setProject, setDeliverable,
-    getDeliverables, getTasks,
+    getDeliverables, getTasks, showForm
   } = useAppData();
   
   const { mode, transition } = useVisualMode(null);
@@ -42,9 +43,14 @@ export default function App() {
           </nav>
         </section>
         <section className="deliverables">
-          <NewDeliverable 
-            project={state.project}
-          />
+          <button className="newDeliverableButton" onClick={() => {
+            showForm(); transition('DELIVERABLES');}}>New Deliverable</button>
+          {state.showForm &&
+          <div>
+            <NewDeliverable 
+              project={state.project}
+            />
+          </div>}
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
