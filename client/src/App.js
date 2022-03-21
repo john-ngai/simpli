@@ -43,14 +43,15 @@ export default function App() {
           </nav>
         </section>
         <section className="deliverables">
+        <div>
           <button className="newDeliverableButton" onClick={() => {
-            showForm(); transition('DELIVERABLES');}}>New Deliverable</button>
+            showForm(); transition('DELIVERABLES')}}>New Deliverable
+          </button>
           {state.showForm &&
-          <div>
-            <NewDeliverable 
-              project={state.project}
-            />
-          </div>}
+          <NewDeliverable 
+            project={state.project}
+          />}
+        </div>
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
