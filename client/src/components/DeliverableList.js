@@ -7,7 +7,7 @@ import NewDeliverable from './NewDeliverable';
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
-  const { state, showForm } = useAppData
+  const { state, showDelivForm } = useAppData
   const { transition } = useVisualMode(null);
 
   const listItem = props.deliverables.map(deliverable =>
@@ -22,27 +22,18 @@ export default function DeliverableList(props) {
     />
   );
 
-  // const newForm = function(
-  //   state.showForm &&
-  //   <NewDeliverable 
-  //     project={props.project}
-  //   />)
-
-  // {state.showForm &&
-  //   <NewDeliverable 
-  //     project={state.project}
-  //   />}
-
   return (
     <div>
-      {/* <button className="newDeliverableButton" onClick={() => {
-        {props.showForm}; transition('DELIVERABLES')}}>New Deliverable
+      <button className="newDeliverableButton" 
+      onClick={props.showDelivForm}
+      >New Deliverable
       </button>
 
-      {props.showForm &&
+      {props.showFormBoolean &&
         <NewDeliverable 
           project={props.project}
-        />} */}
+        />}
+
       <ul className="deliverable_item_list">
         { listItem }
       </ul>
