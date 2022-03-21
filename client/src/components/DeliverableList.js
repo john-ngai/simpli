@@ -1,15 +1,10 @@
-import { React, useState } from 'react';
-import useAppData from '../hooks/useAppData';
-import useVisualMode from '../hooks/useVisualMode';
+import { React } from 'react';
 import DeliverableListItem from './DeliverableListItem';
 import NewDeliverable from './NewDeliverable';
 
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
-  const { state, showDelivForm } = useAppData
-  const { transition } = useVisualMode(null);
-
   const listItem = props.deliverables.map(deliverable =>
     <DeliverableListItem
       key={deliverable.id}
