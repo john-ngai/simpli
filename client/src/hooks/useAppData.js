@@ -112,17 +112,29 @@ export default function useAppData() {
   appData.setDeliverablesPriority = setDeliverablesPriority;
 
   const getTask = (id) => {
-    state.tasks.find((task) => task.id === id)
+    return state.tasks.find((task) => task.id === id);
   }
   appData.getTask = getTask;
 
 
   const setTaskPriority = (id) => {
-    console.log("TASK ID =", id);
+    console.log("TASK ID:", id);
 
-    // map through the tasks state
-    state.tasks.map((task) => task.id === id ? { ...task, priority: !task.priority } : task)
+    // get the task selected
+    const taskToSet = getTask(id);
+    console.log("getTask ID:", taskToSet);
+    // new task data with the priority set to the opposite of what it is
+    const updateTask = { ...taskToSet, priority: !taskToSet.priority };
 
+    // make an axios PUT req to update the task data
+    axios.put(`/tasks/${id}`, updateTask)
+      .then(data => {
+        state.tasks.map((task) => task.id === id ? { ...task, priority: data.priority } : task)
+      })
+      .catch(err => console.log("ERROR:", err));
+
+    // map through the tasks state with the updated task data
+    // state.tasks.map((task) => task.id === id ? { ...task, priority: !task.priority } : task)
   }
   appData.setTaskPriority = setTaskPriority;
 
