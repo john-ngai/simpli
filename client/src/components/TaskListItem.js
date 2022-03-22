@@ -33,7 +33,10 @@ export default function TaskListItem(props) {
             onClick={() => props.setTask()} // Do not remove.
           />
           <DeleteIcon id="delete_task" className="mui_icons"
-            onClick={() => props.setTask()} // Do not remove.
+            onClick={() => {
+              props.setTask();
+              props.deleteTask();
+            }}
           />
         </span>
       </div>
