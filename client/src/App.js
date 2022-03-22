@@ -58,20 +58,15 @@ export default function App() {
           />}
           {mode === TASKS && <TaskList
             tasks={tasks}
+            deliverable={state.deliverable}
             onToggle={setTaskPriority}
             onClick={transition}
             project={state.project}
             selectedProject={selectedProject}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
-            deliverablePercentComplete={deliverablePercentComplete}
-          />}
-
-          {mode === TASKS && <TaskList
-            tasks={tasks}
-            deliverable={state.deliverable}
-            showFormBoolean={state.showTaskForm}
             showTaskForm={showTaskForm}
+            deliverablePercentComplete={deliverablePercentComplete}
           />}
 
           {mode === NEW_PROJECT && <Project
