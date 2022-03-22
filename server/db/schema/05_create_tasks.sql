@@ -6,6 +6,6 @@ CREATE TABLE tasks (
   name VARCHAR(255) NOT NULL,
   description TEXT,
   priority BOOLEAN NOT NULL,
-  status VARCHAR(255) NOT NULL,
+  complete BOOLEAN NOT NULL,
   deliverable_id INTEGER REFERENCES deliverables (id) ON DELETE CASCADE
 );
