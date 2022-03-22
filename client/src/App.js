@@ -24,16 +24,18 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
-    saveProject, editProject,
-    setProject, getSelectedProject, setDeliverable,
-    setDeliverablesPriority,
-    setTaskPriority,
-    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete, deliverablePercentComplete
+    setProject, getSelectedProject, saveProject, editProject, deleteProject,
+    getDeliverables, setDeliverable, getSelectedDeliverable,
+    setDeliverablesPriority, setTaskPriority,
+    getTasks,
+    showDelivForm, showTaskForm,
+    percentComplete, deliverablePercentComplete
   } = useAppData();
 
   const { mode, transition, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
+  const selectedDeliverable = getSelectedDeliverable(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
