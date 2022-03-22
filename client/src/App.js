@@ -58,7 +58,7 @@ export default function App() {
             selectedProject={selectedProject}
             onToggle={setDeliverablesPriority}
           />}
-
+          
           {mode === TASKS && <TaskList
             tasks={tasks}
             deliverable={state.deliverable}
