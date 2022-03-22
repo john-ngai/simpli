@@ -51,12 +51,13 @@ export default function App() {
           deleteProject={deleteProject}
           percentComplete={percentComplete}
         />
+        
         <div id="dashboard">
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
             transition={transition}
-            getSelectedProject={getSelectedProject}
+            selectedProject={selectedProject}
             onToggle={setDeliverablesPriority}
           />}
           
