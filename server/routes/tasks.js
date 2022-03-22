@@ -13,7 +13,7 @@ module.exports = (db) => {
       return res.json(tasksObj);
     });
 
-    // Update task's priority value
+    // Update task's complete & priority value
     router.put('/:id', (req, res) => {
       const taskID = req.params.id;
       const { complete, priority } = req.body;
@@ -25,33 +25,13 @@ module.exports = (db) => {
       WHERE id = $1;
       `;
       return db.query(command, values)
-        .then(data => {
+        .then(() => {
           // console.log("SUCCESS TASK PRIORITY");
           res.send();
         })
         .catch(err => console.log(err));
     })
   });
-
-  // Update task's complete value
-  // router.put('/:id', (req, res) => {
-  //   console.log("HELLO COMPLETE STATUS");
-  //   const taskID = req.params.id;
-  //   const { complete } = req.body;
-  //   const values = [taskID, complete];
-  //   const command = `
-  //     UPDATE tasks
-  //     SET complete = $2
-  //     WHERE id = $1;
-  //     `;
-  //   return db.query(command, values)
-  //     .then(() => {
-  //       console.log("SUCCESS TASK COMPLETE?");
-  //       res.send();
-  //     })
-  //     .catch(err => console.log(err));
-
-  // });
 
   // PUT /tasks/new
   router.put('/new', (req, res) => {
