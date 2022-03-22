@@ -58,7 +58,7 @@ export default function useAppData() {
   appData.saveProject = saveProject;
 
   // Edit an existing project.
-  const editProject = project => {  
+  const editProject = project => {
     const { id, name, description, team_id } = project;
     const projects = {
       ...state.projects,
@@ -87,7 +87,7 @@ export default function useAppData() {
       }
     }
     return axios.delete(`/projects/${project_id}`)
-      .then(() => setState({ ...state, projects }));  
+      .then(() => setState({ ...state, projects }));
   }
   appData.deleteProject = deleteProject;
 
@@ -177,6 +177,32 @@ export default function useAppData() {
   }
   appData.deleteDeliverable = deleteDeliverable;
 
+  // toggle task complete
+  const completeTask = (id) => {
+    const allTasks = Object.values(state.tasks);
+
+    let updTask;
+    allTasks.forEach(task => {
+      if (task.id === id) {
+        task.complete = !task.complete;
+        updTask = task;
+        // console.log("AFTER TASK:", updTask); TEST CODE
+      }
+    });
+
+    const tasks = {
+      ...state.tasks,
+      [id]: updTask
+    }
+
+    axios.put(`/tasks/${id}`, updTask)
+      .then(() => {
+        setState({ ...state, tasks });
+      })
+      .catch(err => console.log(err));
+  }
+  appData.completeTask = completeTask;
+
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
     const allDeliverables = Object.values(state.deliverables);
@@ -198,7 +224,7 @@ export default function useAppData() {
       .catch(err => console.log(err));
   }
   appData.setDeliverablesPriority = setDeliverablesPriority;
-  
+
   // Return an array of tasks matching the selected deliverable id.
   const getTasks = (state, deliverable_id) => {
     const allTasks = Object.values(state.tasks);
@@ -267,7 +293,7 @@ export default function useAppData() {
   }
   appData.setTaskPriority = setTaskPriority;
 
-   // Save new task
+  // Save new task
   const saveTask = newTask => {
     const task = newTask.id;
     const tasks = {

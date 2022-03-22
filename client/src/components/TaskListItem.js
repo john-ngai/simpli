@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TaskListItem(props) {
-  const { task, onToggle } = props;
+  const { task, onToggle, onClick } = props;
   // console.log("PROPS SELECTED:", props.selected);
   // const taskClass = classNames("task_list_item", {
   //   "task_list_item--selected": props.selected
@@ -14,9 +14,10 @@ export default function TaskListItem(props) {
 
   return (
     <li className="task_list_item">
-      <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
+      <CheckCircleOutlineIcon id={props.complete ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => onClick(task.id)} />
+      {/* <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
         onClick={() => props.setTask()} // Do not remove.
-      />
+      /> */}
       <div id="task_list_item_container">
         <div id="task_list_item_header">
           <span className="task_name">{props.name}</span>
