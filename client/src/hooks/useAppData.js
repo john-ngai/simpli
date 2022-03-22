@@ -11,6 +11,7 @@ export default function useAppData() {
     projects: {},
     deliverable: null,
     deliverables: {},
+    task: null,
     tasks: {},
     teams: {},
     users: {},
