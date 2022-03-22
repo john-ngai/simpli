@@ -1,0 +1,26 @@
+#deliverable_details {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+}
+
+#deliverable_name {
+  border: 1px solid red;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#deliverable_description {
+  border: 1px solid red;
+  height: 40px;
+}
+
+#deliverable_stats {
+  border: 1px solid red;
+}
+
+#new_task {
+  height: 50px;
+  width: 100%;
+}

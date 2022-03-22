@@ -2,6 +2,8 @@ import { React } from 'react';
 import useAppData from '../hooks/useAppData';
 import DeliverableListItem from './DeliverableListItem';
 import NewDeliverable from './NewDeliverable';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import './DeliverableList.scss';
 
 
 // Container for each DeliverableListItem.
@@ -21,20 +23,23 @@ export default function DeliverableList(props) {
   );
 
   return (
-    <div>
-      <button className="newDeliverableButton" 
-      onClick={props.showDelivForm}
-      >New Deliverable
-      </button>
+    <section>
+      <div id="project_details">
+        <span id="project_name">Project Name</span>
+        <span id="project_description">Project Description</span>
+        <span id="project_stats">3 of 5 (60%) Deliverables Completed</span>
+        <AddCircleIcon id="new_deliverable" className="mui_icons"
+          onClick={props.showDelivForm}
+        />
+      </div>
 
       {props.showFormBoolean &&
         <NewDeliverable 
           project={props.project}
-        />}
+        />
+      }
 
-      <ul className="deliverable_item_list">
-        { listItem }
-      </ul>
-    </div>
+      { listItem }
+    </section>
   );
 }

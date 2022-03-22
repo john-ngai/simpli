@@ -45,13 +45,23 @@ export default function useAppData() {
   const setProject = project => setState({ ...state, project });
   appData.setProject = setProject;
 
+  // Save a new project or update an existing project.
+  const saveProject = project => {
+    const projects = {
+      ...state.projects,
+      [project.id]: project
+    };
+    setState({ ...state, projects });
+  }
+  appData.saveProject = saveProject;
+
   // Delete the currently selected project id.
   const deleteProject = project_id => {
     // Declare a new projects array to hold the updated projects data.
     const projects = [];
   
     // Loop through each project from state,
-    for (const project of state.projects) {
+    for (const project of Object.values(state.projects)) {
       // If the project's id is not equal to the selected project id,
       if (project.id !== project_id) {
         // Add the project to the projects array.

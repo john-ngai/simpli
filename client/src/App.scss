@@ -1,0 +1,29 @@
+#container {
+  // border: 3px solid blueviolet; // Remove test code.
+  height: 1000px;
+  width: 100%;
+}
+
+main {
+  border: 2px solid magenta;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: inherit;
+  width: inherit;
+}
+
+#dashboard {
+  border: 2px solid blue;
+  height: inherit;
+  width: 80%;
+}
+
+.mui_icons {
+  color: grey;
+}
+
+.mui_icons:hover {
+  color: rgb(180, 180, 180);
+  cursor: pointer;
+}
