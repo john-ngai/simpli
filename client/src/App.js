@@ -39,6 +39,8 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
+  
+
   return (
     <div id="container">
       <NavBar users={state.users} />
@@ -59,6 +61,8 @@ export default function App() {
             transition={transition}
             selectedProject={selectedProject}
             onToggle={setDeliverablesPriority}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={''}
           />}
           
           {mode === TASKS && <TaskList
