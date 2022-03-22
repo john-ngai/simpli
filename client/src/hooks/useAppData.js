@@ -46,12 +46,13 @@ export default function useAppData() {
   appData.setProject = setProject;
 
   // Save a new project or update an existing project.
-  const saveProject = project => {
+  const saveProject = newProject => {
+    const project = newProject.id;
     const projects = {
       ...state.projects,
-      [project.id]: project
+      [newProject.id]: newProject
     };
-    setState({ ...state, projects });
+    setState({ ...state, project, projects });
   }
   appData.saveProject = saveProject;
 
