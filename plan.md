@@ -38,17 +38,39 @@ You should have a document describing your project idea. In other words, what yo
 
 User stories allow you to draft the high-level requirements based on the user needs. It should describe the interaction of the user and the app.
 
-* Users can create a new project title, description, category.
-* Users can create, update, or delete project deliverables.
-* Users can create, update, or delete tasks.
-* Tasks can be assigned a priority status.
-* **Stretch:** Tasks can be assigned a task order number or assigned as unordered.
-* Users can register and login/logout of an account.
-* Users can add other registered users as team members
-* Users can assign tasks to the scheduler.
-* **Stretch:** Users can mark a estimated completion date for each task.
-* **Stretch:** Users can mark a task on the scheduler as not started, in progress, completed.
-* User can navigate to a home page and see a project's summary (i.e. Name, deliverables, tasks, progress percentage/bars)
+* Register:
+  * **(DONE)** Users can create a new account with a username, email, and password.
+    * **(NOT STARTED)** They can also optionally enter a team registration code (to link to a team id). 
+
+* Login/Logout:
+  * **(NOT STARTED)** Users can sign into their account using their email and password.
+  * **(NOT STARTED◊** The nav bar conditionally renders the login/logout buttons.
+  * **(NOT STARTED)** A JWT session cookie is stored upon a successfuly login.
+    * **(NOT STARTED)** Clicking the 'logout' button will delete the JWT session cookie.
+
+* Dashboard:
+  * **(IN PROGRESS)** Users can see their projects, deliverables, and tasks.
+    * **(NOT STARTED)** Users can only see the data associated with their team id.
+  * **(IN PROGRESS)** Users can create, edit, or delete projects, deliverables, and tasks.
+    * **(IN PROGRESS)** When creating a deliverable or task, users can optionally mark them as high priority.
+  * **(IN PROGRESS)** Users can mark existing deliverables or tasks as high priority.
+  * **(NOT STARTED)** Users can mark existing tasks as complete or incomplete.
+
+* Scheduler:
+  * **(NOT STARTED)** Users can see a weekly scheduler:
+    * **(NOT STARTED)** 7 columns for Mon-Sun.
+    * **(NOT STARTED)** 24 rows for each hour in the day.
+  * **(NOT STARTED)** Users can see a drop-down menu to select an existing project.
+    * **(NOT STARTED)** When a project is selected, users can see the tasks that have been added to the scheduler.
+      * **(NOT STARTED)** Users can add, edit, or remove tasks from the scheduler.
+        * **(NOT STARTED)** Tasks that are added to the scheduler will automatically have their status changed to 'in progress'.
+      * **(NOT STARTED)** Users can mark task on the calendar as 'complete'.
+        * **(NOT STARTED)** Tasks marked as complete change into green on the scheduler.
+
+* **(Stretch)** User Profile:
+  * **(NOT STARTED)** Users can see their team id and team registration code.
+  * **(NOT STARTED)** Users can see a list of their team member usernames.
+  * **(NOT STARTED)** Users can add other users onto their team via their email.
 
 **Deliverable:** User stories document
 
