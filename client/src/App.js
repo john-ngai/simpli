@@ -18,16 +18,15 @@ const TASKS = 'TASKS';
 const SAVING = 'SAVING';
 const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
-const NEW_DELIVERABLE = 'NEW_DELIVERABLE';
 const NEW_TASK = 'NEW_TASK';
 
 export default function App() {
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
-    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable,
     setDeliverablesPriority, setTaskPriority,
-    setTask, getTasks, getSelectedTask, deleteTask,
+    setTask, getTasks, getSelectedTask, deleteTask, saveTask,
     showDelivForm, showTaskForm,
     percentComplete, deliverablePercentComplete
   } = useAppData();
@@ -58,12 +57,16 @@ export default function App() {
             deliverables={deliverables}
             onChange={setDeliverable}
             transition={transition}
-            selectedProject={selectedProject}
+            project={state.project}
             onToggle={setDeliverablesPriority}
+            showFormBoolean={state.showDelivForm}
+            showDelivForm={showDelivForm}
+            saveDeliverable={saveDeliverable}
+            selectedProject={selectedProject}
             selectedDeliverable={selectedDeliverable}
             deleteDeliverable={deleteDeliverable}
           />}
-          
+
           {mode === TASKS && <TaskList
             tasks={tasks}
             onChange={setTask}
@@ -75,10 +78,11 @@ export default function App() {
             selectedDeliverable={selectedDeliverable}
             selectedTask={selectedTask}
             deleteTask={deleteTask}
-            showFormBoolean={state.showDelivForm}
+            showFormBoolean={state.showTaskForm}
             showDelivForm={showDelivForm}
             showTaskForm={showTaskForm}
             deliverablePercentComplete={deliverablePercentComplete}
+            saveTask={saveTask}
           />}
 
           {mode === NEW_PROJECT && <Project

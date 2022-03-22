@@ -1,18 +1,14 @@
 import { React, useState } from "react";
 import axios from "axios";
-import useAppData from "../hooks/useAppData";
 
 export default function NewDeliverable(props) {
-  const { state } = useAppData();
-  const deliverables = state.deliverables;
-
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState(false);
   const [status, setStatus] = useState('not started');
 
 
-  const saveDeliverable = () => {
+  const save = () => {
     const deliverable = {
       name: name,
       description: description,
@@ -21,13 +17,20 @@ export default function NewDeliverable(props) {
       project_id: props.project
     }
     axios.put('/deliverables/new', deliverable)
-      .then(res => console.log('res: ', res.data));
+      .then(res => {
+        deliverable.id = res.data.id
+        console.log('res: ', res.data)
+        props.saveDeliverable(deliverable)
+      })
   }
 
   return (
     <main className="new_deliverable_container">
       <section className="new_deliverable">
-        <form onSubmit={event => event.preventDefault()}>
+        <form onSubmit={event => {
+          event.preventDefault();
+          props.showDelivForm();
+          }}>
           {/* Name */}
           <label>Deliverable Title:</label>
           <input name="name" type="text" placeholder="Enter Deliverable Title" value={name} onChange={event => setName(event.target.value)}>
@@ -53,8 +56,8 @@ export default function NewDeliverable(props) {
             <input name="status" type="radio" value={status} onChange={event => setStatus("completed")}>
             </input>
           </div>
+        <button onClick={() => save()}>Save</button>
         </form>
-        <button onClick={saveDeliverable}>Save</button>
       </section>
     </main>
   )

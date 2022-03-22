@@ -3,8 +3,10 @@ import './TaskList.scss';
 import TaskListItem from './TaskListItem';
 import NewTask from './NewTask';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import useAppData from '../hooks/useAppData';
 
 export default function TaskList(props) {
+  const {state, showTaskForm} = useAppData
   const taskInfo = props.tasks.map(task => {
     return (
       <TaskListItem
@@ -36,6 +38,8 @@ export default function TaskList(props) {
         {props.showFormBoolean &&
           <NewTask
             deliverable={props.deliverable}
+            showTaskForm={props.showTaskForm}
+            saveTask={props.saveTask}
           />
         }
       </div>

@@ -16,7 +16,7 @@ export default function useAppData() {
     teams: {},
     users: {},
     showDelivForm: false,
-    showTaskForm: false
+    showTaskForm: false,
   });
 
   // GET state data.
@@ -90,6 +90,17 @@ export default function useAppData() {
       .then(() => setState({ ...state, projects }));  
   }
   appData.deleteProject = deleteProject;
+
+  // Save new deliverable
+  const saveDeliverable = newDeliverable => {
+    const deliverable = newDeliverable.id;
+    const deliverables = {
+      ...state.deliverables,
+      [newDeliverable.id]: newDeliverable
+    };
+    setState({ ...state, deliverable, deliverables });
+  }
+  appData.saveDeliverable = saveDeliverable;
 
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
@@ -255,6 +266,17 @@ export default function useAppData() {
       .catch(err => console.log("ERROR:", err));
   }
   appData.setTaskPriority = setTaskPriority;
+
+   // Save new task
+  const saveTask = newTask => {
+    const task = newTask.id;
+    const tasks = {
+      ...state.tasks,
+      [newTask.id]: newTask
+    };
+    setState({ ...state, task, tasks });
+  }
+  appData.saveTask = saveTask;
 
   const percentComplete = (state, project) => {
     const selectedDelivs = getDeliverables(state, project)
