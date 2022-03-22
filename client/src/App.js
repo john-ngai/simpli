@@ -1,7 +1,7 @@
 // Dependencies
 import React from 'react';
 // Stylesheets
-import './App.css';
+import './App.scss';
 // Hooks
 import useAppData from './hooks/useAppData';
 import useVisualMode from './hooks/useVisualMode';
