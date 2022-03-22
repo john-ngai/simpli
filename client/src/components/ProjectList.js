@@ -21,6 +21,7 @@ export default function ProjectList(props) {
       }}
       deleteProject={() => {
         props.deleteProject(props.value);
+        props.transition(null);
       }}
     />
   );
