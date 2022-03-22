@@ -1,7 +1,5 @@
 import { React, useState } from "react";
 import axios from "axios";
-import useAppData from "../hooks/useAppData";
-import TaskList from "./TaskList";
 
 export default function NewTask(props) {
   const [name, setName] = useState('');
@@ -31,8 +29,8 @@ export default function NewTask(props) {
       <section className="new_task">
         <form onSubmit={event => {
           event.preventDefault();
-          props.showTaskForm();
-          }}>
+          props.showTaskForm()
+        }}>
           {/* Name */}
           <label>Task Title:</label>
           <input name="name" type="text" placeholder="Enter Task Title" value={name} onChange={event => setName(event.target.value)}>
