@@ -116,7 +116,7 @@ export default function useAppData() {
 
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
-    console.log("DEL ID", id);
+    // console.log("DEL ID", id);
 
     const allDeliverables = Object.values(state.deliverables);
 
@@ -141,7 +141,7 @@ export default function useAppData() {
     axios.put(`/deliverables/${id}`, updDeliverable)
       .then(() => {
         console.log("UPDATING deliverable...");
-
+        setState({ ...state, deliverables });
       })
       .catch(err => console.log(err));
   }
