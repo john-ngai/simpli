@@ -15,6 +15,7 @@ export default function TaskList(props) {
         selected={task.priority}
         description={task.description}
         onToggle={props.onToggle}
+        setTask={() => props.onChange(task.id)}
       />
     )
   })
