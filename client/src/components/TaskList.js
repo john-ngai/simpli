@@ -28,7 +28,7 @@ export default function TaskList(props) {
         <span id="deliverable_description">Deliverable Description</span>
         <span id="deliverable_stats">3 of 13 (23%) Tasks Completed</span>
         <AddCircleIcon id="new_task" className="mui_icons"
-          onClick={console.log(props.showTaskForm)}
+          onClick={props.showTaskForm}
         />
 
         {props.showFormBoolean &&
