@@ -24,7 +24,7 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
-    saveProject,
+    saveProject, editProject,
     setProject, getSelectedProject, setDeliverable,
     setDeliverablesPriority,
     setTaskPriority,
@@ -79,7 +79,7 @@ export default function App() {
           />}
 
           {mode === EDIT_PROJECT && <Project
-            saveProject={saveProject}
+            editProject={editProject}
             back={back}
             transition={transition}
             id={selectedProject.id}
