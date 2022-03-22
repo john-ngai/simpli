@@ -108,16 +108,15 @@ export default function useAppData() {
   }
   appData.showTaskForm = showTaskForm
 
+  // Return selected project object.
   const getSelectedProject = state => {
     const project_id = state.project;
     const projects = Object.values(state.projects);
-    let result;
     for (const project of projects) {
       if (project.id === project_id) {
-        result = project;
+        return project;
       }
     }
-    return result;
   }
   appData.getSelectedProject = getSelectedProject;
 
