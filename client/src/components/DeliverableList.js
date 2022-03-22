@@ -5,12 +5,11 @@ import NewDeliverable from './NewDeliverable';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import './DeliverableList.scss';
 import useVisualMode from '../hooks/useVisualMode';
-const NEW_DELIVERABLE = 'NEW_DELIVERABLE';
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
-  const { state, deliverablePercentComplete, saveDeliverable } = useAppData();
-  const { mode, transition, back } = useVisualMode(null);
+  const { state, deliverablePercentComplete } = useAppData();
+  const { transition } = useVisualMode(null);
 
   const listItem = props.deliverables.map(deliverable =>
     <DeliverableListItem
@@ -37,7 +36,6 @@ export default function DeliverableList(props) {
         <span id="project_stats">3 of 5 (60%) Deliverables Completed</span>
         <AddCircleIcon id="new_deliverable" className="mui_icons"
           onClick={() => {
-            // props.transition('NEW_DELIVERABLE')
             props.showDelivForm()
           }}
         />
@@ -51,7 +49,6 @@ export default function DeliverableList(props) {
           saveDeliverable={props.saveDeliverable}
         />
       }
-
       { listItem}
     </section>
   );
