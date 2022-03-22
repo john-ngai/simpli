@@ -87,11 +87,7 @@ export default function useAppData() {
   appData.showDelivForm = showDelivForm
 
   // Set showTaskForm 
-<<<<<<< HEAD
-  const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
-=======
   const setShowTaskForm = showTaskForm => setState({ ...state, showTaskForm });
->>>>>>> feature/set-priority
   const showTaskForm = () => {
     setShowTaskForm(!state.showTaskForm)
   }

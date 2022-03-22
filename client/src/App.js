@@ -25,7 +25,7 @@ export default function App() {
   const {
     state,
     saveProject,
-    setProject, setDeliverable,
+    setProject, getSelectedProject, setDeliverable,
     setDeliverablesPriority,
     setTaskPriority,
     getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete, deliverablePercentComplete
