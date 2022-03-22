@@ -40,7 +40,6 @@ module.exports = (db) => {
 
     return db.query(command, values)
       .then(data => {
-        console.log("DATA SUCCESS", data);
         res.send();
       })
       .catch(err => console.log(err));
