@@ -17,7 +17,6 @@ export default function DeliverableList(props) {
         props.transition('TASKS');
       }}
       selected={deliverable.priority}
-
       onToggle={props.onToggle}
     />
   );
