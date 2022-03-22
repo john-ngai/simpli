@@ -138,6 +138,12 @@ export default function useAppData() {
   }
   appData.getTasks = getTasks;
 
+  // toggle task complete
+  const completeTask = (id) => {
+
+  }
+  appData.completeTask = completeTask;
+
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
     const allDeliverables = Object.values(state.deliverables);
