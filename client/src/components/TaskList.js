@@ -9,8 +9,12 @@ export default function TaskList(props) {
     return (
       <TaskListItem
         key={task.id}
+        id={task.id}
+        task={task}
         name={task.name}
+        selected={task.priority}
         description={task.description}
+        onToggle={props.onToggle}
       />
     )
   })
@@ -32,7 +36,7 @@ export default function TaskList(props) {
         }
       </div>
 
-      { taskInfo }
+      { taskInfo}
     </section>
   );
 }

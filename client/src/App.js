@@ -25,7 +25,9 @@ export default function App() {
   const {
     state,
     saveProject,
-    setProject, getSelectedProject, setDeliverable,
+    setProject, setDeliverable,
+    setDeliverablesPriority,
+    setTaskPriority,
     getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete, deliverablePercentComplete
   } = useAppData();
 
@@ -51,6 +53,12 @@ export default function App() {
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
+            transition={transition}
+            onToggle={setDeliverablesPriority}
+          />}
+          {mode === TASKS && <TaskList
+            tasks={tasks}
+            onToggle={setTaskPriority}
             onClick={transition}
             project={state.project}
             selectedProject={selectedProject}
@@ -72,7 +80,7 @@ export default function App() {
             transition={transition}
           />}
         </div>
-      </main>
-    </div>
+      </main >
+    </div >
   );
 }

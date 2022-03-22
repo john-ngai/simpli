@@ -16,8 +16,10 @@ export default function DeliverableList(props) {
       name={deliverable.name}
       description={deliverable.description}
       count={deliverable.count}
+      selected={deliverable.priority}
+      onToggle={props.onToggle}
       setDeliverable={props.onChange}
-      transition={props.onClick}
+      transition={props.transition}
       deliverablePercentComplete={deliverablePercentComplete(state, deliverable.id)}
     />
   );
@@ -34,12 +36,12 @@ export default function DeliverableList(props) {
       </div>
 
       {props.showFormBoolean &&
-        <NewDeliverable 
+        <NewDeliverable
           project={props.project}
         />
       }
 
-      { listItem }
+      { listItem}
     </section>
   );
 }

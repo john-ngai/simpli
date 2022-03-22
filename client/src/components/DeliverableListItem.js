@@ -4,8 +4,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import React from 'react';
+import classNames from 'classnames';
 
 export default function DeliverableListItem(props) {
+  const { id, onToggle } = props;
+
+  // const deliverableClass = classNames("deliverable_list_item", {
+  //   "deliverable_list_item--selected": props.selected
+  // })
+
   return (
     <li className="deliverable_list_item"
       onClick={() => {
@@ -15,7 +22,7 @@ export default function DeliverableListItem(props) {
     >
       <div id="deliverable_list_item_header">
         <span className="deliverable_name">{props.name}</span>
-        <PriorityHighIcon id="important_deliverable" className="mui_icons" />
+        <PriorityHighIcon id={props.selected ? "important_deliverable" : "low_priority"} onClick={() => onToggle(id)} />
       </div>
       <span className="deliverable_description">{props.description}</span>
       <span className="deliverable_tasks">{props.count} Tasks Remaining</span>

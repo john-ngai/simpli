@@ -12,6 +12,24 @@ module.exports = (db) => {
       }
       return res.json(tasksObj);
     });
+
+    // Update task's priority value
+    router.put('/:id', (req, res) => {
+      const taskID = req.params.id;
+      const { priority } = req.body;
+
+      const values = [taskID, priority];
+      const command = `
+      UPDATE tasks
+      SET priority = $2
+      WHERE id = $1;
+      `;
+      return db.query(command, values)
+        .then(data => {
+          res.send();
+        })
+        .catch(err => console.log(err));
+    })
   });
 
   // PUT /tasks/new

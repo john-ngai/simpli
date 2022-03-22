@@ -87,7 +87,11 @@ export default function useAppData() {
   appData.showDelivForm = showDelivForm
 
   // Set showTaskForm 
+<<<<<<< HEAD
   const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
+=======
+  const setShowTaskForm = showTaskForm => setState({ ...state, showTaskForm });
+>>>>>>> feature/set-priority
   const showTaskForm = () => {
     setShowTaskForm(!state.showTaskForm)
   }
@@ -138,6 +142,66 @@ export default function useAppData() {
   }
   appData.getTasks = getTasks;
 
+  // toggle deliverables priority
+  const setDeliverablesPriority = (id) => {
+    const allDeliverables = Object.values(state.deliverables);
+
+    let updDeliverable;
+
+    allDeliverables.forEach(deliverable => {
+      if (deliverable.id === id) {
+
+        deliverable.priority = !deliverable.priority;
+        updDeliverable = deliverable;
+      }
+    });
+
+    const deliverables = {
+      ...state.deliverables,
+      [id]: updDeliverable
+    }
+
+    axios.put(`/deliverables/${id}`, updDeliverable)
+      .then(() => {
+        setState({ ...state, deliverables });
+      })
+      .catch(err => console.log(err));
+  }
+  appData.setDeliverablesPriority = setDeliverablesPriority;
+
+  const getTask = (id) => {
+    const allTasks = Object.values(state.tasks);
+    return allTasks.find((task) => task.id === id);
+  }
+  appData.getTask = getTask;
+
+
+  const setTaskPriority = (id) => {
+
+    const allTasks = Object.values(state.tasks);
+    // new task data with the priority set to the opposite of what it is
+    let updateTask;
+    allTasks.forEach(task => {
+      if (task.id === id) {
+        task.priority = !task.priority;
+        updateTask = task;
+      }
+    });
+
+
+    const tasks = {
+      ...state.tasks,
+      [id]: updateTask
+    }
+
+    // make an axios PUT req to update the task data
+    axios.put(`/tasks/${id}`, updateTask)
+      .then(() => {
+        setState({ ...state, tasks });
+      })
+      .catch(err => console.log("ERROR:", err));
+  }
+  appData.setTaskPriority = setTaskPriority;
 
   const percentComplete = (state, project) => {
     const selectedDelivs = getDeliverables(state, project)

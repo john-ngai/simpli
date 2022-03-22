@@ -41,7 +41,15 @@
 
 #important_task {
   // border: solid 1px black; // Remove test code.
-  width: 1.5%
+  // width: 1.5%;
+  font-size: 20px;
+  color: red;
+}
+
+#low_priority {
+  // width: 1.5%;
+  font-size: 20px;
+  color: grey;
 }
 
 .task_description {
