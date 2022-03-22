@@ -1,4 +1,5 @@
 import { React } from 'react';
+import useAppData from '../hooks/useAppData';
 import DeliverableListItem from './DeliverableListItem';
 import NewDeliverable from './NewDeliverable';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -7,6 +8,7 @@ import './DeliverableList.scss';
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
+  const { state, deliverablePercentComplete } = useAppData();
   const listItem = props.deliverables.map(deliverable =>
     <DeliverableListItem
       key={deliverable.id}
@@ -16,6 +18,7 @@ export default function DeliverableList(props) {
       count={deliverable.count}
       setDeliverable={props.onChange}
       transition={props.onClick}
+      deliverablePercentComplete={deliverablePercentComplete(state, deliverable.id)}
     />
   );
 

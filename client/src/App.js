@@ -26,14 +26,13 @@ export default function App() {
     state,
     saveProject,
     setProject, setDeliverable,
-    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject
+    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete, deliverablePercentComplete
   } = useAppData();
 
   const { mode, transition, back } = useVisualMode(null);
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-
   return (
     <div id="container">
       <NavBar users={state.users} />
@@ -44,6 +43,7 @@ export default function App() {
           onChange={setProject}
           transition={transition}
           deleteProject={deleteProject}
+          percentComplete={percentComplete}
         />
         <div id="dashboard">
           {mode === DELIVERABLES && <DeliverableList
@@ -53,6 +53,7 @@ export default function App() {
             project={state.project}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
+            deliverablePercentComplete={deliverablePercentComplete}
           />}
 
           {mode === TASKS && <TaskList

@@ -124,5 +124,37 @@ export default function useAppData() {
   }
   appData.getTasks = getTasks;
 
+
+  const percentComplete = (state, project)  => {
+    const selectedDelivs = getDeliverables(state, project)
+    let numCompleted = 0;
+    let numNotCompleted = 0;
+    selectedDelivs.forEach(deliv => {
+      if(deliv.status === 'completed') {
+        numCompleted++;
+      } else {
+        numNotCompleted++;
+      }
+    })
+    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100) ;
+  }
+  appData.percentComplete = percentComplete
+
+  const deliverablePercentComplete = (state, deliverable)  => {
+    const selectedTasks = getTasks(state, deliverable)
+    let numCompleted = 0;
+    let numNotCompleted = 0;
+    selectedTasks.forEach(task => {
+      if(task.status === 'completed') {
+        numCompleted++;
+      } else {
+        numNotCompleted++;
+      }
+    })
+    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100) ;
+  }
+  appData.deliverablePercentComplete = deliverablePercentComplete
+
+
   return appData;
 }

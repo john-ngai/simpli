@@ -19,6 +19,7 @@ export default function DeliverableListItem(props) {
       </div>
       <span className="deliverable_description">{props.description}</span>
       <span className="deliverable_tasks">{props.count} Tasks Remaining</span>
+      {props.count > 0 ? <aside>Percent Complete: {props.deliverablePercentComplete}%</aside> : <aside>No Tasks Yet! </aside>}
       <span className="deliverable_updates">
         <EditIcon id="edit_deliverable" className="mui_icons" />
         <DeleteIcon id="delete_deliverable" className="mui_icons" />
