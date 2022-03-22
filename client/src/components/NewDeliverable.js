@@ -1,11 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
-import useAppData from "../hooks/useAppData";
 
 export default function NewDeliverable(props) {
-  const { state, saveDeliverable } = useAppData();
-  const deliverables = state.deliverables;
-
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState(false);
@@ -24,10 +20,7 @@ export default function NewDeliverable(props) {
       .then(res => {
         deliverable.id = res.data.id
         console.log('res: ', res.data)
-        // console.log(props.saveDeliverable(deliverable))
         props.saveDeliverable(deliverable)
-        console.log(state.showDelivForm)
-        // props.transition('DELIVERABLES')
       })
   }
 
@@ -63,7 +56,7 @@ export default function NewDeliverable(props) {
             <input name="status" type="radio" value={status} onChange={event => setStatus("completed")}>
             </input>
           </div>
-        <button     onClick={() => save()}>Save</button>
+        <button onClick={() => save()}>Save</button>
         </form>
       </section>
     </main>
