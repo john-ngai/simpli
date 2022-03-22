@@ -21,6 +21,7 @@ export default function ProjectList(props) {
       }}
       editProject={event => {
         event.stopPropagation();
+        props.transition('EDIT_PROJECT');
       }}
       deleteProject={event => {
         event.stopPropagation();
