@@ -116,18 +116,15 @@ export default function useAppData() {
 
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
-    // console.log("DEL ID", id);
-
     const allDeliverables = Object.values(state.deliverables);
 
     let updDeliverable;
 
     allDeliverables.forEach(deliverable => {
       if (deliverable.id === id) {
-        console.log("BEFORE del:", deliverable);
+
         deliverable.priority = !deliverable.priority;
         updDeliverable = deliverable;
-        console.log("AFTER del:", deliverable);
       }
     });
 
@@ -136,11 +133,8 @@ export default function useAppData() {
       [id]: updDeliverable
     }
 
-    console.log("UPDATED del:", updDeliverable);
-
     axios.put(`/deliverables/${id}`, updDeliverable)
       .then(() => {
-        console.log("UPDATING deliverable...");
         setState({ ...state, deliverables });
       })
       .catch(err => console.log(err));
@@ -155,21 +149,14 @@ export default function useAppData() {
 
 
   const setTaskPriority = (id) => {
-    // console.log("TASK ID:", id);
-
-    // get the task selected
-    const taskToSet = getTask(id);
-    // console.log("getTask ID:", taskToSet);
 
     const allTasks = Object.values(state.tasks);
     // new task data with the priority set to the opposite of what it is
     let updateTask;
     allTasks.forEach(task => {
       if (task.id === id) {
-        // console.log('BEFORE task =', task); // Remove test code.
         task.priority = !task.priority;
         updateTask = task;
-        // console.log('AFTER task =', task); // Remove test code.
       }
     });
 
@@ -178,17 +165,13 @@ export default function useAppData() {
       ...state.tasks,
       [id]: updateTask
     }
-    // console.log("updateTask:", updateTask);
+
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
       .then(() => {
-        console.log("PENDING...?",);
         setState({ ...state, tasks });
       })
       .catch(err => console.log("ERROR:", err));
-
-    // map through the tasks state with the updated task data
-    // state.tasks.map((task) => task.id === id ? { ...task, priority: task.priority } : task)
   }
   appData.setTaskPriority = setTaskPriority;
 
