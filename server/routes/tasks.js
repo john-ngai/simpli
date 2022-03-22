@@ -65,5 +65,19 @@ module.exports = (db) => {
     return db.query(command, values)
       .then(data => res.send(data.rows[0]));
   });
+
+  // DELETE /tasks/:id
+  router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    const values = [id];
+    const command = `
+      DELETE FROM tasks
+      WHERE id = $1;
+    `;
+    return db.query(command, values)
+      .then(() => res.send())
+      .catch(() => res.status(500).send());
+  });
+
   return router;
 };
