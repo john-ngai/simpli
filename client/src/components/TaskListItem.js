@@ -14,7 +14,7 @@ export default function TaskListItem(props) {
 
   return (
     <li className="task_list_item">
-      <CheckCircleOutlineIcon id="completed_task" className="mui_icons" />
+      <CheckCircleOutlineIcon id={props.selected ? "completed_task" : "incomplete_task"} className="mui_icons" />
       <div id="task_list_item_container">
         <div id="task_list_item_header">
           <span className="task_name">{props.name}</span>
