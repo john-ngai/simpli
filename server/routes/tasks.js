@@ -26,15 +26,16 @@ module.exports = (db) => {
       `;
       return db.query(command, values)
         .then(data => {
+          console.log("SUCCESS TASK PRIORITY");
           res.send();
         })
         .catch(err => console.log(err));
     })
   });
 
-  // Update task's complete status
+  // Update task's complete value
   router.put('/:id', (req, res) => {
-    console.log("SUCCESS in task /:id COMPLETE STATUS");
+    console.log("HELLO COMPLETE STATUS");
     const taskID = req.params.id;
     const { complete } = req.body;
     const values = [taskID, complete];
@@ -45,11 +46,12 @@ module.exports = (db) => {
       `;
     return db.query(command, values)
       .then(() => {
-        console.log("SUCCESS FROM DB?");
+        console.log("SUCCESS TASK COMPLETE?");
+        res.send();
       })
       .catch(err => console.log(err));
 
-  })
+  });
 
   // PUT /tasks/new
   router.put('/new', (req, res) => {
