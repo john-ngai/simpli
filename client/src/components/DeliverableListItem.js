@@ -22,7 +22,9 @@ export default function DeliverableListItem(props) {
     >
       <div id="deliverable_list_item_header">
         <span className="deliverable_name">{props.name}</span>
-        <PriorityHighIcon id={props.selected ? "important_deliverable" : "low_priority"} onClick={() => onToggle(id)} />
+        <span className="important_del">
+          <PriorityHighIcon id={props.selected ? "important_deliverable" : "low_priority"} onClick={() => onToggle(id)} />
+        </span>
       </div>
       <span className="deliverable_description">{props.description}</span>
       <span className="deliverable_tasks">{props.count} Tasks Remaining</span>
