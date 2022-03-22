@@ -18,7 +18,6 @@ const TASKS = 'TASKS';
 const SAVING = 'SAVING';
 const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
-const NEW_DELIVERABLE = 'NEW_DELIVERABLE';
 const NEW_TASK = 'NEW_TASK';
 
 export default function App() {
@@ -36,8 +35,7 @@ export default function App() {
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-console.log(state.showDelivForm)
-console.log(mode)
+
   return (
     <div id="container">
       <NavBar users={state.users} />
