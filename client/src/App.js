@@ -23,16 +23,19 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
-    saveProject, saveDeliverable, saveTask,
-    setProject, getSelectedProject, setDeliverable,
-    setDeliverablesPriority,
-    setTaskPriority,
-    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete, deliverablePercentComplete
+    setProject, getSelectedProject, saveProject, editProject, deleteProject,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable,
+    setDeliverablesPriority, setTaskPriority,
+    setTask, getTasks, getSelectedTask, deleteTask, saveTask,
+    showDelivForm, showTaskForm,
+    percentComplete, deliverablePercentComplete
   } = useAppData();
 
   const { mode, transition, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
+  const selectedDeliverable = getSelectedDeliverable(state);
+  const selectedTask = getSelectedTask(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
@@ -48,6 +51,7 @@ export default function App() {
           deleteProject={deleteProject}
           percentComplete={percentComplete}
         />
+
         <div id="dashboard">
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
@@ -58,16 +62,24 @@ export default function App() {
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
             saveDeliverable={saveDeliverable}
+            selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={deleteDeliverable}
           />}
 
           {mode === TASKS && <TaskList
             tasks={tasks}
+            onChange={setTask}
             deliverable={state.deliverable}
             onToggle={setTaskPriority}
             onClick={transition}
             project={state.project}
             selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            selectedTask={selectedTask}
+            deleteTask={deleteTask}
             showFormBoolean={state.showTaskForm}
+            showDelivForm={showDelivForm}
             showTaskForm={showTaskForm}
             deliverablePercentComplete={deliverablePercentComplete}
             saveTask={saveTask}
@@ -78,8 +90,17 @@ export default function App() {
             back={back}
             transition={transition}
           />}
+
+          {mode === EDIT_PROJECT && <Project
+            editProject={editProject}
+            back={back}
+            transition={transition}
+            id={selectedProject.id}
+            name={selectedProject.name}
+            description={selectedProject.description}
+          />}
         </div>
-      </main >
-    </div >
+      </main>
+    </div>
   );
 }

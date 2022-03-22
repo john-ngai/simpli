@@ -17,6 +17,8 @@ export default function TaskList(props) {
         selected={task.priority}
         description={task.description}
         onToggle={props.onToggle}
+        setTask={() => props.onChange(task.id)}
+        deleteTask={() => props.deleteTask(task.id)}
       />
     )
   })
@@ -24,8 +26,10 @@ export default function TaskList(props) {
   return (
     <section>
       <div id="deliverable_details">
-        <span id="deliverable_name">Project Name: Deliverable Name</span>
-        <span id="deliverable_description">Deliverable Description</span>
+        <span id="deliverable_name">
+          {props.selectedProject.name}: {props.selectedDeliverable.name}
+        </span>
+        <span id="deliverable_description">{props.selectedDeliverable.description}</span>
         <span id="deliverable_stats">3 of 13 (23%) Tasks Completed</span>
         <AddCircleIcon id="new_task" className="mui_icons"
           onClick={props.showTaskForm}

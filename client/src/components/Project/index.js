@@ -7,24 +7,34 @@ import useAppData from '../../hooks/useAppData';
 export default function Project(props) {
   const { state } = useAppData();
   const projects = state.projects;
-  
+
   const [name, setName] = useState(props.name || '');
   const [description, setDescription] = useState(props.description || '');
   const [error, setError] = useState('');
-  
+
   const save = () => {
     const project = {
       name: name,
       description: description,
       team_id: 1, /* Hard coded temporarily */
     }
-    axios.put('/projects/new', project)
-      .then(res => {
-        project.id = res.data.id;
-        props.saveProject(project);
-        props.transition('DELIVERABLES');
-      })
+    // Save a new project or edit an existing project.
+    if (!props.id) {
+      axios.put('/projects/new', project)
+        .then(res => {
+          project.id = res.data.id;
+          props.saveProject(project);
+          props.transition('DELIVERABLES');
+        })
+    } else {
+      project.id = props.id;
+      axios.put(`projects/${project.id}`, project)
+        .then(() => {
+          props.editProject(project);
+          props.transition('DELIVERABLES');
+        });
     }
+  }
 
   const validate = () => {
     if (!name & !description) {
@@ -59,7 +69,7 @@ export default function Project(props) {
           onChange={event => setName(event.target.value)}
         />
 
-        <br /><br />        
+        <br /><br />
 
         <label>Project Description:</label>
         <br />
