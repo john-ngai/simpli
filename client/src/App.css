@@ -105,10 +105,12 @@
   padding: 0;
 }
 
-.high_priority {
+/* .high_priority {
   color: red;
+  font-size: 18px;
 }
 
 .low_priority {
-  color: black;
-}
+  color: rgb(140, 140, 140);
+  font-size: 18px;
+} */

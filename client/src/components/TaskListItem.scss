@@ -1,0 +1,79 @@
+.task_list_item {
+  border: 2px solid grey;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  margin-bottom: 1px;
+}
+
+.task_list_item:hover {
+  background-color: rgb(210, 241, 252);
+}
+
+#task_list_item_container {
+  width: 100%;
+}
+
+#task_list_item_header {
+  // border: solid 2px red; // Remove test code.
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 35%;
+}
+
+.task_name {
+  // border: solid 1px black; // Remove test code.
+  word-wrap: normal;
+  font-weight: bold;
+  width: 97%;
+  margin-top: 2px;
+}
+
+#completed_task {
+  // border: solid 1px black; // Remove test code.
+  height: 50px;
+  width: 50px;
+}
+
+#important_task {
+  // border: solid 1px black; // Remove test code.
+  // width: 1.5%;
+  font-size: 20px;
+  color: red;
+}
+
+#low_priority {
+  // width: 1.5%;
+  font-size: 20px;
+  color: grey;
+}
+
+.task_description {
+  // border: 1px solid red; // Remove test code.
+  height: 30%;
+  font-size: 13px;
+}
+
+.task_updates {
+  // border: 1px solid red; // Remove test code.
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 30%;
+}
+
+#edit_task {
+  // border: 1px solid black; // Remove test code.
+  transform: scale(0.8);
+  margin-top: -2px;
+}
+
+#delete_task {
+  // border: 1px solid black; // Remove test code.
+  transform: scale(0.8);
+  margin-top: -2px;
+}
