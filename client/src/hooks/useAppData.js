@@ -45,7 +45,7 @@ export default function useAppData() {
   const setProject = project => setState({ ...state, project });
   appData.setProject = setProject;
 
-  // Save a new project or update an existing project.
+  // Save a new project.
   const saveProject = newProject => {
     const project = newProject.id;
     const projects = {
@@ -55,6 +55,23 @@ export default function useAppData() {
     setState({ ...state, project, projects });
   }
   appData.saveProject = saveProject;
+
+  // Edit an existing project.
+  const editProject = project => {  
+    const { id, name, description, team_id } = project;
+    const projects = {
+      ...state.projects,
+      [id]: {
+        ...state.projects[project.id], // Get the missing count key.
+        id,
+        name,
+        description,
+        team_id
+      }
+    }
+    setState({ ...state, projects });
+  }
+  appData.editProject = editProject;
 
   // Delete the currently selected project id.
   const deleteProject = project_id => {
