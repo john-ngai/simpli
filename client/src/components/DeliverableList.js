@@ -23,7 +23,7 @@ export default function DeliverableList(props) {
       deliverablePercentComplete={deliverablePercentComplete(state, deliverable.id)}
       deleteDeliverable={event => {
         event.stopPropagation();
-        // props.deleteDeliverable(props.selectedDeliverable.id);
+        props.deleteDeliverable(props.selectedDeliverable.id);
       }}
     />
   );
