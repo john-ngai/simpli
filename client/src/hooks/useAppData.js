@@ -136,6 +136,18 @@ export default function useAppData() {
   }
   appData.getDeliverables = getDeliverables;
 
+  // Return the selected deliverable object.
+  const getSelectedDeliverable = state => {
+    const deliverable_id = state.deliverable;
+    const deliverables = Object.values(state.deliverables);
+    for (const deliverable of deliverables) {
+      if (deliverable.id === state.deliverable) {
+        return deliverable;
+      }
+    }
+  }
+  appData.getSelectedDeliverable = getSelectedDeliverable;
+
   // Return an array of tasks matching the selected deliverable id.
   const getTasks = (state, deliverable_id) => {
     const allTasks = Object.values(state.tasks);
