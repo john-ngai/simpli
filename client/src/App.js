@@ -35,30 +35,17 @@ export default function App() {
   const tasks = getTasks(state, state.deliverable);
 
   return (
-    <div>
+    <div id="container">
       <NavBar users={state.users} />
-      
-      <button onClick={() => transition(NEW_PROJECT)}>NEW_PROJECT</button>
-
-      <main className="layout">
-        <section className="projects">
-          <nav>
-            <ProjectList
-              projects={Object.values(state.projects)}
-              value={state.project}
-              onChange={setProject}
-              transition={transition}
-              deleteProject={deleteProject}
-            />
-          </nav>
-        </section>
-        <section className="deliverables">
-
-          {mode === NEW_PROJECT && <Project
-            saveProject={saveProject}
-            back={back}
-          />}
-
+      <main>
+        <ProjectList
+          projects={Object.values(state.projects)}
+          value={state.project}
+          onChange={setProject}
+          transition={transition}
+          deleteProject={deleteProject}
+        />
+        <div id="dashboard">
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
@@ -67,13 +54,19 @@ export default function App() {
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
           />}
+
           {mode === TASKS && <TaskList
             tasks={tasks}
             deliverable={state.deliverable}
             showFormBoolean={state.showTaskForm}
             showTaskForm={showTaskForm}
           />}
-        </section>
+
+          {mode === NEW_PROJECT && <Project
+            saveProject={saveProject}
+            back={back}
+          />}
+        </div>
       </main>
     </div>
   );
