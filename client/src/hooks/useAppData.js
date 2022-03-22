@@ -182,6 +182,10 @@ export default function useAppData() {
   }
   appData.getTasks = getTasks;
 
+  // Set the currently selected task id.
+  const setTask = task => setState({ ...state, task });
+  appData.setTask = setTask;
+
   // toggle deliverables priority
   const setDeliverablesPriority = (id) => {
     const allDeliverables = Object.values(state.deliverables);
