@@ -15,7 +15,7 @@ export default function useAppData() {
     teams: {},
     users: {},
     showDelivForm: false,
-    showTaskForm: false
+    showTaskForm: false,
   });
 
   // GET state data.
