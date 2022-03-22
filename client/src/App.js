@@ -27,7 +27,7 @@ export default function App() {
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
     getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable,
     setDeliverablesPriority, setTaskPriority,
-    getTasks,
+    setTask, getTasks,
     showDelivForm, showTaskForm,
     percentComplete, deliverablePercentComplete
   } = useAppData();
@@ -65,6 +65,7 @@ export default function App() {
           
           {mode === TASKS && <TaskList
             tasks={tasks}
+            onChange={setTask}
             deliverable={state.deliverable}
             onToggle={setTaskPriority}
             onClick={transition}
