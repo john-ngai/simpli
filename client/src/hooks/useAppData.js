@@ -75,18 +75,18 @@ export default function useAppData() {
 
   // Delete the currently selected project id.
   const deleteProject = project_id => {
-    // Declare a new projects array to hold the updated projects data.
-    const projects = [];
+    // Declare a new projects object to hold the updated projects data.
+    const projects = {};
     // Loop through each project from state,
     for (const project of Object.values(state.projects)) {
       // If the project's id is not equal to the selected project id,
       if (project.id !== project_id) {
-        // Add the project to the projects array.
-        projects.push(project);
+        // Add the project to the projects object.
+        projects[project.id] = project;
       }
     }
     return axios.delete(`/projects/${project_id}`)
-      .then(() => setState({ ...state, projects }));
+      .then(() => setState({ ...state, projects }));  
   }
   appData.deleteProject = deleteProject;
 
