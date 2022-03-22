@@ -27,7 +27,7 @@ export default function App() {
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
     getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable,
     setDeliverablesPriority, setTaskPriority,
-    setTask, getTasks,
+    setTask, getTasks, getSelectedTask, deleteTask,
     showDelivForm, showTaskForm,
     percentComplete, deliverablePercentComplete
   } = useAppData();
@@ -36,6 +36,7 @@ export default function App() {
 
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
+  const selectedTask = getSelectedTask(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
@@ -72,6 +73,8 @@ export default function App() {
             project={state.project}
             selectedProject={selectedProject}
             selectedDeliverable={selectedDeliverable}
+            selectedTask={selectedTask}
+            deleteTask={deleteTask}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
             showTaskForm={showTaskForm}
