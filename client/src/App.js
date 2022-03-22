@@ -32,7 +32,6 @@ export default function App() {
 
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-  console.log("TASK STATE", state.tasks);
 
 
   return (

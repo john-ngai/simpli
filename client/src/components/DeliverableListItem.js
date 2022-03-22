@@ -4,7 +4,6 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 export default function DeliverableListItem(props) {
   const { id, onToggle } = props;
-  // console.log("TEST2", props);
 
   const deliverableClass = classNames("deliverable_list_item", {
     "deliverable_list_item--selected": props.selected
@@ -15,11 +14,7 @@ export default function DeliverableListItem(props) {
       <span className="deliverable_name">{props.name}</span>
       <span className="deliverable_description">{props.description}</span>
       <aside>Tasks remaining: {props.count}</aside>
-      {/* {props.selected &&
-      <span className="deliverable_edit"> */}
       <PriorityHighIcon className={props.selected ? "high_priority" : "low_priority"} onClick={() => onToggle(id)} />
-      {/* </span>
-      } */}
     </li >
   )
 }
