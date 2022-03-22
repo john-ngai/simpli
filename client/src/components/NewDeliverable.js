@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import axios from "axios";
 import useAppData from "../hooks/useAppData";
 import useVisualMode from "../hooks/useVisualMode";
+const DELIVERABLES = 'DELIVERABLES';
 
 export default function NewDeliverable(props) {
   const { state, showDelivForm } = useAppData();
@@ -25,12 +26,18 @@ export default function NewDeliverable(props) {
     axios.put('/deliverables/new', deliverable)
       .then(res => console.log('res: ', res.data))
       .then(console.log(state.showDelivForm))
+      .then(() => props.transition('DELIVERABLES'))
+
   }
 
   return (
     <main className="new_deliverable_container">
       <section className="new_deliverable">
-        <form onSubmit={event => event.preventDefault()}>
+        <form onSubmit={event => {
+          event.preventDefault();
+          props.showDelivForm();
+          saveDeliverable();
+          }}>
           {/* Name */}
           <label>Deliverable Title:</label>
           <input name="name" type="text" placeholder="Enter Deliverable Title" value={name} onChange={event => setName(event.target.value)}>
@@ -56,13 +63,8 @@ export default function NewDeliverable(props) {
             <input name="status" type="radio" value={status} onChange={event => setStatus("completed")}>
             </input>
           </div>
+        <button type='submit'>Save</button>
         </form>
-        <div onClick={() => {
-          saveDeliverable()
-          props.showDelivForm()
-          props.transition('DELIVERABLES')
-          // console.log(mode)
-          }}>Save</div>
       </section>
     </main>
   )
