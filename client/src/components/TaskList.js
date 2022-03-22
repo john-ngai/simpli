@@ -13,8 +13,10 @@ export default function TaskList(props) {
         task={task}
         name={task.name}
         selected={task.priority}
+        complete={task.complete}
         description={task.description}
         onToggle={props.onToggle}
+        onClick={props.completeTask}
       />
     )
   })
