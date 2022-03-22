@@ -25,7 +25,7 @@ export default function App() {
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
-    getDeliverables, setDeliverable, getSelectedDeliverable,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable,
     setDeliverablesPriority, setTaskPriority,
     getTasks,
     showDelivForm, showTaskForm,
@@ -38,8 +38,6 @@ export default function App() {
   const selectedDeliverable = getSelectedDeliverable(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-
-  
 
   return (
     <div id="container">
@@ -62,7 +60,7 @@ export default function App() {
             selectedProject={selectedProject}
             onToggle={setDeliverablesPriority}
             selectedDeliverable={selectedDeliverable}
-            deleteDeliverable={''}
+            deleteDeliverable={deleteDeliverable}
           />}
           
           {mode === TASKS && <TaskList
