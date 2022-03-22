@@ -140,7 +140,29 @@ export default function useAppData() {
 
   // toggle task complete
   const completeTask = (id) => {
+    const allTasks = Object.values(state.tasks);
 
+    let updTask;
+    allTasks.forEach(task => {
+      if (task.id === id) {
+        // console.log("BEFORE TASK:", updTask);
+        task.complete = !task.complete;
+        updTask = task;
+        console.log("AFTER TASK:", updTask);
+      }
+    });
+
+    const tasks = {
+      ...state.tasks,
+      [id]: updTask
+    }
+
+    axios.put(`/tasks/${id}`, updTask)
+      .then(() => {
+        console.log("COMPLETE PENDING...");
+        setState({ ...state, tasks });
+      })
+      .catch(err => console.log(err));
   }
   appData.completeTask = completeTask;
 
@@ -199,6 +221,7 @@ export default function useAppData() {
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
       .then(() => {
+        console.log("PRIORITY PENDING...");
         setState({ ...state, tasks });
       })
       .catch(err => console.log("ERROR:", err));
