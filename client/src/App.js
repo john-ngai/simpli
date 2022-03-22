@@ -24,7 +24,7 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
-    saveProject,
+    saveProject, editProject,
     setProject, getSelectedProject, setDeliverable,
     setDeliverablesPriority,
     setTaskPriority,
@@ -49,13 +49,16 @@ export default function App() {
           deleteProject={deleteProject}
           percentComplete={percentComplete}
         />
+
         <div id="dashboard">
           {mode === DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
             transition={transition}
+            selectedProject={selectedProject}
             onToggle={setDeliverablesPriority}
           />}
+          
           {mode === TASKS && <TaskList
             tasks={tasks}
             deliverable={state.deliverable}
@@ -74,8 +77,17 @@ export default function App() {
             back={back}
             transition={transition}
           />}
+
+          {mode === EDIT_PROJECT && <Project
+            editProject={editProject}
+            back={back}
+            transition={transition}
+            id={selectedProject.id}
+            name={selectedProject.name}
+            description={selectedProject.description}
+          />}
         </div>
-      </main >
-    </div >
+      </main>
+    </div>
   );
 }

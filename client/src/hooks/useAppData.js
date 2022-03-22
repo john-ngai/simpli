@@ -45,7 +45,7 @@ export default function useAppData() {
   const setProject = project => setState({ ...state, project });
   appData.setProject = setProject;
 
-  // Save a new project or update an existing project.
+  // Save a new project.
   const saveProject = newProject => {
     const project = newProject.id;
     const projects = {
@@ -56,11 +56,27 @@ export default function useAppData() {
   }
   appData.saveProject = saveProject;
 
+  // Edit an existing project.
+  const editProject = project => {  
+    const { id, name, description, team_id } = project;
+    const projects = {
+      ...state.projects,
+      [id]: {
+        ...state.projects[project.id], // Get the missing count key.
+        id,
+        name,
+        description,
+        team_id
+      }
+    }
+    setState({ ...state, projects });
+  }
+  appData.editProject = editProject;
+
   // Delete the currently selected project id.
   const deleteProject = project_id => {
     // Declare a new projects array to hold the updated projects data.
     const projects = [];
-
     // Loop through each project from state,
     for (const project of Object.values(state.projects)) {
       // If the project's id is not equal to the selected project id,
@@ -69,7 +85,6 @@ export default function useAppData() {
         projects.push(project);
       }
     }
-
     return axios.delete(`/projects/${project_id}`)
       .then(() => setState({ ...state, projects }));
   }
