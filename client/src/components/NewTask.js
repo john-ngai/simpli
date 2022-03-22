@@ -29,7 +29,7 @@ export default function NewTask(props) {
       <section className="new_task">
         <form onSubmit={event => {
           event.preventDefault();
-          props.showTaskForm()
+          props.showTaskForm();
         }}>
           {/* Name */}
           <label>Task Title:</label>
