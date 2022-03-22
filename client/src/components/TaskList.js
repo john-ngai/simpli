@@ -1,4 +1,5 @@
 import React from 'react';
+import './TaskList.scss';
 import TaskListItem from './TaskListItem';
 import NewTask from './NewTask';
 import AddCircleIcon from '@mui/icons-material/AddCircle';

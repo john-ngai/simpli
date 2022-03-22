@@ -1,4 +1,5 @@
 import React from 'react';
+import './TaskListItem.scss';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import EditIcon from '@mui/icons-material/Edit';
