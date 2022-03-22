@@ -46,12 +46,13 @@ export default function useAppData() {
   appData.setProject = setProject;
 
   // Save a new project or update an existing project.
-  const saveProject = project => {
+  const saveProject = newProject => {
+    const project = newProject.id;
     const projects = {
       ...state.projects,
-      [project.id]: project
+      [newProject.id]: newProject
     };
-    setState({ ...state, projects });
+    setState({ ...state, project, projects });
   }
   appData.saveProject = saveProject;
 
@@ -59,7 +60,7 @@ export default function useAppData() {
   const deleteProject = project_id => {
     // Declare a new projects array to hold the updated projects data.
     const projects = [];
-  
+
     // Loop through each project from state,
     for (const project of Object.values(state.projects)) {
       // If the project's id is not equal to the selected project id,
@@ -85,12 +86,25 @@ export default function useAppData() {
   }
   appData.showDelivForm = showDelivForm
 
-    // Set showTaskForm 
-    const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
-    const showTaskForm = () => {
-      setShowTaskForm(!state.showTaskForm)
+  // Set showTaskForm 
+  const setShowTaskForm = showTaaskForm => setState({ ...state, showTaskForm });
+  const showTaskForm = () => {
+    setShowTaskForm(!state.showTaskForm)
+  }
+  appData.showTaskForm = showTaskForm
+
+  const getSelectedProject = state => {
+    const project_id = state.project;
+    const projects = Object.values(state.projects);
+    let result;
+    for (const project of projects) {
+      if (project.id === project_id) {
+        result = project;
+      }
     }
-    appData.showTaskForm = showTaskForm
+    return result;
+  }
+  appData.getSelectedProject = getSelectedProject;
 
   // Return an array of deliverables matching the selected project id.
   const getDeliverables = (state, project_id) => {
@@ -125,33 +139,33 @@ export default function useAppData() {
   appData.getTasks = getTasks;
 
 
-  const percentComplete = (state, project)  => {
+  const percentComplete = (state, project) => {
     const selectedDelivs = getDeliverables(state, project)
     let numCompleted = 0;
     let numNotCompleted = 0;
     selectedDelivs.forEach(deliv => {
-      if(deliv.status === 'completed') {
+      if (deliv.status === 'completed') {
         numCompleted++;
       } else {
         numNotCompleted++;
       }
     })
-    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100) ;
+    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100);
   }
   appData.percentComplete = percentComplete
 
-  const deliverablePercentComplete = (state, deliverable)  => {
+  const deliverablePercentComplete = (state, deliverable) => {
     const selectedTasks = getTasks(state, deliverable)
     let numCompleted = 0;
     let numNotCompleted = 0;
     selectedTasks.forEach(task => {
-      if(task.status === 'completed') {
+      if (task.status === 'completed') {
         numCompleted++;
       } else {
         numNotCompleted++;
       }
     })
-    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100) ;
+    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100);
   }
   appData.deliverablePercentComplete = deliverablePercentComplete
 
