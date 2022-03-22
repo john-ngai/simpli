@@ -18,12 +18,21 @@ export default function Project(props) {
       description: description,
       team_id: 1, /* Hard coded temporarily */
     }
-    axios.put('/projects/new', project)
-      .then(res => {
-        project.id = res.data.id;
-        props.saveProject(project);
-        props.transition('DELIVERABLES');
-      })
+
+    // Save a new project or edit an existing project.
+    if (!props.id) {
+      axios.put('/projects/new', project)
+        .then(res => {
+          project.id = res.data.id;
+          props.saveProject(project);
+          props.transition('DELIVERABLES');
+        })
+    } else {
+      console.log('edit()'); // Remove test code.
+      project.id = props.id;
+      axios.put(`projects/${project.id}`, project)
+        // .then(() => props.editProject(project))
+    }
     }
 
   const validate = () => {
