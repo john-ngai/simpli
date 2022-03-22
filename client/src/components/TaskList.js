@@ -26,12 +26,16 @@ export default function TaskList(props) {
         <span id="deliverable_description">Deliverable Description</span>
         <span id="deliverable_stats">3 of 13 (23%) Tasks Completed</span>
         <AddCircleIcon id="new_task" className="mui_icons"
-          onClick={props.showTaskForm}
+          onClick={() => {
+            props.showTaskForm()
+          }}
         />
 
         {props.showFormBoolean &&
           <NewTask
             deliverable={props.deliverable}
+            showTaskForm={props.showTaskForm}
+            saveTask={props.saveTask}
           />
         }
       </div>
