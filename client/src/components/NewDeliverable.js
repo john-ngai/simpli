@@ -1,15 +1,17 @@
 import { React, useState } from "react";
 import axios from "axios";
 import useAppData from "../hooks/useAppData";
+import useVisualMode from "../hooks/useVisualMode";
 
 export default function NewDeliverable(props) {
-  const { state } = useAppData();
+  const { state, showDelivForm } = useAppData();
   const deliverables = state.deliverables;
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState(false);
   const [status, setStatus] = useState('not started');
+  const { mode, transition, back } = useVisualMode(null);
 
 
   const saveDeliverable = () => {
@@ -21,7 +23,8 @@ export default function NewDeliverable(props) {
       project_id: props.project
     }
     axios.put('/deliverables/new', deliverable)
-      .then(res => console.log('res: ', res.data));
+      .then(res => console.log('res: ', res.data))
+      .then(console.log(state.showDelivForm))
   }
 
   return (
@@ -54,7 +57,12 @@ export default function NewDeliverable(props) {
             </input>
           </div>
         </form>
-        <button onClick={saveDeliverable}>Save</button>
+        <div onClick={() => {
+          saveDeliverable()
+          props.showDelivForm()
+          props.transition('DELIVERABLES')
+          // console.log(mode)
+          }}>Save</div>
       </section>
     </main>
   )
