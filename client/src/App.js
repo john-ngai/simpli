@@ -24,7 +24,7 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
-    saveProject,
+    saveProject, saveDeliverable,
     setProject, getSelectedProject, setDeliverable,
     setDeliverablesPriority,
     setTaskPriority,
@@ -59,16 +59,18 @@ console.log(mode)
             onToggle={setDeliverablesPriority}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
+            saveDeliverable={saveDeliverable}
           />}
 
           {/* {mode === NEW_DELIVERABLE && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
             transition={transition}
+            project={state.project}
             onToggle={setDeliverablesPriority}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
-          />} */}
+          />}  */}
 
           {mode === TASKS && <TaskList
             tasks={tasks}
