@@ -23,7 +23,7 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
-    saveProject, saveDeliverable,
+    saveProject, saveDeliverable, saveTask,
     setProject, getSelectedProject, setDeliverable,
     setDeliverablesPriority,
     setTaskPriority,
@@ -71,6 +71,7 @@ export default function App() {
             showDelivForm={showDelivForm}
             showTaskForm={showTaskForm}
             deliverablePercentComplete={deliverablePercentComplete}
+            saveTask={saveTask}
           />}
 
           {mode === NEW_PROJECT && <Project
