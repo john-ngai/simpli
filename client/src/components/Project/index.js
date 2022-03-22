@@ -22,8 +22,9 @@ export default function Project(props) {
       .then(res => {
         project.id = res.data.id;
         props.saveProject(project);
+        props.transition('DELIVERABLES');
       })
-  }
+    }
 
   const validate = () => {
     if (!name & !description) {
