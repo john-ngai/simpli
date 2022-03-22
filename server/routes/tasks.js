@@ -32,6 +32,25 @@ module.exports = (db) => {
     })
   });
 
+  // Update task's complete status
+  router.put('/:id', (req, res) => {
+    console.log("SUCCESS in task /:id COMPLETE STATUS");
+    const taskID = req.params.id;
+    const { complete } = req.body;
+    const values = [taskID, complete];
+    const command = `
+      UPDATE tasks
+      SET complete = $2
+      WHERE id = $1;
+      `;
+    return db.query(command, values)
+      .then(() => {
+        console.log("SUCCESS FROM DB?");
+      })
+      .catch(err => console.log(err));
+
+  })
+
   // PUT /tasks/new
   router.put('/new', (req, res) => {
     const { name, description, priority, status, deliverable_id } = req.body;
