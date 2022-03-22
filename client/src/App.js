@@ -62,16 +62,6 @@ console.log(mode)
             saveDeliverable={saveDeliverable}
           />}
 
-          {/* {mode === NEW_DELIVERABLE && <DeliverableList
-            deliverables={deliverables}
-            onChange={setDeliverable}
-            transition={transition}
-            project={state.project}
-            onToggle={setDeliverablesPriority}
-            showFormBoolean={state.showDelivForm}
-            showDelivForm={showDelivForm}
-          />}  */}
-
           {mode === TASKS && <TaskList
             tasks={tasks}
             deliverable={state.deliverable}
