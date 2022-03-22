@@ -14,16 +14,30 @@ export default function TaskListItem(props) {
 
   return (
     <li className="task_list_item">
-      <CheckCircleOutlineIcon id="completed_task" className="mui_icons" />
+      <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
+        onClick={() => props.setTask()} // Do not remove.
+      />
       <div id="task_list_item_container">
         <div id="task_list_item_header">
           <span className="task_name">{props.name}</span>
-          <PriorityHighIcon id={props.selected ? "important_task" : "low_priority"} onClick={() => onToggle(task.id)} />
+          <PriorityHighIcon id={props.selected ? "important_task" : "low_priority"}
+            onClick={() => {
+              onToggle(task.id);
+              props.setTask(); // Do not remove.
+            }}
+          />
         </div>
         <span className="task_description">{props.description}</span>
         <span className="task_updates">
-          <EditIcon id="edit_task" className="mui_icons" />
-          <DeleteIcon id="delete_task" className="mui_icons" />
+          <EditIcon id="edit_task" className="mui_icons"
+            onClick={() => props.setTask()} // Do not remove.
+          />
+          <DeleteIcon id="delete_task" className="mui_icons"
+            onClick={() => {
+              props.setTask();
+              props.deleteTask();
+            }}
+          />
         </span>
       </div>
     </li>

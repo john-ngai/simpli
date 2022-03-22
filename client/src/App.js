@@ -24,16 +24,19 @@ const NEW_TASK = 'NEW_TASK';
 export default function App() {
   const {
     state,
-    saveProject, editProject,
-    setProject, getSelectedProject, setDeliverable,
-    setDeliverablesPriority,
-    setTaskPriority,
-    getDeliverables, getTasks, showDelivForm, showTaskForm, deleteProject, percentComplete, deliverablePercentComplete
+    setProject, getSelectedProject, saveProject, editProject, deleteProject,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable,
+    setDeliverablesPriority, setTaskPriority,
+    setTask, getTasks, getSelectedTask, deleteTask,
+    showDelivForm, showTaskForm,
+    percentComplete, deliverablePercentComplete
   } = useAppData();
 
   const { mode, transition, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
+  const selectedDeliverable = getSelectedDeliverable(state);
+  const selectedTask = getSelectedTask(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
@@ -57,15 +60,21 @@ export default function App() {
             transition={transition}
             selectedProject={selectedProject}
             onToggle={setDeliverablesPriority}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={deleteDeliverable}
           />}
           
           {mode === TASKS && <TaskList
             tasks={tasks}
+            onChange={setTask}
             deliverable={state.deliverable}
             onToggle={setTaskPriority}
             onClick={transition}
             project={state.project}
             selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            selectedTask={selectedTask}
+            deleteTask={deleteTask}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
             showTaskForm={showTaskForm}

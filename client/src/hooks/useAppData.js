@@ -11,6 +11,7 @@ export default function useAppData() {
     projects: {},
     deliverable: null,
     deliverables: {},
+    task: null,
     tasks: {},
     teams: {},
     users: {},
@@ -75,18 +76,18 @@ export default function useAppData() {
 
   // Delete the currently selected project id.
   const deleteProject = project_id => {
-    // Declare a new projects array to hold the updated projects data.
-    const projects = [];
+    // Declare a new projects object to hold the updated projects data.
+    const projects = {};
     // Loop through each project from state,
     for (const project of Object.values(state.projects)) {
       // If the project's id is not equal to the selected project id,
       if (project.id !== project_id) {
-        // Add the project to the projects array.
-        projects.push(project);
+        // Add the project to the projects object.
+        projects[project.id] = project;
       }
     }
     return axios.delete(`/projects/${project_id}`)
-      .then(() => setState({ ...state, projects }));
+      .then(() => setState({ ...state, projects }));  
   }
   appData.deleteProject = deleteProject;
 
@@ -108,16 +109,15 @@ export default function useAppData() {
   }
   appData.showTaskForm = showTaskForm
 
+  // Return selected project object.
   const getSelectedProject = state => {
     const project_id = state.project;
     const projects = Object.values(state.projects);
-    let result;
     for (const project of projects) {
       if (project.id === project_id) {
-        result = project;
+        return project;
       }
     }
-    return result;
   }
   appData.getSelectedProject = getSelectedProject;
 
@@ -137,6 +137,57 @@ export default function useAppData() {
   }
   appData.getDeliverables = getDeliverables;
 
+  // Return the selected deliverable object.
+  const getSelectedDeliverable = state => {
+    const deliverable_id = state.deliverable;
+    const deliverables = Object.values(state.deliverables);
+    for (const deliverable of deliverables) {
+      if (deliverable.id === state.deliverable) {
+        return deliverable;
+      }
+    }
+  }
+  appData.getSelectedDeliverable = getSelectedDeliverable;
+
+  // Delete the currently selected deliverable id.
+  const deleteDeliverable = deliverable_id => {
+    // Declare a new deliverables object to hold the updated deliverables data.
+    const deliverables = {};
+    // Loop through each deliverable from state,
+    for (const deliverable of Object.values(state.deliverables)) {
+      // If the deliverable's id is not equal to the selected deliverable id,
+      if (deliverable.id !== deliverable_id) {
+        // Add the deliverable to the deliverables object.
+        deliverables[deliverable.id] = deliverable;
+      }
+    }
+    return axios.delete(`/deliverables/${deliverable_id}`)
+      .then(() => setState({ ...state, deliverables }));
+  }
+  appData.deleteDeliverable = deleteDeliverable;
+
+  // toggle deliverables priority
+  const setDeliverablesPriority = (id) => {
+    const allDeliverables = Object.values(state.deliverables);
+    let updDeliverable;
+    allDeliverables.forEach(deliverable => {
+      if (deliverable.id === id) {
+        deliverable.priority = !deliverable.priority;
+        updDeliverable = deliverable;
+      }
+    });
+    const deliverables = {
+      ...state.deliverables,
+      [id]: updDeliverable
+    }
+    axios.put(`/deliverables/${id}`, updDeliverable)
+      .then(() => {
+        setState({ ...state, deliverables });
+      })
+      .catch(err => console.log(err));
+  }
+  appData.setDeliverablesPriority = setDeliverablesPriority;
+  
   // Return an array of tasks matching the selected deliverable id.
   const getTasks = (state, deliverable_id) => {
     const allTasks = Object.values(state.tasks);
@@ -153,42 +204,36 @@ export default function useAppData() {
   }
   appData.getTasks = getTasks;
 
-  // toggle deliverables priority
-  const setDeliverablesPriority = (id) => {
-    const allDeliverables = Object.values(state.deliverables);
+  // Set the currently selected task id.
+  const setTask = task => setState({ ...state, task });
+  appData.setTask = setTask;
 
-    let updDeliverable;
+  // Return the selected task object.
+  const getSelectedTask = state => {
+    const task_id = state.task;
+    const tasks = Object.values(state.tasks);
+    return tasks.find(task => task.id === task_id);
+  }
+  appData.getSelectedTask = getSelectedTask;
 
-    allDeliverables.forEach(deliverable => {
-      if (deliverable.id === id) {
-
-        deliverable.priority = !deliverable.priority;
-        updDeliverable = deliverable;
+  // Delete the currently selected task id.
+  const deleteTask = task_id => {
+    // Declare a new tasks object to hold the updated tasks data.
+    const tasks = {};
+    // Loop through each task from state,
+    for (const task of Object.values(state.tasks)) {
+      // If the deliverable's id is not equal to the selected deliverable id,
+      if (task.id !== task_id) {
+        // Add the deliverable to the deliverables object.
+        tasks[task.id] = task;
       }
-    });
-
-    const deliverables = {
-      ...state.deliverables,
-      [id]: updDeliverable
     }
-
-    axios.put(`/deliverables/${id}`, updDeliverable)
-      .then(() => {
-        setState({ ...state, deliverables });
-      })
-      .catch(err => console.log(err));
+    return axios.delete(`/tasks/${task_id}`)
+      .then(() => setState({ ...state, tasks }));
   }
-  appData.setDeliverablesPriority = setDeliverablesPriority;
-
-  const getTask = (id) => {
-    const allTasks = Object.values(state.tasks);
-    return allTasks.find((task) => task.id === id);
-  }
-  appData.getTask = getTask;
-
+  appData.deleteTask = deleteTask;
 
   const setTaskPriority = (id) => {
-
     const allTasks = Object.values(state.tasks);
     // new task data with the priority set to the opposite of what it is
     let updateTask;
@@ -198,13 +243,10 @@ export default function useAppData() {
         updateTask = task;
       }
     });
-
-
     const tasks = {
       ...state.tasks,
       [id]: updateTask
     }
-
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
       .then(() => {

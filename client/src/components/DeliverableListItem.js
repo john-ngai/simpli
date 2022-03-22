@@ -20,10 +20,8 @@ export default function DeliverableListItem(props) {
 
   return (
     <li className="deliverable_list_item"
-      onClick={() => {
-        props.setDeliverable(props.id);
-        props.transition('TASKS');
-      }}
+      onMouseEnter={() => props.setDeliverable(props.id)}
+      onClick={() => props.transition('TASKS')}
     >
       <div id="deliverable_list_item_header">
         <span className="deliverable_name">{props.name}</span>
@@ -36,7 +34,9 @@ export default function DeliverableListItem(props) {
       {props.count > 0 ? <aside>Percent Complete: {props.deliverablePercentComplete}%</aside> : <aside>No Tasks Yet! </aside>}
       <span className="deliverable_updates">
         <EditIcon id="edit_deliverable" className="mui_icons" />
-        <DeleteIcon id="delete_deliverable" className="mui_icons" />
+        <DeleteIcon id="delete_deliverable" className="mui_icons"
+          onClick={props.deleteDeliverable}
+        />
       </span>
     </li>
   )
