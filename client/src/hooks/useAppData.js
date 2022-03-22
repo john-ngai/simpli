@@ -58,7 +58,7 @@ export default function useAppData() {
   appData.saveProject = saveProject;
 
   // Edit an existing project.
-  const editProject = project => {  
+  const editProject = project => {
     const { id, name, description, team_id } = project;
     const projects = {
       ...state.projects,
@@ -87,7 +87,7 @@ export default function useAppData() {
       }
     }
     return axios.delete(`/projects/${project_id}`)
-      .then(() => setState({ ...state, projects }));  
+      .then(() => setState({ ...state, projects }));
   }
   appData.deleteProject = deleteProject;
 
@@ -184,10 +184,9 @@ export default function useAppData() {
     let updTask;
     allTasks.forEach(task => {
       if (task.id === id) {
-        // console.log("BEFORE TASK:", updTask);
         task.complete = !task.complete;
         updTask = task;
-        console.log("AFTER TASK:", updTask);
+        // console.log("AFTER TASK:", updTask); TEST CODE
       }
     });
 
@@ -198,7 +197,6 @@ export default function useAppData() {
 
     axios.put(`/tasks/${id}`, updTask)
       .then(() => {
-        console.log("COMPLETE PENDING...");
         setState({ ...state, tasks });
       })
       .catch(err => console.log(err));
@@ -226,7 +224,7 @@ export default function useAppData() {
       .catch(err => console.log(err));
   }
   appData.setDeliverablesPriority = setDeliverablesPriority;
-  
+
   // Return an array of tasks matching the selected deliverable id.
   const getTasks = (state, deliverable_id) => {
     const allTasks = Object.values(state.tasks);
@@ -289,14 +287,13 @@ export default function useAppData() {
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
       .then(() => {
-        console.log("PRIORITY PENDING...");
         setState({ ...state, tasks });
       })
       .catch(err => console.log("ERROR:", err));
   }
   appData.setTaskPriority = setTaskPriority;
 
-   // Save new task
+  // Save new task
   const saveTask = newTask => {
     const task = newTask.id;
     const tasks = {
