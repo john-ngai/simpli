@@ -24,7 +24,9 @@ export default function ProjectList(props) {
 
   return (
     <aside id="projects_list">
-      <AddCircleIcon id="new_project" className="mui_icons" />
+      <AddCircleIcon id="new_project" className="mui_icons"
+        onClick={() => props.transition('NEW_PROJECT')}
+      />
       {listItem}
     </aside>
   );
