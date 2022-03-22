@@ -1,33 +1,38 @@
 import { React, useState } from "react";
 import axios from "axios";
 import useAppData from "../hooks/useAppData";
+import TaskList from "./TaskList";
 
 export default function NewTask(props) {
-  const { state } = useAppData();
-  const tasks = state.tasks;
-
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState(false);
   const [status, setStatus] = useState('not started');
 
 
-  const saveTask = () => {
-    const deliverable = {
+  const save = () => {
+    const task = {
       name: name,
       description: description,
       priority: priority,
       status: status,
       deliverable_id: props.deliverable
     }
-    axios.put('/tasks/new', deliverable)
-      .then(res => console.log('res: ', res.data));
+    axios.put('/tasks/new', task)
+      .then(res => {
+        task.id = res.data.id
+        console.log('res: ', res.data)
+        props.saveTask(task)
+      });
   }
 
   return (
     <main className="new_task_container">
       <section className="new_task">
-        <form onSubmit={event => event.preventDefault()}>
+        <form onSubmit={event => {
+          event.preventDefault();
+          props.showTaskForm();
+          }}>
           {/* Name */}
           <label>Task Title:</label>
           <input name="name" type="text" placeholder="Enter Task Title" value={name} onChange={event => setName(event.target.value)}>
@@ -54,7 +59,7 @@ export default function NewTask(props) {
             </input>
           </div>
         </form>
-        <button onClick={saveTask}>Save</button>
+        <button onClick={() => save()}>Save</button>
       </section>
     </main>
   )
