@@ -1,21 +1,18 @@
 import { React, useState } from "react";
 import axios from "axios";
 import useAppData from "../hooks/useAppData";
-import useVisualMode from "../hooks/useVisualMode";
-const DELIVERABLES = 'DELIVERABLES';
 
 export default function NewDeliverable(props) {
-  const { state, showDelivForm } = useAppData();
+  const { state, saveDeliverable } = useAppData();
   const deliverables = state.deliverables;
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState(false);
   const [status, setStatus] = useState('not started');
-  const { mode, transition, back } = useVisualMode(null);
 
 
-  const saveDeliverable = () => {
+  const save = () => {
     const deliverable = {
       name: name,
       description: description,
@@ -24,10 +21,14 @@ export default function NewDeliverable(props) {
       project_id: props.project
     }
     axios.put('/deliverables/new', deliverable)
-      .then(res => console.log('res: ', res.data))
-      .then(console.log(state.showDelivForm))
-      .then(() => props.transition('DELIVERABLES'))
-
+      .then(res => {
+        deliverable.id = res.data.id
+        console.log('res: ', res.data)
+        // console.log(props.saveDeliverable(deliverable))
+        props.saveDeliverable(deliverable)
+        console.log(state.showDelivForm)
+        // props.transition('DELIVERABLES')
+      })
   }
 
   return (
@@ -36,7 +37,6 @@ export default function NewDeliverable(props) {
         <form onSubmit={event => {
           event.preventDefault();
           props.showDelivForm();
-          saveDeliverable();
           }}>
           {/* Name */}
           <label>Deliverable Title:</label>
@@ -63,7 +63,7 @@ export default function NewDeliverable(props) {
             <input name="status" type="radio" value={status} onChange={event => setStatus("completed")}>
             </input>
           </div>
-        <button type='submit'>Save</button>
+        <button     onClick={() => save()}>Save</button>
         </form>
       </section>
     </main>
