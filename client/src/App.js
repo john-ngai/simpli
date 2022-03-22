@@ -67,8 +67,7 @@ export default function App() {
             onClick={transition}
             project={state.project}
             selectedProject={selectedProject}
-            showFormBoolean={state.showDelivForm}
-            showDelivForm={showDelivForm}
+            showFormBoolean={state.showTaskForm}
             showTaskForm={showTaskForm}
             deliverablePercentComplete={deliverablePercentComplete}
             saveTask={saveTask}
