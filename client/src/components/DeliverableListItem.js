@@ -13,6 +13,11 @@ export default function DeliverableListItem(props) {
   //   "deliverable_list_item--selected": props.selected
   // })
 
+  const handleClick = (e) => {
+    e.stopPropagation();
+    onToggle(id);
+  }
+
   return (
     <li className="deliverable_list_item"
       onClick={() => {
@@ -23,7 +28,7 @@ export default function DeliverableListItem(props) {
       <div id="deliverable_list_item_header">
         <span className="deliverable_name">{props.name}</span>
         <span className="important_del">
-          <PriorityHighIcon id={props.selected ? "important_deliverable" : "low_priority"} onClick={() => onToggle(id)} />
+          <PriorityHighIcon id={props.selected ? "important_deliverable" : "low_priority"} onClick={handleClick} />
         </span>
       </div>
       <span className="deliverable_description">{props.description}</span>
