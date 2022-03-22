@@ -60,7 +60,6 @@ export default function useAppData() {
   const deleteProject = project_id => {
     // Declare a new projects array to hold the updated projects data.
     const projects = [];
-
     // Loop through each project from state,
     for (const project of Object.values(state.projects)) {
       // If the project's id is not equal to the selected project id,
@@ -69,7 +68,6 @@ export default function useAppData() {
         projects.push(project);
       }
     }
-
     return axios.delete(`/projects/${project_id}`)
       .then(() => setState({ ...state, projects }));
   }
