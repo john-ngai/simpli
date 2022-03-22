@@ -66,6 +66,7 @@ export default function App() {
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}
             back={back}
+            transition={transition}
           />}
         </div>
       </main>
