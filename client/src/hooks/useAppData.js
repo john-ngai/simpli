@@ -75,6 +75,17 @@ export default function useAppData() {
   }
   appData.deleteProject = deleteProject;
 
+  // Save new deliverable
+  const saveDeliverable = newDeliverable => {
+    const deliverable = newDeliverable.id;
+    const deliverables = {
+      ...state.deliverables,
+      [newDeliverable.id]: newDeliverable
+    };
+    setState({ ...state, deliverable, deliverables });
+  }
+  appData.saveDeliverable = saveDeliverable;
+
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
