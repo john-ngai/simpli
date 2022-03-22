@@ -210,6 +210,17 @@ export default function useAppData() {
   }
   appData.setTaskPriority = setTaskPriority;
 
+   // Save new task
+  const saveTask = newTask => {
+    const task = newTask.id;
+    const tasks = {
+      ...state.tasks,
+      [newTask.id]: newTask
+    };
+    setState({ ...state, task, tasks });
+  }
+  appData.saveTask = saveTask;
+
   const percentComplete = (state, project) => {
     const selectedDelivs = getDeliverables(state, project)
     let numCompleted = 0;
