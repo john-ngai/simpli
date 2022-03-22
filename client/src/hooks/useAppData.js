@@ -148,10 +148,6 @@ export default function useAppData() {
   }
   appData.getSelectedDeliverable = getSelectedDeliverable;
 
-
-
-
-
   // Delete the currently selected deliverable id.
   const deleteDeliverable = deliverable_id => {
     // Declare a new deliverables object to hold the updated deliverables data.
@@ -165,13 +161,9 @@ export default function useAppData() {
       }
     }
     return axios.delete(`/deliverables/${deliverable_id}`)
-    //   .then(() => setState({ ...state, deliverables }));
+      .then(() => setState({ ...state, deliverables }));
   }
   appData.deleteDeliverable = deleteDeliverable;
-
-
-
-
 
   // Return an array of tasks matching the selected deliverable id.
   const getTasks = (state, deliverable_id) => {
