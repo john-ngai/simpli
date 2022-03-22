@@ -19,7 +19,8 @@ export default function ProjectList(props) {
         props.onChange(project.id);
         props.transition('DELIVERABLES');
       }}
-      deleteProject={() => {
+      deleteProject={event => {
+        event.stopPropagation();
         props.deleteProject(props.value);
         props.transition(null);
       }}
