@@ -64,15 +64,7 @@ export default function App() {
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
           />}
-          {/* {mode === TASKS && <TaskList
-            tasks={tasks}
-            onToggle={setTaskPriority}
-            onClick={transition}
-            project={state.project}
-            deliverable={state.deliverable}
-            showFormBoolean={state.showTaskForm}
-            showTaskForm={showTaskForm}
-          />} */}
+
         </section>
       </main>
     </div>
