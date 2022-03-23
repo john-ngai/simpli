@@ -86,6 +86,7 @@ export default function App() {
             showTaskForm={showTaskForm}
             deliverablePercentComplete={deliverablePercentComplete}
             saveTask={saveTask}
+            transition={transition}
           />}
 
           {mode === NEW_PROJECT && <Project
