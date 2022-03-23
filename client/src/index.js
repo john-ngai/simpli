@@ -16,7 +16,6 @@ render(
       <Route path="/" element={<App />}/>
       <Route path="register" element={<Register />}/>
       <Route path="login" element={<Login />}/>
-      <Route path="projects/new" element={<NewProject />}/>
     </Routes>
   </BrowserRouter>,
   rootElement
