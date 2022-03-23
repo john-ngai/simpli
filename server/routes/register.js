@@ -2,7 +2,7 @@ const router = require('express').Router();
 const services = require('../services');
 
 module.exports = (db) => {
-  // all routes will go here
+  // GET /register
   router.get('/', (req, res) => {
     const command = "SELECT * FROM users";
     db.query(command).then(data => {
@@ -10,7 +10,7 @@ module.exports = (db) => {
     });
   });
 
-  // PUT /users
+  // PUT /register
   router.put('/', (req, res) => {
     const { name, email, password, team_id } = req.body;
     const hashedPassword = services.hashPassword(password);
