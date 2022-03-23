@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { FormGroup, FormControl, TextField } from '@mui/material';
 import NavBar from '../components/NavBar';
-import './login.scss';
 
 export default function Login() {
 
@@ -42,11 +41,12 @@ export default function Login() {
   }
 
   return (
-      <main>
-        <NavBar />
-        {/* <button onClick={handleClick}>Back to Home</button> */}
-        <h1>Login Page</h1>
+    <main>
+      <NavBar />
+      {/* <button onClick={handleClick}>Back to Home</button> */}
 
+      <main>
+        <h1>Login Page</h1>
         <div>
           <section className="user_validation">{error}</section>
           <br />
@@ -60,9 +60,9 @@ export default function Login() {
               <button type="submit" onClick={validation}>Login</button>
             </FormControl>
           </FormGroup>
-
         </div>
       </main>
+    </main>
   );
 }
 
