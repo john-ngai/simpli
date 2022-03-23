@@ -6,7 +6,7 @@ module.exports = (db) => {
   // GET /projects
   router.get('/', (req, res) => {
     const command = `
-      SELECT projects.*, COUNT(deliverables.id)
+      SELECT projects.*, COUNT(deliverables.id) AS count
       FROM projects
       LEFT JOIN deliverables ON projects.id = project_id
       GROUP BY projects.id;
