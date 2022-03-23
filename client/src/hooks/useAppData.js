@@ -92,16 +92,23 @@ export default function useAppData() {
   appData.deleteProject = deleteProject;
 
   // Save new deliverable
-  const saveDeliverable = newDeliverable => {
+  const saveDeliverable = (newDeliverable) => {
     const deliverable = newDeliverable.id;
     const deliverables = {
       ...state.deliverables,
-      [newDeliverable.id]: newDeliverable
+      [newDeliverable.id]: newDeliverable,
     };
-    setState({ ...state, deliverable, deliverables });
+    const values = Object.values(state.projects)
+    const updateCounter = values.map((project) => {
+      if (newDeliverable.project_id === project.id) {
+        return { ...project, count: project.count ++};
+      }
+      return project
+    });
+    setState({ ...state, deliverable, deliverables, updateCounter });
   }
   appData.saveDeliverable = saveDeliverable;
-
+  
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
@@ -170,6 +177,15 @@ export default function useAppData() {
       if (deliverable.id !== deliverable_id) {
         // Add the deliverable to the deliverables object.
         deliverables[deliverable.id] = deliverable;
+      } else if (deliverable.id === deliverable_id){
+        const values = Object.values(state.projects)
+        values.map((project) => {
+          console.log(deliverables.project_id)
+          if (deliverable.project_id === project.id) {
+            return { ...project, count: project.count -- };
+          }
+          return project
+        });
       }
     }
     return axios.delete(`/deliverables/${deliverable_id}`)
@@ -263,6 +279,14 @@ export default function useAppData() {
       if (task.id !== task_id) {
         // Add the deliverable to the deliverables object.
         tasks[task.id] = task;
+      } else if (task.id === task_id){
+        const values = Object.values(state.deliverables)
+        values.map((deliverable) => {
+          if (task.deliverable_id === deliverable.id) {
+            return { ...deliverable, count: deliverable.count -- };
+          }
+          return deliverable
+        });
       }
     }
     return axios.delete(`/tasks/${task_id}`)
@@ -300,37 +324,42 @@ export default function useAppData() {
       ...state.tasks,
       [newTask.id]: newTask
     };
-    setState({ ...state, task, tasks });
+    const values = Object.values(state.deliverables)
+    const updateCounter = values.map((deliverable) => {
+      if (newTask.deliverable_id === deliverable.id) {
+        return { ...deliverable, count: deliverable.count ++};
+      }
+      return deliverable
+    });
+    setState({ ...state, task, tasks, updateCounter });
   }
   appData.saveTask = saveTask;
 
   const percentComplete = (state, project) => {
     const selectedDelivs = getDeliverables(state, project)
     let numCompleted = 0;
-    let numNotCompleted = 0;
+    let total = 0;
     selectedDelivs.forEach(deliv => {
+      total++
       if (deliv.status === 'completed') {
         numCompleted++;
-      } else {
-        numNotCompleted++;
-      }
+      } 
     })
-    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100);
+    return Math.round((numCompleted / total) * 100);
   }
   appData.percentComplete = percentComplete
 
   const deliverablePercentComplete = (state, deliverable) => {
     const selectedTasks = getTasks(state, deliverable)
     let numCompleted = 0;
-    let numNotCompleted = 0;
+    let total = 0;
     selectedTasks.forEach(task => {
+      total ++
       if (task.status === 'completed') {
         numCompleted++;
-      } else {
-        numNotCompleted++;
-      }
+      } 
     })
-    return Math.round((numCompleted / (numNotCompleted + numCompleted)) * 100);
+    return Math.round((numCompleted / total) * 100);
   }
   appData.deliverablePercentComplete = deliverablePercentComplete
 
