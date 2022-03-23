@@ -91,17 +91,35 @@ export default function useAppData() {
   }
   appData.deleteProject = deleteProject;
 
+
+
+
+
+
   // Save new deliverable
-  const saveDeliverable = newDeliverable => {
+  const saveDeliverable = (newDeliverable) => {
+    // const project = getSelectedProject(state)
     const deliverable = newDeliverable.id;
     const deliverables = {
       ...state.deliverables,
-      [newDeliverable.id]: newDeliverable
+      [newDeliverable.id]: newDeliverable,
     };
-    setState({ ...state, deliverable, deliverables });
+    const values = Object.values(state.projects)
+    const updateCounter = values.map((project) => {
+      if (newDeliverable.project_id === project.id) {
+        return { project, count: project.count ++};
+      }
+      return project
+    });
+    setState({ ...state, deliverable, deliverables, updateCounter });
   }
   appData.saveDeliverable = saveDeliverable;
 
+
+
+
+
+  
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
