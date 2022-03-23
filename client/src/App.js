@@ -11,7 +11,7 @@ import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import Project from './components/Project';
-// Modes
+// Visual Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
 const TASKS = 'TASKS';
@@ -40,10 +40,10 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
-
   return (
     <div id="container">
       <NavBar users={state.users} />
+
       <main>
         <ProjectList
           projects={Object.values(state.projects)}
