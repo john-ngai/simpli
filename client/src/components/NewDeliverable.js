@@ -48,6 +48,7 @@ export default function NewDeliverable(props) {
           <input name="status" type="checkbox" value={status} onChange={event => setStatus(prevCheck => !prevCheck)}>
           </input>
         <button onClick={() => save()}>Save</button>
+        <button onClick={props.showDelivForm}>Cancel</button>
         </form>
       </section>
     </main>

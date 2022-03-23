@@ -47,6 +47,7 @@ export default function TaskList(props) {
       </div>
 
       { taskInfo}
+      <button onClick={() => {props.transition('DELIVERABLES')}}>Back</button>
     </section>
   );
 }

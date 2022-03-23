@@ -49,6 +49,7 @@ export default function NewTask(props) {
           </input>
         </form>
         <button onClick={() => save()}>Save</button>
+        <button onClick={props.showTaskForm}>Cancel</button>
       </section>
     </main>
   )
