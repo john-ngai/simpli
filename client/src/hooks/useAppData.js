@@ -91,14 +91,8 @@ export default function useAppData() {
   }
   appData.deleteProject = deleteProject;
 
-
-
-
-
-
   // Save new deliverable
   const saveDeliverable = (newDeliverable) => {
-    // const project = getSelectedProject(state)
     const deliverable = newDeliverable.id;
     const deliverables = {
       ...state.deliverables,
@@ -114,11 +108,6 @@ export default function useAppData() {
     setState({ ...state, deliverable, deliverables, updateCounter });
   }
   appData.saveDeliverable = saveDeliverable;
-
-
-
-
-
   
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
