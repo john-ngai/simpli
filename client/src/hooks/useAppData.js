@@ -91,6 +91,9 @@ export default function useAppData() {
   }
   appData.deleteProject = deleteProject;
 
+
+
+
   // Save new deliverable
   const saveDeliverable = (newDeliverable) => {
     const deliverable = newDeliverable.id;
@@ -109,6 +112,12 @@ export default function useAppData() {
   }
   appData.saveDeliverable = saveDeliverable;
   
+
+
+
+
+
+
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
@@ -341,7 +350,7 @@ export default function useAppData() {
     let total = 0;
     selectedDelivs.forEach(deliv => {
       total++
-      if (deliv.status === 'completed') {
+      if (deliv.status === true) {
         numCompleted++;
       } 
     })
@@ -355,7 +364,7 @@ export default function useAppData() {
     let total = 0;
     selectedTasks.forEach(task => {
       total ++
-      if (task.status === 'completed') {
+      if (task.status === true) {
         numCompleted++;
       } 
     })
