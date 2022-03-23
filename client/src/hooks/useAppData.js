@@ -101,7 +101,7 @@ export default function useAppData() {
     const values = Object.values(state.projects)
     const updateCounter = values.map((project) => {
       if (newDeliverable.project_id === project.id) {
-        return { project, count: project.count ++};
+        return { ...project, count: project.count ++};
       }
       return project
     });
@@ -177,6 +177,15 @@ export default function useAppData() {
       if (deliverable.id !== deliverable_id) {
         // Add the deliverable to the deliverables object.
         deliverables[deliverable.id] = deliverable;
+      } else if (deliverable.id === deliverable_id){
+        const values = Object.values(state.projects)
+        values.map((project) => {
+          console.log(deliverables.project_id)
+          if (deliverable.project_id === project.id) {
+            return { ...project, count: project.count -- };
+          }
+          return project
+        });
       }
     }
     return axios.delete(`/deliverables/${deliverable_id}`)
