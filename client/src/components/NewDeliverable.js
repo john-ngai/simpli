@@ -47,18 +47,6 @@ export default function NewDeliverable(props) {
           <label>Completed?:</label>
           <input name="status" type="checkbox" value={status} onChange={event => setStatus(prevCheck => !prevCheck)}>
           </input>
-          {/* <div className="status_radio">
-            <label>Status:</label>
-            <label>Not started</label>
-            <input name="status" type="radio" value={status} onChange={event => setStatus("not started")}>
-            </input>
-            <label>In Progress</label>
-            <input name="status" type="radio" value={status} onChange={event => setStatus("in progress")}>
-            </input>
-            <label>Completed!</label>
-            <input name="status" type="radio" value={status} onChange={event => setStatus("completed")}>
-            </input>
-          </div> */}
         <button onClick={() => save()}>Save</button>
         </form>
       </section>
