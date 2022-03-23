@@ -48,7 +48,7 @@ export default function Register() {
 
   return (
     <div id="container">
-      <NavBar users={state.users} />
+      <NavBar />
       <main>
         <h1>Registration Page</h1>
         <div>
