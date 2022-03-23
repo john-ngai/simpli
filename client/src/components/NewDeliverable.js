@@ -5,7 +5,7 @@ export default function NewDeliverable(props) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState(false);
-  const [status, setStatus] = useState('not started');
+  const [status, setStatus] = useState(false);
 
 
   const save = () => {
@@ -44,18 +44,9 @@ export default function NewDeliverable(props) {
           <input name="priority" type="checkbox" value={priority} onChange={event => setPriority(prevCheck => !prevCheck)}>
           </input>
           {/* Status */}
-          <div className="status_radio">
-            <label>Status:</label>
-            <label>Not started</label>
-            <input name="status" type="radio" value={status} onChange={event => setStatus("not started")}>
-            </input>
-            <label>In Progress</label>
-            <input name="status" type="radio" value={status} onChange={event => setStatus("in progress")}>
-            </input>
-            <label>Completed!</label>
-            <input name="status" type="radio" value={status} onChange={event => setStatus("completed")}>
-            </input>
-          </div>
+          <label>Completed?:</label>
+          <input name="status" type="checkbox" value={status} onChange={event => setStatus(prevCheck => !prevCheck)}>
+          </input>
         <button onClick={() => save()}>Save</button>
         </form>
       </section>

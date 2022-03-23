@@ -6,6 +6,6 @@ CREATE TABLE deliverables (
   name VARCHAR(255) NOT NULL,
   description TEXT,
   priority BOOLEAN NOT NULL,
-  status VARCHAR(255) NOT NULL,
+  status BOOLEAN NOT NULL,
   project_id INTEGER REFERENCES projects (id) ON DELETE CASCADE
 );
