@@ -6,7 +6,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import useAppData from '../hooks/useAppData';
 
 export default function TaskList(props) {
-  const {state, showTaskForm} = useAppData
+  const { state, showTaskForm } = useAppData
   const taskInfo = props.tasks.map(task => {
     return (
       <TaskListItem
@@ -15,8 +15,10 @@ export default function TaskList(props) {
         task={task}
         name={task.name}
         selected={task.priority}
+        complete={task.complete}
         description={task.description}
         onToggle={props.onToggle}
+        onClick={props.completeTask}
         setTask={() => props.onChange(task.id)}
         deleteTask={() => props.deleteTask(task.id)}
       />
