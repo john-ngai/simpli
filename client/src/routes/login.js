@@ -41,7 +41,7 @@ export default function Login() {
   }
 
   return (
-    <main>
+    <div id="container">
       <NavBar />
       {/* <button onClick={handleClick}>Back to Home</button> */}
 
@@ -62,7 +62,7 @@ export default function Login() {
           </FormGroup>
         </div>
       </main>
-    </main>
+    </div>
   );
 }
 
