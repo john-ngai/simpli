@@ -253,6 +253,14 @@ export default function useAppData() {
       if (task.id !== task_id) {
         // Add the deliverable to the deliverables object.
         tasks[task.id] = task;
+      } else if (task.id === task_id){
+        const values = Object.values(state.deliverables)
+        values.map((deliverable) => {
+          if (task.deliverable_id === deliverable.id) {
+            return { ...deliverable, count: deliverable.count -- };
+          }
+          return deliverable
+        });
       }
     }
     return axios.delete(`/tasks/${task_id}`)
@@ -290,7 +298,14 @@ export default function useAppData() {
       ...state.tasks,
       [newTask.id]: newTask
     };
-    setState({ ...state, task, tasks });
+    const values = Object.values(state.deliverables)
+    const updateCounter = values.map((deliverable) => {
+      if (newTask.deliverable_id === deliverable.id) {
+        return { ...deliverable, count: deliverable.count ++};
+      }
+      return deliverable
+    });
+    setState({ ...state, task, tasks, updateCounter });
   }
   appData.saveTask = saveTask;
 
