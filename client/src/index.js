@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Schedule from './routes/Schedule';
 import Register from './routes/register';
 import Login from './routes/login';
 import NewProject from './routes/project_new';
