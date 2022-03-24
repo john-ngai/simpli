@@ -14,8 +14,6 @@ export default function useAppData() {
     deliverables: {},
     task: null,
     tasks: {},
-    teams: {},
-    users: {},
     showDelivForm: false,
     showTaskForm: false,
   });
@@ -33,32 +31,9 @@ export default function useAppData() {
           projects: projects.data,
           deliverables: deliverables.data,
           tasks: tasks.data,
-          // teams: teams.data,
-          // users: users.data
         }));
       })
   }, [])
-
-  /*useEffect(() => {
-    Promise.all([
-      axios.get('/projects'),
-      axios.get('/deliverables'),
-      axios.get('/tasks'),
-      axios.get('/teams'),
-      axios.get('/users')
-    ])
-      .then((all) => {
-        const [projects, deliverables, tasks, teams, users] = all;
-        setState(prev => ({
-          ...prev,
-          projects: projects.data,
-          deliverables: deliverables.data,
-          tasks: tasks.data,
-          teams: teams.data,
-          users: users.data
-        }))
-      })
-  }, []);/**/
   appData.state = state;
 
   // Set the currently selected project id.
