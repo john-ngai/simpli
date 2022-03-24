@@ -14,25 +14,25 @@ module.exports = (db) => {
       }
       return res.json(tasksObj);
     });
+  });
+  
+  // Update task's complete & priority value
+  router.put('/:id', (req, res) => {
+    const taskID = req.params.id;
+    const { name, description, priority, status, deliverable_id } = req.body;
 
-    // Update task's complete & priority value
-    router.put('/:id', (req, res) => {
-      const taskID = req.params.id;
-      const { name, description, priority, status, deliverable_id } = req.body;
-
-      const values = [taskID, name, description, priority, status, deliverable_id];
-      const command = `
-      UPDATE tasks
-      SET name = $2, description = $3, priority = $4, status = $5, deliverable_id = $6 
-      WHERE id = $1;
-      `;
-      return db.query(command, values)
-        .then(() => {
-          // console.log("SUCCESS TASK PRIORITY");
-          res.send();
-        })
-        .catch(err => console.log(err));
-    });
+    const values = [taskID, name, description, priority, status, deliverable_id];
+    const command = `
+    UPDATE tasks
+    SET name = $2, description = $3, priority = $4, status = $5, deliverable_id = $6 
+    WHERE id = $1;
+    `;
+    return db.query(command, values)
+      .then(() => {
+        // console.log("SUCCESS TASK PRIORITY");
+        res.send();
+      })
+      .catch(err => console.log(err));
   });
 
   // GET /tasks/auth
