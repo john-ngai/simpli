@@ -50,7 +50,22 @@ module.exports = (db) => {
         }
       });
   });
-
+  
+  // PUT /deliverables/:id
+  router.put('/:id', (req, res) => {
+    const delID = req.params.id;
+    const { name, description, priority, status, project_id } = req.body;
+    const values = [delID, name, description, priority, status, project_id];
+    const command = `
+      UPDATE deliverables
+      SET name = $2, description = $3, priority = $4, status = $5, project_id = $6 
+      WHERE id = $1;  
+    `;
+    return db.query(command, values)
+      .then(() => res.send())
+      .catch(() => res.status(500).send());
+  });
+  
   // PUT /deliverables/new
   router.put('/new', (req, res) => {
     const { name, description, priority, status, project_id } = req.body;
@@ -64,20 +79,6 @@ module.exports = (db) => {
       .then(data => res.send(data.rows[0]));
   });
 
-  // PUT /deliverables/:id
-  router.put('/:id', (req, res) => {
-    const delID = req.params.id;
-    const { priority } = req.body;
-    const values = [delID, priority];
-    const command = `
-      UPDATE deliverables
-      SET priority = $2
-      WHERE id = $1;  
-    `;
-    return db.query(command, values)
-      .then(() => res.send())
-      .catch(() => res.status(500).send());
-  });
 
   // DELETE /deliverables/:id
   router.delete('/:id', (req, res) => {
