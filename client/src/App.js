@@ -19,6 +19,7 @@ const SAVING = 'SAVING';
 const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
+const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
 
 export default function App() {
   const {
@@ -39,7 +40,7 @@ export default function App() {
   const selectedTask = getSelectedTask(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-
+console.log(selectedDeliverable)
 
   return (
     <div id="container">
@@ -68,6 +69,27 @@ export default function App() {
             selectedDeliverable={selectedDeliverable}
             deleteDeliverable={deleteDeliverable}
           />}
+
+
+
+
+
+          {mode === EDIT_DELIVERABLES && <DeliverableList
+            deliverables={deliverables}
+            onChange={setDeliverable}
+            transition={transition}
+            project={state.project}
+            onToggle={setDeliverablesPriority}
+            showFormBoolean={state.showDelivForm}
+            showDelivForm={showDelivForm}
+            saveDeliverable={saveDeliverable}
+            selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={deleteDeliverable}
+          />}
+
+
+
 
           {mode === TASKS && <TaskList
             tasks={tasks}
