@@ -2,10 +2,10 @@ import { React, useState } from "react";
 import axios from "axios";
 
 export default function NewTask(props) {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [name, setName] = useState(props.name || '');
+  const [description, setDescription] = useState(props.description || '');
+  const [priority, setPriority] = useState(props.priority || false);
+  const [status, setStatus] = useState(props.status || false);
 
 
   const save = () => {
@@ -16,12 +16,20 @@ export default function NewTask(props) {
       status: status,
       deliverable_id: props.deliverable
     }
-    axios.put('/tasks/new', task)
-      .then(res => {
-        task.id = res.data.id
-        console.log('res: ', res.data)
-        props.saveTask(task)
-      });
+    if (!props.id) {
+      axios.put('/tasks/new', task)
+        .then(res => {
+          task.id = res.data.id
+          console.log('res: ', res.data)
+          props.saveTask(task)
+        });
+    } else {
+      task.id = props.id;
+      axios.put(`/tasks/${task.id}`, task)
+        .then(() => {
+          props.editTask(task)
+        })
+    }
   }
 
   return (
