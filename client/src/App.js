@@ -24,7 +24,7 @@ export default function App() {
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
-    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable,
     setDeliverablesPriority, setTaskPriority,
     completeTask,
     setTask, getTasks, getSelectedTask, deleteTask, saveTask,
@@ -39,7 +39,7 @@ export default function App() {
   const selectedTask = getSelectedTask(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-console.log(selectedDeliverable)
+// console.log(selectedDeliverable)
 
   return (
     <div id="container">
@@ -82,6 +82,7 @@ console.log(selectedDeliverable)
             selectedDeliverable={selectedDeliverable}
             deleteDeliverable={deleteDeliverable}
             setDeliverable={setDeliverable}
+            editDeliverable={editDeliverable}
 
             id={selectedDeliverable.id}
             name={selectedDeliverable.name}
