@@ -39,7 +39,6 @@ export default function App() {
   const selectedTask = getSelectedTask(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-// console.log(selectedDeliverable)
 
   return (
     <div id="container">
