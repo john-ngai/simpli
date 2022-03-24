@@ -1,12 +1,13 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
+import './Scheduler.scss';
 
 export default function Scheduler() {
 
   let user = null;
   if (!localStorage.user) {
     return (
-      <div id="container">
+      <div id="scheduler_container">
         {!user && <NavBar user={null} />}
         <h1>Please <a href="/login">login</a> or <a href="/register">register</a> to view this page.</h1>
       </div>
@@ -18,8 +19,13 @@ export default function Scheduler() {
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name}/>}
-      <main>
-        <h1>Scheduler</h1>
+    
+      <main id="scheduler_main">
+    
+      <aside>
+
+      </aside>
+      
       </main>
     </div>
   );
