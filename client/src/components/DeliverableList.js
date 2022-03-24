@@ -23,6 +23,7 @@ export default function DeliverableList(props) {
       setDeliverable={props.onChange}
       transition={props.transition}
       showDelivForm={props.showDelivForm}
+      editDeliverable={props.editDeliverable}
       deliverablePercentComplete={deliverablePercentComplete(state, deliverable.id)}
       deleteDeliverable={event => {
         event.stopPropagation();
@@ -55,6 +56,7 @@ export default function DeliverableList(props) {
           description={props.description}
           priority={props.priority}
           status={props.status}
+          editDeliverable={props.editDeliverable}
         />
       }
       { listItem}
