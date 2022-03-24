@@ -20,7 +20,6 @@ const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
-
 export default function App() {
   const {
     state,
@@ -34,6 +33,7 @@ export default function App() {
   } = useAppData();
 
   const { mode, transition, back } = useVisualMode(null);
+console.log(mode)
 
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
@@ -72,7 +72,7 @@ console.log(selectedDeliverable)
 
 
 
-
+console.log(state.deliverable)
 
           {mode === EDIT_DELIVERABLES && <DeliverableList
             deliverables={deliverables}
@@ -86,6 +86,13 @@ console.log(selectedDeliverable)
             selectedProject={selectedProject}
             selectedDeliverable={selectedDeliverable}
             deleteDeliverable={deleteDeliverable}
+            setDeliverable={setDeliverable}
+
+            id={selectedDeliverable.id}
+            name={selectedDeliverable.name}
+            description={selectedDeliverable.description}
+            priority={selectedDeliverable.priority}
+            status={selectedDeliverable.status}
           />}
 
 
