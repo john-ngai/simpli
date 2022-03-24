@@ -312,6 +312,25 @@ export default function useAppData() {
   }
   appData.deleteTask = deleteTask;
 
+      // Edit an existing task.
+      const editTasks = task => {
+        const { id, name, description, deliverable_id, priority, status } = task;
+        const tasks = {
+          ...state.tasks,
+          [id]: {
+            ...state.tasks[task.id], // Get the missing count key.
+            id,
+            name,
+            description,
+            deliverable_id,
+            priority,
+            status
+          }
+        }
+        setState({ ...state, tasks });
+      }
+      appData.editTasks = editTasks;
+
   const setTaskPriority = (id) => {
     const allTasks = Object.values(state.tasks);
     // new task data with the priority set to the opposite of what it is
