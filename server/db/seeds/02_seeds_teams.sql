@@ -1,2 +1,2 @@
-INSERT INTO teams (id) VALUES (1);
-INSERT INTO teams (id) VALUES (2);
+INSERT INTO teams (code) VALUES ('lighthouse');
+INSERT INTO teams (name, code) VALUES ('tesla', 'JA30$SH');
