@@ -14,7 +14,7 @@ export default function TaskListItem(props) {
 
   return (
     <li className="task_list_item">
-      <CheckCircleOutlineIcon id={props.complete ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => onClick(task.id)} />
+      <CheckCircleOutlineIcon id={props.status ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => onClick(task.id)} />
       {/* <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
         onClick={() => props.setTask()} // Do not remove.
       /> */}
@@ -31,7 +31,11 @@ export default function TaskListItem(props) {
         <span className="task_description">{props.description}</span>
         <span className="task_updates">
           <EditIcon id="edit_task" className="mui_icons"
-            onClick={() => props.setTask()} // Do not remove.
+            onClick={event => {
+              event.stopPropagation()
+              props.setTask()
+              props.transition('EDIT_TASKS')
+            }} 
           />
           <DeleteIcon id="delete_task" className="mui_icons"
             onClick={() => {

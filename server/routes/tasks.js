@@ -18,12 +18,12 @@ module.exports = (db) => {
     // Update task's complete & priority value
     router.put('/:id', (req, res) => {
       const taskID = req.params.id;
-      const { complete, priority } = req.body;
+      const { name, description, priority, status, deliverable_id } = req.body;
 
-      const values = [taskID, complete, priority];
+      const values = [taskID, name, description, priority, status, deliverable_id];
       const command = `
       UPDATE tasks
-      SET complete = $2, priority = $3
+      SET name= $2, description=$3, priority = $4, status = $5, deliverable_id=$6 
       WHERE id = $1;
       `;
       return db.query(command, values)
@@ -32,7 +32,7 @@ module.exports = (db) => {
           res.send();
         })
         .catch(err => console.log(err));
-    })
+    });
   });
 
   // GET /tasks/auth

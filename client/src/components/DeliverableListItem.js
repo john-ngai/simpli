@@ -10,10 +10,6 @@ import classNames from 'classnames';
 export default function DeliverableListItem(props) {
   const { id, onToggle } = props;
 
-  // const deliverableClass = classNames("deliverable_list_item", {
-  //   "deliverable_list_item--selected": props.selected
-  // })
-
   const handleClick = (e) => {
     e.stopPropagation();
     onToggle(id);
@@ -35,7 +31,14 @@ export default function DeliverableListItem(props) {
       {props.count > 0 ? <aside>Percent Complete: {props.deliverablePercentComplete}%</aside> : <aside>No Tasks Yet! </aside>}
       { props.count > 0 ? <CircularProgressWithLabel value={props.deliverablePercentComplete}/> : <CircularProgressWithLabel value={0}/> }
       <span className="deliverable_updates">
-        <EditIcon id="edit_deliverable" className="mui_icons" />
+        <EditIcon id="edit_deliverable" className="mui_icons" 
+          onClick={event => {
+            props.transition('EDIT_DELIVERABLES')
+            event.stopPropagation()
+            props.setDeliverable(props.id)
+            props.showDelivForm()
+          }}
+        />
         <DeleteIcon id="delete_deliverable" className="mui_icons"
           onClick={props.deleteDeliverable}
         />

@@ -2,10 +2,10 @@ import { React, useState } from "react";
 import axios from "axios";
 
 export default function NewDeliverable(props) {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [name, setName] = useState(props.name || '');
+  const [description, setDescription] = useState(props.description || '');
+  const [priority, setPriority] = useState(props.priority || false);
+  const [status, setStatus] = useState(props.status || false);
 
 
   const save = () => {
@@ -16,12 +16,20 @@ export default function NewDeliverable(props) {
       status: status,
       project_id: props.project
     }
-    axios.put('/deliverables/new', deliverable)
-      .then(res => {
-        deliverable.id = res.data.id
-        console.log('res: ', res.data)
-        props.saveDeliverable(deliverable)
-      })
+    if (!props.id) {
+      axios.put('/deliverables/new', deliverable)
+        .then(res => {
+          deliverable.id = res.data.id
+          console.log('res: ', res.data)
+          props.saveDeliverable(deliverable)
+        })
+    } else {
+      deliverable.id = props.id;
+      axios.put(`/deliverables/${deliverable.id}`, deliverable)
+        .then(() => {
+          props.editDeliverable(deliverable)
+        })
+    }
   }
 
   return (
@@ -29,7 +37,6 @@ export default function NewDeliverable(props) {
       <section className="new_deliverable">
         <form onSubmit={event => {
           event.preventDefault();
-          props.showDelivForm();
           }}>
           {/* Name */}
           <label>Deliverable Title:</label>

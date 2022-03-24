@@ -161,6 +161,19 @@ export default function useAppData() {
   }
   appData.getSelectedDeliverable = getSelectedDeliverable;
 
+    // Return the selected task object.
+    const getSelectedTask = state => {
+      const task_id = state.task;
+      const tasks = Object.values(state.tasks);
+      // return tasks.find(task => task.id === task_id);
+      for (const task of tasks) {
+        if (task.id === state.task) {
+          return task;
+        }
+      }
+    }
+    appData.getSelectedTask = getSelectedTask;
+
   // Delete the currently selected deliverable id.
   const deleteDeliverable = deliverable_id => {
     // Declare a new deliverables object to hold the updated deliverables data.
@@ -186,6 +199,25 @@ export default function useAppData() {
   }
   appData.deleteDeliverable = deleteDeliverable;
 
+    // Edit an existing deliverable.
+    const editDeliverable = deliverable => {
+      const { id, name, description, project_id, priority, status } = deliverable;
+      const deliverables = {
+        ...state.deliverables,
+        [id]: {
+          ...state.deliverables[deliverable.id], // Get the missing count key.
+          id,
+          name,
+          description,
+          project_id,
+          priority,
+          status
+        }
+      }
+      setState({ ...state, deliverables });
+    }
+    appData.editDeliverable = editDeliverable;
+
   // toggle task complete
   const completeTask = (id) => {
     const allTasks = Object.values(state.tasks);
@@ -193,7 +225,7 @@ export default function useAppData() {
     let updTask;
     allTasks.forEach(task => {
       if (task.id === id) {
-        task.complete = !task.complete;
+        task.status = !task.status;
         updTask = task;
         // console.log("AFTER TASK:", updTask); TEST CODE
       }
@@ -254,14 +286,6 @@ export default function useAppData() {
   const setTask = task => setState({ ...state, task });
   appData.setTask = setTask;
 
-  // Return the selected task object.
-  const getSelectedTask = state => {
-    const task_id = state.task;
-    const tasks = Object.values(state.tasks);
-    return tasks.find(task => task.id === task_id);
-  }
-  appData.getSelectedTask = getSelectedTask;
-
   // Delete the currently selected task id.
   const deleteTask = task_id => {
     // Declare a new tasks object to hold the updated tasks data.
@@ -286,6 +310,25 @@ export default function useAppData() {
       .then(() => setState({ ...state, tasks }));
   }
   appData.deleteTask = deleteTask;
+
+    // Edit an existing task.
+    const editTask = task => {
+      const { id, name, description, deliverable_id, priority, status } = task;
+      const tasks = {
+        ...state.tasks,
+        [id]: {
+          ...state.tasks[task.id], // Get the missing count key.
+          id,
+          name,
+          description,
+          deliverable_id,
+          priority,
+          status
+        }
+      }
+      setState({ ...state, tasks });
+    }
+    appData.editTask = editTask;
 
   const setTaskPriority = (id) => {
     const allTasks = Object.values(state.tasks);
