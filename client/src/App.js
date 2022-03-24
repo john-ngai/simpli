@@ -20,6 +20,8 @@ const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
+const EDIT_TASKS = 'EDIT_TASKS'
+
 export default function App() {
   const {
     state,
@@ -108,6 +110,32 @@ export default function App() {
             deliverablePercentComplete={deliverablePercentComplete}
             saveTask={saveTask}
             transition={transition}
+          />}
+
+          {mode === EDIT_TASKS && <TaskList
+            tasks={tasks}
+            onChange={setTask}
+            deliverable={state.deliverable}
+            onToggle={setTaskPriority}
+            completeTask={completeTask}
+            onClick={transition}
+            project={state.project}
+            selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            selectedTask={selectedTask}
+            deleteTask={deleteTask}
+            showFormBoolean={state.showTaskForm}
+            showDelivForm={showDelivForm}
+            showTaskForm={showTaskForm}
+            deliverablePercentComplete={deliverablePercentComplete}
+            saveTask={saveTask}
+            transition={transition}
+
+            id={selectedTask.id}
+            name={selectedTask.name}
+            description={selectedTask.description}
+            priority={selectedTask.priority}
+            status={selectedTask.status}
           />}
 
           {mode === NEW_PROJECT && <Project
