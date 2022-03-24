@@ -11,7 +11,7 @@ module.exports = (db) => {
     });
   });
 
-  // PUT /register
+  // POST /register
   router.post('/', (req, res) => {
     const { name, email, password, team } = req.body;
     let team_id;
