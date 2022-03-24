@@ -42,6 +42,11 @@ export default function TaskList(props) {
             deliverable={props.deliverable}
             showTaskForm={props.showTaskForm}
             saveTask={props.saveTask}
+            id={props.id}
+            name={props.name}
+            description={props.description}
+            priority={props.priority}
+            status={props.status}
           />
         }
       </div>
