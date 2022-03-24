@@ -15,7 +15,7 @@ exports.findUserByEmail = findUserByEmail;
 
 // Return the team if it exists or generate a new team code.
 const findTeamByCode = code => {
-  // Return a randomly generated team code.
+  // If the code is empty, return the id as null.
   if (!code) {
     return { id: null };
   }
