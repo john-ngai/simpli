@@ -16,4 +16,4 @@ const hexNumGenerator = (digits) => {
   return Math.random().toString(36).slice(firstIndex, lastIndex);
 };
 
-module.exports = { hexNumGenerator };
+module.exports = hexNumGenerator;
