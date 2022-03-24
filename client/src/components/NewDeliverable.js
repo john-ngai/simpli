@@ -27,7 +27,6 @@ export default function NewDeliverable(props) {
       deliverable.id = props.id;
       axios.put(`/deliverables/${deliverable.id}`, deliverable)
         .then(() => {
-          console.log("completed")
           props.editDeliverable(deliverable)
         })
     }
