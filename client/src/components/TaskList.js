@@ -6,6 +6,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import useAppData from '../hooks/useAppData';
 
 export default function TaskList(props) {
+  const {state, deliverablePercentComplete, completedTasks } = useAppData();
   const taskInfo = props.tasks.map(task => {
     return (
       <TaskListItem
@@ -34,7 +35,7 @@ export default function TaskList(props) {
           {props.selectedProject.name}: {props.selectedDeliverable.name}
         </span>
         <span id="deliverable_description">{props.selectedDeliverable.description}</span>
-        <span id="deliverable_stats">3 of 13 (23%) Tasks Completed</span>
+        <span id="deliverable_stats">{completedTasks(state, props.deliverable)} of {props.selectedDeliverable.count} ({deliverablePercentComplete(state, props.deliverable)}%) Tasks Completed</span>
         <AddCircleIcon id="new_task" className="mui_icons"
           onClick={props.showTaskForm}
         />
