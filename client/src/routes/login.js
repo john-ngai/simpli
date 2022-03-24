@@ -35,6 +35,7 @@ export default function Login() {
       .then(res => {
         if (res.data) {
           localStorage.setItem('user', JSON.stringify(res.data));
+          navigate('/');
         } else {
           setError('Wrong password');
         }
