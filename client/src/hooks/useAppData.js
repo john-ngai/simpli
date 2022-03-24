@@ -192,6 +192,25 @@ export default function useAppData() {
   }
   appData.deleteDeliverable = deleteDeliverable;
 
+    // Edit an existing deliverable.
+    const editDeliverable = deliverable => {
+      const { id, name, description, project_id, priority, status } = deliverable;
+      const deliverables = {
+        ...state.deliverables,
+        [id]: {
+          ...state.deliverables[deliverable.id], // Get the missing count key.
+          id,
+          name,
+          description,
+          project_id,
+          priority,
+          status
+        }
+      }
+      setState({ ...state, deliverables });
+    }
+    appData.editDeliverable = editDeliverable;
+
   // toggle task complete
   const completeTask = (id) => {
     const allTasks = Object.values(state.tasks);
