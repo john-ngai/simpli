@@ -10,6 +10,7 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [team, setTeam] = useState("");
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
@@ -34,16 +35,10 @@ export default function Register() {
   };
 
   function registerUser(name, email, password) {
-    // new user
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-      team_id: 1 //temporary id assigned. Will need to update later
-    }
+    const user = { name, email, password, team };
     axios.put('/register', user)
-      .then(res => console.log('res.data =', res.data))
-      .then(navigate('/'))
+      .then(res => console.log('Registered -', res.data))
+      .then(navigate('/'));
   }
 
   return (
@@ -61,6 +56,8 @@ export default function Register() {
               <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
               <br />
               <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+              <br />
+              <TextField label="Team" type="text" value={team} placeholder="Enter team code" onChange={(e) => setTeam(e.target.value)} />
               <br />
               <button type="submit" onClick={validation}>Register</button>
             </FormControl>
