@@ -43,15 +43,15 @@ User stories allow you to draft the high-level requirements based on the user ne
     * **(NOT STARTED)** They can also optionally enter a team registration code (to link to a team id). 
 
 * Login/Logout:
-  * **(IN PROGRESSS)** Users can sign into their account using their email and password.
-  * **(IN PROGRESS)** The nav bar conditionally renders the login/logout buttons.
-  * **(IN PROGRESS)** A JWT session cookie is stored upon a successfuly login.
-    * **(IN PROGRESS)** Clicking the 'logout' button will delete the JWT session cookie.
+  * **(DONE)** Users can sign into their account using their email and password.
+  * **(DONE)** The nav bar conditionally renders the login/logout buttons.
+  * **(DONE)** A JSON web token (JWT) is added to the browser's local storage upon a successfuly login.
+    * **(DONE)** Clicking the 'logout' button will remove the JWT from the browser's local storage.
 
 * Dashboard:
   * **(DONE)** Users can see their projects, deliverables, and tasks.
-    * **(NOT STARTED)** Users can only see the data associated with their team id.
-  * **(IN PROGRESS)** Users can create, edit, or delete projects, deliverables, and tasks.
+    * **(DONE)** Users can only see the data associated with their team id.
+  * **(DONE)** Users can create, edit, or delete projects, deliverables, and tasks.
     * **(DONE)** When creating a deliverable or task, users can optionally mark them as high priority.
   * **(DONE)** Users can mark existing deliverables or tasks as high priority.
   * **(DONE)** Users can mark existing tasks as complete or incomplete.
