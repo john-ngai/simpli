@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const formatData = require('../helpers/formatData');
 const services = require('../services');
+const formatData = require('../helpers/formatData');
 
 module.exports = (db) => {
   // GET /projects
@@ -39,13 +39,13 @@ module.exports = (db) => {
     const command = `
       SELECT projects.*, COUNT(deliverables.id) AS count
       FROM projects
-      LEFT JOIN deliverables ON projects.id = project_id
+        LEFT JOIN deliverables ON projects.id = project_id
       WHERE team_id = $1
       GROUP BY projects.id;
     `;
     return db.query(command, values)
       .then(data => {
-        const projects = data.rows
+        const projects = data.rows;
         // Respond with an empty object if the query doesn't return any rows.
         if (projects.length === 0) {
           res.send({});
@@ -53,7 +53,7 @@ module.exports = (db) => {
         } else {
           res.send(formatData(projects));
         }
-      })
+      });
   })
 
   // PUT /projects/new
