@@ -1,5 +1,6 @@
 // Dependencies
 const db = require('./configs/db.config');
+const hexNumGenerator = require('./helpers/hexNumGenerator');
 
 // Return the user if it exists.
 const findUserByEmail = email => {
@@ -30,3 +31,30 @@ const findTeamByCode = code => {
     .then(res => res.rows[0]);
 }
 exports.findTeamByCode = findTeamByCode;
+
+// Create and return a new team if the given team id is null.
+const createTeam = team_id => {
+  if (team_id) {
+    return { id: team_id };
+  }
+  const values = [hexNumGenerator(6)];
+  command = `
+    INSERT INTO teams (code)
+    VALUES ($1)
+    RETURNING *;
+  `;
+  return db.query(command, values)
+    .then(res => res.rows[0]);
+}
+exports.createTeam = createTeam;
+
+// Create a new user.
+const createUser = (name, email, password, team_id) => {
+  values = [name, email, password, team_id];
+  command = `
+    INSERT INTO users (name, email, password, team_id)
+    values ($1, $2, $3, $4);
+  `;
+  return db.query(command, values);
+}
+exports.createUser = createUser;
