@@ -399,6 +399,17 @@ export default function useAppData() {
   }
   appData.deliverablePercentComplete = deliverablePercentComplete
 
+  const completedDeliverables = (state, project) => {
+    const selectedDelivs = getDeliverables(state, project)
+    let numCompleted = 0;
+    selectedDelivs.forEach(deliv => {
+      if (deliv.status === true) {
+        numCompleted++;
+      }
+    })
+    return numCompleted
+  }
+  appData.completedDeliverables = completedDeliverables
 
   return appData;
 }
