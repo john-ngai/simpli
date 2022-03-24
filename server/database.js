@@ -1,6 +1,5 @@
 // Dependencies
 const db = require('./configs/db.config');
-const { hexNumGenerator } = require('./helpers/hexNumGenerator');
 
 // Return the user if it exists.
 const findUserByEmail = email => {
@@ -17,12 +16,10 @@ exports.findUserByEmail = findUserByEmail;
 // Return the team if it exists or generate a new team code.
 const findTeamByCode = code => {
   // Return a randomly generated team code.
-  if (code === '') {
-    return {
-      id: null,
-      code: hexNumGenerator(6)
-    }
+  if (!code) {
+    return { id: null };
   }
+
   // Return the team if it exists.
   const values = [code];
   const command = `
