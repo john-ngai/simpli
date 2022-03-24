@@ -2,15 +2,18 @@ const router = require('express').Router();
 
 module.exports = (db) => {
   // all routes will go here
-  router.get('/', (req, res) => {
-    // WILL NEED TO UPDATE WITH COOKIES LATER 
-    // will need another route to validate user info
-    const { email } = req.body;
-    const values = [email];
-    const command = "SELECT * FROM users WHERE email = $1";
-    db.query(command, values)
+  router.post('/', (req, res) => {
+    const { email, password } = req.body;
+    const values = [email, password];
+    const command = `
+      SELECT * FROM users
+      WHERE email = 'rick.sandchez@gmail.com';
+    `;
+
+    return db.query(command, values)
       .then(data => res.send(data.rows[0]))
-      .catch(err => console.log(err));
+      .catch(err => res.send(err));
   });
+  
   return router;
 };

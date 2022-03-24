@@ -26,30 +26,27 @@ export default function Login() {
   }
 
   const loginUser = (email, password) => {
-    // user data
     const user = {
       email: email,
       password: password
     }
-    axios.get('/login', user)
-      .then(res => console.log("success?", res.data))
-      .then(navigate('/'));
-  }
+    console.log('email =', email); // Remove test code.
+    // console.log('password =', password); // Remove test code.
 
-  const handleClick = () => {
-    navigate('/');
+    axios.post('/login', user)
+      .then(res => console.log('res.data =', res.data))
+      .catch(err => console.log('err =', err));
   }
 
   return (
     <div id="container">
       <NavBar />
-      {/* <button onClick={handleClick}>Back to Home</button> */}
-
       <main>
         <h1>Login Page</h1>
         <div>
           <section className="user_validation">{error}</section>
           <br />
+
 
           <FormGroup onSubmit={(e) => e.preventDefault()} >
             <FormControl>
@@ -60,6 +57,8 @@ export default function Login() {
               <button type="submit" onClick={validation}>Login</button>
             </FormControl>
           </FormGroup>
+
+
         </div>
       </main>
     </div>
