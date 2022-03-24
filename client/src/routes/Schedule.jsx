@@ -36,24 +36,24 @@ export default function Schedule() {
       <NavBar />
       <div className="scheduler">
         <div>
-          <button className="customButton" onClick={() => alert("Add Deliverable button clicked!")}>Add Deliverable</button>
-          <button className="customButton" onClick={() => alert("Add Task button clicked!")}>Add Task</button>
+          {/* <button className="customButton" onClick={() => alert("Add Deliverable button clicked!")}>Add Deliverable</button>
+          <button className="customButton" onClick={() => alert("Add Task button clicked!")}>Add Task</button> */}
         </div>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="timeGridWeek"
           headerToolbar={{
-            center: 'dayGridMonth, timeGridWeek'
+            center: 'dayGridMonth,timeGridWeek,addTask,addDel'
           }}
           customButtons={{
-            new: {
+            addTask: {
               text: 'Add Task',
               click: () => alert("Add Task button clicked!")
+            },
+            addDel: {
+              text: 'Add Deliverable',
+              click: () => alert("Add Deliverable button clicked!")
             }
-            // new: {
-            //   text: 'Add Deliverable',
-            //   click: () => alert("Add Deliverable button clicked!")
-            // }
           }}
           events={events}
           editable="true"
