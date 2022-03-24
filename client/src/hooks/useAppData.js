@@ -313,7 +313,7 @@ export default function useAppData() {
   appData.deleteTask = deleteTask;
 
       // Edit an existing task.
-      const editTasks = task => {
+      const editTask = task => {
         const { id, name, description, deliverable_id, priority, status } = task;
         const tasks = {
           ...state.tasks,
@@ -329,7 +329,7 @@ export default function useAppData() {
         }
         setState({ ...state, tasks });
       }
-      appData.editTasks = editTasks;
+      appData.editTask = editTask;
 
   const setTaskPriority = (id) => {
     const allTasks = Object.values(state.tasks);
