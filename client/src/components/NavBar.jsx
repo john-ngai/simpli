@@ -17,7 +17,7 @@ export default function Navbar(props) {
         <Link to="/login">Login</Link>
         <a href="" onClick={() => localStorage.removeItem('user')}>Logout</a>
       </span>
-      <span className="nav_item">Logged in as:</span>
+      <span className="nav_item">Logged in as: {props.user}</span>
     </nav>
   )
 }
