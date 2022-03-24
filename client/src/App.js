@@ -131,7 +131,6 @@ export default function App() {
               saveTask={saveTask}
               transition={transition}
               editTask={editTask}
-
               />
             <NewTask
               id={selectedTask.id}
@@ -143,7 +142,7 @@ export default function App() {
               saveTask={saveTask}
               editTask={editTask}
             />
-            </div>
+          </div>
           }
 
           {mode === NEW_PROJECT && <Project
