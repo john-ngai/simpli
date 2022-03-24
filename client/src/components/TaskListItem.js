@@ -4,7 +4,6 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import useAppData from '../hooks/useAppData';
 
 export default function TaskListItem(props) {
   const { task, onToggle, onClick } = props;
