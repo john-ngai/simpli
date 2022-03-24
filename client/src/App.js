@@ -24,10 +24,6 @@ const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 
 export default function App() {
-  const { page, mode, transition, transitionPage, back } = useVisualMode(null);
-
-
-
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
@@ -36,9 +32,10 @@ export default function App() {
     completeTask,
     setTask, getTasks, getSelectedTask, deleteTask, saveTask,
     showDelivForm, showTaskForm,
-    percentComplete, deliverablePercentComplete
+    percentComplete, deliverablePercentComplete,
   } = useAppData();
-
+  
+  const { page, mode, transition, transitionPage, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
@@ -48,12 +45,12 @@ export default function App() {
 
   let user = null;
   if (!localStorage.user) {
-    // return (
-    //   <div id="container">
-    //     {!user && <NavBar />}
-    //     <h1>Please <a href="/login">login</a> to view this page.</h1>
-    //   </div>
-    // );
+    return (
+      <div id="container">
+        {!user && <NavBar />}
+        <h1>Please <a href="/login">login</a> to view this page.</h1>
+      </div>
+    );
   } else {
     user = JSON.parse(localStorage.user);
   }
