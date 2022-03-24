@@ -1,5 +1,5 @@
 /*
-Return an array of objects into the following format:
+Return an array of objects with the following format:
   {
     id: {
       id,
