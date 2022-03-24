@@ -20,5 +20,13 @@ const generateToken = data => {
 };
 exports.generateToken = generateToken;
 
-const message = () => console.log('Hello World!');
-exports.message = message;
+// If verified, return token data, otherwise return null.
+const verifyToken = token => {
+  const secret = process.env.JWT_SECRET;
+  let data;
+  jwt.verify(token, secret, (err, decoded) => {
+    err? null : data = decoded;
+  });
+  return data;
+}
+exports.verifyToken = verifyToken;
