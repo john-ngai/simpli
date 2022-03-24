@@ -11,7 +11,10 @@ import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import Project from './components/Project';
-// Visual Modes
+// Pages
+const LOGIN = 'LOGIN';
+const SUMMARY = 'SUMMARY';
+// Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
 const TASKS = 'TASKS';
@@ -21,6 +24,10 @@ const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 
 export default function App() {
+  const { page, mode, transition, transitionPage, back } = useVisualMode(null);
+
+
+
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
@@ -32,7 +39,6 @@ export default function App() {
     percentComplete, deliverablePercentComplete
   } = useAppData();
 
-  const { mode, transition, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
@@ -40,9 +46,21 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
+  let user = null;
+  if (!localStorage.user) {
+    // return (
+    //   <div id="container">
+    //     {!user && <NavBar />}
+    //     <h1>Please <a href="/login">login</a> to view this page.</h1>
+    //   </div>
+    // );
+  } else {
+    user = JSON.parse(localStorage.user);
+  }
+
   return (
     <div id="container">
-      <NavBar users={state.users} />
+      {user && <NavBar user={user.name} />}
 
       <main>
         <ProjectList
