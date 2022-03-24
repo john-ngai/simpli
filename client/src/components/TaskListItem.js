@@ -4,6 +4,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import useAppData from '../hooks/useAppData';
 
 export default function TaskListItem(props) {
   const { task, onToggle, onClick } = props;
@@ -11,7 +12,12 @@ export default function TaskListItem(props) {
   // const taskClass = classNames("task_list_item", {
   //   "task_list_item--selected": props.selected
   // })
+  
+  // Temporary code:
+  const { state, getSelectedTask, setTask } = useAppData();
+  const selectedTask = getSelectedTask(state);
 
+  
   return (
     <li className="task_list_item">
       <CheckCircleOutlineIcon id={props.complete ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => onClick(task.id)} />
@@ -32,10 +38,9 @@ export default function TaskListItem(props) {
         <span className="task_updates">
           <EditIcon id="edit_task" className="mui_icons"
             onClick={event => {
-              props.setTask()
+              setTask(selectedTask.id)
               props.transition('EDIT_TASKS')
               event.stopPropagation()
-              props.setDeliverable(props.id)
               props.showTaskForm()
             }} // Do not remove.
           />
