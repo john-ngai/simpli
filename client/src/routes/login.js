@@ -30,12 +30,16 @@ export default function Login() {
       email: email,
       password: password
     }
-    console.log('email =', email); // Remove test code.
-    // console.log('password =', password); // Remove test code.
 
     axios.post('/login', user)
-      .then(res => console.log('res.data =', res.data))
-      .catch(err => console.log('err =', err));
+      .then(res => {
+        if (res.data) {
+          localStorage.setItem('user', JSON.stringify(res.data));
+        } else {
+          setError('Wrong password');
+        }
+      })
+      .catch(() => setError('Not a registered email'));
   }
 
   return (
@@ -46,8 +50,6 @@ export default function Login() {
         <div>
           <section className="user_validation">{error}</section>
           <br />
-
-
           <FormGroup onSubmit={(e) => e.preventDefault()} >
             <FormControl>
               <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
@@ -57,8 +59,6 @@ export default function Login() {
               <button type="submit" onClick={validation}>Login</button>
             </FormControl>
           </FormGroup>
-
-
         </div>
       </main>
     </div>
