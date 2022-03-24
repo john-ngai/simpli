@@ -48,7 +48,7 @@ export default function App() {
     return (
       <div id="container">
         {!user && <NavBar />}
-        <h1>Please <a href="/login">login</a> to view this page.</h1>
+        <h1>Please <a href="/login">login</a> or <a href="/register">register</a> to view this page.</h1>
       </div>
     );
   } else {
