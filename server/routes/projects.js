@@ -5,25 +5,6 @@ const formatData = require('../helpers/formatData');
 module.exports = (db) => {
   // GET /projects
   router.get('/', (req, res) => {
-    const command = `
-      SELECT projects.*, COUNT(deliverables.id) AS count
-      FROM projects
-      LEFT JOIN deliverables ON projects.id = project_id
-      GROUP BY projects.id;
-    `;
-    db.query(command)
-      .then(data => {
-        const projectsArray = data.rows;
-        const projectsObj = {};
-        for (const e of projectsArray) {
-          projectsObj[e.id] = e;
-        }
-        return res.json(projectsObj);
-      });
-  });
-
-  // GET /projects/auth
-  router.get('/auth', (req, res) => {
     const token = req.headers['x-access-token'];
     // Respond with an empty object when no token is found.
     if (!token) {
