@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
 export default function useVisualMode(initial) {
+  const [page, setPage] = useState(initial);
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState(initial);
 
   const transition = mode => setMode(mode);
+  const transitionPage = page => setPage(page);
 
   const back = () => {
     if (!history) {
