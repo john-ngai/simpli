@@ -30,18 +30,18 @@ export default function App() {
     setDeliverablesPriority, setTaskPriority,
     completeTask,
     setTask, getTasks, getSelectedTask, deleteTask, saveTask,
-    showDelivForm, showTaskForm,
+    showDelivForm, showTaskForm, editTask,
     percentComplete, deliverablePercentComplete
   } = useAppData();
 
   const { mode, transition, back } = useVisualMode(null);
-
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
   const selectedTask = getSelectedTask(state);
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
-
+  
+  console.log(selectedTask)
   return (
     <div id="container">
       <NavBar users={state.users} />
@@ -130,6 +130,7 @@ export default function App() {
             deliverablePercentComplete={deliverablePercentComplete}
             saveTask={saveTask}
             transition={transition}
+            editTask={editTask}
 
             id={selectedTask.id}
             name={selectedTask.name}

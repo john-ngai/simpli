@@ -14,13 +14,12 @@ export default function TaskListItem(props) {
   // })
   
   // Temporary code:
-  const { state, getSelectedTask, setTask } = useAppData();
-  const selectedTask = getSelectedTask(state);
+  // const { state, getSelectedTask, setTask } = useAppData();
+  // const selectedTask = getSelectedTask(state);
 
-  
   return (
     <li className="task_list_item">
-      <CheckCircleOutlineIcon id={props.complete ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => onClick(task.id)} />
+      <CheckCircleOutlineIcon id={props.status ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => onClick(task.id)} />
       {/* <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
         onClick={() => props.setTask()} // Do not remove.
       /> */}
@@ -38,11 +37,11 @@ export default function TaskListItem(props) {
         <span className="task_updates">
           <EditIcon id="edit_task" className="mui_icons"
             onClick={event => {
-              setTask(selectedTask.id)
-              props.transition('EDIT_TASKS')
+              props.setTask()
               event.stopPropagation()
               props.showTaskForm()
-            }} // Do not remove.
+              props.transition('EDIT_TASKS')
+            }} 
           />
           <DeleteIcon id="delete_task" className="mui_icons"
             onClick={() => {
