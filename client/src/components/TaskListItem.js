@@ -31,7 +31,13 @@ export default function TaskListItem(props) {
         <span className="task_description">{props.description}</span>
         <span className="task_updates">
           <EditIcon id="edit_task" className="mui_icons"
-            onClick={() => props.setTask()} // Do not remove.
+            onClick={event => {
+              props.setTask()
+              props.transition('EDIT_TASKS')
+              event.stopPropagation()
+              props.setDeliverable(props.id)
+              props.showTaskForm()
+            }} // Do not remove.
           />
           <DeleteIcon id="delete_task" className="mui_icons"
             onClick={() => {
