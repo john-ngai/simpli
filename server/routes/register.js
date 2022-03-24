@@ -12,9 +12,9 @@ module.exports = (db) => {
 
   // PUT /register
   router.put('/', (req, res) => {
-    const { name, email, password, team_id } = req.body;
+    const { name, email, password } = req.body;
     const hashedPassword = services.hashPassword(password);
-    const values = [name, email, hashedPassword, team_id];
+    const values = [name, email, hashedPassword, 1];
     const command = `
     INSERT INTO users (name, email, password, team_id)
     VALUES ($1, $2, $3, $4)
