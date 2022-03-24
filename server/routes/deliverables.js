@@ -33,8 +33,8 @@ module.exports = (db) => {
     const command = `
       SELECT deliverables.*, team_id, COUNT(tasks.id)
       FROM deliverables
-        JOIN projects ON deliverables.project_id = projects.id
-        JOIN tasks ON deliverables.id = deliverable_id
+        LEFT JOIN projects ON deliverables.project_id = projects.id
+        LEFT JOIN tasks ON deliverables.id = deliverable_id
       WHERE team_id = $1
       GROUP BY deliverables.id, team_id;
     `;
@@ -51,6 +51,20 @@ module.exports = (db) => {
       });
   });
   
+  
+  // PUT /deliverables/new
+  router.put('/new', (req, res) => {
+    const { name, description, priority, status, project_id } = req.body;
+    const values = [name, description, priority, status, project_id];
+    const command = `
+    INSERT INTO deliverables (name, description, priority, status, project_id)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `;
+    return db.query(command, values)
+      .then(data => res.send(data.rows[0]));
+  });
+  
   // PUT /deliverables/:id
   router.put('/:id', (req, res) => {
     const delID = req.params.id;
@@ -65,20 +79,6 @@ module.exports = (db) => {
       .then(() => res.send())
       .catch(() => res.status(500).send());
   });
-  
-  // PUT /deliverables/new
-  router.put('/new', (req, res) => {
-    const { name, description, priority, status, project_id } = req.body;
-    const values = [name, description, priority, status, project_id];
-    const command = `
-      INSERT INTO deliverables (name, description, priority, status, project_id)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING *;
-    `;
-    return db.query(command, values)
-      .then(data => res.send(data.rows[0]));
-  });
-
 
   // DELETE /deliverables/:id
   router.delete('/:id', (req, res) => {
