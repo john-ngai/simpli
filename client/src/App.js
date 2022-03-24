@@ -111,6 +111,7 @@ export default function App() {
             deliverablePercentComplete={deliverablePercentComplete}
             saveTask={saveTask}
             transition={transition}
+            editTask={editTask}
           />}
 
           {mode === EDIT_TASKS && 
@@ -142,7 +143,6 @@ export default function App() {
               deliverable={state.deliverable}
               saveTask={saveTask}
               editTask={editTask}
-              // transition={showTaskForm()}
             />
             </div>
           }
