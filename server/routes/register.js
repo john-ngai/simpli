@@ -1,7 +1,8 @@
 const router = require('express').Router();
+const services = require('../services');
 
 module.exports = (db) => {
-  // all routes will go here
+  // GET /register
   router.get('/', (req, res) => {
     const command = "SELECT * FROM users";
     db.query(command).then(data => {
@@ -9,11 +10,11 @@ module.exports = (db) => {
     });
   });
 
-  // PUT /users
+  // PUT /register
   router.put('/', (req, res) => {
-    console.log("Inside PUT /register");
-    const { name, email, password, team_id } = req.body;
-    const values = [name, email, password, team_id];
+    const { name, email, password } = req.body;
+    const hashedPassword = services.hashPassword(password);
+    const values = [name, email, hashedPassword, 1];
     const command = `
     INSERT INTO users (name, email, password, team_id)
     VALUES ($1, $2, $3, $4)

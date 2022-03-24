@@ -5,7 +5,6 @@ import './index.css';
 import App from './App';
 import Register from './routes/register';
 import Login from './routes/login';
-import NewProject from './routes/project_new';
 import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById('root');
@@ -16,7 +15,6 @@ render(
       <Route path="/" element={<App />}/>
       <Route path="register" element={<Register />}/>
       <Route path="login" element={<Login />}/>
-      <Route path="projects/new" element={<NewProject />}/>
     </Routes>
   </BrowserRouter>,
   rootElement
