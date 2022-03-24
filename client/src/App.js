@@ -33,7 +33,6 @@ export default function App() {
   } = useAppData();
 
   const { mode, transition, back } = useVisualMode(null);
-console.log(mode)
 
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
@@ -70,10 +69,6 @@ console.log(selectedDeliverable)
             deleteDeliverable={deleteDeliverable}
           />}
 
-
-
-console.log(state.deliverable)
-
           {mode === EDIT_DELIVERABLES && <DeliverableList
             deliverables={deliverables}
             onChange={setDeliverable}
@@ -94,9 +89,6 @@ console.log(state.deliverable)
             priority={selectedDeliverable.priority}
             status={selectedDeliverable.status}
           />}
-
-
-
 
           {mode === TASKS && <TaskList
             tasks={tasks}
