@@ -19,6 +19,8 @@ export default function TaskList(props) {
         description={task.description}
         onToggle={props.onToggle}
         onClick={props.completeTask}
+        transition={props.transition}
+        showTaskForm={props.showTaskForm}
         setTask={() => props.onChange(task.id)}
         deleteTask={() => props.deleteTask(task.id)}
       />
