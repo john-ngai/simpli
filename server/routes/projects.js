@@ -43,7 +43,7 @@ module.exports = (db) => {
       WHERE team_id = $1
       GROUP BY projects.id;
     `;
-    db.query(command, values)
+    return db.query(command, values)
       .then(data => {
         const projects = data.rows
         // Respond with an empty object if the query doesn't return any rows.
