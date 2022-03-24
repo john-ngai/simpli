@@ -34,9 +34,10 @@ export default function Register() {
     registerUser(name, email, password, team);
   };
 
-  function registerUser(name, email, password, team) {
+  // POST /register
+  const registerUser = (name, email, password, team) => {
     const user = { name, email, password, team };
-    axios.put('/register', user)
+    axios.post('/register', user)
       .then(res => {
         const error = res.data.error;
         switch (error) {
@@ -47,8 +48,9 @@ export default function Register() {
             return setError("Invalid team code - Leave blank to create a new team");
             break;
         }
+        localStorage.setItem('user', JSON.stringify(res.data));
+        return navigate('/');
       })
-      // .then(navigate('/'));
   }
 
   return (
