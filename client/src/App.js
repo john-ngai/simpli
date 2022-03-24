@@ -51,7 +51,7 @@ export default function App() {
   if (!localStorage.user) {
     return (
       <div id="container">
-        {!user && <NavBar />}
+        {!user && <NavBar user={null} />}
         <h1>Please <a href="/login">login</a> or <a href="/register">register</a> to view this page.</h1>
       </div>
     );
@@ -61,7 +61,7 @@ export default function App() {
 
   return (
     <div id="container">
-      {user && <NavBar user={user.name} />}
+      {user && <NavBar user={user.name}/>}
 
       <main>
         <ProjectList
