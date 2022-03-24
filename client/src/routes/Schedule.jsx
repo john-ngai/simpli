@@ -39,6 +39,8 @@ export default function Schedule() {
           {/* <button className="customButton" onClick={() => alert("Add Deliverable button clicked!")}>Add Deliverable</button>
           <button className="customButton" onClick={() => alert("Add Task button clicked!")}>Add Task</button> */}
         </div>
+        
+        
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="timeGridWeek"

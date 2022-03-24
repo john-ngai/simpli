@@ -18,7 +18,7 @@ render(
       <Route path="/" element={<App />} />
       <Route path="scheduler" element={<Scheduler />}/>
       {/* <Route path="/Schedule" element={<Schedule />} /> */}
-      <Route path="/schedule" element={<Schedule2 />} />
+      {/* <Route path="/schedule" element={<Schedule2 />} /> */}
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
     </Routes>
