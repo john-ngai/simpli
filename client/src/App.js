@@ -48,6 +48,7 @@ export default function App() {
   const tasks = getTasks(state, state.deliverable);
 
   let user = null;
+  let accessToken = null;
   if (!localStorage.user) {
     return (
       <div id="container">
@@ -57,6 +58,7 @@ export default function App() {
     );
   } else {
     user = JSON.parse(localStorage.user);
+    accessToken = user.accessToken;
   }
 
   return (
@@ -164,12 +166,14 @@ export default function App() {
           }
 
           {mode === NEW_PROJECT && <Project
+            accessToken={accessToken}
             saveProject={saveProject}
             back={back}
             transition={transition}
           />}
 
           {mode === EDIT_PROJECT && <Project
+            accessToken={accessToken}
             editProject={editProject}
             back={back}
             transition={transition}
