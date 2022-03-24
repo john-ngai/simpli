@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const services = require('../services');
+const formatData = require('../helpers/formatData');
 
 module.exports = (db) => {
   // all routes will go here
@@ -12,6 +14,41 @@ module.exports = (db) => {
       }
       return res.json(deliverablesObj);
     });
+  });
+
+  // GET /deliverables/auth
+  router.get('/auth', (req, res) => {
+    const token = req.headers['x-access-token'];
+    // Respond with an empty object when no token is found.
+    if (!token) {
+      return res.send({});
+    }
+    // Respond with an empty object if the token verification fails.
+    const user = services.verifyToken(token);
+    if (!user) {
+      return res.send({});
+    }
+    const { team_id } = user;
+    const values = [team_id];
+    const command = `
+      SELECT deliverables.*, team_id, COUNT(tasks.id)
+      FROM deliverables
+        JOIN projects ON deliverables.project_id = projects.id
+        JOIN tasks ON deliverables.id = deliverable_id
+      WHERE team_id = $1
+      GROUP BY deliverables.id, team_id;
+    `;
+    return db.query(command, values)
+      .then(data => {
+        const deliverables = data.rows;
+        // Respond with an empty object if the query doesn't return any rows.
+        if (deliverables.length === 0) {
+          res.send({});
+          // Respond with the correctly formatted data.
+        } else {
+          res.send(formatData(deliverables));
+        }
+      });
   });
 
   // PUT /deliverables/new
