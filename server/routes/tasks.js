@@ -23,7 +23,7 @@ module.exports = (db) => {
       const values = [taskID, name, description, priority, status, deliverable_id];
       const command = `
       UPDATE tasks
-      SET name= $2, description=$3, priority = $4, status = $5, deliverable_id=$6 
+      SET name = $2, description = $3, priority = $4, status = $5, deliverable_id = $6 
       WHERE id = $1;
       `;
       return db.query(command, values)
