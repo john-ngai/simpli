@@ -27,7 +27,6 @@ export default function NewTask(props) {
       task.id = props.id;
       axios.put(`/tasks/${task.id}`, task)
         .then(() => {
-          console.log("COMPLETED")
           props.editTask(task)
         })
     }
