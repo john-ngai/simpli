@@ -2,23 +2,9 @@ const router = require('express').Router();
 const services = require('../services');
 const formatData = require('../helpers/formatData');
 
-module.exports = (db) => {
-  // all routes will go here
+module.exports = (db) => {  
+  // GET /tasks
   router.get('/', (req, res) => {
-    const command = "SELECT * FROM tasks";
-    db.query(command).then(data => {
-      const tasksArray = data.rows;
-      const tasksObj = {};
-      for (const e of tasksArray) {
-        tasksObj[e.id] = e;
-      }
-      return res.json(tasksObj);
-    });
-  });
-
-  
-  // GET /tasks/auth
-  router.get('/auth', (req, res) => {
     const token = req.headers['x-access-token'];
     // Respond with an empty object when no token is found.
     if (!token) {
