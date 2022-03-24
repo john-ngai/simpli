@@ -31,14 +31,24 @@ export default function Register() {
     }
     // resets setError to prev state and saves the registered user
     setError("");
-    registerUser(name, email, password);
+    registerUser(name, email, password, team);
   };
 
-  function registerUser(name, email, password) {
+  function registerUser(name, email, password, team) {
     const user = { name, email, password, team };
     axios.put('/register', user)
-      .then(res => console.log('Registered -', res.data))
-      .then(navigate('/'));
+      .then(res => {
+        const error = res.data.error;
+        switch (error) {
+          case 'registered email':
+            return setError("Email already registered");
+            break;
+          case 'invalid team':
+            return setError("Invalid team code - Leave blank to create a new team");
+            break;
+        }
+      })
+      // .then(navigate('/'));
   }
 
   return (
@@ -57,8 +67,10 @@ export default function Register() {
               <br />
               <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
               <br />
+              
               <TextField label="Team" type="text" value={team} placeholder="Enter team code" onChange={(e) => setTeam(e.target.value)} />
               <br />
+              
               <button type="submit" onClick={validation}>Register</button>
             </FormControl>
           </FormGroup>
