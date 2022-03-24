@@ -11,6 +11,7 @@ import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import Project from './components/Project';
+import NewTask from './components/NewTask';
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
@@ -112,32 +113,39 @@ export default function App() {
             transition={transition}
           />}
 
-          {mode === EDIT_TASKS && <TaskList
-            tasks={tasks}
-            onChange={setTask}
-            deliverable={state.deliverable}
-            onToggle={setTaskPriority}
-            completeTask={completeTask}
-            onClick={transition}
-            project={state.project}
-            selectedProject={selectedProject}
-            selectedDeliverable={selectedDeliverable}
-            selectedTask={selectedTask}
-            deleteTask={deleteTask}
-            showFormBoolean={state.showTaskForm}
-            showDelivForm={showDelivForm}
-            showTaskForm={showTaskForm}
-            deliverablePercentComplete={deliverablePercentComplete}
-            saveTask={saveTask}
-            transition={transition}
-            editTask={editTask}
+          {mode === EDIT_TASKS && 
+          <div>
+            <TaskList
+              tasks={tasks}
+              onChange={setTask}
+              deliverable={state.deliverable}
+              project={state.project}
+              selectedProject={selectedProject}
+              selectedDeliverable={selectedDeliverable}
+              selectedTask={selectedTask}
+              deleteTask={deleteTask}
+              showFormBoolean={state.showTaskForm}
+              showDelivForm={showDelivForm}
+              showTaskForm={showTaskForm}
+              deliverablePercentComplete={deliverablePercentComplete}
+              saveTask={saveTask}
+              transition={transition}
+              editTask={editTask}
 
-            id={selectedTask.id}
-            name={selectedTask.name}
-            description={selectedTask.description}
-            priority={selectedTask.priority}
-            status={selectedTask.status}
-          />}
+              />
+            <NewTask
+              id={selectedTask.id}
+              name={selectedTask.name}
+              description={selectedTask.description}
+              priority={selectedTask.priority}
+              status={selectedTask.status}
+              deliverable={state.deliverable}
+              saveTask={saveTask}
+              editTask={editTask}
+              // transition={showTaskForm()}
+            />
+            </div>
+          }
 
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}

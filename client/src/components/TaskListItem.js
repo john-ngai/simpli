@@ -12,10 +12,6 @@ export default function TaskListItem(props) {
   // const taskClass = classNames("task_list_item", {
   //   "task_list_item--selected": props.selected
   // })
-  
-  // Temporary code:
-  // const { state, getSelectedTask, setTask } = useAppData();
-  // const selectedTask = getSelectedTask(state);
 
   return (
     <li className="task_list_item">
@@ -37,9 +33,8 @@ export default function TaskListItem(props) {
         <span className="task_updates">
           <EditIcon id="edit_task" className="mui_icons"
             onClick={event => {
-              props.setTask()
               event.stopPropagation()
-              props.showTaskForm()
+              props.setTask()
               props.transition('EDIT_TASKS')
             }} 
           />
