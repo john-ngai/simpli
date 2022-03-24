@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import authHeader from '../services/authHeader';
 
 export default function useAppData() {
   // Container for the state and all helper functions.
@@ -19,8 +20,26 @@ export default function useAppData() {
     showTaskForm: false,
   });
 
-  // GET state data.
   useEffect(() => {
+    Promise.all([
+      axios.get('/projects/auth', { headers: authHeader() }),
+      axios.get('/deliverables/auth', { headers: authHeader() }),
+      axios.get('/tasks/auth', { headers: authHeader() })
+    ])
+      .then(all => {
+        const [projects, deliverables, tasks] = all;
+        setState(prev => ({
+          ...prev,
+          projects: projects.data,
+          deliverables: deliverables.data,
+          tasks: tasks.data,
+          // teams: teams.data,
+          // users: users.data
+        }));
+      })
+  }, [])
+
+  /*useEffect(() => {
     Promise.all([
       axios.get('/projects'),
       axios.get('/deliverables'),
@@ -39,7 +58,7 @@ export default function useAppData() {
           users: users.data
         }))
       })
-  }, [])
+  }, []);/**/
   appData.state = state;
 
   // Set the currently selected project id.
@@ -90,7 +109,7 @@ export default function useAppData() {
       .then(() => setState({ ...state, projects }));
   }
   appData.deleteProject = deleteProject;
-  
+
   // Save new deliverable
   const saveDeliverable = (newDeliverable) => {
     const deliverable = newDeliverable.id;
@@ -101,14 +120,14 @@ export default function useAppData() {
     const values = Object.values(state.projects)
     const updateCounter = values.map((project) => {
       if (newDeliverable.project_id === project.id) {
-        return { ...project, count: project.count ++};
+        return { ...project, count: project.count++ };
       }
       return project
     });
     setState({ ...state, deliverable, deliverables, updateCounter });
   }
   appData.saveDeliverable = saveDeliverable;
-  
+
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
@@ -177,12 +196,12 @@ export default function useAppData() {
       if (deliverable.id !== deliverable_id) {
         // Add the deliverable to the deliverables object.
         deliverables[deliverable.id] = deliverable;
-      } else if (deliverable.id === deliverable_id){
+      } else if (deliverable.id === deliverable_id) {
         const values = Object.values(state.projects)
         values.map((project) => {
           console.log(deliverables.project_id)
           if (deliverable.project_id === project.id) {
-            return { ...project, count: project.count -- };
+            return { ...project, count: project.count-- };
           }
           return project
         });
@@ -279,11 +298,11 @@ export default function useAppData() {
       if (task.id !== task_id) {
         // Add the deliverable to the deliverables object.
         tasks[task.id] = task;
-      } else if (task.id === task_id){
+      } else if (task.id === task_id) {
         const values = Object.values(state.deliverables)
         values.map((deliverable) => {
           if (task.deliverable_id === deliverable.id) {
-            return { ...deliverable, count: deliverable.count -- };
+            return { ...deliverable, count: deliverable.count-- };
           }
           return deliverable
         });
@@ -327,7 +346,7 @@ export default function useAppData() {
     const values = Object.values(state.deliverables)
     const updateCounter = values.map((deliverable) => {
       if (newTask.deliverable_id === deliverable.id) {
-        return { ...deliverable, count: deliverable.count ++};
+        return { ...deliverable, count: deliverable.count++ };
       }
       return deliverable
     });
@@ -343,7 +362,7 @@ export default function useAppData() {
       total++
       if (deliv.status === true) {
         numCompleted++;
-      } 
+      }
     })
     return Math.round((numCompleted / total) * 100);
   }
@@ -354,10 +373,10 @@ export default function useAppData() {
     let numCompleted = 0;
     let total = 0;
     selectedTasks.forEach(task => {
-      total ++
+      total++
       if (task.status === true) {
         numCompleted++;
-      } 
+      }
     })
     return Math.round((numCompleted / total) * 100);
   }
