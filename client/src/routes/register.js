@@ -42,7 +42,7 @@ export default function Register() {
       team_id: 1 //temporary id assigned. Will need to update later
     }
     axios.put('/register', user)
-      .then(res => console.log('success?', res.data))
+      .then(res => console.log('res.data =', res.data))
       .then(navigate('/'))
   }
 
