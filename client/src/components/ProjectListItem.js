@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './ProjectListItem.scss';
+import CircularProgressWithLabel from "./MUI/CircularProgressWithLabel";
 
 export default function ProjectListItem(props) {
   const projectClass = classNames('project_list_item', {
@@ -13,7 +14,8 @@ export default function ProjectListItem(props) {
       <span className="project_name">{props.name}</span>
       <span className="project_description">{props.description}</span>
       <span className="project_deliverables">{props.count} Deliverables</span>
-      {props.count > 0 ? <aside>Percent Complete: {props.percentComplete}%</aside> : <aside>No Deliverables Yet! </aside>}
+      {/* {props.count > 0 ? <aside>Percent Complete: {props.percentComplete}%</aside> : <aside>No Deliverables Yet! </aside>} */}
+      { props.count > 0 ? <CircularProgressWithLabel value={props.percentComplete}/> : <CircularProgressWithLabel value={0}/> }
       {props.selected &&
         <span className="project_edit">
           <EditIcon id="edit_project" className="mui_icons"

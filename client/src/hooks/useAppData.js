@@ -174,7 +174,6 @@ export default function useAppData() {
       } else if (deliverable.id === deliverable_id) {
         const values = Object.values(state.projects)
         values.map((project) => {
-          console.log(deliverables.project_id)
           if (deliverable.project_id === project.id) {
             return { ...project, count: project.count-- };
           }
