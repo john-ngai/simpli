@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 // Hooks
-import useAppData from '../../hooks/useAppData';
+import useAppData from '../hooks/useAppData';
+import authHeader from '../services/authHeader';
 
 export default function Project(props) {
   const { state } = useAppData();
@@ -13,23 +14,21 @@ export default function Project(props) {
   const [error, setError] = useState('');
 
   const save = () => {
-    const project = {
-      name: name,
-      description: description,
-      team_id: 1, /* Hard coded temporarily */
-    }
+    const project = { name, description };
     // Save a new project or edit an existing project.
     if (!props.id) {
-      axios.put('/projects/new', project)
+      axios.put('/projects', project, { headers: authHeader() })
         .then(res => {
           project.id = res.data.id;
+          project['team_id'] = res.data['team_id'];
           props.saveProject(project);
           props.transition('DELIVERABLES');
         })
     } else {
       project.id = props.id;
-      axios.put(`projects/${project.id}`, project)
-        .then(() => {
+      axios.put(`projects/${project.id}`, project, { headers: authHeader() })
+        .then(res => {
+          project['team_id'] = res.data['team_id'];
           props.editProject(project);
           props.transition('DELIVERABLES');
         });

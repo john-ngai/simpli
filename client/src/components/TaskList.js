@@ -6,7 +6,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import useAppData from '../hooks/useAppData';
 
 export default function TaskList(props) {
-  const { state, showTaskForm } = useAppData
+  const {state, deliverablePercentComplete, completedTasks } = useAppData();
   const taskInfo = props.tasks.map(task => {
     return (
       <TaskListItem
@@ -15,11 +15,14 @@ export default function TaskList(props) {
         task={task}
         name={task.name}
         selected={task.priority}
-        complete={task.complete}
+        status={task.status}
         description={task.description}
         onToggle={props.onToggle}
         onClick={props.completeTask}
+        transition={props.transition}
+        showTaskForm={props.showTaskForm}
         setTask={() => props.onChange(task.id)}
+        editTask={props.editTask}
         deleteTask={() => props.deleteTask(task.id)}
       />
     )
@@ -32,7 +35,7 @@ export default function TaskList(props) {
           {props.selectedProject.name}: {props.selectedDeliverable.name}
         </span>
         <span id="deliverable_description">{props.selectedDeliverable.description}</span>
-        <span id="deliverable_stats">3 of 13 (23%) Tasks Completed</span>
+        <span id="deliverable_stats">{completedTasks(state, props.deliverable)} of {props.selectedDeliverable.count} ({deliverablePercentComplete(state, props.deliverable)}%) Tasks Completed</span>
         <AddCircleIcon id="new_task" className="mui_icons"
           onClick={props.showTaskForm}
         />
@@ -40,13 +43,21 @@ export default function TaskList(props) {
         {props.showFormBoolean &&
           <NewTask
             deliverable={props.deliverable}
+            transition={props.transition}
             showTaskForm={props.showTaskForm}
             saveTask={props.saveTask}
+            id={props.id}
+            name={props.name}
+            description={props.description}
+            priority={props.priority}
+            status={props.status}
+            editTask={props.editTask}
           />
         }
       </div>
 
       { taskInfo}
+      <button onClick={() => {props.transition('DELIVERABLES')}}>Back</button>
     </section>
   );
 }

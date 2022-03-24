@@ -1,16 +1,37 @@
 const router = require('express').Router();
+const services = require('../services');
 
 module.exports = (db) => {
-  // all routes will go here
-  router.get('/', (req, res) => {
-    // WILL NEED TO UPDATE WITH COOKIES LATER 
-    // will need another route to validate user info
-    const { email } = req.body;
-    const values = [email];
-    const command = "SELECT * FROM users WHERE email = $1";
+
+  // POST /login
+  router.post('/', (req, res) => {
+    const { email, password } = req.body;
+    values = [email];
+    command = `
+      SELECT * FROM users
+      WHERE email = $1;
+    `;
     db.query(command, values)
-      .then(data => res.send(data.rows[0]))
-      .catch(err => console.log(err));
-  });
+      // If the user is found,
+      .then(data => {
+        const hash = data.rows[0].password;
+        // If the passwords match,
+        if (services.checkPassword(password, hash)) {
+          const { name, email, team_id } = data.rows[0];
+          const user = { name, email, team_id };
+          const accessToken = services.generateToken(user);
+          user.accessToken = accessToken;
+          // Respond with a generated JSON web token.
+          res.send(user);
+        // If the passwords do not match,
+        } else {
+          // Respond without any data.
+          res.send();
+        }
+      })
+      // If the user is not found, respond with an error code 500.
+      .catch(() => res.status(500).send());
+  })
+
   return router;
 };

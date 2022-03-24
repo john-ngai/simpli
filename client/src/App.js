@@ -11,6 +11,10 @@ import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import Project from './components/Project';
+import NewTask from './components/NewTask';
+// Pages
+const LOGIN = 'LOGIN';
+const SUMMARY = 'SUMMARY';
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
@@ -19,20 +23,23 @@ const SAVING = 'SAVING';
 const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
+const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
+const EDIT_TASKS = 'EDIT_TASKS'
 
 export default function App() {
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
-    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable,
     setDeliverablesPriority, setTaskPriority,
     completeTask,
     setTask, getTasks, getSelectedTask, deleteTask, saveTask,
-    showDelivForm, showTaskForm,
-    percentComplete, deliverablePercentComplete
-  } = useAppData();
 
-  const { mode, transition, back } = useVisualMode(null);
+    showDelivForm, showTaskForm, editTask,
+    percentComplete, deliverablePercentComplete,
+  } = useAppData();
+  
+  const { page, mode, transition, transitionPage, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
@@ -40,10 +47,22 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
+  let user = null;
+  if (!localStorage.user) {
+    return (
+      <div id="container">
+        {!user && <NavBar user={null} />}
+        <h1>Please <a href="/login">login</a> or <a href="/register">register</a> to view this page.</h1>
+      </div>
+    );
+  } else {
+    user = JSON.parse(localStorage.user);
+  }
 
   return (
     <div id="container">
-      <NavBar users={state.users} />
+      {user && <NavBar user={user.name}/>}
+
       <main>
         <ProjectList
           projects={Object.values(state.projects)}
@@ -69,6 +88,28 @@ export default function App() {
             deleteDeliverable={deleteDeliverable}
           />}
 
+          {mode === EDIT_DELIVERABLES && <DeliverableList
+            deliverables={deliverables}
+            onChange={setDeliverable}
+            transition={transition}
+            project={state.project}
+            onToggle={setDeliverablesPriority}
+            showFormBoolean={state.showDelivForm}
+            showDelivForm={showDelivForm}
+            saveDeliverable={saveDeliverable}
+            selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={deleteDeliverable}
+            setDeliverable={setDeliverable}
+            editDeliverable={editDeliverable}
+
+            id={selectedDeliverable.id}
+            name={selectedDeliverable.name}
+            description={selectedDeliverable.description}
+            priority={selectedDeliverable.priority}
+            status={selectedDeliverable.status}
+          />}
+
           {mode === TASKS && <TaskList
             tasks={tasks}
             onChange={setTask}
@@ -86,7 +127,41 @@ export default function App() {
             showTaskForm={showTaskForm}
             deliverablePercentComplete={deliverablePercentComplete}
             saveTask={saveTask}
+            transition={transition}
+            editTask={editTask}
           />}
+
+          {mode === EDIT_TASKS && 
+          <div>
+            <TaskList
+              tasks={tasks}
+              onChange={setTask}
+              deliverable={state.deliverable}
+              project={state.project}
+              selectedProject={selectedProject}
+              selectedDeliverable={selectedDeliverable}
+              selectedTask={selectedTask}
+              deleteTask={deleteTask}
+              showFormBoolean={state.showTaskForm}
+              showDelivForm={showDelivForm}
+              showTaskForm={showTaskForm}
+              deliverablePercentComplete={deliverablePercentComplete}
+              saveTask={saveTask}
+              transition={transition}
+              editTask={editTask}
+              />
+            <NewTask
+              id={selectedTask.id}
+              name={selectedTask.name}
+              description={selectedTask.description}
+              priority={selectedTask.priority}
+              status={selectedTask.status}
+              deliverable={state.deliverable}
+              saveTask={saveTask}
+              editTask={editTask}
+            />
+          </div>
+          }
 
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}

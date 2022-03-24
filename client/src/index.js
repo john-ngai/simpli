@@ -7,7 +7,6 @@ import Schedule from './routes/Schedule';
 import Schedule2 from './routes/Schedule2';
 import Register from './routes/register';
 import Login from './routes/login';
-import NewProject from './routes/project_new';
 import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById('root');
@@ -17,10 +16,9 @@ render(
     <Routes>
       <Route path="/" element={<App />} />
       {/* <Route path="/Schedule" element={<Schedule />} /> */}
-      <Route path="/Schedule" element={<Schedule2 />} />
+      <Route path="/schedule" element={<Schedule2 />} />
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
-      <Route path="projects/new" element={<NewProject />} />
     </Routes>
   </BrowserRouter>,
   rootElement

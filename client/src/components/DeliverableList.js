@@ -8,7 +8,7 @@ import useVisualMode from '../hooks/useVisualMode';
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
-  const { state, deliverablePercentComplete } = useAppData();
+  const { state, deliverablePercentComplete, completedDeliverables, percentComplete } = useAppData();
   const { transition } = useVisualMode(null);
 
   const listItem = props.deliverables.map(deliverable =>
@@ -22,6 +22,8 @@ export default function DeliverableList(props) {
       onToggle={props.onToggle}
       setDeliverable={props.onChange}
       transition={props.transition}
+      showDelivForm={props.showDelivForm}
+      editDeliverable={props.editDeliverable}
       deliverablePercentComplete={deliverablePercentComplete(state, deliverable.id)}
       deleteDeliverable={event => {
         event.stopPropagation();
@@ -35,7 +37,7 @@ export default function DeliverableList(props) {
       <div id="project_details">
         <span id="project_name">{props.selectedProject.name}</span>
         <span id="project_description">{props.selectedProject.description}</span>
-        <span id="project_stats">3 of 5 (60%) Deliverables Completed</span>
+        <span id="project_stats">{completedDeliverables(state, props.project)} of {props.selectedProject.count} ({percentComplete(state, props.project)}%) Deliverables Completed</span>
         <AddCircleIcon id="new_deliverable" className="mui_icons"
           onClick={() => {
             props.showDelivForm()
@@ -49,6 +51,12 @@ export default function DeliverableList(props) {
           transition={transition}
           showDelivForm={props.showDelivForm}
           saveDeliverable={props.saveDeliverable}
+          id={props.id}
+          name={props.name}
+          description={props.description}
+          priority={props.priority}
+          status={props.status}
+          editDeliverable={props.editDeliverable}
         />
       }
       { listItem}

@@ -3,12 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { FormGroup, FormControl, TextField } from '@mui/material';
 import useAppData from '../hooks/useAppData';
+import NavBar from '../components/NavBar';
 
 export default function Register() {
   const { state } = useAppData();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [team, setTeam] = useState("");
   const [error, setError] = useState("");
 
   let navigate = useNavigate();
@@ -19,63 +21,64 @@ export default function Register() {
       setError("A name is required");
       return;
     }
-
     if (!email) {
       setError("An email is required");
       return;
     }
-
     if (!password) {
       setError("A password is required");
       return;
     }
-
     // resets setError to prev state and saves the registered user
     setError("");
-    registerUser(name, email, password);
+    registerUser(name, email, password, team);
   };
 
-  function registerUser(name, email, password) {
-    // new user
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-      team_id: 1 //temporary id assigned. Will need to update later
-    }
-    console.log("New user registered!", user);
-
-    axios.put('/register', user)
-      .then(res => console.log('success?', res.data))
-      .then(navigate('/'))
-  }
-
-  function handleClick() {
-    navigate('/');
+  // POST /register
+  const registerUser = (name, email, password, team) => {
+    const user = { name, email, password, team };
+    axios.post('/register', user)
+      .then(res => {
+        const error = res.data.error;
+        switch (error) {
+          case 'registered email':
+            return setError("Email already registered");
+            break;
+          case 'invalid team':
+            return setError("Invalid team code - Leave blank to create a new team");
+            break;
+        }
+        localStorage.setItem('user', JSON.stringify(res.data));
+        return navigate('/');
+      })
   }
 
   return (
-    <main>
-      <button onClick={handleClick}>Back to Home</button>
-      <h1>Register Page</h1>
-      <div>
-        <section className="user_validation">{error}</section>
-        <br />
-
-        <FormGroup onSubmit={(e) => e.preventDefault()} >
-          <FormControl>
-            <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
-            <br />
-            <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-            <br />
-            <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-            <br />
-            <button type="submit" onClick={validation}>Register</button>
-          </FormControl>
-        </FormGroup>
-
-      </div>
-    </main >
+    <div id="container">
+      <NavBar />
+      <main>
+        <h1>Registration Page</h1>
+        <div>
+          <section className="user_validation">{error}</section>
+          <br />
+          <FormGroup onSubmit={(e) => e.preventDefault()} >
+            <FormControl>
+              <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
+              <br />
+              <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
+              <br />
+              <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+              <br />
+              
+              <TextField label="Team" type="text" value={team} placeholder="Enter team code" onChange={(e) => setTeam(e.target.value)} />
+              <br />
+              
+              <button type="submit" onClick={validation}>Register</button>
+            </FormControl>
+          </FormGroup>
+        </div>
+      </main>
+    </div>
   );
 }
 

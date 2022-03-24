@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import authHeader from '../services/authHeader';
 
 export default function useAppData() {
   // Container for the state and all helper functions.
@@ -13,31 +14,24 @@ export default function useAppData() {
     deliverables: {},
     task: null,
     tasks: {},
-    teams: {},
-    users: {},
     showDelivForm: false,
     showTaskForm: false,
   });
 
-  // GET state data.
   useEffect(() => {
     Promise.all([
-      axios.get('/projects'),
-      axios.get('/deliverables'),
-      axios.get('/tasks'),
-      axios.get('/teams'),
-      axios.get('/users')
+      axios.get('/projects', { headers: authHeader() }),
+      axios.get('/deliverables', { headers: authHeader() }),
+      axios.get('/tasks', { headers: authHeader() })
     ])
-      .then((all) => {
-        const [projects, deliverables, tasks, teams, users] = all;
+      .then(all => {
+        const [projects, deliverables, tasks] = all;
         setState(prev => ({
           ...prev,
           projects: projects.data,
           deliverables: deliverables.data,
           tasks: tasks.data,
-          teams: teams.data,
-          users: users.data
-        }))
+        }));
       })
   }, [])
   appData.state = state;
@@ -90,7 +84,7 @@ export default function useAppData() {
       .then(() => setState({ ...state, projects }));
   }
   appData.deleteProject = deleteProject;
-  
+
   // Save new deliverable
   const saveDeliverable = (newDeliverable) => {
     const deliverable = newDeliverable.id;
@@ -101,14 +95,14 @@ export default function useAppData() {
     const values = Object.values(state.projects)
     const updateCounter = values.map((project) => {
       if (newDeliverable.project_id === project.id) {
-        return { ...project, count: project.count ++};
+        return { ...project, count: project.count++ };
       }
       return project
     });
     setState({ ...state, deliverable, deliverables, updateCounter });
   }
   appData.saveDeliverable = saveDeliverable;
-  
+
   // Set the currently selected deliverable id.
   const setDeliverable = deliverable => setState({ ...state, deliverable });
   appData.setDeliverable = setDeliverable;
@@ -167,6 +161,19 @@ export default function useAppData() {
   }
   appData.getSelectedDeliverable = getSelectedDeliverable;
 
+    // Return the selected task object.
+    const getSelectedTask = state => {
+      const task_id = state.task;
+      const tasks = Object.values(state.tasks);
+      // return tasks.find(task => task.id === task_id);
+      for (const task of tasks) {
+        if (task.id === state.task) {
+          return task;
+        }
+      }
+    }
+    appData.getSelectedTask = getSelectedTask;
+
   // Delete the currently selected deliverable id.
   const deleteDeliverable = deliverable_id => {
     // Declare a new deliverables object to hold the updated deliverables data.
@@ -177,12 +184,11 @@ export default function useAppData() {
       if (deliverable.id !== deliverable_id) {
         // Add the deliverable to the deliverables object.
         deliverables[deliverable.id] = deliverable;
-      } else if (deliverable.id === deliverable_id){
+      } else if (deliverable.id === deliverable_id) {
         const values = Object.values(state.projects)
         values.map((project) => {
-          console.log(deliverables.project_id)
           if (deliverable.project_id === project.id) {
-            return { ...project, count: project.count -- };
+            return { ...project, count: project.count-- };
           }
           return project
         });
@@ -193,6 +199,25 @@ export default function useAppData() {
   }
   appData.deleteDeliverable = deleteDeliverable;
 
+    // Edit an existing deliverable.
+    const editDeliverable = deliverable => {
+      const { id, name, description, project_id, priority, status } = deliverable;
+      const deliverables = {
+        ...state.deliverables,
+        [id]: {
+          ...state.deliverables[deliverable.id], // Get the missing count key.
+          id,
+          name,
+          description,
+          project_id,
+          priority,
+          status
+        }
+      }
+      setState({ ...state, deliverables });
+    }
+    appData.editDeliverable = editDeliverable;
+
   // toggle task complete
   const completeTask = (id) => {
     const allTasks = Object.values(state.tasks);
@@ -200,7 +225,7 @@ export default function useAppData() {
     let updTask;
     allTasks.forEach(task => {
       if (task.id === id) {
-        task.complete = !task.complete;
+        task.status = !task.status;
         updTask = task;
         // console.log("AFTER TASK:", updTask); TEST CODE
       }
@@ -261,14 +286,6 @@ export default function useAppData() {
   const setTask = task => setState({ ...state, task });
   appData.setTask = setTask;
 
-  // Return the selected task object.
-  const getSelectedTask = state => {
-    const task_id = state.task;
-    const tasks = Object.values(state.tasks);
-    return tasks.find(task => task.id === task_id);
-  }
-  appData.getSelectedTask = getSelectedTask;
-
   // Delete the currently selected task id.
   const deleteTask = task_id => {
     // Declare a new tasks object to hold the updated tasks data.
@@ -279,11 +296,11 @@ export default function useAppData() {
       if (task.id !== task_id) {
         // Add the deliverable to the deliverables object.
         tasks[task.id] = task;
-      } else if (task.id === task_id){
+      } else if (task.id === task_id) {
         const values = Object.values(state.deliverables)
         values.map((deliverable) => {
           if (task.deliverable_id === deliverable.id) {
-            return { ...deliverable, count: deliverable.count -- };
+            return { ...deliverable, count: deliverable.count-- };
           }
           return deliverable
         });
@@ -293,6 +310,25 @@ export default function useAppData() {
       .then(() => setState({ ...state, tasks }));
   }
   appData.deleteTask = deleteTask;
+
+    // Edit an existing task.
+    const editTask = task => {
+      const { id, name, description, deliverable_id, priority, status } = task;
+      const tasks = {
+        ...state.tasks,
+        [id]: {
+          ...state.tasks[task.id], // Get the missing count key.
+          id,
+          name,
+          description,
+          deliverable_id,
+          priority,
+          status
+        }
+      }
+      setState({ ...state, tasks });
+    }
+    appData.editTask = editTask;
 
   const setTaskPriority = (id) => {
     const allTasks = Object.values(state.tasks);
@@ -327,7 +363,7 @@ export default function useAppData() {
     const values = Object.values(state.deliverables)
     const updateCounter = values.map((deliverable) => {
       if (newTask.deliverable_id === deliverable.id) {
-        return { ...deliverable, count: deliverable.count ++};
+        return { ...deliverable, count: deliverable.count++ };
       }
       return deliverable
     });
@@ -343,7 +379,7 @@ export default function useAppData() {
       total++
       if (deliv.status === true) {
         numCompleted++;
-      } 
+      }
     })
     return Math.round((numCompleted / total) * 100);
   }
@@ -354,14 +390,38 @@ export default function useAppData() {
     let numCompleted = 0;
     let total = 0;
     selectedTasks.forEach(task => {
-      total ++
+      total++
       if (task.status === true) {
         numCompleted++;
-      } 
+      }
     })
     return Math.round((numCompleted / total) * 100);
   }
   appData.deliverablePercentComplete = deliverablePercentComplete
+
+  const completedDeliverables = (state, project) => {
+    const selectedDelivs = getDeliverables(state, project)
+    let numCompleted = 0;
+    selectedDelivs.forEach(deliv => {
+      if (deliv.status === true) {
+        numCompleted++;
+      }
+    })
+    return numCompleted;
+  }
+  appData.completedDeliverables = completedDeliverables
+
+  const completedTasks = (state, deliverable) => {
+    const selectedTasks = getTasks(state, deliverable)
+    let numCompleted = 0;
+    selectedTasks.forEach(task => {
+      if (task.status === true) {
+        numCompleted++;
+      }
+    })
+    return numCompleted;
+  }
+  appData.completedTasks = completedTasks
 
 
   return appData;

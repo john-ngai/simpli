@@ -1,51 +1,72 @@
 const router = require('express').Router();
+const services = require('../services');
+const formatData = require('../helpers/formatData');
 
-module.exports = (db) => {
-  // all routes will go here
+module.exports = (db) => {  
+  // GET /tasks
   router.get('/', (req, res) => {
-    const command = "SELECT * FROM tasks";
-    db.query(command).then(data => {
-      const tasksArray = data.rows;
-      const tasksObj = {};
-      for (const e of tasksArray) {
-        tasksObj[e.id] = e;
-      }
-      return res.json(tasksObj);
-    });
-
-    // Update task's complete & priority value
-    router.put('/:id', (req, res) => {
-      const taskID = req.params.id;
-      const { complete, priority } = req.body;
-
-      const values = [taskID, complete, priority];
-      const command = `
-      UPDATE tasks
-      SET complete = $2, priority = $3
-      WHERE id = $1;
-      `;
-      return db.query(command, values)
-        .then(() => {
-          // console.log("SUCCESS TASK PRIORITY");
-          res.send();
-        })
-        .catch(err => console.log(err));
-    })
+    const token = req.headers['x-access-token'];
+    // Respond with an empty object when no token is found.
+    if (!token) {
+      return res.send({});
+    }
+    // Respond with an empty object if the token verification fails.
+    const user = services.verifyToken(token);
+    if (!user) {
+      return res.send({});
+    }
+    const { team_id } = user;
+    const values = [team_id];
+    const command = `
+    SELECT tasks.*, team_id
+    FROM tasks
+    LEFT JOIN deliverables ON deliverable_id = deliverables.id
+    LEFT JOIN projects ON project_id = projects.id
+    WHERE team_id = $1;
+    `;
+    return db.query(command, values)
+      .then(data => {
+        const tasks = data.rows;
+        // Respond with an empty object if the query doesn't return any rows.
+        if (tasks.length === 0) {
+          res.send({});
+          // Respond with the correctly formatted data.
+        } else {
+          res.send(formatData(tasks));
+        }
+      });
   });
-
+  
   // PUT /tasks/new
   router.put('/new', (req, res) => {
     const { name, description, priority, status, deliverable_id } = req.body;
     const values = [name, description, priority, status, deliverable_id];
     const command = `
-      INSERT INTO tasks (name, description, priority, status, deliverable_id)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING *;
+    INSERT INTO tasks (name, description, priority, status, deliverable_id)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
     `;
     return db.query(command, values)
       .then(data => res.send(data.rows[0]));
   });
+  // Update task's values
+  router.put('/:id', (req, res) => {
+    const taskID = req.params.id;
+    const { name, description, priority, status, deliverable_id } = req.body;
 
+    const values = [taskID, name, description, priority, status, deliverable_id];
+    const command = `
+    UPDATE tasks
+    SET name = $2, description = $3, priority = $4, status = $5, deliverable_id = $6 
+    WHERE id = $1;
+    `;
+    return db.query(command, values)
+      .then(() => {
+        res.send();
+      })
+      .catch(err => console.log(err));
+  });
+  
   // DELETE /tasks/:id
   router.delete('/:id', (req, res) => {
     const id = req.params.id;
