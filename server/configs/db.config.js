@@ -1,5 +1,6 @@
 // Database connections
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const {DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT} = process.env;
 
