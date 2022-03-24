@@ -11,6 +11,9 @@ import ProjectList from './components/ProjectList';
 import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import Project from './components/Project';
+// Pages
+const LOGIN = 'LOGIN';
+const SUMMARY = 'SUMMARY';
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const PROJECTS = 'PROJECTS';
@@ -29,10 +32,10 @@ export default function App() {
     completeTask,
     setTask, getTasks, getSelectedTask, deleteTask, saveTask,
     showDelivForm, showTaskForm,
-    percentComplete, deliverablePercentComplete
+    percentComplete, deliverablePercentComplete,
   } = useAppData();
-
-  const { mode, transition, back } = useVisualMode(null);
+  
+  const { page, mode, transition, transitionPage, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
@@ -40,10 +43,22 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
+  let user = null;
+  if (!localStorage.user) {
+    return (
+      <div id="container">
+        {!user && <NavBar />}
+        <h1>Please <a href="/login">login</a> or <a href="/register">register</a> to view this page.</h1>
+      </div>
+    );
+  } else {
+    user = JSON.parse(localStorage.user);
+  }
 
   return (
     <div id="container">
-      <NavBar users={state.users} />
+      {user && <NavBar user={user.name} />}
+
       <main>
         <ProjectList
           projects={Object.values(state.projects)}
