@@ -407,9 +407,22 @@ export default function useAppData() {
         numCompleted++;
       }
     })
-    return numCompleted
+    return numCompleted;
   }
   appData.completedDeliverables = completedDeliverables
+
+  const completedTasks = (state, deliverable) => {
+    const selectedTasks = getTasks(state, deliverable)
+    let numCompleted = 0;
+    selectedTasks.forEach(task => {
+      if (task.status === true) {
+        numCompleted++;
+      }
+    })
+    return numCompleted;
+  }
+  appData.completedTasks = completedTasks
+
 
   return appData;
 }
