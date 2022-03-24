@@ -167,6 +167,19 @@ export default function useAppData() {
   }
   appData.getSelectedDeliverable = getSelectedDeliverable;
 
+    // Return the selected task object.
+    const getSelectedTask = state => {
+      const task_id = state.task;
+      const tasks = Object.values(state.tasks);
+      // return tasks.find(task => task.id === task_id);
+      for (const task of tasks) {
+        if (task.id === state.task) {
+          return task;
+        }
+      }
+    }
+    appData.getSelectedTask = getSelectedTask;
+
   // Delete the currently selected deliverable id.
   const deleteDeliverable = deliverable_id => {
     // Declare a new deliverables object to hold the updated deliverables data.
@@ -218,7 +231,7 @@ export default function useAppData() {
     let updTask;
     allTasks.forEach(task => {
       if (task.id === id) {
-        task.complete = !task.complete;
+        task.status = !task.status;
         updTask = task;
         // console.log("AFTER TASK:", updTask); TEST CODE
       }
@@ -278,14 +291,6 @@ export default function useAppData() {
   // Set the currently selected task id.
   const setTask = task => setState({ ...state, task });
   appData.setTask = setTask;
-
-  // Return the selected task object.
-  const getSelectedTask = state => {
-    const task_id = state.task;
-    const tasks = Object.values(state.tasks);
-    return tasks.find(task => task.id === task_id);
-  }
-  appData.getSelectedTask = getSelectedTask;
 
   // Delete the currently selected task id.
   const deleteTask = task_id => {
