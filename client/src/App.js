@@ -42,7 +42,6 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
   
-  console.log(selectedTask)
   return (
     <div id="container">
       <NavBar users={state.users} />
