@@ -20,9 +20,9 @@ export default function useAppData() {
 
   useEffect(() => {
     Promise.all([
-      axios.get('/projects/auth', { headers: authHeader() }),
-      axios.get('/deliverables/auth', { headers: authHeader() }),
-      axios.get('/tasks/auth', { headers: authHeader() })
+      axios.get('/projects', { headers: authHeader() }),
+      axios.get('/deliverables', { headers: authHeader() }),
+      axios.get('/tasks', { headers: authHeader() })
     ])
       .then(all => {
         const [projects, deliverables, tasks] = all;
