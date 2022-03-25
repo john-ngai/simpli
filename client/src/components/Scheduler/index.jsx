@@ -16,12 +16,11 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 // import MenuItem from '@mui/material/MenuItem';
 // import { Typography, Button } from '@mui/material';
 
-export default function Scheduler() {
+export default function Scheduler(props) {
   let user = null;
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(!open);
 
   // const data = {
   //   "1": {
@@ -105,7 +104,7 @@ export default function Scheduler() {
   } else {
     user = JSON.parse(localStorage.user);
   }
-  
+console.log(open)
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -126,6 +125,10 @@ export default function Scheduler() {
             onClick={handleOpen}  
           />
         </aside>
+        <PopupForm 
+        open={open}
+        handleOpen={handleOpen}
+        />
 {/* 
           <div>
           <Modal
