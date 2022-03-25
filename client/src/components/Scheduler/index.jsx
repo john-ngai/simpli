@@ -5,6 +5,7 @@ import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { List } from '@mui/material';
 
 
 export default function Scheduler() {
@@ -29,7 +30,20 @@ export default function Scheduler() {
 
         <aside id="menu">
           <br />
-          <SelectProject />
+          <List>
+          <ListItemButton onClick={handleOpen}>
+            <ListItemText primary="Select Project" primaryTypographyProps={{
+              color: 'primary',
+              fontWeight: 'bold'
+              }} />
+              {!open ? <ExpandMore/> : <ExpandLess/>}
+              </ListItemButton>
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div">
+                <SelectProject />
+                </List>
+              </Collapse>
+          </List>
           <br />
           <span><strong>Completed</strong></span>
           <br /><br />
