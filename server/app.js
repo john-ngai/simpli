@@ -15,6 +15,8 @@ const teamsRouter = require('./routes/teams');
 const usersRouter = require('./routes/users');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
+const daysRouter = require('./routes/days');
+const scheduleRouter = require('./routes/schedule');
 
 const app = express();
 
@@ -33,5 +35,7 @@ app.use('/teams', teamsRouter(db));
 app.use('/users', usersRouter(db));
 app.use('/register', registerRouter(db));
 app.use('/login', loginRouter(db));
+app.use('/days', daysRouter(db));
+app.use('/schedule', scheduleRouter(db));
 
 module.exports = app;

@@ -13,7 +13,7 @@ export default function SelectProject() {
   };
 
   return (
-    <Box sx={{ minWidth: 200 }}>
+    <Box sx={{ minWidth: 175 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Project</InputLabel>
         <Select
