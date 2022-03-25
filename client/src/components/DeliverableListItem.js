@@ -3,6 +3,7 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgressWithLabel from './MUI/CircularProgressWithLabel';
+import LinearProgressWithLabel from './MUI/LinearProgress';
 
 import React from 'react';
 import classNames from 'classnames';
