@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import './Scheduler.scss';
+import Calendar from './Calendar';
 
 export default function Scheduler() {
 
@@ -18,15 +19,13 @@ export default function Scheduler() {
   
   return (
     <div id="scheduler_container">
-      {user && <NavBar user={user.name}/>}
+      {/* {user && <NavBar user={user.name}/>} */}
     
-      <main id="scheduler_main">
+      {/* <main id="scheduler_main"> */}
     
-      <aside>
-
-      </aside>
+      <Calendar />
       
-      </main>
+      {/* </main> */}
     </div>
   );
 }

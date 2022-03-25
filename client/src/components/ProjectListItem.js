@@ -16,7 +16,11 @@ export default function ProjectListItem(props) {
       <span className="project_description">{props.description}</span>
       <span className="project_deliverables">{props.count} Deliverables</span>
       {/* {props.count > 0 ? <aside>Percent Complete: {props.percentComplete}%</aside> : <aside>No Deliverables Yet! </aside>} */}
-      { props.count > 0 ? <LinearProgressWithLabel value={props.percentComplete}/> : <LinearProgressWithLabel value={0}/> }
+
+      {props.count > 0 ? <LinearProgressWithLabel className="project_progress"
+        value={props.percentComplete} /> : <LinearProgressWithLabel className="project_progress" value={0} />}
+
+
       {props.selected &&
         <span className="project_edit">
           <EditIcon id="edit_project" className="mui_icons"
