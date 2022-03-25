@@ -8,46 +8,63 @@
 days = [
   {
     "id": 1,
+    "name": "Sunday",
+    "schedule": [],
+  },
+  {
+    "id": 2,
     "name": "Monday",
-    "appointments": [1, 2],
-    "interviewers": [1, 2],
-    "spots": 0
+    "schedule": [],
   },
   {
-    "id": 1,
-    "name": "Tueday",
-    "appointments": [1, 2],
-    "interviewers": [1, 2],
-    "spots": 0
+    "id": 3,
+    "name": "Tuesday",
+    "schedule": [],
   },
   {
-    "id": 1,
+    "id": 4,
     "name": "Wednesday",
-    "appointments": [1, 2],
-    "interviewers": [1, 2],
-    "spots": 0
-  }
+    "schedule": [],
+  },
+  {
+    "id": 5,
+    "name": "Thursday",
+    "schedule": [],
+  },
+  {
+    "id": 6,
+    "name": "Friday",
+    "schedule": [],
+  },
+  {
+    "id": 7,
+    "name": "Saturday",
+    "schedule": [],
+  },
 ]
 
-appointment = {
+schedule = {
   "1": {
     "id": 1,
-    "time": "12pm",
-    "project": {
-      id: 12,
-      "name": "Lydia Miller-Jones",
-      "description": "Ipsum lorem"
-    },
-    "deliverable": {
-      "name": "Lydia Miller-Jones",
-      "description": "Ipsum lorem"
-    },
+    "start_time": "12pm",
+    "end_time": 2pm,
+    "day_id": 1
     "task": {
-      id: 1
-      "name": "Lydia Miller-Jones",
-      "description": "Ipsum lorem"
+      id: 2
+      "name": "Clean out the closet",
+      "description": "Place valuables somewhere safe"
     },
   },
   ...
 }
 
+table=days
+PK id
+name
+
+table=schedule(appointments)
+PK id
+FK day_id (>- many to one)
+FK task_id (>- many to one)
+start_time
+end_time
