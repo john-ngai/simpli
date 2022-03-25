@@ -5,10 +5,17 @@ import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { List } from '@mui/material';
+import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+// Hooks
+import useAppData from '../../hooks/useAppData';
 
 
 export default function Scheduler() {
+  const { state, setProject, getSelectedProject } = useAppData();
+
+  const [open, setOpen] = React.useState(true);
 
   let user = null;
   if (!localStorage.user) {
@@ -44,7 +51,10 @@ export default function Scheduler() {
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div">
-                <SelectProject />
+                <SelectProject 
+                projects={Object.values(state.projects)} 
+                value={state.project} 
+                />
                 </List>
               </Collapse>
           </List>
