@@ -15,8 +15,8 @@ render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      {/* <Route path="/Schedule" element={<Schedule />} /> */}
-      <Route path="/schedule" element={<Schedule2 />} />
+      <Route path="/Schedule" element={<Schedule />} />
+      {/* <Route path="/schedule" element={<Schedule2 />} /> */}
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
     </Routes>
