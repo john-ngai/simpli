@@ -7,10 +7,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TaskListItem(props) {
   const { task, onToggle, onClick } = props;
-  // console.log("PROPS SELECTED:", props.selected);
-  // const taskClass = classNames("task_list_item", {
-  //   "task_list_item--selected": props.selected
-  // })
 
   return (
     <li className="task_list_item">

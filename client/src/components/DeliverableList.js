@@ -38,9 +38,11 @@ export default function DeliverableList(props) {
       <div id="project_details">
         <span id="project_name">{props.selectedProject.name}</span>
         <span id="project_description">{props.selectedProject.description}</span>
+        
         <span id="project_stats">{completedDeliverables(state, props.project)} of {props.selectedProject.count} Deliverables Completed
-        <LinearProgressWithLabel value={percentComplete(state, props.project)}/>
         </span>
+        <span className="deliverable_progress"><LinearProgressWithLabel value={percentComplete(state, props.project)}/></span>
+
         <AddCircleIcon id="new_deliverable" className="mui_icons"
           onClick={() => {
             props.showDelivForm()
