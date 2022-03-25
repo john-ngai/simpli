@@ -15,10 +15,15 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 export default function SelectProject() {
   const [project, setProject] = React.useState('');
+  const [open, setOpen] = React.useState(true);
 
   const handleChange = event => {
     setProject(event.target.value);
   };
+
+  const handleOpen = () => {
+    setOpen(!open);
+  }
 
   return (
     // <Box sx={{ minWidth: 175 }}>
@@ -42,6 +47,7 @@ export default function SelectProject() {
     <List>
       <ListItemButton>
         <ListItemText primary="Select Project"/>
+        {open ? <ExpandLess/> : <ExpandMore/>}
       </ListItemButton>
     </List>
   );
