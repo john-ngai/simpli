@@ -21,10 +21,10 @@ const style = {
   p: 4,
 };
 
-export default function PopupForm() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function PopupForm(props) {
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(!open);
+  // const handleClose = () => setOpen(false);
 
   const data = {
     "1": {
@@ -102,8 +102,8 @@ export default function PopupForm() {
   return (
     <div>
     <Modal
-      open={open}
-      onClose={handleClose}
+      open={props.open}
+      onClose={props.handleOpen}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
