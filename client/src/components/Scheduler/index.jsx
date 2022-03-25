@@ -7,12 +7,14 @@ import SelectProject from './SelectProject';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 // import PopupForm from './Form'; 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import FormControl, { useFormControl } from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import { TextField } from '@mui/material';
-
+import TimePicker from '@mui/lab/TimePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import MenuItem from '@mui/material/MenuItem';
+import { Typography, Button } from '@mui/material';
 
 export default function Scheduler() {
   let user = null;
@@ -34,9 +36,51 @@ export default function Scheduler() {
       }
     }
   }
+  // To access values: 
+  // defaultValue={data[1].task.name}
+
+  const days = [
+    {
+      value: "Sunday",
+      label: "Sunday"
+    },
+    {
+      value: "Monday",
+      label: "Monday"
+    },
+    {
+      value: "Tuesday",
+      label: "Tuesday"
+    },
+    {
+      value: "Wednesday",
+      label: "Wednesday"
+    },
+    {
+      value: "Thursday",
+      label: "Thursday"
+    },
+    {
+      value: "Friday",
+      label: "Friday"
+    },
+    {
+      value: "Saturday",
+      label: "Saturday"
+    }
+  ]
 
 
-console.log(data[1].task.name)
+  const [value, setValue] = useState(new Date());
+  const [day, setDay] = useState('Monday')
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  const handleDayChange = (event) => {
+    setDay(event.target.value);
+  };
 
 
   const popupStyle = {
@@ -88,8 +132,7 @@ console.log(data[1].task.name)
 
 
 
-
-        <div>
+          <div>
           <Modal
             open={open}
             onClose={handleClose}
@@ -97,15 +140,59 @@ console.log(data[1].task.name)
             aria-describedby="modal-modal-description"
           >
             <Box sx={popupStyle}>
-              <FormControl sx={{ width: '25ch' }}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Schedule a Task
+              </Typography>
+              <FormControl sx={{ width: '50ch' }}>
                 <TextField
                   id="standard-helperText"
-                  label="Helper text"
-                  defaultValue={data[1].task.name}
-                  helperText="Some important text"
+                  label="Task Name"
+                  // defaultValue={data[1].task.name}
+                  helperText="Task Name"
                   variant="standard"
                 />
+                <TextField
+                  id="standard-helperText"
+                  label="Task Description"
+                  // defaultValue={data[1].task.description}
+                  helperText="Task Description"
+                  variant="standard"
+                />
+                <div style={{display:"flex"}} >
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                  label="Start Time"
+                  value={value}
+                  onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <TimePicker
+                  label="End Time"
+                  value={value}
+                  onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+                </div>
+                <TextField
+                  id="standard-select-day"
+                  select
+                  label="Select"
+                  value={day}
+                  onChange={handleDayChange}
+                  helperText="Select a day"
+                  variant="standard"
+                >
+                  {days.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </FormControl>
+              <Button variant="outlined" size="small">
+                Save
+              </Button>
             </Box>
           </Modal>
         </div>
@@ -335,5 +422,6 @@ console.log(data[1].task.name)
 
       </main>
     </div>
+    
   );
 }
