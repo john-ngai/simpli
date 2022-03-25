@@ -45,7 +45,7 @@ export default function SelectProject() {
 
 
     <List>
-      <ListItemButton>
+      <ListItemButton onClick={handleOpen}>
         <ListItemText primary="Select Project"/>
         {open ? <ExpandLess/> : <ExpandMore/>}
       </ListItemButton>
