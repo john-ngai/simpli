@@ -16,7 +16,7 @@ export default function useAppData() {
     tasks: {},
     showDelivForm: false,
     showTaskForm: false,
-    percent: 0,
+    percent: null,
   });
 
   useEffect(() => {
@@ -100,22 +100,7 @@ export default function useAppData() {
       }
       return project
     });
-
-    // const percentComplete = (state, project) => {
-    //   const selectedDelivs = getDeliverables(state, project)
-    //   let numCompleted = 0;
-    //   let total = 0;
-    //   selectedDelivs.forEach(deliv => {
-    //     total++
-    //     if (deliv.status === true) {
-    //       numCompleted++;
-    //     }
-    //   })
-    //   return Math.round((numCompleted / total) * 100);
-    // }
-    // appData.percentComplete = percentComplete
-    const percent = percentComplete(state, state.project.id)
-    setState({ ...state, deliverable, deliverables, updateCounter, percent });
+    setState({ ...state, deliverable, deliverables, updateCounter });
   }
   appData.saveDeliverable = saveDeliverable;
 
@@ -387,6 +372,18 @@ export default function useAppData() {
   }
   appData.saveTask = saveTask;
 
+
+
+
+
+
+
+
+
+  const setPercent =  (percent) => setState({ ...state, percent });
+  appData.setPercent = setPercent;
+
+
   const percentComplete = (state, project) => {
     const selectedDelivs = getDeliverables(state, project)
     let numCompleted = 0;
@@ -397,9 +394,20 @@ export default function useAppData() {
         numCompleted++;
       }
     })
-    return Math.round((numCompleted / total) * 100);
+    // setPercent(percent)
+    return Math.round((numCompleted / total) * 100)
   }
   appData.percentComplete = percentComplete
+
+
+
+
+
+
+
+
+
+
 
   const deliverablePercentComplete = (state, deliverable) => {
     const selectedTasks = getTasks(state, deliverable)
