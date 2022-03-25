@@ -1,15 +1,16 @@
 #navbar {
-  border: 2px solid red;
-  background-color: lightblue; 
+  /* border: 2px solid red; */
+  background-color: #161B22; 
   padding: 15px 0 15px 0;
+  color: white;
   width: 100%;
 }
 
 #app_name {
   font-size: 25px;
   font-weight: bold;
-  color: black;
   text-decoration: none;
+  color: white
 }
 
 .nav_item {
@@ -17,10 +18,16 @@
   padding: 10px;
 }
 
-.login-nav {
+.login_nav {
   flex-direction: flex-end;
+  text-decoration: none;
 }
 
-.login-nav :link {
+.login_nav :link {
   padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: white
 }

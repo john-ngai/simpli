@@ -20,11 +20,13 @@
 }
 
 .project_list_item:hover {
-  background-color: rgb(193, 239, 255);
+  background-color: #2f3949;
+  color: white;
 }
 
 .project_list_item--selected {
-  background-color: rgb(193, 239, 255);
+  background-color: #2f3949;
+  color: white;
 }
 
 .project_name {

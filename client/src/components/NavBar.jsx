@@ -12,7 +12,7 @@ export default function Navbar(props) {
       <span className="nav_item">
         <Link to="/scheduler">Scheduler</Link>
       </span>
-      <span className="login-nav">
+      <span className="login_nav">
         {!props.user && <Link to="/register">Register</Link>}
         {!props.user && <Link to="/login">Login</Link>}
         {props.user && <a href="" onClick={() => localStorage.removeItem('user')}>Logout</a>}
