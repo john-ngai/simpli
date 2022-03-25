@@ -8,7 +8,7 @@
 }
 
 .deliverable_list_item:hover {
-  background-color: rgb(210, 241, 252);
+  background-color: #2f3949;
 }
 
 #deliverable_list_item_header {
@@ -63,4 +63,8 @@
   // border: 1px solid black; // Remove test code.
   transform: scale(0.8);
   margin-top: -2px;
+}
+
+.circle_bar {
+  color: #88a2cf;
 }
