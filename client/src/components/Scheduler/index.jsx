@@ -55,8 +55,8 @@ export default function Scheduler() {
 
             <tr>
               <td class="table time">7 AM</td>
-              {/* <td id="sun_7am" class="table item"></td> */}
-              <td id="sun_7am" class="table item booked completed">Research best front-end frameworks</td>
+              <td id="sun_7am" class="table item"></td>
+              {/* <td id="sun_7am" class="table item booked completed">Research best front-end frameworks</td> */}
               <td class="table item"></td>
               <td class="table item"></td>
               <td class="table item"></td>
