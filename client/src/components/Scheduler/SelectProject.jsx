@@ -49,6 +49,19 @@ export default function SelectProject() {
         <ListItemText primary="Select Project"/>
         {open ? <ExpandLess/> : <ExpandMore/>}
       </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+      <List>
+        <ListItemButton>
+          <ListItemText primary="Project 1"/>
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemText primary="Project 2"/>
+        </ListItemButton>
+        <ListItemButton>
+          <ListItemText primary="Project 3"/>
+        </ListItemButton>
+      </List>
+      </Collapse>
     </List>
   );
 }
