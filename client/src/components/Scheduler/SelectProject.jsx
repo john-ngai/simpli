@@ -13,14 +13,14 @@ export default function SelectProject() {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 200 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Project</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          label="Age"
+          value={'projectID'}
+          label="Select Project"
           onChange={handleChange}
         >
           <MenuItem value={'projectID'}>Project Name #1</MenuItem>
