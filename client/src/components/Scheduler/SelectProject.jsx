@@ -18,7 +18,9 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
 export default function SelectProject() {
-  const {state} = useAppData;
+  const {state, getDeliverables} = useAppData;
+
+  const deliverables = getDeliverables(state, state.project);
 
   const [project, setProject] = React.useState('');
   const [open, setOpen] = React.useState(true);
@@ -61,7 +63,7 @@ export default function SelectProject() {
       <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div">
         <ListItemButton>
-          <SelectDeliverable />
+          <SelectDeliverable deliverables={deliverables} />
         </ListItemButton>
         <ListItemButton>
           <ListItemText primary="Project 2"/>
