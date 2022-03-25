@@ -33,10 +33,6 @@ export default function SelectProject() {
     setProject(event.target.value);
   };
 
-  const handleOpen = () => {
-    setOpen(!open);
-  }
-
   return (
     // <Box sx={{ minWidth: 175 }}>
     //   <FormControl fullWidth>
