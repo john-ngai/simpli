@@ -5,11 +5,11 @@ import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import PopupForm from './Form'; 
+// import PopupForm from './Form'; 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { FormControl } from '@mui/material';
 
 export default function Scheduler() {
   let user = null;
@@ -69,7 +69,7 @@ export default function Scheduler() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box className="popupForm" sx={popupStyle}>
+            <Box sx={popupStyle}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Text in a modal
               </Typography>
