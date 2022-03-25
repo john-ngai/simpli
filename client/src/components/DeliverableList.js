@@ -5,6 +5,7 @@ import NewDeliverable from './NewDeliverable';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import './DeliverableList.scss';
 import useVisualMode from '../hooks/useVisualMode';
+import LinearProgressWithLabel from './MUI/LinearProgress';
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
@@ -37,7 +38,9 @@ export default function DeliverableList(props) {
       <div id="project_details">
         <span id="project_name">{props.selectedProject.name}</span>
         <span id="project_description">{props.selectedProject.description}</span>
-        <span id="project_stats">{completedDeliverables(state, props.project)} of {props.selectedProject.count} ({percentComplete(state, props.project)}%) Deliverables Completed</span>
+        <span id="project_stats">{completedDeliverables(state, props.project)} of {props.selectedProject.count} Deliverables Completed
+        <LinearProgressWithLabel value={percentComplete(state, props.project)}/>
+        </span>
         <AddCircleIcon id="new_deliverable" className="mui_icons"
           onClick={() => {
             props.showDelivForm()
