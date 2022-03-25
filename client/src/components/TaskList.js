@@ -37,8 +37,11 @@ export default function TaskList(props) {
         </span>
         <span id="deliverable_description">{props.selectedDeliverable.description}</span>
         <span id="deliverable_stats">{completedTasks(state, props.deliverable)} of {props.selectedDeliverable.count} Tasks Completed
-        <LinearProgressWithLabel value={deliverablePercentComplete(state, props.deliverable)}/>
         </span>
+
+        <span className="task_progress"><LinearProgressWithLabel value={deliverablePercentComplete(state, props.deliverable)}/></span>
+
+
         <AddCircleIcon id="new_task" className="mui_icons"
           onClick={props.showTaskForm}
         />

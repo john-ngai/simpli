@@ -1,26 +1,39 @@
 #project_details {
-  border: 2px solid red;
+  border: 2px solid grey;
+  border-radius: 5px;
+  background-color: #2f3949;
   display: flex;
   flex-direction: column;
   height: 150px;
+  padding-bottom: 7px;
+  margin-bottom: 1px;
 }
 
 #project_name {
   // border: 1px solid red;
   font-weight: bold;
   font-size: 30px;
+  margin-left: 5px;
 }
 
 #project_description {
   // border: 1px solid red;
   height: 40px;
+  margin-left: 10px;
 }
 
 #project_stats {
   // border: 1px solid red;
+  margin-left: 10px;
+}
+
+.deliverable_progress {
+  // border: 1px solid red; // Remove test code.
+  margin-left: 5px;
 }
 
 #new_deliverable {
   height: 50px;
   width: 100%;
+  margin-left: 10px;
 }
