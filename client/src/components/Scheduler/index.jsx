@@ -1,6 +1,6 @@
 import React from 'react';
-import NavBar from '../components/NavBar';
-import './Scheduler.scss';
+import NavBar from '../NavBar';
+import './index.scss';
 // Material-UI
 
 
