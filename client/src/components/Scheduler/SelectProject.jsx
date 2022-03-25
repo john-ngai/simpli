@@ -23,9 +23,9 @@ export default function SelectProject() {
           label="Select Project"
           onChange={handleChange}
         >
-          <MenuItem value={'projectID'}>Project Name #1</MenuItem>
-          <MenuItem value={'projectID'}>Project Name #2</MenuItem>
-          <MenuItem value={'projectID'}>Project Name #3</MenuItem>
+          <MenuItem value={'projectID1'}>Project Name #1</MenuItem>
+          <MenuItem value={'projectID2'}>Project Name #2</MenuItem>
+          <MenuItem value={'projectID3'}>Project Name #3</MenuItem>
         </Select>
       </FormControl>
     </Box>
