@@ -1,15 +1,18 @@
-import React from 'react';
+import { React, useState } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import PopupForm from './Form'; 
 
 
 export default function Scheduler() {
-
   let user = null;
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   if (!localStorage.user) {
     return (
       <div id="scheduler_container">
@@ -20,6 +23,7 @@ export default function Scheduler() {
   } else {
     user = JSON.parse(localStorage.user);
   }
+
 
   return (
     <div id="scheduler_container">
@@ -37,7 +41,9 @@ export default function Scheduler() {
           <br /><br />
           <span>32 of 54 Tasks</span>
           <br /><br />
-          <AddCircleIcon id="schedule_task" className="mui_icons" />
+          <AddCircleIcon id="schedule_task" className="mui_icons"
+            onClick={handleOpen && <PopupForm />}  
+          />
         </aside>
 
         <section id="calendar">
