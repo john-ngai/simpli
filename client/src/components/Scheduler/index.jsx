@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useMemo } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
@@ -9,7 +9,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { FormControl } from '@mui/material';
+import FormControl, { useFormControl } from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { TextField } from '@mui/material';
+
 
 export default function Scheduler() {
   let user = null;
@@ -18,12 +21,30 @@ export default function Scheduler() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const data = {
+    "1": {
+      "id":1, 
+      "start_time":"12pm", 
+      "end_time":"2pm", 
+      "day_id":2, 
+      "task": {
+        "id":2,
+        "name":"Clean out the closet",
+        "description":"Place valuables somewhere safe"
+      }
+    }
+  }
+
+
+console.log(data[1].task.name)
+
+
   const popupStyle = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -40,8 +61,7 @@ export default function Scheduler() {
   } else {
     user = JSON.parse(localStorage.user);
   }
-
-
+  
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -62,6 +82,13 @@ export default function Scheduler() {
             onClick={handleOpen}  
           />
         </aside>
+
+
+
+
+
+
+
         <div>
           <Modal
             open={open}
@@ -70,15 +97,27 @@ export default function Scheduler() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={popupStyle}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-              </Typography>
+              <FormControl sx={{ width: '25ch' }}>
+                <TextField
+                  id="standard-helperText"
+                  label="Helper text"
+                  defaultValue={data[1].task.name}
+                  helperText="Some important text"
+                  variant="standard"
+                />
+              </FormControl>
             </Box>
           </Modal>
         </div>
+
+
+
+
+
+
+
+
+        
         <section id="calendar">
           <table id="table">
             <tr>
