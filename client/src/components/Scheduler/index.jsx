@@ -22,6 +22,10 @@ export default function Scheduler() {
     user = JSON.parse(localStorage.user);
   }
 
+  const handleOpen = () => {
+    setOpen(!open);
+  }
+
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
