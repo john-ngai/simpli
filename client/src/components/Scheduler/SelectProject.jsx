@@ -1,4 +1,5 @@
 import * as React from 'react';
+import SelectDeliverable from './SelectDeliverable';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -50,7 +51,7 @@ export default function SelectProject() {
           color: 'primary',
           fontWeight: 'bold'
         }} />
-        {open ? <ExpandLess/> : <ExpandMore/>}
+        {!open ? <ExpandMore/> : <ExpandLess/>}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div">
