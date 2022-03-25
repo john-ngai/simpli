@@ -1,6 +1,10 @@
+body {
+  background-color: #0D1117;
+}
+
 #container {
   // border: 3px solid blueviolet; // Remove test code.
-  height: 1000px;
+  height: 93vh;
   width: 100%;
   background-color: #0D1117;
   // background-color: #263048;
@@ -24,11 +28,16 @@ main {
 }
 
 .mui_icons {
-  color: grey;
+  color: #cdd2da;
+
 }
 
 .mui_icons:hover {
-  color: rgb(180, 180, 180);
+  color: #88a2cf;
   cursor: pointer;
 }
 
+.progress_bar {
+  // color:#324d79;
+  color: #88a2cf;
+}
