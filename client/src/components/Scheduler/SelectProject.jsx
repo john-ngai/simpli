@@ -18,11 +18,15 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
 export default function SelectProject() {
-  const {state, getDeliverables} = useAppData;
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
 
   const deliverables = getDeliverables(state, state.project);
+  const selectedDel = getSelectedDeliverable(state);
 
-  const [project, setProject] = React.useState('');
+  console.log("state =", state.deliverables);
+  console.log("SELECTED DEL=", selectedDel);
+
+  // const [project, setProject] = React.useState('');
   const [open, setOpen] = React.useState(true);
 
   const handleChange = event => {
@@ -51,28 +55,10 @@ export default function SelectProject() {
     //   </FormControl>
     // </Box>
 
+    // <SelectDeliverable deliverables={deliverables} selectedDel={selectedDel} onClick={setDeliverable}  />
 
-    <List>
-      <ListItemButton onClick={handleOpen}>
-        <ListItemText primary="Select Project" primaryTypographyProps={{
-          color: 'primary',
-          fontWeight: 'bold'
-        }} />
-        {!open ? <ExpandMore/> : <ExpandLess/>}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-      <List component="div">
         <ListItemButton>
-          <SelectDeliverable deliverables={deliverables} />
+          
         </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary="Project 2"/>
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary="Project 3"/>
-        </ListItemButton>
-      </List>
-      </Collapse>
-    </List>
   );
 }
