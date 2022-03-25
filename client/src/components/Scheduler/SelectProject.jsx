@@ -46,11 +46,14 @@ export default function SelectProject() {
 
     <List>
       <ListItemButton onClick={handleOpen}>
-        <ListItemText primary="Select Project"/>
+        <ListItemText primary="Select Project" primaryTypographyProps={{
+          color: 'primary',
+          fontWeight: 'bold'
+        }} />
         {open ? <ExpandLess/> : <ExpandMore/>}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
-      <List>
+      <List component="div">
         <ListItemButton>
           <ListItemText primary="Project 1"/>
         </ListItemButton>
