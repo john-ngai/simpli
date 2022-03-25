@@ -3,18 +3,18 @@ import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
+import PopupForm from './Form';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-// import PopupForm from './Form'; 
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import FormControl, { useFormControl } from '@mui/material/FormControl';
-import { TextField } from '@mui/material';
-import TimePicker from '@mui/lab/TimePicker';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import MenuItem from '@mui/material/MenuItem';
-import { Typography, Button } from '@mui/material';
+// import Box from '@mui/material/Box';
+// import Modal from '@mui/material/Modal';
+// import FormControl, { useFormControl } from '@mui/material/FormControl';
+// import { TextField } from '@mui/material';
+// import TimePicker from '@mui/lab/TimePicker';
+// import LocalizationProvider from '@mui/lab/LocalizationProvider';
+// import AdapterDateFns from '@mui/lab/AdapterDateFns';
+// import MenuItem from '@mui/material/MenuItem';
+// import { Typography, Button } from '@mui/material';
 
 export default function Scheduler() {
   let user = null;
@@ -23,77 +23,77 @@ export default function Scheduler() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const data = {
-    "1": {
-      "id":1, 
-      "start_time":"12pm", 
-      "end_time":"2pm", 
-      "day_id":2, 
-      "task": {
-        "id":2,
-        "name":"Clean out the closet",
-        "description":"Place valuables somewhere safe"
-      }
-    }
-  }
-  // To access values: 
-  // defaultValue={data[1].task.name}
+  // const data = {
+  //   "1": {
+  //     "id":1, 
+  //     "start_time":"12pm", 
+  //     "end_time":"2pm", 
+  //     "day_id":2, 
+  //     "task": {
+  //       "id":2,
+  //       "name":"Clean out the closet",
+  //       "description":"Place valuables somewhere safe"
+  //     }
+  //   }
+  // }
+  // // To access values: 
+  // // defaultValue={data[1].task.name}
 
-  const days = [
-    {
-      value: "Sunday",
-      label: "Sunday"
-    },
-    {
-      value: "Monday",
-      label: "Monday"
-    },
-    {
-      value: "Tuesday",
-      label: "Tuesday"
-    },
-    {
-      value: "Wednesday",
-      label: "Wednesday"
-    },
-    {
-      value: "Thursday",
-      label: "Thursday"
-    },
-    {
-      value: "Friday",
-      label: "Friday"
-    },
-    {
-      value: "Saturday",
-      label: "Saturday"
-    }
-  ]
-
-
-  const [value, setValue] = useState(new Date());
-  const [day, setDay] = useState('Monday')
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-
-  const handleDayChange = (event) => {
-    setDay(event.target.value);
-  };
+  // const days = [
+  //   {
+  //     value: "Sunday",
+  //     label: "Sunday"
+  //   },
+  //   {
+  //     value: "Monday",
+  //     label: "Monday"
+  //   },
+  //   {
+  //     value: "Tuesday",
+  //     label: "Tuesday"
+  //   },
+  //   {
+  //     value: "Wednesday",
+  //     label: "Wednesday"
+  //   },
+  //   {
+  //     value: "Thursday",
+  //     label: "Thursday"
+  //   },
+  //   {
+  //     value: "Friday",
+  //     label: "Friday"
+  //   },
+  //   {
+  //     value: "Saturday",
+  //     label: "Saturday"
+  //   }
+  // ]
 
 
-  const popupStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+  // const [value, setValue] = useState(new Date());
+  // const [day, setDay] = useState('Monday')
+
+  // const handleChange = (newValue) => {
+  //   setValue(newValue);
+  // };
+
+  // const handleDayChange = (event) => {
+  //   setDay(event.target.value);
+  // };
+
+
+  // const popupStyle = {
+  //   position: 'absolute',
+  //   top: '50%',
+  //   left: '50%',
+  //   transform: 'translate(-50%, -50%)',
+  //   width: 500,
+  //   bgcolor: 'background.paper',
+  //   border: '2px solid #000',
+  //   boxShadow: 24,
+  //   p: 4,
+  // };
 
   if (!localStorage.user) {
     return (
@@ -126,12 +126,7 @@ export default function Scheduler() {
             onClick={handleOpen}  
           />
         </aside>
-
-
-
-
-
-
+{/* 
           <div>
           <Modal
             open={open}
@@ -196,15 +191,7 @@ export default function Scheduler() {
             </Box>
           </Modal>
         </div>
-
-
-
-
-
-
-
-
-        
+         */}
         <section id="calendar">
           <table id="table">
             <tr>
