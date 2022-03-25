@@ -22,10 +22,6 @@ const style = {
 };
 
 export default function PopupForm(props) {
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(!open);
-  // const handleClose = () => setOpen(false);
-
   const data = {
     "1": {
       "id":1, 
