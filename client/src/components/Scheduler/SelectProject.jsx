@@ -1,5 +1,7 @@
 import * as React from 'react';
+import useAppData from '../../hooks/useAppData';
 import SelectDeliverable from './SelectDeliverable';
+
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,7 +16,10 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
 
+
 export default function SelectProject() {
+  const {state} = useAppData;
+
   const [project, setProject] = React.useState('');
   const [open, setOpen] = React.useState(true);
 
@@ -56,7 +61,7 @@ export default function SelectProject() {
       <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div">
         <ListItemButton>
-          <ListItemText primary="Project 1"/>
+          <SelectDeliverable />
         </ListItemButton>
         <ListItemButton>
           <ListItemText primary="Project 2"/>
