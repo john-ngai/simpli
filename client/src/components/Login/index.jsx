@@ -10,7 +10,8 @@ import {
   Box,
   Container,
   Typography,
-  styled
+  styled,
+  OutlinedInput
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import NavBar from '../components/NavBar';
@@ -59,18 +60,17 @@ export default function Login() {
   const PasswordInput = styled(TextField)({
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: 'white',
-        background: 'transparent',
-        color: '#ffffff'
+        borderColor: 'white'
       },
       '&:hover fieldset': {
-        borderColor: 'white',
-        color: '#ffffff'
+        borderColor: 'white'
       },
       '&.Mui-focused fieldset': {
-        borderColor: 'white',
-        color: '#ffffff'
+        borderColor: 'white'
       }
+    },
+    '& input:valid:focus + fieldset': {
+      borderColor: 'white'
     }
   })
 
@@ -99,30 +99,35 @@ export default function Login() {
           </Typography>
           <br />
           <Box component="form" onSubmit={(e) => e.preventDefault()}>
-            <TextField
+            <OutlinedInput
+            id="email_input"
               fullWidth
               required
-              sx={{ color: 'white', bgcolor: 'white', border: 'white' }}
-              margin="normal"
-              label="Email"
+              sx={{ color: 'white', bgcolor: 'transparent' }}
+              // label="Email"
               type="text"
               value={email}
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
             <br />
-            <PasswordInput id="password_input" fullWidth required />
-            {/* <TextField
-              fullWidth
-              required
-              sx={{ color: 'white' }}
-              margin="normal"
+            {/* <PasswordInput id="password_input" fullWidth required
+            sx={{ color: 'white' }}
               label="Password"
               type="password"
               value={password}
               placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)} /> */}
+            <OutlinedInput
+              fullWidth
+              required
+              sx={{ color: 'white' }}
+              // label="Password"
+              type="password"
+              value={password}
+              placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)}
-            /> */}
+            />
             <br />
             <Button
               fullWidth
