@@ -49,8 +49,7 @@ export default function Scheduler(props) {
   } else {
     user = JSON.parse(localStorage.user);
   }
-// console.log(selectedProject)
-console.log(mode)
+
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
