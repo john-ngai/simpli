@@ -24,20 +24,12 @@ const style = {
 };
 
 export default function PopupForm(props) {
-  const { state, setState, schedule, scheduleItem, selectedTask } = useAppData();
+  const { saveSchedule } = useAppData();
   const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
   const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
   const [day, setDay] = useState('');
   const [task_id, setTask_id] = useState('');
 
-  const saveSchedule = (newScheduleItem) => {
-    const scheduleItem = newScheduleItem.task_id;
-    const schedule = {
-      ...state.schedule,
-      [newScheduleItem.id]: newScheduleItem
-    };
-    setState({ ...state, scheduleItem, schedule })
-  }
 
   function formatAMPM(date) {
     var hours = date.getHours();
@@ -58,25 +50,25 @@ export default function PopupForm(props) {
     console.log(scheduleItem)
     axios.put('/schedule/new', scheduleItem)
       .then(res => {
-        // scheduleItem.id = res.data.id
-        // console.log('res: ', res.data)
-        // saveSchedule(scheduleItem)
+        scheduleItem.id = res.data.id
+        console.log('res: ', res.data)
+        saveSchedule(scheduleItem)
       })
   }
 
-  const data = {
-    "1": {
-      "id":1, 
-      "start_time":"12pm", 
-      "end_time":"2pm", 
-      "day_id":2, 
-      "task": {
-        "id":2,
-        "name":"Clean out the closet",
-        "description":"Place valuables somewhere safe"
-      }
-    }
-  }
+  // const data = {
+  //   "1": {
+  //     "id":1, 
+  //     "start_time":"12pm", 
+  //     "end_time":"2pm", 
+  //     "day_id":2, 
+  //     "task": {
+  //       "id":2,
+  //       "name":"Clean out the closet",
+  //       "description":"Place valuables somewhere safe"
+  //     }
+  //   }
+  // }
   // To access values: 
   // defaultValue={data[1].task.name}
 
@@ -110,17 +102,6 @@ export default function PopupForm(props) {
       label: "Saturday"
     }
   ]
-
-
-  // const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
-  // const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
-
-  // const [day, setDay] = useState('Monday')
-
-  // const handleDayChange = (event) => {
-  //   setDay(event.target.value);
-  // };
-
 
   const popupStyle = {
     position: 'absolute',
