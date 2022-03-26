@@ -21,7 +21,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 export default function SelectProject(props) {
   const { state } = useAppData();
 
-  const {onChange} = props;
+  const {onChange, transition} = props;
   const [open, setOpen] = React.useState(true);
 
 
@@ -31,7 +31,10 @@ export default function SelectProject(props) {
     id={project.id}
     name={project.name}
     selected={project.id === props.value}
-    setProject={() => {onChange(project.id)}}
+    setProject={() => {
+      onChange(project.id);
+      transition('DELIVERABLES');
+    }}
     />
   );
 
