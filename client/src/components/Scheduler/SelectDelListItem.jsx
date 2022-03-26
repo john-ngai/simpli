@@ -13,13 +13,14 @@ export default function SelectDelListItem(props) {
   }
 
   return (
-    <ListItemButton key={id} id={id} onClick={handleOpen} >
+    <ListItemButton onClick={handleOpen} >
       <ListItemText
+      id={id}
       primary={name}
       primaryTypographyProps={{
         fontSize: 12
       }}
-      onClick={()=>{setDeliverable(id)}} 
+      onClick={setDeliverable} 
       />
       {!open ? <ExpandMore /> : <ExpandLess />}
     </ListItemButton>
