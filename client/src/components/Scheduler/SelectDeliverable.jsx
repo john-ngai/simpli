@@ -14,6 +14,7 @@ export default function SelectDeliverable(props) {
     key={deliverable.id} 
     id={deliverable.id} 
     name={deliverable.name} 
+    selected={deliverable.id === props.value}
     setDeliverable={() => {
       onChange(deliverable.id);
       transition("TASKS");
@@ -36,7 +37,7 @@ export default function SelectDeliverable(props) {
 
   return (
   <Collapse in={open} timeout="auto" unmountOnExit>
-  <List sx={{ width: 'auto'}} subheader={
+  <List sx={{ width: 'auto', maxWidth: 200 }} subheader={
     <ListSubheader sx={{ textDecoration: "underline", '&:hover': { backgroundColor: "lightgray" } }} >Deliverables</ListSubheader> } >
     {delList}
   </List>
