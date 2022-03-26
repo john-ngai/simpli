@@ -37,7 +37,7 @@ const style = {
 //   setState({ ...state, deliverable, deliverables, updateCounter });
 // }
 export default function PopupForm(props) {
-  const { state, setState } = useAppData();
+  const { state, setState, schedule } = useAppData();
 
   const saveSchedule = (newScheduleItem) => {
     const scheduleItem = newScheduleItem.id;
@@ -132,7 +132,7 @@ export default function PopupForm(props) {
           Schedule a Task
         </Typography>
         <FormControl sx={{ width: '50ch' }}>
-          <TextField
+          {/* <TextField
             id="standard-helperText"
             label="Task Name"
             // defaultValue={data[1].task.name}
@@ -145,6 +145,13 @@ export default function PopupForm(props) {
             // defaultValue={data[1].task.description}
             helperText="Task Description"
             variant="standard"
+          /> */}
+          <TextField
+          id="standard-helperText"
+          label="Task ID"
+          defaultValue={2}
+          helperText="Task ID"
+          variant="standard"
           />
           <div style={{display:"flex"}} >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -202,7 +209,10 @@ export default function PopupForm(props) {
             ))}
           </TextField>
         </FormControl>
-        <Button variant="outlined" size="small" onClick={saveSchedule}>
+        <Button variant="outlined" size="small" onClick={() => {
+          saveSchedule()
+          
+          }}>
           Save
         </Button>
       </Box>
