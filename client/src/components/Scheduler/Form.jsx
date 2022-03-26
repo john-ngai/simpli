@@ -24,14 +24,14 @@ const style = {
 };
 
 export default function PopupForm(props) {
-  const { state, setState, schedule, selectedTask } = useAppData();
-  const [start_time, setStart_time] = useState('');
-  const [end_time, setEnd_time] = useState('');
-  const [day_id, setDay_id] = useState(1);
-  // const [task_id, setTask_id] = useState('');
+  const { state, setState, schedule, scheduleItem, selectedTask } = useAppData();
+  const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
+  const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
+  const [day, setDay] = useState('');
+  const [task_id, setTask_id] = useState('');
 
   const saveSchedule = (newScheduleItem) => {
-    const scheduleItem = newScheduleItem.id;
+    const scheduleItem = newScheduleItem.task_id;
     const schedule = {
       ...state.schedule,
       [newScheduleItem.id]: newScheduleItem
@@ -39,18 +39,28 @@ export default function PopupForm(props) {
     setState({ ...state, scheduleItem, schedule })
   }
 
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    var strTime = hours + ampm;
+    return strTime;
+  }
+  
   const save = () => {
     const scheduleItem = {
-      start_time: start_time,
-      end_time: end_time,
-      day_id: day_id,
-      task_id: props.selectedTask
+      start_time: formatAMPM(valueStartTime),
+      end_time: formatAMPM(valueEndTime),
+      day_id: day,
+      task_id: 1
     }
+    console.log(scheduleItem)
     axios.put('/schedule/new', scheduleItem)
       .then(res => {
-        scheduleItem.id = res.data.id
-        console.log('res: ', res.data)
-        saveSchedule(scheduleItem)
+        // scheduleItem.id = res.data.id
+        // console.log('res: ', res.data)
+        // saveSchedule(scheduleItem)
       })
   }
 
@@ -72,44 +82,44 @@ export default function PopupForm(props) {
 
   const days = [
     {
-      value: "Sunday",
+      value: 1,
       label: "Sunday"
     },
     {
-      value: "Monday",
+      value: 2,
       label: "Monday"
     },
     {
-      value: "Tuesday",
+      value: 3,
       label: "Tuesday"
     },
     {
-      value: "Wednesday",
+      value: 4,
       label: "Wednesday"
     },
     {
-      value: "Thursday",
+      value: 5,
       label: "Thursday"
     },
     {
-      value: "Friday",
+      value: 6,
       label: "Friday"
     },
     {
-      value: "Saturday",
+      value: 7,
       label: "Saturday"
     }
   ]
 
 
-  const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
-  const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
+  // const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
+  // const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
 
-  const [day, setDay] = useState('Monday')
+  // const [day, setDay] = useState('Monday')
 
-  const handleDayChange = (event) => {
-    setDay(event.target.value);
-  };
+  // const handleDayChange = (event) => {
+  //   setDay(event.target.value);
+  // };
 
 
   const popupStyle = {
@@ -123,7 +133,6 @@ export default function PopupForm(props) {
     boxShadow: 24,
     p: 4,
   };
-
 
   return (
     <div>
@@ -155,7 +164,8 @@ export default function PopupForm(props) {
           <TextField
           id="standard-helperText"
           label="Task ID"
-          defaultValue={selectedTask}
+          value={task_id}
+          onChange={event => setTask_id(event.target.value)}
           helperText="Task ID"
           variant="standard"
           />
@@ -166,9 +176,7 @@ export default function PopupForm(props) {
             label="Start Time"
             value={valueStartTime}
             views={["hours"]}
-            onChange={(newValue) => {
-              setValueStartTime(newValue);
-            }}
+            onChange={newValue => setValueStartTime(newValue)}
             minTime={new Date(0, 0, 0, 7)}
             maxTime={new Date(0, 0, 0, 23, 59)}
             shouldDisableTime={(timeValue, clockType) => {
@@ -185,9 +193,7 @@ export default function PopupForm(props) {
             label="End Time"
             value={valueEndTime}
             views={["hours"]}
-            onChange={(newValue) => {
-              setValueEndTime(newValue);
-            }}
+            onChange={newValue => setValueEndTime(newValue)}
             minTime={new Date(0, 0, 0, 7)}
             maxTime={new Date(0, 0, 0, 23, 59)}
             shouldDisableTime={(timeValue, clockType) => {
@@ -204,7 +210,7 @@ export default function PopupForm(props) {
             select
             label="Select"
             value={day}
-            onChange={handleDayChange}
+            onChange={event => setDay(event.target.value)}
             helperText="Select a day"
             variant="standard"
           >
