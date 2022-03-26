@@ -32,7 +32,6 @@ export default function Login() {
     }
     // clears errors messages
     setError("");
-    // will need to update with cookies later on
     loginUser(email, password);
   };
 
