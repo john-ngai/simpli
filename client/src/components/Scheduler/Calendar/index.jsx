@@ -24,11 +24,15 @@ import _12AM from './_12AM';
 const helper = require('./helpers');
 
 export default function Calendar() {
-  // const { state } = useAppData();
+  const { state } = useAppData();
   // const schedule = state.schedule;
-  
+
+
+  const schedule = state.schedule;
+  console.log(schedule);
+
   // Temp data
-  const schedule = {
+  /*const schedule = {
     1: {
       id: 1,
       start_time: "7am",
@@ -138,8 +142,8 @@ export default function Calendar() {
         name: "Eat your ABCDs",
         description: "Random description 1"
       }
-    }/**/
-  };
+    }
+  };/**/
   
   return (
     <section id="calendar">
