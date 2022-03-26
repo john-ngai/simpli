@@ -8,6 +8,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import MenuItem from '@mui/material/MenuItem';
 import { Typography, Button } from '@mui/material';
+import useAppData from '../../hooks/useAppData';
 
 const style = {
   position: 'absolute',
@@ -20,8 +21,33 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
+// const saveDeliverable = (newDeliverable) => {
+//   const deliverable = newDeliverable.id;
+//   const deliverables = {
+//     ...state.deliverables,
+//     [newDeliverable.id]: newDeliverable,
+//   };
+//   const values = Object.values(state.projects)
+//   const updateCounter = values.map((project) => {
+//     if (newDeliverable.project_id === project.id) {
+//       return { ...project, count: project.count++ };
+//     }
+//     return project
+//   });
+//   setState({ ...state, deliverable, deliverables, updateCounter });
+// }
 export default function PopupForm(props) {
+  const { state, setState } = useAppData();
+
+  const saveSchedule = (newScheduleItem) => {
+    const scheduleItem = newScheduleItem.id;
+    const schedule = {
+      ...state.schedule,
+      [newScheduleItem.id]: newScheduleItem
+    };
+    setState({ ...state, scheduleItem, schedule })
+  }
+
   const data = {
     "1": {
       "id":1, 
@@ -176,7 +202,7 @@ export default function PopupForm(props) {
             ))}
           </TextField>
         </FormControl>
-        <Button variant="outlined" size="small">
+        <Button variant="outlined" size="small" onClick={saveSchedule}>
           Save
         </Button>
       </Box>
