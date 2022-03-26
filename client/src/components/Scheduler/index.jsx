@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
@@ -16,6 +16,7 @@ import useAppData from '../../hooks/useAppData';
 import useVisualMode from '../../hooks/useVisualMode';
 
 const DELIVERABLES = "DELIVERABLES";
+const TASKS = "TASKS";
 
 
 export default function Scheduler() {
@@ -31,8 +32,10 @@ export default function Scheduler() {
   const selectedTask = getSelectedTask(state);
 
   console.log("state.deliverables =", state.deliverables);
-  console.log("SELECTED DEL=", selectedDel);
   console.log("STATE.PROJECT", state.projects);
+  console.log("SelectedProject", selectedProject);
+  console.log("SelectedDel", selectedDel);
+  console.log("selectedTask:", selectedTask);
 
   let user = null;
   if (!localStorage.user) {
@@ -84,15 +87,28 @@ export default function Scheduler() {
                 onChange={setDeliverable} 
                 selectedDel={selectedDel}
                 selectedProject={selectedProject}
+                transition={transition}
                 /> }
               {/* </Collapse> */}
+              { mode === TASKS && 
+              <Fragment>
+              <SelectDeliverable
+              deliverables={deliverables}
+              onChange={setDeliverable} 
+              selectedDel={selectedDel}
+              selectedProject={selectedProject}
+              transition={transition}
+              /> 
+
               <SelectTask 
               tasks={tasks}
               onChange={setTask}
               selectedProject={selectedProject}
               selectedDel={selectedDel}
               selectedTask={selectedTask}
-              />
+              /> 
+              </Fragment>
+              }
             </Collapse>
           </List>
           <br />
