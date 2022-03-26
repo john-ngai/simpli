@@ -133,13 +133,13 @@ console.log(selectedTask)
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <div style={{display:"flex"}} >
-              <SelectProject 
+              {/* <SelectProject 
               projects={Object.values(state.projects)} 
               // value={state.project} 
               onChange={setProject}
               onClick={handleOpen}
               transition={transition}
-              />
+              /> */}
               {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
                 { mode === DELIVERABLES && <SelectDeliverable
                 deliverables={deliverables}
