@@ -24,7 +24,7 @@ export default function useAppData() {
       axios.get('/projects', { headers: authHeader() }),
       axios.get('/deliverables', { headers: authHeader() }),
       axios.get('/tasks', { headers: authHeader() }),
-      axios.get('/schedule')
+      axios.get('/schedule') /* Missing JWT authentication!! */
     ])
       .then(all => {
         const [projects, deliverables, tasks, schedule] = all;
@@ -426,6 +426,17 @@ export default function useAppData() {
   }
   appData.completedTasks = completedTasks
 
+  // Return the schedule for the selected project id.
+  const getProjectSchedule = (project, schedule) => {
+    const projectSchedule = {};
+    Object.values(schedule).forEach(item => {
+      if (item['project_id'] === project) {
+        projectSchedule[item.id] = item;
+      }
+    })
+    return projectSchedule;
+  }
+  appData.getProjectSchedule = getProjectSchedule;
 
   return appData;
 }
