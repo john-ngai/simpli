@@ -16,14 +16,14 @@ export default function SelectDeliverable(props) {
   //   />;
   // });
 
-  const delList = props.deliverables.map(deliverable => {
+  const delList = props.deliverables.map(deliverable => 
     <ListItemButton key={deliverable.id} id={deliverable.id} >
       <ListItemText 
       primary={deliverable.name}
       onClick={()=>{setDeliverable(deliverable.id)}} 
       />
     </ListItemButton>
-  })
+  );
 
   return (
   <List sx={{ width: 'auto' }} >

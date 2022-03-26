@@ -26,8 +26,8 @@ export default function Scheduler() {
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
 
-  console.log("state =", state.deliverables);
-  console.log("SELECTED DEL=", selectedDel);
+  // console.log("state =", state.deliverables);
+  // console.log("SELECTED DEL=", selectedDel);
 
   let user = null;
   if (!localStorage.user) {
