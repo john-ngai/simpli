@@ -1,7 +1,8 @@
 import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { FormGroup, FormControl, FormControlLabel, TextField, CssBaseline, Link, Grid, Box, Container, Avatar, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { FormGroup, FormControl, FormControlLabel, TextField, CssBaseline, Grid, Box, Container, Avatar, Button, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import useAppData from '../../hooks/useAppData';
 import NavBar from '../NavBar';
@@ -86,6 +87,9 @@ export default function Register() {
                 </Grid>
                 <Button type="submit" fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} onClick={validation}>Register</Button>
                 {/* </FormControl> */}
+                <Grid>
+                  
+                </Grid>
             </Box>
         </Box>
       </Container>
