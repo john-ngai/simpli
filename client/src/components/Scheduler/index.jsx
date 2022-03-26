@@ -71,7 +71,7 @@ export default function Scheduler(props) {
         </aside>
 
 
-        <Calendar />
+        <Calendar project={state.project}/>
 
       </main>
     </div>
