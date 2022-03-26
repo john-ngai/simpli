@@ -24,7 +24,6 @@ export default function Scheduler(props) {
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
   const {mode, transition} = useVisualMode(null);
   
-  console.log(openForm)
   const [open, setOpen] = useState(true);
 
   const selectedProject = getSelectedProject(state);
