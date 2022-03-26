@@ -2,12 +2,13 @@
 const getTimeRange = (start_time, end_time) => {
   const range = [];
 
-  // CASE #1: If time starting and ending hours are both in the morning,
+  // CASE #1: If starting and ending hours are both in the morning,
   if (start_time.includes('a') && end_time.includes('a')) {
     start_time = start_time.split(/(?=a)/g);
     end_time = end_time.split(/(?=a)/g);
     // CASE #1.1: If the ending hour is 12 AM. 
-    if (Number(end_time[0]) === 12) {
+    if (Number(end_time[0]) === 12 && end_time[1] === 'am') {
+      console.log(true);
       // Add the morning hours to the range, from start to end.
       for (let hour = start_time[0]; hour <= 11; hour++) {
         range.push(`${hour}am`);
@@ -19,9 +20,13 @@ const getTimeRange = (start_time, end_time) => {
       }
       // CASE #1.2: If the ending hour is NOT 12 AM.
     } else {
+      let hour = Number(start_time[0]);
       // Add the morning hours to the range, from start to end.
-      for (let hour = start_time[0]; hour < end_time[0]; hour++) {
+      range.push(`${hour}am`);
+      hour++;
+      while (hour < Number(end_time[0])) {
         range.push(`${hour}am`);
+        hour++;
       }
     }
   }
@@ -35,7 +40,7 @@ const getTimeRange = (start_time, end_time) => {
       range.push(`${hour}am`);
     }
     // If the ending hour is NOT 12 PM,
-    if (Number(start_time[0]) !== 12 && start_time[1] !== 'pm') {
+    if (Number(end_time[0]) !== 12) {
       range.push('12pm');
       // Add the afternoon hours to the range, from 1pm to the end.
       for (let hour = 1; hour < end_time[0]; hour++) {
@@ -51,10 +56,42 @@ const getTimeRange = (start_time, end_time) => {
     // If the starting hour is 12 PM,
     if (Number(start_time[0]) === 12 && start_time[1] === 'pm') {
       range.push('12pm');
-    }
-    // Add the afternoon hours to the range, from 1 PM to the end.
-    for (let hour = 1; hour < end_time[0]; hour++) {
+      for (let hour = 1; hour < end_time[0]; hour++) {
+        range.push(`${hour}pm`);
+      }
+      // If the starting hour is NOT 12 PM,
+    } else {
+      let hour = Number(start_time[0]);
+      // Add the afternoon hours to the range, from start to end.
       range.push(`${hour}pm`);
+      hour++;
+      while (hour < Number(end_time[0])) {
+        range.push(`${hour}pm`);
+        hour++;
+      }
+    }
+  }
+
+  // CASE #4: If the starting hour is in the afternoon and the ending hour is in the morning,
+  if (start_time.includes('p') && end_time.includes('a')) {
+    start_time = start_time.split(/(?=p)/g);
+    end_time = end_time.split(/(?=a)/g);
+    // If the starting hour is 12 PM,
+    if (Number(start_time[0]) === 12 && start_time[1] === 'pm') {
+      range.push('12pm');
+      for (let hour = 1; hour < end_time[0]; hour++) {
+        range.push(`${hour}pm`);
+      }
+      // If the starting hour is NOT 12 PM,
+    } else {
+      let hour = Number(start_time[0]);
+      // Add the afternoon hours to the range, from start to end.
+      range.push(`${hour}pm`);
+      hour++;
+      while (hour < Number(end_time[0])) {
+        range.push(`${hour}pm`);
+        hour++;
+      }
     }
   }
 
@@ -99,6 +136,8 @@ const getScheduledTasks = (filteredSchedule, time) => {
   for (const item of Object.values(filteredSchedule)) {
     const day_id = item['day_id'];
     const start_time = item.timeRange[0];
+    const lastHour = item.timeRange[item.timeRange.length - 1];
+
     switch (day_id) {
       case 1:
         scheduledTasks.sun.id = item.id;
@@ -106,6 +145,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.sun.name = item.task.name;
           scheduledTasks.sun.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.sun.lastHour = true;
         }
         break;
       case 2:
@@ -115,6 +157,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.mon.name = item.task.name;
           scheduledTasks.mon.description = item.task.description;
         }
+        if (lastHour === time) {
+          scheduledTasks.mon.lastHour = true;
+        }
         break;
       case 3:
         scheduledTasks.tues.id = item.id;
@@ -122,6 +167,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.tues.name = item.task.name;
           scheduledTasks.tues.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.tues.lastHour = true;
         }
         break;
       case 4:
@@ -131,6 +179,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.wed.name = item.task.name;
           scheduledTasks.wed.description = item.task.description;
         }
+        if (lastHour === time) {
+          scheduledTasks.wed.lastHour = true;
+        }
         break;
       case 5:
         scheduledTasks.thurs.id = item.id;
@@ -138,6 +189,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.thurs.name = item.task.name;
           scheduledTasks.thurs.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.thurs.lastHour = true;
         }
         break;
       case 6:
@@ -147,6 +201,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.fri.name = item.task.name;
           scheduledTasks.fri.description = item.task.description;
         }
+        if (lastHour === time) {
+          scheduledTasks.fri.lastHour = true;
+        }
         break;
       case 7:
         scheduledTasks.sat.id = item.id;
@@ -154,6 +211,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.sat.name = item.task.name;
           scheduledTasks.sat.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.sat.lastHour = true;
         }
         break;
     }
