@@ -3,12 +3,35 @@ import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
+<<<<<<< HEAD
 import Calendar from './Calendar';
+=======
+import SelectDeliverable from './SelectDeliverable';
+>>>>>>> feature/scheduler-menu
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+// Hooks
+import useAppData from '../../hooks/useAppData';
+import useVisualMode from '../../hooks/useVisualMode';
+
+const DELIVERABLES = "DELIVERABLES";
 
 
 export default function Scheduler() {
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
+  const {mode, transition} = useVisualMode(null);
+
+  const [open, setOpen] = React.useState(true);
+
+  const selectedProject = getSelectedProject(state);
+  const deliverables = getDeliverables(state, state.project);
+  const selectedDel = getSelectedDeliverable(state);
+
+  console.log("state =", state.deliverables);
+  console.log("SELECTED DEL=", selectedDel);
 
   let user = null;
   if (!localStorage.user) {
@@ -22,6 +45,10 @@ export default function Scheduler() {
     user = JSON.parse(localStorage.user);
   }
 
+  const handleOpen = () => {
+    setOpen(!open);
+  }
+// console.log("STATE.PROJECT", state.project);
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -30,7 +57,36 @@ export default function Scheduler() {
 
         <aside id="menu">
           <br />
-          <SelectProject />
+          <List sx={{ width: '100%', maxWidth: 300 }}>
+            <ListItemButton onClick={handleOpen}>
+              <ListItemText 
+              primary="Select Project" 
+              primaryTypographyProps={{
+              color: 'primary',
+              fontWeight: 'bold'
+              }} 
+              />
+
+            {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <SelectProject 
+              projects={Object.values(state.projects)} 
+              // value={state.project} 
+              onChange={setProject}
+              onClick={handleOpen}
+              transition={transition}
+              />
+              {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
+                { mode === DELIVERABLES && <SelectDeliverable
+                deliverables={deliverables}
+                onChange={setDeliverable} 
+                selectedDel={selectedDel}
+                selectedProject={selectedProject}
+                /> }
+              {/* </Collapse> */}
+            </Collapse>
+          </List>
           <br />
           <span><strong>Completed</strong></span>
           <br /><br />
