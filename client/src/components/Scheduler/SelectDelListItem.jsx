@@ -3,9 +3,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 export default function SelectDelListItem(props) {
+  const { id, name, setDeliverable } = props;
   return (
     <ListItemButton>
-      <ListItemText />
+      <ListItemText 
+      primary={name}
+      onClick={setDeliverable} 
+      />
     </ListItemButton>
   );
 }
