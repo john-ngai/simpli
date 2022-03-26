@@ -7,7 +7,13 @@ export default function SelectDelListItem(props) {
   return (
     <ListItemButton>
       <ListItemText 
+      sx={{
+        bgcolor: "lightgrey"
+      }}
       primary={name}
+      primaryTypographyProps={{
+        fontSize: 12
+      }}
       onClick={()=>{setDeliverable(id)}} 
       />
     </ListItemButton>
