@@ -29,11 +29,11 @@ module.exports = (db) => {
   });
 
   // PUT /schedule
-  router.put('/', (req,res) => {
-    const {day_id, start_time, end_time} = req.body;
-    const values = {day_id, start_time, end_time, task_id};
+  router.put('/new', (req,res) => {
+    const {start_time, end_time, day_id, task_id} = req.body;
+    const values = [start_time, end_time, day_id, task_id];
     const command = `
-    INSERT INTO schedule (day_id, start_time, end_time, task_id)
+    INSERT INTO schedule (start_time, end_time, day_id, task_id)
     VALUES ($1, $2, $3, $4)
     RETURNING *;
     `;

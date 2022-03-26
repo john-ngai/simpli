@@ -14,6 +14,7 @@ export default function useAppData() {
     deliverables: {},
     task: null,
     tasks: {},
+    scheduleItem: null,
     schedule: {},
     showDelivForm: false,
     showTaskForm: false,
