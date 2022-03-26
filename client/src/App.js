@@ -39,7 +39,8 @@ export default function App() {
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
   const selectedTask = getSelectedTask(state);
-  const deliverables = getDeliverables(state, state.project);const tasks = getTasks(state, state.deliverable);
+  const deliverables = getDeliverables(state, state.project);
+  const tasks = getTasks(state, state.deliverable);
 
   let user = null;
   if (!localStorage.user) {
