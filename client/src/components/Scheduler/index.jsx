@@ -3,11 +3,9 @@ import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
-<<<<<<< HEAD
 import Calendar from './Calendar';
-=======
 import SelectDeliverable from './SelectDeliverable';
->>>>>>> feature/scheduler-menu
+import SelectTask from './SelectTask';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
@@ -21,7 +19,7 @@ const DELIVERABLES = "DELIVERABLES";
 
 
 export default function Scheduler() {
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
   const {mode, transition} = useVisualMode(null);
 
   const [open, setOpen] = React.useState(true);
@@ -29,9 +27,12 @@ export default function Scheduler() {
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
+  const tasks = getTasks(state, state.deliverable);
+  const selectedTask = getSelectedTask(state);
 
-  console.log("state =", state.deliverables);
+  console.log("state.deliverables =", state.deliverables);
   console.log("SELECTED DEL=", selectedDel);
+  console.log("STATE.PROJECT", state.projects);
 
   let user = null;
   if (!localStorage.user) {
@@ -48,7 +49,7 @@ export default function Scheduler() {
   const handleOpen = () => {
     setOpen(!open);
   }
-// console.log("STATE.PROJECT", state.project);
+
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -85,6 +86,13 @@ export default function Scheduler() {
                 selectedProject={selectedProject}
                 /> }
               {/* </Collapse> */}
+              <SelectTask 
+              tasks={tasks}
+              onChange={setTask}
+              selectedProject={selectedProject}
+              selectedDel={selectedDel}
+              selectedTask={selectedTask}
+              />
             </Collapse>
           </List>
           <br />
