@@ -19,20 +19,20 @@ const DELIVERABLES = "DELIVERABLES";
 
 export default function Scheduler(props) {
   let user = null;
-
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
   const {mode, transition} = useVisualMode(null);
-
+  
+  console.log(openForm)
   const [open, setOpen] = useState(true);
 
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
 
-  console.log("state =", state.deliverables);
-  console.log("SELECTED DEL=", selectedDel);
+  // console.log("state =", state.deliverables);
+  // console.log("SELECTED DEL=", selectedDel);
 
   if (!localStorage.user) {
     return (
@@ -95,9 +95,16 @@ export default function Scheduler(props) {
           <span>32 of 54 Tasks</span>
           <br /><br />
           <AddCircleIcon id="schedule_task" className="mui_icons"
-            onClick={handleOpenForm}  
+            onClick={handleOpenForm}
           />
+        <div>
+          <PopupForm 
+          openForm={openForm}
+          handleOpenForm={handleOpenForm}
+          />
+        </div>
         </aside>
+
 
         <Calendar />
 

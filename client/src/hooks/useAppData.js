@@ -17,7 +17,6 @@ export default function useAppData() {
     schedule: {},
     showDelivForm: false,
     showTaskForm: false,
-    schedule: {},
   });
 
   useEffect(() => {

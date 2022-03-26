@@ -21,32 +21,18 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-// const saveDeliverable = (newDeliverable) => {
-//   const deliverable = newDeliverable.id;
-//   const deliverables = {
-//     ...state.deliverables,
-//     [newDeliverable.id]: newDeliverable,
-//   };
-//   const values = Object.values(state.projects)
-//   const updateCounter = values.map((project) => {
-//     if (newDeliverable.project_id === project.id) {
-//       return { ...project, count: project.count++ };
-//     }
-//     return project
-//   });
-//   setState({ ...state, deliverable, deliverables, updateCounter });
-// }
+
 export default function PopupForm(props) {
   const { state, setState, schedule } = useAppData();
 
-  const saveSchedule = (newScheduleItem) => {
-    const scheduleItem = newScheduleItem.id;
-    const schedule = {
-      ...state.schedule,
-      [newScheduleItem.id]: newScheduleItem
-    };
-    setState({ ...state, scheduleItem, schedule })
-  }
+  // const saveSchedule = (newScheduleItem) => {
+  //   const scheduleItem = newScheduleItem.id;
+  //   const schedule = {
+  //     ...state.schedule,
+  //     [newScheduleItem.id]: newScheduleItem
+  //   };
+  //   setState({ ...state, scheduleItem, schedule })
+  // }
 
   const data = {
     "1": {
@@ -210,8 +196,8 @@ export default function PopupForm(props) {
           </TextField>
         </FormControl>
         <Button variant="outlined" size="small" onClick={() => {
-          saveSchedule()
-          
+          // saveSchedule()
+          props.handleOpenForm()
           }}>
           Save
         </Button>
