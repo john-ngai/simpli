@@ -1,11 +1,18 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import useAppData from '../../hooks/useAppData';
 import SelectDelListItem from './SelectDelListItem';
 import { List, ListItemButton, ListItemText, ListSubheader } from '@mui/material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 export default function SelectDeliverable(props) {
   const {state} = useAppData();
   const {onChange} = props;
+
+  const [open, setOpen] = useState(true);
+  const handleOpen = () => {
+    setOpen(!open);
+  }
 
   // const delList = props.deliverables.map(deliverable => 
   //   <SelectDelListItem 
@@ -17,7 +24,7 @@ export default function SelectDeliverable(props) {
   // );
 
   const delList = props.deliverables.map(deliverable =>
-    <ListItemButton key={deliverable.id} id={deliverable.id} >
+    <ListItemButton key={deliverable.id} id={deliverable.id} onClick={handleOpen} >
       <ListItemText 
       primary={deliverable.name}
       primaryTypographyProps={{
@@ -30,8 +37,7 @@ export default function SelectDeliverable(props) {
 
   return (
   <List sx={{ width: 'auto'}} subheader={
-    <ListSubheader sx={{ textDecoration: "underline", '&:hover': { backgroundColor: "lightgray" } }} >Deliverables</ListSubheader>
-  } >
+    <ListSubheader sx={{ textDecoration: "underline", '&:hover': { backgroundColor: "lightgray" } }} >Deliverables</ListSubheader> } >
     {delList}
   </List>    
   )
