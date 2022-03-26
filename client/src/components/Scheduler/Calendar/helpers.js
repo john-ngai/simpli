@@ -136,6 +136,8 @@ const getScheduledTasks = (filteredSchedule, time) => {
   for (const item of Object.values(filteredSchedule)) {
     const day_id = item['day_id'];
     const start_time = item.timeRange[0];
+    const lastHour = item.timeRange[item.timeRange.length - 1];
+
     switch (day_id) {
       case 1:
         scheduledTasks.sun.id = item.id;
@@ -143,6 +145,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.sun.name = item.task.name;
           scheduledTasks.sun.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.sun.lastHour = true;
         }
         break;
       case 2:
@@ -152,6 +157,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.mon.name = item.task.name;
           scheduledTasks.mon.description = item.task.description;
         }
+        if (lastHour === time) {
+          scheduledTasks.mon.lastHour = true;
+        }
         break;
       case 3:
         scheduledTasks.tues.id = item.id;
@@ -159,6 +167,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.tues.name = item.task.name;
           scheduledTasks.tues.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.tues.lastHour = true;
         }
         break;
       case 4:
@@ -168,6 +179,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.wed.name = item.task.name;
           scheduledTasks.wed.description = item.task.description;
         }
+        if (lastHour === time) {
+          scheduledTasks.wed.lastHour = true;
+        }
         break;
       case 5:
         scheduledTasks.thurs.id = item.id;
@@ -175,6 +189,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.thurs.name = item.task.name;
           scheduledTasks.thurs.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.thurs.lastHour = true;
         }
         break;
       case 6:
@@ -184,6 +201,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.fri.name = item.task.name;
           scheduledTasks.fri.description = item.task.description;
         }
+        if (lastHour === time) {
+          scheduledTasks.fri.lastHour = true;
+        }
         break;
       case 7:
         scheduledTasks.sat.id = item.id;
@@ -191,6 +211,9 @@ const getScheduledTasks = (filteredSchedule, time) => {
         if (start_time === time) {
           scheduledTasks.sat.name = item.task.name;
           scheduledTasks.sat.description = item.task.description;
+        }
+        if (lastHour === time) {
+          scheduledTasks.sat.lastHour = true;
         }
         break;
     }
