@@ -1,5 +1,6 @@
 import * as React from 'react';
 import useAppData from '../../hooks/useAppData';
+import SelectProjectItem from './SelectProjectItem';
 import SelectDeliverable from './SelectDeliverable';
 
 import Box from '@mui/material/Box';
@@ -17,8 +18,10 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
 
-export default function SelectProject() {
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
+export default function SelectProject(props) {
+  const { state, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
+
+  const {onChange} = props;
 
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
@@ -26,12 +29,21 @@ export default function SelectProject() {
   console.log("state =", state.deliverables);
   console.log("SELECTED DEL=", selectedDel);
 
-  // const [project, setProject] = React.useState('');
-  const [open, setOpen] = React.useState(true);
+  const projectList = props.projects.map(project =>
+    <SelectProjectItem 
+    key={project.id}
+    id={project.id}
+    name={project.name}
+    selected={project.id === props.value}
+    setProject={onChange}
+    />
+  );
 
-  const handleChange = event => {
-    setProject(event.target.value);
-  };
+  // const [project, setProject] = React.useState('');
+
+  // const handleChange = event => {
+  //   setProject(event.target.value);
+  // };
 
   return (
     // <Box sx={{ minWidth: 175 }}>
@@ -53,8 +65,9 @@ export default function SelectProject() {
 
     // <SelectDeliverable deliverables={deliverables} selectedDel={selectedDel} onClick={setDeliverable}  />
 
-        <ListItemButton>
-          
-        </ListItemButton>
+
+      <List sx={{width: 'auto'}} component="div">
+          {projectList}
+      </List>
   );
 }
