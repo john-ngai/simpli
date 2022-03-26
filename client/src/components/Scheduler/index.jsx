@@ -9,10 +9,11 @@ import PopupForm from './Form';
 import SelectDeliverable from './SelectDeliverable';
 import SelectTask from './SelectTask';
 // Material-UI
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+
 // Hooks
 import useAppData from '../../hooks/useAppData';
 import useVisualMode from '../../hooks/useVisualMode';
@@ -28,6 +29,9 @@ export default function Scheduler(props) {
   const {mode, transition} = useVisualMode(null);
   
   const [open, setOpen] = useState(true);
+  const handleOpen = () => {
+    setOpen(!open);
+  }
 
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
@@ -45,11 +49,8 @@ export default function Scheduler(props) {
   } else {
     user = JSON.parse(localStorage.user);
   }
-
-  const handleOpen = () => {
-    setOpen(!open);
-  }
-
+// console.log(selectedProject)
+console.log(mode)
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -57,8 +58,7 @@ export default function Scheduler(props) {
       <main id="scheduler_main">
 
         <aside id="menu">
-          <br />
-          <List sx={{ width: '100%', maxWidth: 300 }}>
+        <List sx={{ width: '100%', maxWidth: 300 }}>
             <ListItemButton onClick={handleOpen}>
               <ListItemText 
               primary="Select Project" 
@@ -78,34 +78,7 @@ export default function Scheduler(props) {
               onClick={handleOpen}
               transition={transition}
               />
-              {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
-                { mode === DELIVERABLES && <SelectDeliverable
-                deliverables={deliverables}
-                onChange={setDeliverable} 
-                selectedDel={selectedDel}
-                selectedProject={selectedProject}
-                transition={transition}
-                /> }
-              {/* </Collapse> */}
-              { mode === TASKS && 
-              <Fragment>
-              <SelectDeliverable
-              deliverables={deliverables}
-              onChange={setDeliverable} 
-              selectedDel={selectedDel}
-              selectedProject={selectedProject}
-              transition={transition}
-              /> 
 
-              <SelectTask 
-              tasks={tasks}
-              onChange={setTask}
-              selectedProject={selectedProject}
-              selectedDel={selectedDel}
-              selectedTask={selectedTask}
-              /> 
-              </Fragment>
-              }
             </Collapse>
           </List>
           <br />
@@ -116,12 +89,17 @@ export default function Scheduler(props) {
           <span>32 of 54 Tasks</span>
           <br /><br />
           <AddCircleIcon id="schedule_task" className="mui_icons"
-            onClick={handleOpenForm}
+            onClick={() => {
+              transition('DELIVERABLES')
+              handleOpenForm()
+            }}
           />
         <div>
           <PopupForm 
           openForm={openForm}
           handleOpenForm={handleOpenForm}
+          selectedTask={selectedTask}
+          selectedProject={selectedProject}
           />
         </div>
         </aside>
