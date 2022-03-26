@@ -1,0 +1,67 @@
+#calendar {
+  border: 1px solid red;
+  height: 100%;
+  width: 80%;
+}
+
+#table {
+  border-collapse: collapse;
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 1500px;
+}
+
+.table {
+  height: 50px;
+  width: 250px;
+  text-align: center; 
+}
+
+.time {
+  border-radius: 10px;
+  width: 100px;
+}
+
+.header {
+  border: 2px solid transparent;
+  border-radius: 10px;
+}
+
+.item {
+  font-size: 13px;
+  word-wrap: break-all;
+  border-right: 2px solid rgb(220, 220, 220);
+  border-bottom: 2px solid rgb(220, 220, 220);
+}
+
+.last {
+  border-right: 2px solid transparent;
+}
+
+
+.booked {
+  background-color: lightcyan;
+  border-bottom: 2px solid lightcyan;
+  cursor: pointer;
+}
+
+.booked.name {
+  // background-color: lightcyan;
+  // border-bottom: 2px solid lightcyan;
+  // cursor: pointer;
+  max-width: 197.4px;
+  min-width: 197.4px;
+}
+
+.booked.bottom {
+  border-bottom: 2px solid rgb(220, 220, 220);
+}
+
+.completed {
+  background-color: rgb(142, 255, 193);
+  border-bottom: 2px solid rgb(142, 255, 193);
+  cursor: pointer; 
+}
