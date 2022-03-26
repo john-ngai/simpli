@@ -427,6 +427,16 @@ export default function useAppData() {
   }
   appData.completedTasks = completedTasks
 
+  const saveSchedule = (newScheduleItem) => {
+    const scheduleItem = newScheduleItem.task_id;
+    const schedule = {
+      ...state.schedule,
+      [newScheduleItem.id]: newScheduleItem
+    };
+    setState({ ...state, scheduleItem, schedule })
+  }
+  appData.saveSchedule = saveSchedule
 
+  
   return appData;
 }
