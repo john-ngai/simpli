@@ -10,6 +10,7 @@ import {
   Box,
   Container,
   Typography,
+  styled
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import NavBar from '../components/NavBar';
@@ -54,6 +55,25 @@ export default function Login() {
       .catch(() => setError("Not a registered email"));
   };
 
+  // Custom theme for textfield inputs
+  const PasswordInput = styled(TextField)({
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'white',
+        background: 'transparent',
+        color: '#ffffff'
+      },
+      '&:hover fieldset': {
+        borderColor: 'white',
+        color: '#ffffff'
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+        color: '#ffffff'
+      }
+    }
+  })
+
   return (
     <div id="container_login">
       <NavBar />
@@ -82,6 +102,7 @@ export default function Login() {
             <TextField
               fullWidth
               required
+              sx={{ color: 'white', bgcolor: 'white', border: 'white' }}
               margin="normal"
               label="Email"
               type="text"
@@ -90,16 +111,18 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <br />
-            <TextField
+            <PasswordInput id="password_input" fullWidth required />
+            {/* <TextField
               fullWidth
               required
+              sx={{ color: 'white' }}
               margin="normal"
               label="Password"
               type="password"
               value={password}
               placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)}
-            />
+            /> */}
             <br />
             <Button
               fullWidth
