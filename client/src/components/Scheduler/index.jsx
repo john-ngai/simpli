@@ -1,26 +1,36 @@
 // import React, { Fragment } from 'react';
-import { React, useState } from 'react';
+import { React, useState, useMemo, Fragment } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
+import SelectProject from './SelectProject';
 import Calendar from './Calendar';
 import PopupForm from './Form';
-
+import SelectDeliverable from './SelectDeliverable';
+import SelectTask from './SelectTask';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 // Hooks
 import useAppData from '../../hooks/useAppData';
 import useVisualMode from '../../hooks/useVisualMode';
 
+const DELIVERABLES = "DELIVERABLES";
+const TASKS = "TASKS";
 
 export default function Scheduler(props) {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, getSelectedProject, getDeliverables, getSelectedDeliverable, getTasks, getSelectedTask } = useAppData();
-
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
+  const {mode, transition} = useVisualMode(null);
+  
   const [open, setOpen] = useState(true);
 
+  const selectedProject = getSelectedProject(state);
+  const deliverables = getDeliverables(state, state.project);
+  const selectedDel = getSelectedDeliverable(state);
+  const tasks = getTasks(state, state.deliverable);
   const selectedTask = getSelectedTask(state);
 
   if (!localStorage.user) {
@@ -34,10 +44,6 @@ export default function Scheduler(props) {
     user = JSON.parse(localStorage.user);
   }
 
-  const handleOpen = () => {
-    setOpen(!open);
-  }
-
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -45,8 +51,6 @@ export default function Scheduler(props) {
       <main id="scheduler_main">
 
         <aside id="menu">
-          <br />
-
           <br />
           <span><strong>Completed</strong></span>
           <br /><br />
@@ -61,6 +65,7 @@ export default function Scheduler(props) {
           <PopupForm 
           openForm={openForm}
           handleOpenForm={handleOpenForm}
+          selectedTask={selectedTask}
           />
         </div>
         </aside>
