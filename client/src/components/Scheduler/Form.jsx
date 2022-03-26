@@ -19,17 +19,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import useVisualMode from '../../hooks/useVisualMode';
 const DELIVERABLES = "DELIVERABLES";
 const TASKS = "TASKS";
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+
 
 export default function PopupForm(props) {
   const { saveSchedule } = useAppData();
@@ -180,43 +170,6 @@ console.log(selectedTask)
             </Collapse>
           </List>
         <FormControl sx={{ width: '50ch' }}>
-
-          {/* <div>
-            <TextField
-              disabled
-              id="standard-helperText"
-              label="Task Name"
-              defaultValue={selectedTask.name}
-              helperText="Task Name"
-              variant="standard"
-            />
-            <TextField
-            disabled
-              id="standard-helperText"
-              label="Task Description"
-              defaultValue={selectedTask.description}
-              helperText="Task Description"
-              variant="standard"
-            />
-            <TextField
-            disabled
-              id="standard-helperText"
-              label="Task ID"
-              defaultValue={selectedTask.id}
-              // onChange={event => setTask_id(event.target.value)}
-              helperText="Task ID"
-              variant="standard"
-            />
-          </div>
-
-          <TextField
-              id="standard-helperText"
-              label="Task ID"
-              value={task_id}
-              onChange={event => setTask_id(event.target.value)}
-              helperText="Task ID"
-              variant="standard"
-            /> */}
           {selectedTask && 
           <div>
           <div style={{display:"flex"}} >
