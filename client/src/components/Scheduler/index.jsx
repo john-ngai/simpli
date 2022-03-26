@@ -1,16 +1,39 @@
-import React from 'react';
+import { React, useState, useMemo } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
+import PopupForm from './Form';
 import Calendar from './Calendar';
+import SelectDeliverable from './SelectDeliverable';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+// Hooks
+import useAppData from '../../hooks/useAppData';
+import useVisualMode from '../../hooks/useVisualMode';
 
+const DELIVERABLES = "DELIVERABLES";
 
-export default function Scheduler() {
-
+export default function Scheduler(props) {
   let user = null;
+  const [openForm, setOpenForm] = useState(false);
+  const handleOpenForm = () => setOpenForm(!openForm);
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
+  const {mode, transition} = useVisualMode(null);
+  
+  console.log(openForm)
+  const [open, setOpen] = useState(true);
+
+  const selectedProject = getSelectedProject(state);
+  const deliverables = getDeliverables(state, state.project);
+  const selectedDel = getSelectedDeliverable(state);
+
+  // console.log("state =", state.deliverables);
+  // console.log("SELECTED DEL=", selectedDel);
+
   if (!localStorage.user) {
     return (
       <div id="scheduler_container">
@@ -22,6 +45,10 @@ export default function Scheduler() {
     user = JSON.parse(localStorage.user);
   }
 
+  const handleOpen = () => {
+    setOpen(!open);
+  }
+// console.log("STATE.PROJECT", state.project);
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -30,7 +57,36 @@ export default function Scheduler() {
 
         <aside id="menu">
           <br />
-          <SelectProject />
+          <List sx={{ width: '100%', maxWidth: 300 }}>
+            <ListItemButton onClick={handleOpen}>
+              <ListItemText 
+              primary="Select Project" 
+              primaryTypographyProps={{
+              color: 'primary',
+              fontWeight: 'bold'
+              }} 
+              />
+
+            {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <SelectProject 
+              projects={Object.values(state.projects)} 
+              // value={state.project} 
+              onChange={setProject}
+              onClick={handleOpen}
+              transition={transition}
+              />
+              {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
+                { mode === DELIVERABLES && <SelectDeliverable
+                deliverables={deliverables}
+                onChange={setDeliverable} 
+                selectedDel={selectedDel}
+                selectedProject={selectedProject}
+                /> }
+              {/* </Collapse> */}
+            </Collapse>
+          </List>
           <br />
           <span><strong>Completed</strong></span>
           <br /><br />
@@ -38,12 +94,22 @@ export default function Scheduler() {
           <br /><br />
           <span>32 of 54 Tasks</span>
           <br /><br />
-          <AddCircleIcon id="schedule_task" className="mui_icons" />
+          <AddCircleIcon id="schedule_task" className="mui_icons"
+            onClick={handleOpenForm}
+          />
+        <div>
+          <PopupForm 
+          openForm={openForm}
+          handleOpenForm={handleOpenForm}
+          />
+        </div>
         </aside>
+
 
         <Calendar />
 
       </main>
     </div>
+    
   );
 }
