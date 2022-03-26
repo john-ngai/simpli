@@ -49,7 +49,7 @@ export default function Scheduler(props) {
   } else {
     user = JSON.parse(localStorage.user);
   }
-
+console.log(selectedProject)
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -81,12 +81,16 @@ export default function Scheduler(props) {
             </Collapse>
           </List>
           <br />
-          <span><strong>Completed</strong></span>
-          <br /><br />
-          <span>7 of 12 Deliverables</span>
-          <br /><br />
-          <span>32 of 54 Tasks</span>
-          <br /><br />
+          {selectedProject && 
+          <div>
+            <span><strong>Project Progress</strong></span>
+            <br /><br />
+            <span>7 of {selectedProject.count} Deliverables</span>
+            <br /><br />
+            <span>32 of 54 Tasks</span>
+            <br /><br />
+          </div>
+          }
           <AddCircleIcon id="schedule_task" className="mui_icons"
             onClick={() => {
               transition('DELIVERABLES')
