@@ -41,22 +41,25 @@ export default function Scheduler() {
 
         <aside id="menu">
           <br />
-          <List>
-          <ListItemButton onClick={handleOpen}>
-            <ListItemText primary="Select Project" primaryTypographyProps={{
+          <List sx={{ width: '100%', maxWidth: 300 }}>
+            <ListItemButton onClick={handleOpen}>
+              <ListItemText 
+              primary="Select Project" 
+              primaryTypographyProps={{
               color: 'primary',
               fontWeight: 'bold'
-              }} />
-              {!open ? <ExpandMore/> : <ExpandLess/>}
-              </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div">
-                <SelectProject 
-                projects={Object.values(state.projects)} 
-                value={state.project} 
-                />
-                </List>
-              </Collapse>
+              }} 
+              />
+
+            {!open ? <ExpandMore/> : <ExpandLess/>}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <SelectProject 
+              projects={Object.values(state.projects)} 
+              value={state.project} 
+              onChange={setProject}
+              />
+            </Collapse>
           </List>
           <br />
           <span><strong>Completed</strong></span>
