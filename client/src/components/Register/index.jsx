@@ -1,7 +1,8 @@
 import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { FormGroup, FormControl, TextField } from '@mui/material';
+import { FormGroup, FormControl, FormControlLabel, TextField, CssBaseline, Link, Grid, Box, Container, Avatar, Button, Typography } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import useAppData from '../../hooks/useAppData';
 import NavBar from '../NavBar';
 import './index.scss'; // Temporary
@@ -57,30 +58,37 @@ export default function Register() {
   return (
     <div id="container_register">
       <NavBar />
-      <main>
-        <section>
-          <h1>Registration Page</h1>
-          <div>
-            <section className="user_validation">{error}</section>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box sx={{ marginTop: 8, display: "flex", flexDirection: "column", alignItems: "center" }} >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography variant='h5'>Registration Page</Typography>
             <br />
-            <FormGroup onSubmit={(e) => e.preventDefault()} >
-              <FormControl>
-                <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
-                <br />
-                <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-                <br />
-                <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-                <br />
-
-                <TextField label="Team" type="text" value={team} placeholder="Enter team code" onChange={(e) => setTeam(e.target.value)} />
-                <br />
-
-                <button type="submit" onClick={validation}>Register</button>
-              </FormControl>
-            </FormGroup>
-          </div>
-        </section>
-      </main>
+            <Typography sx={{fontSize: 16, color: "red" }} className="user_validation">{error}</Typography>
+            <br />
+            <Box component="form" onSubmit={(e) => e.preventDefault()} >
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                {/* <FormControl> */}
+                    <TextField label="Name" type="text" value={name} placeholder="Enter your full name" required fullWidth onChange={(e) => setName(e.target.value)} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField label="Email" type="text" value={email} placeholder="Enter email" required fullWidth onChange={(e) => setEmail(e.target.value)} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField label="Password" type="password" value={password} placeholder="Enter password" required fullWidth onChange={(e) => setPassword(e.target.value)} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField label="Team" type="text" value={team} placeholder="Enter team code" required fullWidth onChange={(e) => setTeam(e.target.value)} />
+                  </Grid>
+                </Grid>
+                <Button type="submit" fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} onClick={validation}>Register</Button>
+                {/* </FormControl> */}
+            </Box>
+        </Box>
+      </Container>
     </div>
   );
 }
