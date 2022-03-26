@@ -1,11 +1,13 @@
-import { React, useState, useMemo } from 'react';
+// import React, { Fragment } from 'react';
+import { React, useState, useMemo, Fragment } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
-import PopupForm from './Form';
 import Calendar from './Calendar';
+import PopupForm from './Form';
 import SelectDeliverable from './SelectDeliverable';
+import SelectTask from './SelectTask';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
@@ -16,12 +18,13 @@ import useAppData from '../../hooks/useAppData';
 import useVisualMode from '../../hooks/useVisualMode';
 
 const DELIVERABLES = "DELIVERABLES";
+const TASKS = "TASKS";
 
 export default function Scheduler(props) {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
   const {mode, transition} = useVisualMode(null);
   
   console.log(openForm)
@@ -30,9 +33,8 @@ export default function Scheduler(props) {
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
-
-  // console.log("state =", state.deliverables);
-  // console.log("SELECTED DEL=", selectedDel);
+  const tasks = getTasks(state, state.deliverable);
+  const selectedTask = getSelectedTask(state);
 
   if (!localStorage.user) {
     return (
@@ -48,7 +50,7 @@ export default function Scheduler(props) {
   const handleOpen = () => {
     setOpen(!open);
   }
-// console.log("STATE.PROJECT", state.project);
+
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -83,8 +85,28 @@ export default function Scheduler(props) {
                 onChange={setDeliverable} 
                 selectedDel={selectedDel}
                 selectedProject={selectedProject}
+                transition={transition}
                 /> }
               {/* </Collapse> */}
+              { mode === TASKS && 
+              <Fragment>
+              <SelectDeliverable
+              deliverables={deliverables}
+              onChange={setDeliverable} 
+              selectedDel={selectedDel}
+              selectedProject={selectedProject}
+              transition={transition}
+              /> 
+
+              <SelectTask 
+              tasks={tasks}
+              onChange={setTask}
+              selectedProject={selectedProject}
+              selectedDel={selectedDel}
+              selectedTask={selectedTask}
+              /> 
+              </Fragment>
+              }
             </Collapse>
           </List>
           <br />
