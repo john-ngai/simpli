@@ -9,6 +9,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import MenuItem from '@mui/material/MenuItem';
 import { Typography, Button } from '@mui/material';
 import useAppData from '../../hooks/useAppData';
+import axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -23,16 +24,35 @@ const style = {
 };
 
 export default function PopupForm(props) {
-  const { state, setState, schedule } = useAppData();
+  const { state, setState, schedule, selectedTask } = useAppData();
+  const [start_time, setStart_time] = useState('');
+  const [end_time, setEnd_time] = useState('');
+  const [day_id, setDay_id] = useState(1);
+  // const [task_id, setTask_id] = useState('');
 
-  // const saveSchedule = (newScheduleItem) => {
-  //   const scheduleItem = newScheduleItem.id;
-  //   const schedule = {
-  //     ...state.schedule,
-  //     [newScheduleItem.id]: newScheduleItem
-  //   };
-  //   setState({ ...state, scheduleItem, schedule })
-  // }
+  const saveSchedule = (newScheduleItem) => {
+    const scheduleItem = newScheduleItem.id;
+    const schedule = {
+      ...state.schedule,
+      [newScheduleItem.id]: newScheduleItem
+    };
+    setState({ ...state, scheduleItem, schedule })
+  }
+
+  const save = () => {
+    const scheduleItem = {
+      start_time: start_time,
+      end_time: end_time,
+      day_id: day_id,
+      task_id: props.selectedTask
+    }
+    axios.put('/schedule/new', scheduleItem)
+      .then(res => {
+        scheduleItem.id = res.data.id
+        console.log('res: ', res.data)
+        saveSchedule(scheduleItem)
+      })
+  }
 
   const data = {
     "1": {
@@ -135,7 +155,7 @@ export default function PopupForm(props) {
           <TextField
           id="standard-helperText"
           label="Task ID"
-          defaultValue={2}
+          defaultValue={selectedTask}
           helperText="Task ID"
           variant="standard"
           />
@@ -196,7 +216,7 @@ export default function PopupForm(props) {
           </TextField>
         </FormControl>
         <Button variant="outlined" size="small" onClick={() => {
-          // saveSchedule()
+          save()
           props.handleOpenForm()
           }}>
           Save
