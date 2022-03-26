@@ -122,8 +122,8 @@ export default function PopupForm(props) {
   return (
     <div>
     <Modal
-      open={props.open}
-      onClose={props.handleOpen}
+      open={props.openForm}
+      onClose={props.handleOpenForm}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >

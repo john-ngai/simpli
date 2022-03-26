@@ -30,13 +30,8 @@ export default function App() {
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
-    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable,
-    setDeliverablesPriority, setTaskPriority,
-    completeTask,
-    setTask, getTasks, getSelectedTask, deleteTask, saveTask,
-
-    showDelivForm, showTaskForm, editTask,
-    percentComplete, deliverablePercentComplete,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable,    setDeliverablesPriority, setTaskPriority, completeTask,
+    setTask, getTasks, getSelectedTask, deleteTask, saveTask, showDelivForm, showTaskForm, editTask, percentComplete, deliverablePercentComplete,
   } = useAppData();
   
   const { page, mode, transition, transitionPage, back } = useVisualMode(null);
