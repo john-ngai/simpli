@@ -11,7 +11,7 @@ export default function SelectProjectItem(props) {
       primary={name} 
       primaryTypographyProps={{
         textAlign: 'left',
-        fontSize: 12
+        fontSize: 14
       }}
       onClick={setProject} />
     </ListItemButton>
