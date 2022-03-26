@@ -70,7 +70,9 @@ export default function PopupForm(props) {
   ]
 
 
-  const [value, setValue] = useState(new Date());
+  const [value, setValue] = useState(new Date(0, 0, 0, 7));
+  const [value2, setValue2] = useState(new Date(0, 0, 0, 8));
+
   const [day, setDay] = useState('Monday')
 
   const handleTimeChange = (newValue) => {
@@ -124,36 +126,42 @@ export default function PopupForm(props) {
           />
           <div style={{display:"flex"}} >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <TimePicker
-          renderInput={(params) => <TextField {...params} />}
-          label="Start Time"
-          value={value}
-          onChange={handleTimeChange}
-          minTime={new Date(0, 0, 0, 7)}
-          maxTime={new Date(0, 0, 0, 23, 59)}
-          shouldDisableTime={(timeValue, clockType) => {
-            if (clockType === 'minutes' && timeValue !== 0) {
-              return true;
-            }
-            return false;
-          }}
-          />
+            <TimePicker
+            renderInput={(params) => <TextField {...params} />}
+            label="Start Time"
+            value={value}
+            views={["hours"]}
+            onChange={(newValue) => {
+              setValue(newValue);
+            }}
+            minTime={new Date(0, 0, 0, 7)}
+            maxTime={new Date(0, 0, 0, 23, 59)}
+            shouldDisableTime={(timeValue, clockType) => {
+              if (clockType === 'minutes' && timeValue !== 0) {
+                return true;
+              }
+              return false;
+            }}
+            />
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <TimePicker
-          renderInput={(params) => <TextField {...params} />}
-          label="End Time"
-          value={value}
-          onChange={handleTimeChange}
-          minTime={new Date(0, 0, 0, 7)}
-          maxTime={new Date(0, 0, 0, 23, 59)}
-          shouldDisableTime={(timeValue, clockType) => {
-            if (clockType === 'minutes' && timeValue !== 0) {
-              return true;
-            }
-            return false;
-          }}
-          />
+            <TimePicker
+            renderInput={(params) => <TextField {...params} />}
+            label="End Time"
+            value={value2}
+            views={["hours"]}
+            onChange={(newValue2) => {
+              setValue2(newValue2);
+            }}
+            minTime={new Date(0, 0, 0, 7)}
+            maxTime={new Date(0, 0, 0, 23, 59)}
+            shouldDisableTime={(timeValue, clockType) => {
+              if (clockType === 'minutes' && timeValue !== 0) {
+                return true;
+              }
+              return false;
+            }}
+            />
           </LocalizationProvider>
           </div>
           <TextField
