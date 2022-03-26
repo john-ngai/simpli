@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import axios from 'axios';
-import { FormGroup, FormControl, TextField } from '@mui/material';
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import {
+  Avatar,
+  Button,
+  TextField,
+  Grid,
+  Box,
+  Container,
+  Typography,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import NavBar from '../components/NavBar';
-import NavBar from '../NavBar';
-import './index.scss';
+import NavBar from "../NavBar";
+import "./index.scss";
 
 export default function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,50 +32,92 @@ export default function Login() {
     }
     // clears errors messages
     setError("");
-    // will need to update with cookies later on
     loginUser(email, password);
-  }
+  };
 
   const loginUser = (email, password) => {
     const user = {
       email: email,
-      password: password
-    }
+      password: password,
+    };
 
-    axios.post('/login', user)
-      .then(res => {
+    axios
+      .post("/login", user)
+      .then((res) => {
         if (res.data) {
-          localStorage.setItem('user', JSON.stringify(res.data));
-          navigate('/');
+          localStorage.setItem("user", JSON.stringify(res.data));
+          navigate("/");
         } else {
-          setError('Wrong password');
+          setError("Wrong password");
         }
       })
-      .catch(() => setError('Not a registered email'));
-  }
+      .catch(() => setError("Not a registered email"));
+  };
 
   return (
     <div id="container_login">
       <NavBar />
-      <main>
-        <section>
-          <h1>Login Page</h1>
-          <div>
-            <section className="user_validation">{error}</section>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "red" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography variant="h5">Login Page</Typography>
+          <br />
+          <Typography
+            sx={{ fontSize: 16, color: "red" }}
+            className="user_validation"
+          >
+            {error}
+          </Typography>
+          <br />
+          <Box component="form" onSubmit={(e) => e.preventDefault()}>
+            <TextField
+              fullWidth
+              required
+              margin="normal"
+              label="Email"
+              type="text"
+              value={email}
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <br />
-            <FormGroup onSubmit={(e) => e.preventDefault()} >
-              <FormControl>
-                <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-                <br />
-                <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-                <br />
-                <button type="submit" onClick={validation}>Login</button>
-              </FormControl>
-            </FormGroup>
-          </div>
-        </section>
-      </main>
+            <TextField
+              fullWidth
+              required
+              margin="normal"
+              label="Password"
+              type="password"
+              value={password}
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              type="submit"
+              onClick={validation}
+            >
+              Login
+            </Button>
+            <Grid>
+              <Link id="to_register" to="/register">
+                Don't have an account yet? Sign up
+              </Link>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
     </div>
   );
 }
-
