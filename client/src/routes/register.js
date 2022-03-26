@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { FormGroup, FormControl, TextField } from '@mui/material';
 import useAppData from '../hooks/useAppData';
 import NavBar from '../components/NavBar';
+import './login.scss'; // Temporary
 
 export default function Register() {
   const { state } = useAppData();
@@ -57,26 +58,28 @@ export default function Register() {
     <div id="container">
       <NavBar />
       <main>
-        <h1>Registration Page</h1>
-        <div>
-          <section className="user_validation">{error}</section>
-          <br />
-          <FormGroup onSubmit={(e) => e.preventDefault()} >
-            <FormControl>
-              <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
-              <br />
-              <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
-              <br />
-              <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-              <br />
-              
-              <TextField label="Team" type="text" value={team} placeholder="Enter team code" onChange={(e) => setTeam(e.target.value)} />
-              <br />
-              
-              <button type="submit" onClick={validation}>Register</button>
-            </FormControl>
-          </FormGroup>
-        </div>
+        <section>
+          <h1>Registration Page</h1>
+          <div>
+            <section className="user_validation">{error}</section>
+            <br />
+            <FormGroup onSubmit={(e) => e.preventDefault()} >
+              <FormControl>
+                <TextField label="Name" type="text" value={name} placeholder="Enter your full name" onChange={(e) => setName(e.target.value)} />
+                <br />
+                <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
+                <br />
+                <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+                <br />
+
+                <TextField label="Team" type="text" value={team} placeholder="Enter team code" onChange={(e) => setTeam(e.target.value)} />
+                <br />
+
+                <button type="submit" onClick={validation}>Register</button>
+              </FormControl>
+            </FormGroup>
+          </div>
+        </section>
       </main>
     </div>
   );
