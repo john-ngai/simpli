@@ -11,10 +11,14 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 // Hooks
 import useAppData from '../../hooks/useAppData';
+import useVisualMode from '../../hooks/useVisualMode';
+
+const DELIVERABLES = "DELIVERABLES";
 
 
 export default function Scheduler() {
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
+  const {mode, transition} = useVisualMode(null);
 
   const [open, setOpen] = React.useState(true);
 
@@ -59,23 +63,25 @@ export default function Scheduler() {
               }} 
               />
 
-            {!open ? <ExpandMore/> : <ExpandLess/>}
+            {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <SelectProject 
               projects={Object.values(state.projects)} 
               value={state.project} 
               onChange={setProject}
+              onClick={handleOpen}
+              transition={transition}
               />
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <SelectDeliverable
+              {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
+                { mode === DELIVERABLES && <SelectDeliverable
                 project={state.project}
                 deliverables={deliverables}
                 onChange={setDeliverable} 
                 selectedDel={selectedDel}
                 selectedProject={selectedProject}
-                />
-              </Collapse>
+                /> }
+              {/* </Collapse> */}
             </Collapse>
           </List>
           <br />
