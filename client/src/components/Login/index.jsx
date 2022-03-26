@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Avatar, Button, TextField, Grid, Box, Container, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -69,6 +70,9 @@ export default function Login() {
                 <TextField fullWidth required margin='normal' label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
                 <br />
                 <Button fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} type="submit" onClick={validation}>Login</Button>
+                <Grid container justifyContent="flex-end">
+                  <Link to="/register">Don't have an account yet? Sign up</Link>
+                </Grid>
             </Box>
         </Box>
       </Container>
