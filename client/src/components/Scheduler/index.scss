@@ -5,6 +5,7 @@ body {
 #scheduler_container {
   height: 1075px;
   width: 100%;
+  background-color: white;
 }
 
 #scheduler_main {
@@ -18,7 +19,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   height: inherit;
-  width: 10%;
+  width: 20%;
 }
 
 #schedule_task {

@@ -1,8 +1,9 @@
-import React from 'react';
+import { React, useState, useMemo } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
+import PopupForm from './Form';
 import Calendar from './Calendar';
 import SelectDeliverable from './SelectDeliverable';
 // Material-UI
@@ -16,21 +17,23 @@ import useVisualMode from '../../hooks/useVisualMode';
 
 const DELIVERABLES = "DELIVERABLES";
 
-
-export default function Scheduler() {
+export default function Scheduler(props) {
+  let user = null;
+  const [openForm, setOpenForm] = useState(false);
+  const handleOpenForm = () => setOpenForm(!openForm);
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
   const {mode, transition} = useVisualMode(null);
-
-  const [open, setOpen] = React.useState(true);
+  
+  console.log(openForm)
+  const [open, setOpen] = useState(true);
 
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
 
-  console.log("state =", state.deliverables);
-  console.log("SELECTED DEL=", selectedDel);
+  // console.log("state =", state.deliverables);
+  // console.log("SELECTED DEL=", selectedDel);
 
-  let user = null;
   if (!localStorage.user) {
     return (
       <div id="scheduler_container">
@@ -91,12 +94,22 @@ export default function Scheduler() {
           <br /><br />
           <span>32 of 54 Tasks</span>
           <br /><br />
-          <AddCircleIcon id="schedule_task" className="mui_icons" />
+          <AddCircleIcon id="schedule_task" className="mui_icons"
+            onClick={handleOpenForm}
+          />
+        <div>
+          <PopupForm 
+          openForm={openForm}
+          handleOpenForm={handleOpenForm}
+          />
+        </div>
         </aside>
+
 
         <Calendar />
 
       </main>
     </div>
+    
   );
 }
