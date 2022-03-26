@@ -45,13 +45,12 @@ export default function PopupForm(props) {
       start_time: formatAMPM(valueStartTime),
       end_time: formatAMPM(valueEndTime),
       day_id: day,
-      task_id: 1
+      task_id: props.selectedTask.id
     }
-    console.log(scheduleItem)
     axios.put('/schedule/new', scheduleItem)
       .then(res => {
         scheduleItem.id = res.data.id
-        console.log('res: ', res.data)
+        // console.log('res: ', res.data)
         saveSchedule(scheduleItem)
       })
   }
@@ -128,28 +127,44 @@ export default function PopupForm(props) {
           Schedule a Task
         </Typography>
         <FormControl sx={{ width: '50ch' }}>
-          {/* <TextField
-            id="standard-helperText"
-            label="Task Name"
-            // defaultValue={data[1].task.name}
-            helperText="Task Name"
-            variant="standard"
-          />
+          {props.selectedTask ? 
+          <div>
+            <TextField
+              disabled
+              id="standard-helperText"
+              label="Task Name"
+              defaultValue={props.selectedTask.name}
+              helperText="Task Name"
+              variant="standard"
+            />
+            <TextField
+            disabled
+              id="standard-helperText"
+              label="Task Description"
+              defaultValue={props.selectedTask.description}
+              helperText="Task Description"
+              variant="standard"
+            />
+            <TextField
+            disabled
+              id="standard-helperText"
+              label="Task ID"
+              defaultValue={props.selectedTask.id}
+              // onChange={event => setTask_id(event.target.value)}
+              helperText="Task ID"
+              variant="standard"
+            />
+          </div>
+          : 
           <TextField
-            id="standard-helperText"
-            label="Task Description"
-            // defaultValue={data[1].task.description}
-            helperText="Task Description"
-            variant="standard"
-          /> */}
-          <TextField
-          id="standard-helperText"
-          label="Task ID"
-          value={task_id}
-          onChange={event => setTask_id(event.target.value)}
-          helperText="Task ID"
-          variant="standard"
-          />
+              id="standard-helperText"
+              label="Task ID"
+              value={task_id}
+              onChange={event => setTask_id(event.target.value)}
+              helperText="Task ID"
+              variant="standard"
+            />
+            }
           <div style={{display:"flex"}} >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <TimePicker
