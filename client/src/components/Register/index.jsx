@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { FormGroup, FormControl, FormControlLabel, TextField, CssBaseline, Grid, Box, Container, Avatar, Button, Typography } from '@mui/material';
+import { TextField, CssBaseline, Grid, Box, Container, Avatar, Button, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import useAppData from '../../hooks/useAppData';
 import NavBar from '../NavBar';
@@ -60,7 +60,6 @@ export default function Register() {
     <div id="container_register">
       <NavBar />
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box sx={{ marginTop: 8, display: "flex", flexDirection: "column", alignItems: "center" }} >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
