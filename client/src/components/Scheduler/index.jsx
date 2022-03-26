@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react';
+// import React, { Fragment } from 'react';
+import { React, useState, useMemo, Fragment } from 'react';
 import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
 import Calendar from './Calendar';
+import PopupForm from './Form';
 import SelectDeliverable from './SelectDeliverable';
 import SelectTask from './SelectTask';
 // Material-UI
@@ -18,12 +20,15 @@ import useVisualMode from '../../hooks/useVisualMode';
 const DELIVERABLES = "DELIVERABLES";
 const TASKS = "TASKS";
 
-
-export default function Scheduler() {
+export default function Scheduler(props) {
+  let user = null;
+  const [openForm, setOpenForm] = useState(false);
+  const handleOpenForm = () => setOpenForm(!openForm);
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
   const {mode, transition} = useVisualMode(null);
-
-  const [open, setOpen] = React.useState(true);
+  
+  console.log(openForm)
+  const [open, setOpen] = useState(true);
 
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
@@ -31,13 +36,6 @@ export default function Scheduler() {
   const tasks = getTasks(state, state.deliverable);
   const selectedTask = getSelectedTask(state);
 
-  console.log("state.deliverables =", state.deliverables);
-  console.log("STATE.PROJECT", state.projects);
-  console.log("SelectedProject", selectedProject);
-  console.log("SelectedDel", selectedDel);
-  console.log("selectedTask:", selectedTask);
-
-  let user = null;
   if (!localStorage.user) {
     return (
       <div id="scheduler_container">
@@ -118,12 +116,22 @@ export default function Scheduler() {
           <br /><br />
           <span>32 of 54 Tasks</span>
           <br /><br />
-          <AddCircleIcon id="schedule_task" className="mui_icons" />
+          <AddCircleIcon id="schedule_task" className="mui_icons"
+            onClick={handleOpenForm}
+          />
+        <div>
+          <PopupForm 
+          openForm={openForm}
+          handleOpenForm={handleOpenForm}
+          />
+        </div>
         </aside>
+
 
         <Calendar />
 
       </main>
     </div>
+    
   );
 }
