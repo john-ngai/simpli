@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import FormControl, { useFormControl } from '@mui/material/FormControl';
@@ -10,7 +10,15 @@ import MenuItem from '@mui/material/MenuItem';
 import { Typography, Button } from '@mui/material';
 import useAppData from '../../hooks/useAppData';
 import axios from 'axios';
-
+import SelectProject from './SelectProject';
+import SelectDeliverable from './SelectDeliverable';
+import SelectTask from './SelectTask';
+import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import useVisualMode from '../../hooks/useVisualMode';
+const DELIVERABLES = "DELIVERABLES";
+const TASKS = "TASKS";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,7 +37,18 @@ export default function PopupForm(props) {
   const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
   const [day, setDay] = useState('');
   const [task_id, setTask_id] = useState('');
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
+  const {mode, transition} = useVisualMode(null);
+  const [open, setOpen] = useState(true);
+  const handleOpen = () => {
+    setOpen(!open);
+  }
 
+  const selectedProject = getSelectedProject(state);
+  const deliverables = getDeliverables(state, state.project);
+  const selectedDel = getSelectedDeliverable(state);
+  const tasks = getTasks(state, state.deliverable);
+  const selectedTask = getSelectedTask(state);
 
   function formatAMPM(date) {
     var hours = date.getHours();
@@ -45,7 +64,7 @@ export default function PopupForm(props) {
       start_time: formatAMPM(valueStartTime),
       end_time: formatAMPM(valueEndTime),
       day_id: day,
-      task_id: props.selectedTask.id
+      task_id: selectedTask.id
     }
     axios.put('/schedule/new', scheduleItem)
       .then(res => {
@@ -54,22 +73,6 @@ export default function PopupForm(props) {
         saveSchedule(scheduleItem)
       })
   }
-
-  // const data = {
-  //   "1": {
-  //     "id":1, 
-  //     "start_time":"12pm", 
-  //     "end_time":"2pm", 
-  //     "day_id":2, 
-  //     "task": {
-  //       "id":2,
-  //       "name":"Clean out the closet",
-  //       "description":"Place valuables somewhere safe"
-  //     }
-  //   }
-  // }
-  // To access values: 
-  // defaultValue={data[1].task.name}
 
   const days = [
     {
@@ -113,7 +116,7 @@ export default function PopupForm(props) {
     boxShadow: 24,
     p: 4,
   };
-
+console.log(selectedTask)
   return (
     <div>
     <Modal
@@ -126,14 +129,64 @@ export default function PopupForm(props) {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Schedule a Task
         </Typography>
+        <List sx={{ width: '100%', maxWidth: 300 }}>
+            <ListItemButton onClick={handleOpen}>
+              <ListItemText 
+              primary="Select Project" 
+              primaryTypographyProps={{
+              color: 'primary',
+              fontWeight: 'bold'
+              }} 
+              />
+
+            {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <SelectProject 
+              projects={Object.values(state.projects)} 
+              // value={state.project} 
+              onChange={setProject}
+              onClick={handleOpen}
+              transition={transition}
+              />
+              {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
+                { mode === DELIVERABLES && <SelectDeliverable
+                deliverables={deliverables}
+                onChange={setDeliverable} 
+                selectedDel={selectedDel}
+                selectedProject={selectedProject}
+                transition={transition}
+                /> }
+              {/* </Collapse> */}
+              { mode === TASKS && 
+              <Fragment>
+              <SelectDeliverable
+              deliverables={deliverables}
+              onChange={setDeliverable} 
+              selectedDel={selectedDel}
+              selectedProject={selectedProject}
+              transition={transition}
+              /> 
+
+              <SelectTask 
+              tasks={tasks}
+              onChange={setTask}
+              selectedProject={selectedProject}
+              selectedDel={selectedDel}
+              selectedTask={selectedTask}
+              /> 
+              </Fragment>
+              }
+            </Collapse>
+          </List>
         <FormControl sx={{ width: '50ch' }}>
-          {props.selectedTask ? 
-          <div>
+
+          {/* <div>
             <TextField
               disabled
               id="standard-helperText"
               label="Task Name"
-              defaultValue={props.selectedTask.name}
+              defaultValue={selectedTask.name}
               helperText="Task Name"
               variant="standard"
             />
@@ -141,7 +194,7 @@ export default function PopupForm(props) {
             disabled
               id="standard-helperText"
               label="Task Description"
-              defaultValue={props.selectedTask.description}
+              defaultValue={selectedTask.description}
               helperText="Task Description"
               variant="standard"
             />
@@ -149,13 +202,13 @@ export default function PopupForm(props) {
             disabled
               id="standard-helperText"
               label="Task ID"
-              defaultValue={props.selectedTask.id}
+              defaultValue={selectedTask.id}
               // onChange={event => setTask_id(event.target.value)}
               helperText="Task ID"
               variant="standard"
             />
           </div>
-          : 
+
           <TextField
               id="standard-helperText"
               label="Task ID"
@@ -163,8 +216,9 @@ export default function PopupForm(props) {
               onChange={event => setTask_id(event.target.value)}
               helperText="Task ID"
               variant="standard"
-            />
-            }
+            /> */}
+          {selectedTask && 
+          <div>
           <div style={{display:"flex"}} >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <TimePicker
@@ -216,6 +270,7 @@ export default function PopupForm(props) {
               </MenuItem>
             ))}
           </TextField>
+          </div>}
         </FormControl>
         <Button variant="outlined" size="small" onClick={() => {
           save()
