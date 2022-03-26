@@ -23,10 +23,13 @@ import _12AM from './_12AM';
 
 const helper = require('./helpers');
 
-export default function Calendar() {
-  const { state } = useAppData();
+export default function Calendar(props) {
+  const { state, getProjectSchedule } = useAppData();
+  const project = props.project;
   const schedule = state.schedule;
-  
+
+  const projectSchedule = getProjectSchedule(project, schedule);
+
   return (
     <section id="calendar">
       <table id="table">
@@ -42,24 +45,24 @@ export default function Calendar() {
           <td className="table header"><b>SATURDAY</b></td>
         </tr>
 
-        <_7AM schedule={schedule}/>
-        <_8AM schedule={schedule}/>
-        <_9AM schedule={schedule}/>
-        <_10AM schedule={schedule}/>
-        <_11AM schedule={schedule}/>
-        <_12PM schedule={schedule}/>
-        <_1PM schedule={schedule}/>
-        <_2PM schedule={schedule}/>
-        <_3PM schedule={schedule}/>
-        <_4PM schedule={schedule}/>
-        <_5PM schedule={schedule}/>
-        <_6PM schedule={schedule}/>
-        <_7PM schedule={schedule}/>
-        <_8PM schedule={schedule}/>
-        <_9PM schedule={schedule}/>
-        <_10PM schedule={schedule}/>
-        <_11PM schedule={schedule}/>
-        <_12AM schedule={schedule}/>
+        <_7AM schedule={projectSchedule}/>
+        <_8AM schedule={projectSchedule}/>
+        <_9AM schedule={projectSchedule}/>
+        <_10AM schedule={projectSchedule}/>
+        <_11AM schedule={projectSchedule}/>
+        <_12PM schedule={projectSchedule}/>
+        <_1PM schedule={projectSchedule}/>
+        <_2PM schedule={projectSchedule}/>
+        <_3PM schedule={projectSchedule}/>
+        <_4PM schedule={projectSchedule}/>
+        <_5PM schedule={projectSchedule}/>
+        <_6PM schedule={projectSchedule}/>
+        <_7PM schedule={projectSchedule}/>
+        <_8PM schedule={projectSchedule}/>
+        <_9PM schedule={projectSchedule}/>
+        <_10PM schedule={projectSchedule}/>
+        <_11PM schedule={projectSchedule}/>
+        <_12AM schedule={projectSchedule}/>
         </tbody>
       </table>
     </section>
