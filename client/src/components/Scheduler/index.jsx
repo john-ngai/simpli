@@ -3,6 +3,7 @@ import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
+import SelectDeliverable from './SelectDeliverable';
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
@@ -13,9 +14,16 @@ import useAppData from '../../hooks/useAppData';
 
 
 export default function Scheduler() {
-  const { state, setProject, getSelectedProject } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
 
   const [open, setOpen] = React.useState(true);
+
+  const selectedProject = getSelectedProject(state);
+  const deliverables = getDeliverables(state, state.project);
+  const selectedDel = getSelectedDeliverable(state);
+
+  console.log("state =", state.deliverables);
+  console.log("SELECTED DEL=", selectedDel);
 
   let user = null;
   if (!localStorage.user) {
@@ -59,6 +67,15 @@ export default function Scheduler() {
               value={state.project} 
               onChange={setProject}
               />
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <SelectDeliverable
+                project={state.project}
+                deliverables={deliverables}
+                onChange={setDeliverable} 
+                selectedDel={selectedDel}
+                selectedProject={selectedProject}
+                />
+              </Collapse>
             </Collapse>
           </List>
           <br />
