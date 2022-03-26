@@ -49,7 +49,7 @@ export default function Scheduler(props) {
   const handleOpen = () => {
     setOpen(!open);
   }
-console.log(selectedTask)
+
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
