@@ -73,7 +73,7 @@ export default function PopupForm(props) {
   const [value, setValue] = useState(new Date());
   const [day, setDay] = useState('Monday')
 
-  const handleChange = (newValue) => {
+  const handleTimeChange = (newValue) => {
     setValue(newValue);
   };
 
@@ -125,17 +125,35 @@ export default function PopupForm(props) {
           <div style={{display:"flex"}} >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
           <TimePicker
-            label="Start Time"
-            value={value}
-            onChange={handleChange}
-            renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => <TextField {...params} />}
+          label="Start Time"
+          value={value}
+          onChange={handleTimeChange}
+          minTime={new Date(0, 0, 0, 7)}
+          maxTime={new Date(0, 0, 0, 23, 59)}
+          shouldDisableTime={(timeValue, clockType) => {
+            if (clockType === 'minutes' && timeValue !== 0) {
+              return true;
+            }
+            return false;
+          }}
           />
+          </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
           <TimePicker
-            label="End Time"
-            value={value}
-            onChange={handleChange}
-            renderInput={(params) => <TextField {...params} />}
-            />
+          renderInput={(params) => <TextField {...params} />}
+          label="End Time"
+          value={value}
+          onChange={handleTimeChange}
+          minTime={new Date(0, 0, 0, 7)}
+          maxTime={new Date(0, 0, 0, 23, 59)}
+          shouldDisableTime={(timeValue, clockType) => {
+            if (clockType === 'minutes' && timeValue !== 0) {
+              return true;
+            }
+            return false;
+          }}
+          />
           </LocalizationProvider>
           </div>
           <TextField
