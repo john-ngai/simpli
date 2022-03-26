@@ -100,7 +100,7 @@ export default function PopupForm(props) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: 700,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -119,19 +119,20 @@ console.log(selectedTask)
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Schedule a Task
         </Typography>
-        <List sx={{ width: '100%', maxWidth: 300 }}>
+        <List sx={{ width: '100%', maxWidth: 700 }}>
             <ListItemButton onClick={handleOpen}>
               <ListItemText 
               primary="Select Project" 
               primaryTypographyProps={{
-              color: 'primary',
-              fontWeight: 'bold'
+                color: 'primary',
+                fontWeight: 'bold'
               }} 
               />
 
             {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
+                <div style={{display:"flex"}} >
               <SelectProject 
               projects={Object.values(state.projects)} 
               // value={state.project} 
@@ -167,11 +168,12 @@ console.log(selectedTask)
               /> 
               </Fragment>
               }
+          </div>
             </Collapse>
           </List>
-        <FormControl sx={{ width: '50ch' }}>
           {selectedTask && 
           <div>
+        <FormControl sx={{ width: '50ch' }}>
           <div style={{display:"flex"}} >
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <TimePicker
@@ -223,14 +225,17 @@ console.log(selectedTask)
               </MenuItem>
             ))}
           </TextField>
-          </div>}
         </FormControl>
         <Button variant="outlined" size="small" onClick={() => {
           save()
           props.handleOpenForm()
-          }}>
+          // setProject(null)
+          // setDeliverable(null)
+          // setTask(null)
+        }}>
           Save
         </Button>
+        </div>}
       </Box>
     </Modal>
   </div>
