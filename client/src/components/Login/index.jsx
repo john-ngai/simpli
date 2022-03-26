@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-import { FormGroup, FormControl, TextField } from '@mui/material';
+import { Avatar, Button, TextField, Grid, Box, Container, Typography } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 // import NavBar from '../components/NavBar';
 import NavBar from '../NavBar';
 import './index.scss';
@@ -48,24 +49,27 @@ export default function Login() {
   return (
     <div id="container_login">
       <NavBar />
-      <main>
-        <section>
-          <h1>Login Page</h1>
+      <Container component="main" maxWidth="xs">
+        <Box>
+          <Avatar>
+
+          </Avatar>
+          <Typography>Login Page</Typography>
           <div>
-            <section className="user_validation">{error}</section>
+            <Box className="user_validation">{error}</Box>
             <br />
             <FormGroup onSubmit={(e) => e.preventDefault()} >
-              <FormControl>
+              
                 <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
                 <br />
                 <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
                 <br />
                 <button type="submit" onClick={validation}>Login</button>
-              </FormControl>
+             
             </FormGroup>
           </div>
-        </section>
-      </main>
+        </Box>
+      </Container>
     </div>
   );
 }
