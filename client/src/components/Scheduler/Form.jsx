@@ -106,7 +106,7 @@ export default function PopupForm(props) {
     boxShadow: 24,
     p: 4,
   };
-console.log(props.selectedProject)
+
   return (
     <div>
     <Modal
