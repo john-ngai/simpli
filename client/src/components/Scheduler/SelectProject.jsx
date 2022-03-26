@@ -59,8 +59,6 @@ export default function SelectProject(props) {
     //   </FormControl>
     // </Box>
 
-    // <SelectDeliverable deliverables={deliverables} selectedDel={selectedDel} onClick={setDeliverable}  />
-
     
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List sx={{width: 'auto'}} component="div">
