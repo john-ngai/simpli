@@ -3,11 +3,8 @@ import './index.scss';
 // Components
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
-<<<<<<< HEAD
 import Calendar from './Calendar';
-=======
 import SelectDeliverable from './SelectDeliverable';
->>>>>>> feature/scheduler-menu
 // Material-UI
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
