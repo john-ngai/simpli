@@ -2,6 +2,7 @@ import * as React from 'react';
 import useAppData from '../../hooks/useAppData';
 import SelectProjectItem from './SelectProjectItem';
 import SelectDeliverable from './SelectDeliverable';
+import handleOpen from './index';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -22,6 +23,7 @@ export default function SelectProject(props) {
   const { state, getDeliverables, setDeliverable, getSelectedDeliverable } = useAppData();
 
   const {onChange} = props;
+  const [open, setOpen] = React.useState(true);
 
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
@@ -66,8 +68,10 @@ export default function SelectProject(props) {
     // <SelectDeliverable deliverables={deliverables} selectedDel={selectedDel} onClick={setDeliverable}  />
 
 
+    <Collapse in={open} timeout="auto" unmountOnExit>
       <List sx={{width: 'auto'}} component="div">
           {projectList}
       </List>
+    </Collapse>
   );
 }
