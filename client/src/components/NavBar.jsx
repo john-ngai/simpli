@@ -5,7 +5,7 @@ import "./NavBar.css";
 export default function Navbar(props) {
   return (
     <nav id="navbar">
-      <span id="app_name">Project Tracker</span>
+      <span id="app_name">Simpli</span>
       <span className="nav_item">
         <Link to="/">Summary</Link>
       </span>
@@ -18,7 +18,7 @@ export default function Navbar(props) {
         {!props.user && <Link to="/login">Login</Link>}
         {props.user && <a href="" onClick={() => localStorage.removeItem('user')}>Logout</a>}
       </span>
-      <span className="nav_item">Logged in as: {props.user}</span>
+      {props.user && <span className="nav_item">Logged in as: {props.user}</span> }
     </nav>
   )
 }
