@@ -70,14 +70,10 @@ export default function PopupForm(props) {
   ]
 
 
-  const [value, setValue] = useState(new Date(0, 0, 0, 7));
-  const [value2, setValue2] = useState(new Date(0, 0, 0, 8));
+  const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
+  const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
 
   const [day, setDay] = useState('Monday')
-
-  const handleTimeChange = (newValue) => {
-    setValue(newValue);
-  };
 
   const handleDayChange = (event) => {
     setDay(event.target.value);
@@ -129,10 +125,10 @@ export default function PopupForm(props) {
             <TimePicker
             renderInput={(params) => <TextField {...params} />}
             label="Start Time"
-            value={value}
+            value={valueStartTime}
             views={["hours"]}
             onChange={(newValue) => {
-              setValue(newValue);
+              setValueStartTime(newValue);
             }}
             minTime={new Date(0, 0, 0, 7)}
             maxTime={new Date(0, 0, 0, 23, 59)}
@@ -148,10 +144,10 @@ export default function PopupForm(props) {
             <TimePicker
             renderInput={(params) => <TextField {...params} />}
             label="End Time"
-            value={value2}
+            value={valueEndTime}
             views={["hours"]}
-            onChange={(newValue2) => {
-              setValue2(newValue2);
+            onChange={(newValue) => {
+              setValueEndTime(newValue);
             }}
             minTime={new Date(0, 0, 0, 7)}
             maxTime={new Date(0, 0, 0, 23, 59)}
