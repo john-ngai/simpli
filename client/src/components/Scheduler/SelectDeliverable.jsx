@@ -5,7 +5,7 @@ import { List, ListItemButton, ListItemText } from '@mui/material';
 
 export default function SelectDeliverable(props) {
   const {state} = useAppData();
-  const {onClick} = props;
+  const {onClick, setDeliverable} = props;
 
   // const delList = props.deliverables.map(deliverable => {
   //   <SelectDelListItem 
@@ -16,10 +16,18 @@ export default function SelectDeliverable(props) {
   //   />;
   // });
 
+  const delList = props.deliverables.map(deliverable => {
+    <ListItemButton key={deliverable.id} id={deliverable.id} >
+      <ListItemText 
+      primary={deliverable.name}
+      onClick={()=>{setDeliverable(deliverable.id)}} 
+      />
+    </ListItemButton>
+  })
+
   return (
-    <List sx={{ width: 'auto' }} >
-      {delList}
-    </List>
-    
-  );
+  <List sx={{ width: 'auto' }} >
+    {delList}
+  </List>    
+  )
 }

@@ -44,7 +44,7 @@ export default function Scheduler() {
   const handleOpen = () => {
     setOpen(!open);
   }
-
+// console.log("STATE.PROJECT", state.project);
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -68,14 +68,13 @@ export default function Scheduler() {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <SelectProject 
               projects={Object.values(state.projects)} 
-              value={state.project} 
+              // value={state.project} 
               onChange={setProject}
               onClick={handleOpen}
               transition={transition}
               />
               {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
                 { mode === DELIVERABLES && <SelectDeliverable
-                project={state.project}
                 deliverables={deliverables}
                 onChange={setDeliverable} 
                 selectedDel={selectedDel}
