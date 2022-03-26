@@ -4,8 +4,13 @@ module.exports = (db) => {
   // GET /schedule
   router.get('/', (req, res) => {
     const command = `
-      SELECT schedule.*, name, description
-      FROM schedule JOIN tasks ON task_id = tasks.id;
+      SELECT schedule.*,
+        tasks.name,
+        tasks.description,
+        project_id
+      FROM schedule
+        JOIN tasks ON task_id = tasks.id
+        JOIN deliverables ON deliverable_id = deliverables.id;
     `;
     db.query(command)
       .then(data => {
@@ -17,6 +22,7 @@ module.exports = (db) => {
             start_time: element['start_time'],
             end_time: element['end_time'],
             day_id: element['day_id'],
+            project_id: element['project_id'],
             task: {
               id: element['task_id'],
               name: element.name,

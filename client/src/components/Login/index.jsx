@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { FormGroup, FormControl, TextField } from '@mui/material';
-import NavBar from '../components/NavBar';
-import './login.scss';
+// import NavBar from '../components/NavBar';
+import NavBar from '../NavBar';
+import './index.scss';
 
 export default function Login() {
 
@@ -45,7 +46,7 @@ export default function Login() {
   }
 
   return (
-    <div id="container">
+    <div id="container_login">
       <NavBar />
       <main>
         <section>

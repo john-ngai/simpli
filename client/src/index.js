@@ -6,8 +6,8 @@ import App from './App';
 import Scheduler from './components/Scheduler';
 import Schedule from './routes/Schedule';
 import Schedule2 from './routes/Schedule2';
-import Register from './routes/register';
-import Login from './routes/login';
+import Register from './components/Register';
+import Login from './components/Login';
 import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById('root');
