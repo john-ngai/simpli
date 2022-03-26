@@ -2,9 +2,9 @@ import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { FormGroup, FormControl, TextField } from '@mui/material';
-import useAppData from '../hooks/useAppData';
-import NavBar from '../components/NavBar';
-import './login.scss'; // Temporary
+import useAppData from '../../hooks/useAppData';
+import NavBar from '../NavBar';
+import './index.scss'; // Temporary
 
 export default function Register() {
   const { state } = useAppData();
@@ -55,7 +55,7 @@ export default function Register() {
   }
 
   return (
-    <div id="container">
+    <div id="container_register">
       <NavBar />
       <main>
         <section>
