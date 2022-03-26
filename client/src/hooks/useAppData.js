@@ -14,6 +14,7 @@ export default function useAppData() {
     deliverables: {},
     task: null,
     tasks: {},
+    schedule: {},
     showDelivForm: false,
     showTaskForm: false,
     percent: null,
@@ -23,15 +24,17 @@ export default function useAppData() {
     Promise.all([
       axios.get('/projects', { headers: authHeader() }),
       axios.get('/deliverables', { headers: authHeader() }),
-      axios.get('/tasks', { headers: authHeader() })
+      axios.get('/tasks', { headers: authHeader() }),
+      axios.get('/schedule')
     ])
       .then(all => {
-        const [projects, deliverables, tasks] = all;
+        const [projects, deliverables, tasks, schedule] = all;
         setState(prev => ({
           ...prev,
           projects: projects.data,
           deliverables: deliverables.data,
           tasks: tasks.data,
+          schedule: schedule.data,
         }));
       })
   }, [])
