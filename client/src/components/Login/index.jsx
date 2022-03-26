@@ -50,24 +50,26 @@ export default function Login() {
     <div id="container_login">
       <NavBar />
       <Container component="main" maxWidth="xs">
-        <Box>
-          <Avatar>
-
+        <Box sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          <Avatar sx={{ m: 1, bgcolor: 'red'}}>
+            <LockOutlinedIcon />
           </Avatar>
-          <Typography>Login Page</Typography>
-          <div>
-            <Box className="user_validation">{error}</Box>
+          <Typography variant='h5'>Login Page</Typography>
+          <br />
+            <Typography sx={{ fontSize: 16, color: 'red' }} className="user_validation">{error}</Typography>
             <br />
-            <FormGroup onSubmit={(e) => e.preventDefault()} >
-              
-                <TextField label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
+            <Box component="form" onSubmit={(e) => e.preventDefault()} >
+                <TextField fullWidth required margin='normal' label="Email" type="text" value={email} placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
                 <br />
-                <TextField label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+                <TextField fullWidth required margin='normal' label="Password" type="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
                 <br />
-                <button type="submit" onClick={validation}>Login</button>
-             
-            </FormGroup>
-          </div>
+                <Button fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} type="submit" onClick={validation}>Login</Button>
+            </Box>
         </Box>
       </Container>
     </div>
