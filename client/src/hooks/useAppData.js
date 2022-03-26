@@ -14,6 +14,7 @@ export default function useAppData() {
     deliverables: {},
     task: null,
     tasks: {},
+    scheduleItem: null,
     schedule: {},
     showDelivForm: false,
     showTaskForm: false,
@@ -438,5 +439,15 @@ export default function useAppData() {
   }
   appData.getProjectSchedule = getProjectSchedule;
 
+  const saveSchedule = (newScheduleItem) => {
+    const scheduleItem = newScheduleItem.task_id;
+    const schedule = {
+      ...state.schedule,
+      [newScheduleItem.id]: newScheduleItem
+    };
+    setState({ ...state, scheduleItem, schedule })
+  }
+  appData.saveSchedule = saveSchedule
+  
   return appData;
 }
