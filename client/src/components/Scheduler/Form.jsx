@@ -100,7 +100,7 @@ export default function PopupForm(props) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 700,
-    bgcolor: 'background.paper',
+    bgcolor: 'red',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -133,19 +133,19 @@ console.log(props.mode)
             </ListItemButton> 
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <div style={{display:"flex"}} >
-              <SelectProject 
+              {/* <SelectProject 
               projects={Object.values(state.projects)} 
               // value={state.project} 
               onChange={setProject}
               onClick={handleOpen}
               transition={transition}
-              />
+              /> */}
               <Collapse in={open} timeout="auto" unmountOnExit>
                 {mode === DELIVERABLES && 
                 <Fragment>
                 <SelectDeliverable
                 projects={Object.values(state.projects)}
-                deliverables={deliverables}
+                deliverables={getDeliverables(state, Object.values(state.projects))}
                 onChange={setDeliverable} 
                 selectedDel={selectedDel}
                 value={selectedProject}
