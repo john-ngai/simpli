@@ -13,7 +13,6 @@
   font-weight: bold;
   text-decoration: none;
   color: white;
-  /* padding-top: 8px; */
 }
 
 .nav_wrapper {
@@ -21,9 +20,6 @@
 }
 
 .nav_item {
-  /* display: flex;
-  flex-direction: column-reverse; */
-  /* justify-content: space-between; */
   padding: 10px;
   padding-top: 12px;
 }
@@ -36,8 +32,6 @@
 
 .login_user {
   padding-top: 12px;
-  /* display: inline;
-  justify-content: flex-end; */
 }
 
 .login_nav :link {

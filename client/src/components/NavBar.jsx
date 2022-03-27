@@ -11,7 +11,6 @@ export default function Navbar(props) {
         <Link to="/">Summary</Link>
       </span>
       <span className="nav_item">
-        {/* <Link to="/schedule">Schedule</Link> */}
         <Link to="/scheduler">Scheduler</Link>
       </span>
       </div>
