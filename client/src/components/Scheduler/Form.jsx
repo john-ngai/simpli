@@ -129,7 +129,7 @@ export default function PopupForm(props) {
           </Typography>
           
           <List sx={{ width: '100%', maxWidth: 700 }}>
-            <ListItemButton onClick={handleOpen}>
+            {/* <ListItemButton onClick={handleOpen}>
               <ListItemText
                 // primary="Select Project"
                 primary="Select Deliverable"
@@ -140,8 +140,8 @@ export default function PopupForm(props) {
               />
 
               {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            </ListItemButton> */}
+            {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
                 <div style={{display:"flex"}} >
               {/* <SelectProject 
               projects={Object.values(state.projects)} 
@@ -151,18 +151,17 @@ export default function PopupForm(props) {
               transition={transition}
               /> */}
               <Collapse in={open} timeout="auto" unmountOnExit>
-                {mode === DELIVERABLES && 
-                <Fragment>
+                
                 <SelectDeliverable
                 projects={Object.values(state.projects)}
-                deliverables={getDeliverables(state, Object.values(state.projects))}
+                deliverables={deliverables2}
                 onChange={setDeliverable} 
                 selectedDel={selectedDel}
                 value={selectedProject}
                 selectedProject={props.selectedProject}
                 onClick={handleOpen}
                 transition={transition}
-                /> </Fragment>}
+                />
               </Collapse>
               { mode === TASKS && 
               <Fragment>
@@ -173,18 +172,17 @@ export default function PopupForm(props) {
               selectedProject={selectedProject}
               transition={transition}
               /> 
-
-                    <SelectTask
-                      tasks={tasks}
-                      onChange={setTask}
-                      selectedProject={selectedProject}
-                      selectedDel={selectedDel}
-                      selectedTask={selectedTask}
-                    />
-                  </Fragment>
+              <SelectTask
+                tasks={tasks}
+                onChange={setTask}
+                selectedProject={selectedProject}
+                selectedDel={selectedDel}
+                selectedTask={selectedTask}
+              />
+            </Fragment>
                 }
               </div>
-            </Collapse>
+            {/* </Collapse> */}
           </List>
           {selectedTask &&
             <div>
