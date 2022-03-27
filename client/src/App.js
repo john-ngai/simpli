@@ -37,8 +37,6 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
-  console.log(selectedProject); // Remove test code.
-
   let user = null;
   if (!localStorage.user) {
     return (
@@ -141,13 +139,11 @@ export default function App() {
 
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}
-            back={back}
             transition={transition}
           />}
 
           {mode === EDIT_PROJECT && <Project
             editProject={editProject}
-            back={back}
             transition={transition}
             id={selectedProject.id}
             name={selectedProject.name}
