@@ -447,7 +447,42 @@ export default function useAppData() {
     };
     setState({ ...state, scheduleItem, schedule })
   }
-  appData.saveSchedule = saveSchedule
+  appData.saveSchedule = saveSchedule;
   
+
+  const completedTasksForProject = (state, project) => {
+    let finishedTasks = 0;
+    const selectedDelivs = getDeliverables(state, project)
+    const allTasks = Object.values(state.tasks);
+    selectedDelivs.forEach(deliverable => {
+      allTasks.forEach(task => {
+        if (task.deliverable_id === deliverable.id) {
+          if (task.status === true) {
+            finishedTasks++
+          }
+        }
+      })
+    })
+    return finishedTasks;
+  }
+  appData.completedTasksForProject = completedTasksForProject;
+
+  const totalTasksForProject = (state, project) => {
+    let totalTasks = 0;
+    const selectedDelivs = getDeliverables(state, project);
+    console.log(selectedDelivs)
+    const allTasks = Object.values(state.tasks);
+    selectedDelivs.forEach(deliverable => {
+      allTasks.forEach(task => {
+        if (task.deliverable_id === deliverable.id) {
+          totalTasks++
+        }
+      })
+    })
+    return totalTasks;
+  }
+  appData.totalTasksForProject = totalTasksForProject
+
+
   return appData;
 }
