@@ -18,7 +18,10 @@ export default function DeliverableListItem(props) {
 
   return (
     <li className="deliverable_list_item"
-      onClick={() => props.transition('TASKS')}
+      onClick={() => {
+        props.setDeliverable(props.id);
+        props.transition('TASKS');
+    }}
     >
       
       <div id="box">
