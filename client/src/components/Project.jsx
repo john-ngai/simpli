@@ -1,9 +1,13 @@
 // Dependencies
 import React, { useState } from 'react';
 import axios from 'axios';
+// Styling
+import './Project.scss';
 // Hooks
 import useAppData from '../hooks/useAppData';
 import authHeader from '../services/authHeader';
+// Material-UI
+import { Button } from '@mui/material';
 
 export default function Project(props) {
   const { state } = useAppData();
@@ -52,40 +56,48 @@ export default function Project(props) {
   };
 
   return (
-    <div>
-      <h1>{props.id ? 'Edit Project' : 'Create a New Project'}</h1>
+    <div id="container_project_new_edit">
+      <span id="title">{props.id ? 'Edit Project' : 'Create a New Project'}</span>
+      
+      <div id="container_form">
+        <span id="project_validation"><b>{error}</b></span>
+        <form onSubmit={event => event.preventDefault()}>
+          <input
+            id="input_name"
+            name="project name"
+            type="text"
+            maxLength="80"
+            placeholder="Enter Project Name"
+            value={name}
+            onChange={event => setName(event.target.value)}
+          />
 
-      <span className="project_validation"><b>{error}</b></span>
+          <br /><br />
 
-      <form onSubmit={event => event.preventDefault()}>
-        <label>Project Name:</label>
-        <br />
-        <input
-          name="name"
-          type="text"
-          placeholder="Enter Project Name"
-          value={name}
-          onChange={event => setName(event.target.value)}
-        />
+          <textarea
+            id="textarea_description"
+            name="project description"
+            rows="2"
+            cols="61"
+            maxLength="80"
+            placeholder="Enter Project Description"
+            value={description}
+            onChange={event => setDescription(event.target.value)}
+          />
 
-        <br /><br />
+          <br /><br />
 
-        <label>Project Description:</label>
-        <br />
-        <textarea
-          name="name"
-          rows="4"
-          cols="50"
-          placeholder="Enter Project Description"
-          value={description}
-          onChange={event => setDescription(event.target.value)}
-        />
+          <Button id="button_cancel"
+            variant="outlined"
+            onClick={() => props.transition('DELIVERABLES')}
+          >Cancel</Button>
 
-        <br /><br />
-
-        <button onClick={() => props.back()}>Back</button>
-        <button onClick={() => validate()}>Save</button>
-      </form>
+          <Button id="button_save"
+            variant="outlined"
+            onClick={() => validate()}
+          >Save</Button>
+        </form>
+      </div>
     </div>
   );
 }
