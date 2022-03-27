@@ -31,18 +31,18 @@
 .login_nav {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: flex-end;
-  /* align-items: center; */
   text-decoration: none;
 }
 
-#login_nav_item {
-  display: inline;
-  justify-content: flex-end;
+.login_user {
+  padding-top: 12px;
+  /* display: inline;
+  justify-content: flex-end; */
 }
 
 .login_nav :link {
   padding: 10px;
+  padding-top: 12px;
 }
 
 a {

@@ -18,8 +18,8 @@ export default function Navbar(props) {
       <span className="login_nav">
         {!props.user && <Link to="/register">Register</Link>}
         {!props.user && <Link to="/login">Login</Link>}
-        {props.user && <a href="" id="login_nav_item" onClick={() => localStorage.removeItem('user')}>Logout</a>}
-        {props.user && <span id="login_nav_item">Logged in as: {props.user}</span> }
+        {props.user && <a href="" onClick={() => localStorage.removeItem('user')}>Logout</a>}
+        {props.user && <span className="login_user">Logged in as: {props.user}</span> }
       </span>
     </nav>
   )
