@@ -22,12 +22,11 @@ const TASKS = "TASKS";
 
 
 export default function PopupForm(props) {
-  const { saveSchedule } = useAppData();
   const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
   const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
   const [day, setDay] = useState('');
   const [task_id, setTask_id] = useState('');
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, saveSchedule } = useAppData();
   const {mode, transition} = useVisualMode(null);
   const [open, setOpen] = useState(true);
   const handleOpen = () => {
@@ -107,6 +106,7 @@ export default function PopupForm(props) {
     p: 4,
   };
 console.log(props.selectedProject)
+console.log(props.mode)
   return (
     <div>
     <Modal
@@ -130,7 +130,7 @@ console.log(props.selectedProject)
               />
 
             {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
+            </ListItemButton> 
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <div style={{display:"flex"}} >
               <SelectProject 
@@ -140,15 +140,20 @@ console.log(props.selectedProject)
               onClick={handleOpen}
               transition={transition}
               />
-              {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
-                { mode === DELIVERABLES && <SelectDeliverable
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                {mode === DELIVERABLES && 
+                <Fragment>
+                <SelectDeliverable
+                projects={Object.values(state.projects)}
                 deliverables={deliverables}
                 onChange={setDeliverable} 
                 selectedDel={selectedDel}
-                selectedProject={selectedProject}
+                value={selectedProject}
+                selectedProject={props.selectedProject}
+                onClick={handleOpen}
                 transition={transition}
-                /> }
-              {/* </Collapse> */}
+                /> </Fragment>}
+              </Collapse>
               { mode === TASKS && 
               <Fragment>
               <SelectDeliverable

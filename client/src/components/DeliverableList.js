@@ -13,7 +13,7 @@ const EDIT_DELIVERABLE = 'EDIT_DELIVERABLE';
 
 // Container for each DeliverableListItem.
 export default function DeliverableList(props) {
-  const { state, deliverablePercentComplete, completedDeliverables, percentComplete } = useAppData();
+  const { state, deliverablePercentComplete, completedDeliverables, percentComplete, completedTasks } = useAppData();
   const { mode, transition } = useVisualMode(null);
 
   const listItem = props.deliverables.map(deliverable =>
@@ -31,6 +31,8 @@ export default function DeliverableList(props) {
       showDelivForm={props.showDelivForm}
       editDeliverable={props.editDeliverable}
       deliverablePercentComplete={deliverablePercentComplete(state, deliverable.id)}
+      completedDeliverables={props.completedDeliverables}
+      completedTasks={completedTasks(state, deliverable.id)}
       deleteDeliverable={event => {
         event.stopPropagation();
         props.onChange(deliverable.id);
@@ -47,7 +49,7 @@ export default function DeliverableList(props) {
 
         <span id="project_stats">{completedDeliverables(state, props.project)} of {props.selectedProject.count} Deliverables Completed
         </span>
-        <span className="deliverable_progress"><LinearProgressWithLabel value={percentComplete(state, props.project)} /></span>
+        <span className="deliverable_progress"><LinearProgressWithLabel value={Math.round((completedDeliverables(state, props.project) / props.selectedProject.count) * 100)}/></span>
 
         <AddCircleIcon id="new_deliverable" className="mui_icons"
           onClick={() => {

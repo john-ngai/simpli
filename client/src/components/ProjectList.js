@@ -15,6 +15,7 @@ export default function ProjectList(props) {
       count={project.count}
       selected={project.id === props.value}
       percentComplete={percentComplete(state, project.id)}
+      completedDeliverables={props.completedDeliverables(state, project.id)}
       setProject={() => {
         props.onChange(project.id);
         props.transition('DELIVERABLES');

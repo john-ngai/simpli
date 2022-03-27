@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useAppData from '../../hooks/useAppData';
 import SelectDelListItem from './SelectDelListItem';
 import { List, ListSubheader, Collapse } from '@mui/material';
 
@@ -19,9 +18,9 @@ export default function SelectDeliverable(props) {
       transition("TASKS");
     }} 
     />
-  );
+    );
 
-  return (
+    return (
   <Collapse in={open} timeout="auto" unmountOnExit>
   <List sx={{ width: 'auto', maxWidth: 200 }} subheader={
     <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", '&:hover': { backgroundColor: "lightgray" } }} >Deliverables</ListSubheader> } >

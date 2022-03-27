@@ -20,13 +20,14 @@ const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 const EDIT_TASKS = 'EDIT_TASKS'
+const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
 
 export default function App() {
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
     getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable,    setDeliverablesPriority, setTaskPriority, completeTask,
-    setTask, getTasks, getSelectedTask, deleteTask, saveTask, showDelivForm, showTaskForm, editTask, percentComplete, deliverablePercentComplete,
+    setTask, getTasks, getSelectedTask, deleteTask, saveTask, showDelivForm, showTaskForm, editTask, percentComplete, deliverablePercentComplete, completedDeliverables, completedTasks,
   } = useAppData();
   
   const { page, mode, transition, transitionPage, back } = useVisualMode(null);
@@ -61,6 +62,7 @@ export default function App() {
           transition={transition}
           deleteProject={deleteProject}
           percentComplete={percentComplete}
+          completedDeliverables={completedDeliverables}
         />
 
         <div id="dashboard">
@@ -71,10 +73,35 @@ export default function App() {
             project={state.project}
             onToggle={setDeliverablesPriority}
             showFormBoolean={state.showDelivForm}
+            showDelivForm={showDelivForm}
+            saveDeliverable={saveDeliverable}
+            selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={deleteDeliverable}
+            completedDeliverables={completedDeliverables}
+            completedTasks={completedTasks}
+          />}
+
+          {mode === EDIT_DELIVERABLES && <DeliverableList
+            deliverables={deliverables}
+            onChange={setDeliverable}
+            transition={transition}
+            project={state.project}
+            onToggle={setDeliverablesPriority}
+            showFormBoolean={state.showDelivForm}
+            showDelivForm={showDelivForm}
             saveDeliverable={saveDeliverable}
             selectedProject={selectedProject}
             selectedDeliverable={selectedDeliverable}
             editDeliverable={editDeliverable}
+            completedDeliverables={completedDeliverables}
+            completedTasks={completedTasks}
+
+            id={selectedDeliverable.id}
+            name={selectedDeliverable.name}
+            description={selectedDeliverable.description}
+            priority={selectedDeliverable.priority}
+            status={selectedDeliverable.status}
             deleteDeliverable={deleteDeliverable}
           />}
 
@@ -97,7 +124,41 @@ export default function App() {
             saveTask={saveTask}
             transition={transition}
             editTask={editTask}
+            completedTasks={completedTasks}
           />}
+
+          {mode === EDIT_TASKS && 
+          <div>
+            <TaskList
+              tasks={tasks}
+              onChange={setTask}
+              deliverable={state.deliverable}
+              project={state.project}
+              selectedProject={selectedProject}
+              selectedDeliverable={selectedDeliverable}
+              selectedTask={selectedTask}
+              deleteTask={deleteTask}
+              showFormBoolean={state.showTaskForm}
+              showDelivForm={showDelivForm}
+              showTaskForm={showTaskForm}
+              deliverablePercentComplete={deliverablePercentComplete}
+              saveTask={saveTask}
+              transition={transition}
+              editTask={editTask}
+              completedTasks={completedTasks}
+              />
+            <NewTask
+              id={selectedTask.id}
+              name={selectedTask.name}
+              description={selectedTask.description}
+              priority={selectedTask.priority}
+              status={selectedTask.status}
+              deliverable={state.deliverable}
+              saveTask={saveTask}
+              editTask={editTask}
+            />
+          </div>
+          }
 
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}
