@@ -20,7 +20,6 @@ const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 const EDIT_TASKS = 'EDIT_TASKS'
-const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
 
 export default function App() {
   const {
