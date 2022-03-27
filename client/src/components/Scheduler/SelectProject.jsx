@@ -30,7 +30,7 @@ export default function SelectProject(props) {
     key={project.id}
     id={project.id}
     name={project.name}
-    selected={project.id === props.value}
+    // selected={project.id === props.value}
     setProject={() => {
       onChange(project.id);
       transition('DELIVERABLES');

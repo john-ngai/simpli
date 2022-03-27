@@ -49,6 +49,7 @@ export default function Scheduler(props) {
     user = JSON.parse(localStorage.user);
   }
 // console.log(selectedProject)
+// console.log(state.project)
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -71,7 +72,6 @@ export default function Scheduler(props) {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <SelectProject 
               projects={Object.values(state.projects)} 
-              // value={state.project} 
               onChange={setProject}
               onClick={handleOpen}
               transition={transition}
@@ -88,20 +88,22 @@ export default function Scheduler(props) {
             <br /><br />
             <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks</span>
             <br /><br />
+            <AddCircleIcon id="schedule_task" className="mui_icons"
+              onClick={() => {
+                handleOpenForm()
+              }}
+            />
           </div>
           }
-          <AddCircleIcon id="schedule_task" className="mui_icons"
-            onClick={() => {
-              transition('DELIVERABLES')
-              handleOpenForm()
-            }}
-          />
         <div>
           <PopupForm 
           openForm={openForm}
           handleOpenForm={handleOpenForm}
           selectedTask={selectedTask}
           selectedProject={selectedProject}
+          value={state.project}
+          transition={transition}
+          mode={mode}
           />
         </div>
         </aside>
