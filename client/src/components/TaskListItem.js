@@ -35,7 +35,7 @@ export default function TaskListItem(props) {
             onClick={event => {
               event.stopPropagation()
               props.setTask()
-              props.transition('EDIT_TASKS')
+              props.transition('EDIT_TASK');
             }} 
           />
           <DeleteIcon id="delete_task" className="mui_icons"

@@ -3,13 +3,13 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import {
-  TextField,
   Grid,
   Box,
   Container,
   Avatar,
   Button,
   Typography,
+  OutlinedInput,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import useAppData from "../../hooks/useAppData";
@@ -93,8 +93,9 @@ export default function Register() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 {/* <FormControl> */}
-                <TextField
-                  label="Name"
+                <OutlinedInput
+                sx={{ color: 'white', bgcolor: 'black' }}
+                  // label="Name"
                   type="text"
                   value={name}
                   placeholder="Enter your full name"
@@ -104,8 +105,9 @@ export default function Register() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Email"
+                <OutlinedInput
+                sx={{ color: 'white', bgcolor: 'black' }}
+                  // label="Email"
                   type="text"
                   value={email}
                   placeholder="Enter email"
@@ -115,8 +117,9 @@ export default function Register() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Password"
+                <OutlinedInput
+                sx={{ color: 'white', bgcolor: 'black' }}
+                  // label="Password"
                   type="password"
                   value={password}
                   placeholder="Enter password"
@@ -126,8 +129,9 @@ export default function Register() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Team"
+                <OutlinedInput
+                sx={{ color: 'white', bgcolor: 'black' }}
+                  // label="Team"
                   type="text"
                   value={team}
                   placeholder="Enter team code"

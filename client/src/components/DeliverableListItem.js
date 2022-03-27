@@ -19,8 +19,10 @@ export default function DeliverableListItem(props) {
 
   return (
     <li className="deliverable_list_item"
-      onMouseEnter={() => props.setDeliverable(props.id)}
-      onClick={() => props.transition('TASKS')}
+      onClick={() => {
+        props.setDeliverable(props.id);
+        props.transition('TASKS');
+    }}
     >
       
       <div id="box">
@@ -49,10 +51,9 @@ export default function DeliverableListItem(props) {
       <span className="deliverable_updates">
         <EditIcon id="edit_deliverable" className="mui_icons" 
           onClick={event => {
-            props.transition('EDIT_DELIVERABLES')
-            event.stopPropagation()
-            props.setDeliverable(props.id)
-            props.showDelivForm()
+            event.stopPropagation();
+            props.setDeliverable(props.id);
+            props.transition2('EDIT_DELIVERABLE');
           }}
         />
         <DeleteIcon id="delete_deliverable" className="mui_icons"

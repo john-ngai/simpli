@@ -5,20 +5,21 @@ import "./NavBar.css";
 export default function Navbar(props) {
   return (
     <nav id="navbar">
-      <span id="app_name">Project Tracker</span>
+      <div className="nav_wrapper">
+      <span id="app_name">Simpli</span>
       <span className="nav_item">
         <Link to="/">Summary</Link>
       </span>
       <span className="nav_item">
-        {/* <Link to="/schedule">Schedule</Link> */}
         <Link to="/scheduler">Scheduler</Link>
       </span>
+      </div>
       <span className="login_nav">
         {!props.user && <Link to="/register">Register</Link>}
         {!props.user && <Link to="/login">Login</Link>}
         {props.user && <a href="" onClick={() => localStorage.removeItem('user')}>Logout</a>}
+        {props.user && <span className="login_user">Logged in as: {props.user}</span> }
       </span>
-      <span className="nav_item">Logged in as: {props.user}</span>
     </nav>
   )
 }
