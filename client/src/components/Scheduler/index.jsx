@@ -25,14 +25,13 @@ export default function Scheduler(props) {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject } = useAppData();
   const {mode, transition} = useVisualMode(null);
   
   const [open, setOpen] = useState(true);
   const handleOpen = () => {
     setOpen(!open);
   }
-
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
@@ -49,7 +48,7 @@ export default function Scheduler(props) {
   } else {
     user = JSON.parse(localStorage.user);
   }
-console.log(selectedProject)
+// console.log(selectedProject)
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -85,9 +84,9 @@ console.log(selectedProject)
           <div>
             <span><strong>Project Progress</strong></span>
             <br /><br />
-            <span>7 of {selectedProject.count} Deliverables</span>
+            <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables</span>
             <br /><br />
-            <span>32 of 54 Tasks</span>
+            <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks</span>
             <br /><br />
           </div>
           }
