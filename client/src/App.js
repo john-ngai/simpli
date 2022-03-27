@@ -20,6 +20,7 @@ const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 const EDIT_TASKS = 'EDIT_TASKS'
+const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
 
 export default function App() {
   const {
@@ -72,7 +73,6 @@ export default function App() {
             project={state.project}
             onToggle={setDeliverablesPriority}
             showFormBoolean={state.showDelivForm}
-<<<<<<< HEAD
             showDelivForm={showDelivForm}
             saveDeliverable={saveDeliverable}
             selectedProject={selectedProject}
@@ -90,13 +90,10 @@ export default function App() {
             onToggle={setDeliverablesPriority}
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
-=======
->>>>>>> main
             saveDeliverable={saveDeliverable}
             selectedProject={selectedProject}
             selectedDeliverable={selectedDeliverable}
             editDeliverable={editDeliverable}
-<<<<<<< HEAD
             completedDeliverables={completedDeliverables}
             completedTasks={completedTasks}
 
@@ -105,9 +102,7 @@ export default function App() {
             description={selectedDeliverable.description}
             priority={selectedDeliverable.priority}
             status={selectedDeliverable.status}
-=======
             deleteDeliverable={deleteDeliverable}
->>>>>>> main
           />}
 
           {mode === TASKS && <TaskList
@@ -132,7 +127,6 @@ export default function App() {
             completedTasks={completedTasks}
           />}
 
-<<<<<<< HEAD
           {mode === EDIT_TASKS && 
           <div>
             <TaskList
@@ -166,8 +160,6 @@ export default function App() {
           </div>
           }
 
-=======
->>>>>>> main
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}
             back={back}
