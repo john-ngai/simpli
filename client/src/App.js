@@ -38,6 +38,8 @@ export default function App() {
   const deliverables = getDeliverables(state, state.project);
   const tasks = getTasks(state, state.deliverable);
 
+  console.log(selectedProject); // Remove test code.
+
   let user = null;
   if (!localStorage.user) {
     return (
@@ -75,34 +77,12 @@ export default function App() {
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
             saveDeliverable={saveDeliverable}
-            selectedProject={selectedProject}
-            selectedDeliverable={selectedDeliverable}
-            deleteDeliverable={deleteDeliverable}
-            completedDeliverables={completedDeliverables}
-            completedTasks={completedTasks}
-          />}
-
-          {mode === EDIT_DELIVERABLES && <DeliverableList
-            deliverables={deliverables}
-            onChange={setDeliverable}
-            transition={transition}
-            project={state.project}
-            onToggle={setDeliverablesPriority}
-            showFormBoolean={state.showDelivForm}
-            showDelivForm={showDelivForm}
-            saveDeliverable={saveDeliverable}
-            selectedProject={selectedProject}
-            selectedDeliverable={selectedDeliverable}
             editDeliverable={editDeliverable}
+            selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={deleteDeliverable}
             completedDeliverables={completedDeliverables}
             completedTasks={completedTasks}
-
-            id={selectedDeliverable.id}
-            name={selectedDeliverable.name}
-            description={selectedDeliverable.description}
-            priority={selectedDeliverable.priority}
-            status={selectedDeliverable.status}
-            deleteDeliverable={deleteDeliverable}
           />}
 
           {mode === TASKS && <TaskList
