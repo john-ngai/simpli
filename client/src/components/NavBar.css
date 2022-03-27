@@ -1,26 +1,44 @@
 #navbar {
   /* border: 2px solid red; */
+  display: flex;
+  justify-content: space-between;
   background-color: #161B22; 
-  padding: 15px 0 15px 0;
+  padding: 10px 10px;
   color: white;
   width: 100%;
 }
 
 #app_name {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
   text-decoration: none;
-  color: white
+  color: white;
+  /* padding-top: 8px; */
+}
+
+.nav_wrapper {
+  display: flex;
 }
 
 .nav_item {
-  display: inline;
+  /* display: flex;
+  flex-direction: column-reverse; */
+  /* justify-content: space-between; */
   padding: 10px;
+  padding-top: 12px;
 }
 
 .login_nav {
-  flex-direction: flex-end;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  /* align-items: center; */
   text-decoration: none;
+}
+
+#login_nav_item {
+  display: inline;
+  justify-content: flex-end;
 }
 
 .login_nav :link {
