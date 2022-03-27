@@ -10,6 +10,8 @@ import {
   Box,
   Container,
   Typography,
+  styled,
+  OutlinedInput
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import NavBar from '../components/NavBar';
@@ -54,6 +56,24 @@ export default function Login() {
       .catch(() => setError("Not a registered email"));
   };
 
+  // Custom theme for textfield inputs
+  const PasswordInput = styled(TextField)({
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'white'
+      },
+      '&:hover fieldset': {
+        borderColor: 'white'
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white'
+      }
+    },
+    '& input:valid:focus + fieldset': {
+      borderColor: 'white'
+    }
+  })
+
   return (
     <div id="container_login">
       <NavBar />
@@ -79,27 +99,39 @@ export default function Login() {
           </Typography>
           <br />
           <Box component="form" onSubmit={(e) => e.preventDefault()}>
-            <TextField
+            <Grid>
+            <OutlinedInput
+            className="email_input"
               fullWidth
               required
-              margin="normal"
-              label="Email"
+              sx={{ color: 'white', bgcolor: 'black' }}
+              // label="Email"
               type="text"
               value={email}
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
+            </Grid>
             <br />
-            <TextField
+            {/* <PasswordInput id="password_input" fullWidth required
+            sx={{ color: 'white' }}
+              label="Password"
+              type="password"
+              value={password}
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)} /> */}
+              <Grid>
+            <OutlinedInput
               fullWidth
               required
-              margin="normal"
-              label="Password"
+              sx={{ color: 'white', bgcolor: 'black' }}
+              // label="Password"
               type="password"
               value={password}
               placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)}
             />
+            </Grid>
             <br />
             <Button
               fullWidth

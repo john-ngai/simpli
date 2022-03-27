@@ -1,7 +1,13 @@
 #container_login {
   // border: 1px solid red; // Remove test code.
-  background-color: white;
-  color: black;
+  // background-color: white;
+  // background-color: #0D1117;
+  color: white;
+}
+
+body {
+  background-color: #121418;
+  // color: white;
 }
 
 main {
@@ -17,4 +23,17 @@ main {
 #to_register {
   color: #1A76D2;
   text-decoration: underline;
+}
+
+// #password_input {
+//   color: white;
+// }
+
+// .email_input {
+//   border-color: white;
+//   color: white;
+// }
+
+.MuiOutlinedInput-root {
+  border-color: white;
 }
