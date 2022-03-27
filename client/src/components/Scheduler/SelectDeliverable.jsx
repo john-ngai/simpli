@@ -24,8 +24,8 @@ export default function SelectDeliverable(props) {
     return (
   // <Collapse in={open} timeout="auto" unmountOnExit>
   // <List sx={{ width: 'auto', maxWidth: 200 }} subheader={
-  //   <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", '&:hover': { backgroundColor: "lightgray" } }} >Deliverables</ListSubheader> } >
-  <div>
+    <div>
+    <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", '&:hover': { backgroundColor: "lightgray" } }} >Deliverables</ListSubheader>
     {delList}
   </div>
   // </List>
