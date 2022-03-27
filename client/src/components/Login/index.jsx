@@ -100,7 +100,7 @@ export default function Login() {
           <br />
           <Box component="form" onSubmit={(e) => e.preventDefault()}>
             <OutlinedInput
-            id="email_input"
+            className="email_input"
               fullWidth
               required
               sx={{ color: 'white', bgcolor: 'transparent' }}
