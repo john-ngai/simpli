@@ -31,7 +31,7 @@ export default function App() {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
     getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable,    setDeliverablesPriority, setTaskPriority, completeTask,
-    setTask, getTasks, getSelectedTask, deleteTask, saveTask, showDelivForm, showTaskForm, editTask, percentComplete, deliverablePercentComplete,
+    setTask, getTasks, getSelectedTask, deleteTask, saveTask, showDelivForm, showTaskForm, editTask, percentComplete, deliverablePercentComplete, completedDeliverables, completedTasks,
   } = useAppData();
   
   const { page, mode, transition, transitionPage, back } = useVisualMode(null);
@@ -66,6 +66,7 @@ export default function App() {
           transition={transition}
           deleteProject={deleteProject}
           percentComplete={percentComplete}
+          completedDeliverables={completedDeliverables}
         />
 
         <div id="dashboard">
@@ -81,6 +82,8 @@ export default function App() {
             selectedProject={selectedProject}
             selectedDeliverable={selectedDeliverable}
             deleteDeliverable={deleteDeliverable}
+            completedDeliverables={completedDeliverables}
+            completedTasks={completedTasks}
           />}
 
           {mode === EDIT_DELIVERABLES && <DeliverableList
@@ -97,6 +100,8 @@ export default function App() {
             deleteDeliverable={deleteDeliverable}
             setDeliverable={setDeliverable}
             editDeliverable={editDeliverable}
+            completedDeliverables={completedDeliverables}
+            completedTasks={completedTasks}
 
             id={selectedDeliverable.id}
             name={selectedDeliverable.name}

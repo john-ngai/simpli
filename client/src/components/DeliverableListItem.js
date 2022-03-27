@@ -7,10 +7,11 @@ import LinearProgressWithLabel from './MUI/LinearProgress';
 
 import React from 'react';
 import classNames from 'classnames';
+import useAppData from '../hooks/useAppData';
 
 export default function DeliverableListItem(props) {
   const { id, onToggle } = props;
-
+  const { state, completedTasks } = useAppData()
   const handleClick = (e) => {
     e.stopPropagation();
     onToggle(id);
@@ -23,7 +24,7 @@ export default function DeliverableListItem(props) {
     >
       
       <div id="box">
-      { props.count > 0 ? <CircularProgressWithLabel value={props.deliverablePercentComplete}/> : <CircularProgressWithLabel value={0}/> }
+      { props.count > 0 ? <CircularProgressWithLabel value={Math.round((props.completedTasks / props.count) * 100)}/> : <CircularProgressWithLabel value={0}/> }
       </div>
 
 
