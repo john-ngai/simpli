@@ -129,6 +129,7 @@ export default function App() {
             saveTask={saveTask}
             transition={transition}
             editTask={editTask}
+            completedTasks={completedTasks}
           />}
 
           {mode === EDIT_TASKS && 
@@ -149,6 +150,7 @@ export default function App() {
               saveTask={saveTask}
               transition={transition}
               editTask={editTask}
+              completedTasks={completedTasks}
               />
             <NewTask
               id={selectedTask.id}

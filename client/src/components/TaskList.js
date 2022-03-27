@@ -9,6 +9,7 @@ import LinearProgressWithLabel from './MUI/LinearProgress';
 export default function TaskList(props) {
   const {state, deliverablePercentComplete, completedTasks } = useAppData();
   const taskInfo = props.tasks.map(task => {
+    // console.log(completedTasks(state, task.deliverable_id))
     return (
       <TaskListItem
         key={task.id}
@@ -25,6 +26,7 @@ export default function TaskList(props) {
         setTask={() => props.onChange(task.id)}
         editTask={props.editTask}
         deleteTask={() => props.deleteTask(task.id)}
+        completedTasks={props.completedTasks(state, task.deliverable_id)}
       />
     )
   })
@@ -39,7 +41,7 @@ export default function TaskList(props) {
         <span id="deliverable_stats">{completedTasks(state, props.deliverable)} of {props.selectedDeliverable.count} Tasks Completed
         </span>
 
-        <span className="task_progress"><LinearProgressWithLabel value={deliverablePercentComplete(state, props.deliverable)}/></span>
+        <span className="task_progress"><LinearProgressWithLabel value={Math.round((completedTasks(state, props.deliverable) / props.selectedDeliverable.count) * 100)}/></span>
 
 
         <AddCircleIcon id="new_task" className="mui_icons"
