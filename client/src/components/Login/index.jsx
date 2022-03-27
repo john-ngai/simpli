@@ -99,17 +99,19 @@ export default function Login() {
           </Typography>
           <br />
           <Box component="form" onSubmit={(e) => e.preventDefault()}>
+            <Grid>
             <OutlinedInput
             className="email_input"
               fullWidth
               required
-              sx={{ color: 'white', bgcolor: 'transparent' }}
+              sx={{ color: 'white', bgcolor: 'black' }}
               // label="Email"
               type="text"
               value={email}
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
             />
+            </Grid>
             <br />
             {/* <PasswordInput id="password_input" fullWidth required
             sx={{ color: 'white' }}
@@ -118,16 +120,18 @@ export default function Login() {
               value={password}
               placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)} /> */}
+              <Grid>
             <OutlinedInput
               fullWidth
               required
-              sx={{ color: 'white' }}
+              sx={{ color: 'white', bgcolor: 'black' }}
               // label="Password"
               type="password"
               value={password}
               placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)}
             />
+            </Grid>
             <br />
             <Button
               fullWidth
