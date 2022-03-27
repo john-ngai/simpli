@@ -12,6 +12,7 @@ import DeliverableList from './components/DeliverableList';
 import TaskList from './components/TaskList';
 import Project from './components/Project';
 import NewTask from './components/NewTask';
+import { getThemeProps } from '@mui/system';
 // Modes
 const DELIVERABLES = 'DELIVERABLES';
 const TASKS = 'TASKS';
@@ -97,38 +98,6 @@ export default function App() {
             transition={transition}
             editTask={editTask}
           />}
-
-          {mode === EDIT_TASKS && 
-          <div>
-            <TaskList
-              tasks={tasks}
-              onChange={setTask}
-              deliverable={state.deliverable}
-              project={state.project}
-              selectedProject={selectedProject}
-              selectedDeliverable={selectedDeliverable}
-              selectedTask={selectedTask}
-              deleteTask={deleteTask}
-              showFormBoolean={state.showTaskForm}
-              showDelivForm={showDelivForm}
-              showTaskForm={showTaskForm}
-              deliverablePercentComplete={deliverablePercentComplete}
-              saveTask={saveTask}
-              transition={transition}
-              editTask={editTask}
-              />
-            <NewTask
-              id={selectedTask.id}
-              name={selectedTask.name}
-              description={selectedTask.description}
-              priority={selectedTask.priority}
-              status={selectedTask.status}
-              deliverable={state.deliverable}
-              saveTask={saveTask}
-              editTask={editTask}
-            />
-          </div>
-          }
 
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}
