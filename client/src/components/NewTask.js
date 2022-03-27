@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import axios from "axios";
+import './NewTask.scss';
 
 export default function NewTask(props) {
   const [name, setName] = useState(props.name || '');
