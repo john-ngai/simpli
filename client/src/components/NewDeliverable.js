@@ -15,22 +15,23 @@ export default function NewDeliverable(props) {
     const deliverable = {
       name: name,
       description: description,
-      priority: priority,
-      status: status,
+      priority: false,
+      status: false,
       project_id: props.project
     }
     if (!props.id) {
       axios.put('/deliverables/new', deliverable)
         .then(res => {
           deliverable.id = res.data.id
-          console.log('res: ', res.data)
           props.saveDeliverable(deliverable)
+          props.transition(null);
         })
     } else {
       deliverable.id = props.id;
       axios.put(`/deliverables/${deliverable.id}`, deliverable)
         .then(() => {
           props.editDeliverable(deliverable)
+          props.transition(null);
         })
     }
   }
@@ -68,7 +69,7 @@ export default function NewDeliverable(props) {
         <div id="buttons">
           <Button id="button_cancel"
             variant="outlined"
-            onClick={props.showDelivForm}
+            onClick={() => props.transition(null)}
           >Cancel</Button>
 
           <Button id="button_save"
