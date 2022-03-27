@@ -470,7 +470,6 @@ export default function useAppData() {
   const totalTasksForProject = (state, project) => {
     let totalTasks = 0;
     const selectedDelivs = getDeliverables(state, project);
-    console.log(selectedDelivs)
     const allTasks = Object.values(state.tasks);
     selectedDelivs.forEach(deliverable => {
       allTasks.forEach(task => {
