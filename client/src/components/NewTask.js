@@ -21,14 +21,15 @@ export default function NewTask(props) {
       axios.put('/tasks/new', task)
         .then(res => {
           task.id = res.data.id
-          console.log('res: ', res.data)
           props.saveTask(task)
+          props.transition(null);
         });
     } else {
       task.id = props.id;
       axios.put(`/tasks/${task.id}`, task)
         .then(() => {
           props.editTask(task)
+          props.transition(null);
         })
     }
   }
@@ -57,8 +58,8 @@ export default function NewTask(props) {
           <input name="status" type="checkbox" value={status} onChange={event => setStatus(prevCheck => !prevCheck)}>
           </input>
         </form>
+        <button onClick={() => props.transition(null)}>Cancel</button>
         <button onClick={() => save()}>Save</button>
-        <button onClick={props.showTaskForm}>Cancel</button>
       </section>
     </main>
   )

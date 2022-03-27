@@ -1,13 +1,20 @@
 import React from 'react';
+
 import './TaskList.scss';
 import TaskListItem from './TaskListItem';
 import NewTask from './NewTask';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import useAppData from '../hooks/useAppData';
+import useVisualMode from '../hooks/useVisualMode';
 import LinearProgressWithLabel from './MUI/LinearProgress';
 
+// Modes
+const NEW_TASK = 'NEW_TASK';
+const EDIT_TASK = 'EDIT_TASK';
+
 export default function TaskList(props) {
-  const {state, deliverablePercentComplete, completedTasks } = useAppData();
+  const { state, deliverablePercentComplete, completedTasks } = useAppData();
+  const { mode, transition } = useVisualMode(null);
   const taskInfo = props.tasks.map(task => {
     return (
       <TaskListItem
@@ -20,7 +27,7 @@ export default function TaskList(props) {
         description={task.description}
         onToggle={props.onToggle}
         onClick={props.completeTask}
-        transition={props.transition}
+        transition={transition}
         showTaskForm={props.showTaskForm}
         setTask={() => props.onChange(task.id)}
         editTask={props.editTask}
@@ -39,31 +46,46 @@ export default function TaskList(props) {
         <span id="deliverable_stats">{completedTasks(state, props.deliverable)} of {props.selectedDeliverable.count} Tasks Completed
         </span>
 
-        <span className="task_progress"><LinearProgressWithLabel value={deliverablePercentComplete(state, props.deliverable)}/></span>
-
+        <span className="task_progress"><LinearProgressWithLabel value={deliverablePercentComplete(state, props.deliverable)} /></span>
 
         <AddCircleIcon id="new_task" className="mui_icons"
-          onClick={props.showTaskForm}
+          onClick={() => {
+            // onClick={props.showTaskForm} // Change to transition
+            if (!mode) {
+              transition(NEW_TASK);
+            } else {
+              transition(null);
+            }
+          }}
         />
-
-        {props.showFormBoolean &&
-          <NewTask
-            deliverable={props.deliverable}
-            transition={props.transition}
-            showTaskForm={props.showTaskForm}
-            saveTask={props.saveTask}
-            id={props.id}
-            name={props.name}
-            description={props.description}
-            priority={props.priority}
-            status={props.status}
-            editTask={props.editTask}
-          />
-        }
       </div>
 
-      { taskInfo}
-      <button onClick={() => {props.transition('DELIVERABLES')}}>Back</button>
+      {mode === NEW_TASK &&
+        <NewTask
+          deliverable={props.deliverable}
+          transition={transition}
+          saveTask={props.saveTask}
+          priority={props.priority}
+          status={props.status}
+          editTask={props.editTask}
+        />
+      }
+
+      {mode === EDIT_TASK &&
+        <NewTask
+          deliverable={props.deliverable}
+          transition={transition}
+          status={props.selectedTask.status}
+          editTask={props.editTask}
+          id={props.selectedTask.id}
+          name={props.selectedTask.name}
+          description={props.selectedTask.description}
+          priority={props.selectedTask.priority}
+        />
+      }
+
+      {taskInfo}
+      <button onClick={() => { props.transition('DELIVERABLES') }}>Back</button>
     </section>
   );
 }
