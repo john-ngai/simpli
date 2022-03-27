@@ -27,7 +27,7 @@ export default function PopupForm(props) {
   const [day, setDay] = useState('');
   const [task_id, setTask_id] = useState('');
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, saveSchedule } = useAppData();
-  const {mode, transition} = useVisualMode(null);
+  const { mode, transition } = useVisualMode(null);
   const [open, setOpen] = useState(true);
   const handleOpen = () => {
     setOpen(!open);
@@ -38,6 +38,12 @@ export default function PopupForm(props) {
   const selectedDel = getSelectedDeliverable(state);
   const tasks = getTasks(state, state.deliverable);
   const selectedTask = getSelectedTask(state);
+  
+  let deliverables2;
+  if (props.selectedProject) {
+    deliverables2 = getDeliverables(state, props.selectedProject.id);
+  }
+  console.log('deliverables2 =', deliverables2); // Remove test code.
 
   function formatAMPM(date) {
     var hours = date.getHours();
@@ -47,7 +53,7 @@ export default function PopupForm(props) {
     var strTime = hours + ampm;
     return strTime;
   }
-  
+
   const save = () => {
     const scheduleItem = {
       start_time: formatAMPM(valueStartTime),
@@ -100,37 +106,41 @@ export default function PopupForm(props) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 700,
-    bgcolor: 'red',
+    bgcolor: /*'background.paper',*/ 'red',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
-console.log(props.selectedProject)
-console.log(props.mode)
+  // console.log(props.selectedProject)
+  
+  // console.log(props.mode)
+  
   return (
     <div>
-    <Modal
-      open={props.openForm}
-      onClose={props.handleOpenForm}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={popupStyle}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Schedule a Task
-        </Typography>
-        <List sx={{ width: '100%', maxWidth: 700 }}>
+      <Modal
+        open={props.openForm}
+        onClose={props.handleOpenForm}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={popupStyle}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Schedule a Task
+          </Typography>
+          
+          <List sx={{ width: '100%', maxWidth: 700 }}>
             <ListItemButton onClick={handleOpen}>
-              <ListItemText 
-              primary="Select Project" 
-              primaryTypographyProps={{
-                color: 'primary',
-                fontWeight: 'bold'
-              }} 
+              <ListItemText
+                // primary="Select Project"
+                primary="Select Deliverable"
+                primaryTypographyProps={{
+                  color: 'primary',
+                  fontWeight: 'bold'
+                }}
               />
 
-            {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton> 
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <div style={{display:"flex"}} >
               {/* <SelectProject 
@@ -164,86 +174,86 @@ console.log(props.mode)
               transition={transition}
               /> 
 
-              <SelectTask 
-              tasks={tasks}
-              onChange={setTask}
-              selectedProject={selectedProject}
-              selectedDel={selectedDel}
-              selectedTask={selectedTask}
-              /> 
-              </Fragment>
-              }
-          </div>
+                    <SelectTask
+                      tasks={tasks}
+                      onChange={setTask}
+                      selectedProject={selectedProject}
+                      selectedDel={selectedDel}
+                      selectedTask={selectedTask}
+                    />
+                  </Fragment>
+                }
+              </div>
             </Collapse>
           </List>
-          {selectedTask && 
-          <div>
-        <FormControl sx={{ width: '50ch' }}>
-          <div style={{display:"flex"}} >
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <TimePicker
-            renderInput={(params) => <TextField {...params} />}
-            label="Start Time"
-            value={valueStartTime}
-            views={["hours"]}
-            onChange={newValue => setValueStartTime(newValue)}
-            minTime={new Date(0, 0, 0, 7)}
-            maxTime={new Date(0, 0, 0, 23, 59)}
-            shouldDisableTime={(timeValue, clockType) => {
-              if (clockType === 'minutes' && timeValue !== 0) {
-                return true;
-              }
-              return false;
-            }}
-            />
-          </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <TimePicker
-            renderInput={(params) => <TextField {...params} />}
-            label="End Time"
-            value={valueEndTime}
-            views={["hours"]}
-            onChange={newValue => setValueEndTime(newValue)}
-            minTime={new Date(0, 0, 0, 7)}
-            maxTime={new Date(0, 0, 0, 23, 59)}
-            shouldDisableTime={(timeValue, clockType) => {
-              if (clockType === 'minutes' && timeValue !== 0) {
-                return true;
-              }
-              return false;
-            }}
-            />
-          </LocalizationProvider>
-          </div>
-          <TextField
-            id="standard-select-day"
-            select
-            label="Select"
-            value={day}
-            onChange={event => setDay(event.target.value)}
-            helperText="Select a day"
-            variant="standard"
-          >
-            {days.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-        </FormControl>
-        <Button variant="outlined" size="small" onClick={() => {
-          save()
-          props.handleOpenForm()
-          // setProject(null)
-          // setDeliverable(null)
-          // setTask(null)
-        }}>
-          Save
-        </Button>
-        </div>}
-      </Box>
-    </Modal>
-  </div>
+          {selectedTask &&
+            <div>
+              <FormControl sx={{ width: '50ch' }}>
+                <div style={{ display: "flex" }} >
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <TimePicker
+                      renderInput={(params) => <TextField {...params} />}
+                      label="Start Time"
+                      value={valueStartTime}
+                      views={["hours"]}
+                      onChange={newValue => setValueStartTime(newValue)}
+                      minTime={new Date(0, 0, 0, 7)}
+                      maxTime={new Date(0, 0, 0, 23, 59)}
+                      shouldDisableTime={(timeValue, clockType) => {
+                        if (clockType === 'minutes' && timeValue !== 0) {
+                          return true;
+                        }
+                        return false;
+                      }}
+                    />
+                  </LocalizationProvider>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <TimePicker
+                      renderInput={(params) => <TextField {...params} />}
+                      label="End Time"
+                      value={valueEndTime}
+                      views={["hours"]}
+                      onChange={newValue => setValueEndTime(newValue)}
+                      minTime={new Date(0, 0, 0, 7)}
+                      maxTime={new Date(0, 0, 0, 23, 59)}
+                      shouldDisableTime={(timeValue, clockType) => {
+                        if (clockType === 'minutes' && timeValue !== 0) {
+                          return true;
+                        }
+                        return false;
+                      }}
+                    />
+                  </LocalizationProvider>
+                </div>
+                <TextField
+                  id="standard-select-day"
+                  select
+                  label="Select"
+                  value={day}
+                  onChange={event => setDay(event.target.value)}
+                  helperText="Select a day"
+                  variant="standard"
+                >
+                  {days.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </FormControl>
+              <Button variant="outlined" size="small" onClick={() => {
+                save()
+                props.handleOpenForm()
+                // setProject(null)
+                // setDeliverable(null)
+                // setTask(null)
+              }}>
+                Save
+              </Button>
+            </div>}
+        </Box>
+      </Modal>
+    </div>
 
   );
 }
