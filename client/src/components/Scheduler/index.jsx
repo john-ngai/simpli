@@ -25,14 +25,13 @@ export default function Scheduler(props) {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject } = useAppData();
   const {mode, transition} = useVisualMode(null);
   
   const [open, setOpen] = useState(true);
   const handleOpen = () => {
     setOpen(!open);
   }
-
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
   const selectedDel = getSelectedDeliverable(state);
@@ -50,7 +49,7 @@ export default function Scheduler(props) {
     user = JSON.parse(localStorage.user);
   }
 // console.log(selectedProject)
-console.log(mode)
+// console.log(state.project)
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
@@ -73,7 +72,6 @@ console.log(mode)
             <Collapse in={open} timeout="auto" unmountOnExit>
               <SelectProject 
               projects={Object.values(state.projects)} 
-              // value={state.project} 
               onChange={setProject}
               onClick={handleOpen}
               transition={transition}
@@ -82,24 +80,30 @@ console.log(mode)
             </Collapse>
           </List>
           <br />
-          <span><strong>Completed</strong></span>
-          <br /><br />
-          <span>7 of 12 Deliverables</span>
-          <br /><br />
-          <span>32 of 54 Tasks</span>
-          <br /><br />
-          <AddCircleIcon id="schedule_task" className="mui_icons"
-            onClick={() => {
-              transition('DELIVERABLES')
-              handleOpenForm()
-            }}
-          />
+          {selectedProject && 
+          <div>
+            <span><strong>Project Progress</strong></span>
+            <br /><br />
+            <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables</span>
+            <br /><br />
+            <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks</span>
+            <br /><br />
+            <AddCircleIcon id="schedule_task" className="mui_icons"
+              onClick={() => {
+                handleOpenForm()
+              }}
+            />
+          </div>
+          }
         <div>
           <PopupForm 
           openForm={openForm}
           handleOpenForm={handleOpenForm}
           selectedTask={selectedTask}
           selectedProject={selectedProject}
+          value={state.project}
+          transition={transition}
+          mode={mode}
           />
         </div>
         </aside>

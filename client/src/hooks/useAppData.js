@@ -225,7 +225,7 @@ export default function useAppData() {
   // toggle task complete
   const completeTask = (id) => {
     const allTasks = Object.values(state.tasks);
-
+    
     let updTask;
     allTasks.forEach(task => {
       if (task.id === id) {
@@ -239,6 +239,16 @@ export default function useAppData() {
       ...state.tasks,
       [id]: updTask
     }
+
+    // const values = Object.values(state.deliverables)
+    // const updateCounter = values.map((deliverable) => {
+    //   const completedTasks=(state, deliverable.id)
+    //   console.log(completedTasks)
+    //   if (updTask.deliverable_id === deliverable.id) {
+    //     return { ...deliverable, completedTasks: completedTasks+1 };
+    //   }
+    //   return deliverable
+    // });
 
     axios.put(`/tasks/${id}`, updTask)
       .then(() => {
@@ -348,6 +358,7 @@ export default function useAppData() {
       ...state.tasks,
       [id]: updateTask
     }
+    
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
       .then(() => {
@@ -404,8 +415,8 @@ export default function useAppData() {
   appData.deliverablePercentComplete = deliverablePercentComplete
 
   const completedDeliverables = (state, project) => {
+    let numCompleted = 0
     const selectedDelivs = getDeliverables(state, project)
-    let numCompleted = 0;
     selectedDelivs.forEach(deliv => {
       if (deliv.status === true) {
         numCompleted++;
@@ -447,7 +458,41 @@ export default function useAppData() {
     };
     setState({ ...state, scheduleItem, schedule })
   }
-  appData.saveSchedule = saveSchedule
+  appData.saveSchedule = saveSchedule;
   
+
+  const completedTasksForProject = (state, project) => {
+    let finishedTasks = 0;
+    const selectedDelivs = getDeliverables(state, project)
+    const allTasks = Object.values(state.tasks);
+    selectedDelivs.forEach(deliverable => {
+      allTasks.forEach(task => {
+        if (task.deliverable_id === deliverable.id) {
+          if (task.status === true) {
+            finishedTasks++
+          }
+        }
+      })
+    })
+    return finishedTasks;
+  }
+  appData.completedTasksForProject = completedTasksForProject;
+
+  const totalTasksForProject = (state, project) => {
+    let totalTasks = 0;
+    const selectedDelivs = getDeliverables(state, project);
+    const allTasks = Object.values(state.tasks);
+    selectedDelivs.forEach(deliverable => {
+      allTasks.forEach(task => {
+        if (task.deliverable_id === deliverable.id) {
+          totalTasks++
+        }
+      })
+    })
+    return totalTasks;
+  }
+  appData.totalTasksForProject = totalTasksForProject
+
+
   return appData;
 }
