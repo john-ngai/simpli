@@ -23,6 +23,7 @@ export default function DeliverableListItem(props) {
         props.setDeliverable(props.id);
         props.transition('TASKS');
     }}
+    id={props.selected ? "priority_del" : "deliverable_list_item"}
     >
       
       <div id="box">
