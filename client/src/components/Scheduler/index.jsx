@@ -5,7 +5,7 @@ import './index.scss';
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
 import Calendar from './Calendar';
-import PopupForm from './Form';
+import PopupForm from './PopupForm';
 import SelectDeliverable from './SelectDeliverable';
 import SelectTask from './SelectTask';
 // Material-UI
