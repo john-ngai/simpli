@@ -1,18 +1,18 @@
 import React from 'react';
 
-export default function Teams() {
+export default function Teams(props) {
   return(
     <table>
       <thead>
         <tr>
-          <th>ID</th>
+          <th>Team ID</th>
           <th>Name</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th>1</th>
-          <th>Tony Stark</th>
+          <th>{props.teamID}</th>
+          <th>{props.name}</th>
         </tr>
       </tbody>
     </table>
