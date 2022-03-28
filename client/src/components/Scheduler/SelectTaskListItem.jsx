@@ -6,10 +6,9 @@ export default function SelectTaskListItem(props) {
   const { id, name, setTask } = props;
   
   return(
-    <ListItemButton>
+    <ListItemButton >
       <ListItemText 
-      // id={id}
-      id="selected"
+      id={id}
       primary={name}
       primaryTypographyProps={{
         fontSize: 12
