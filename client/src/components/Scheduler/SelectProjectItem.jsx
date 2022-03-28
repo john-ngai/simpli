@@ -22,9 +22,7 @@ export default function SelectProjectItem(props) {
     <ListItemButton
     id="selected" 
     selected={selectedIndex === 0}
-    onClick={(event) => {
-      handleListItemClick(event, 0);
-    }}> 
+    onClick={setProject}> 
       <ListItemText 
       id={id}
       primary={name} 
