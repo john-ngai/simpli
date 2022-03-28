@@ -17,6 +17,7 @@ import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import useVisualMode from '../../hooks/useVisualMode';
+import { withTheme } from '@emotion/react';
 const DELIVERABLES = "DELIVERABLES";
 const TASKS = "TASKS";
 
@@ -106,7 +107,8 @@ export default function PopupForm(props) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '500px',
-    bgcolor: /*'background.paper',*/ 'red',
+    bgcolor: /*'background.paper',*/ 'darkgrey',
+    color: 'inherit',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
