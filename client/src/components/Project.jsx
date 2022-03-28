@@ -10,15 +10,21 @@ import authHeader from '../services/authHeader';
 import { Button } from '@mui/material';
 
 export default function Project(props) {
-  const { state } = useAppData();
-  const projects = state.projects;
+  // const { state } = useAppData();
+  // const projects = state.projects;
+  const { completed_deliverables, total_deliverables } = props.projects;
 
   const [name, setName] = useState(props.name || '');
   const [description, setDescription] = useState(props.description || '');
   const [error, setError] = useState('');
 
   const save = () => {
-    const project = { name, description };
+    const project = {
+      name,
+      description,
+      completed_deliverables,
+      total_deliverables
+    };
     // Save a new project or edit an existing project.
     if (!props.id) {
       axios.put('/projects', project, { headers: authHeader() })

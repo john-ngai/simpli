@@ -54,12 +54,12 @@ module.exports = (db) => {
     const values = [name, description, team_id];
     const command = `
       INSERT INTO projects
-        (name, description, completed_deliverables, total_deliverables, team_id)
-      VALUES ($1, $2, 0, 0, $3)
+        (name, description, team_id)
+      VALUES ($1, $2, $3)
       RETURNING *;
     `;
-    return db.query(command, values)
-      .then(data => res.send(data.rows[0]));
+    // return db.query(command, values)
+    //   .then(data => res.send(data.rows[0]));
   });
 
   // PUT /projects/:id
