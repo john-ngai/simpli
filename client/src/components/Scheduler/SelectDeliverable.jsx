@@ -20,7 +20,6 @@ export default function SelectDeliverable(props) {
     />
     );
     
-    console.log(delList)
     return (
   <div>
     <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", backgroundColor: "inherit", color: 'white' }} >Deliverables</ListSubheader>
