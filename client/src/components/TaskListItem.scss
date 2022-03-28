@@ -21,6 +21,18 @@
   border-left: solid 5px rgb(79, 221, 146);
 }
 
+#priority {
+  border: 2px solid grey;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  margin-bottom: 1px;
+  border-left: solid 5px rgb(255, 200, 100);
+}
+
 .task_list_item:hover {
   background-color: #2f3949;
 }
@@ -52,6 +64,7 @@
   height: 50px;
   width: 50px;
   color: rgb(79, 221, 146);
+  padding-left: 5px;
 }
 
 #incomplete_task {
@@ -69,7 +82,6 @@
   margin-top: 5px;
   margin-right: 2px;
   cursor: pointer;
-  border-left: solid 2px white;
 }
 
 #low_priority {
