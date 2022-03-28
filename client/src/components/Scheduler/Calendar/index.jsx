@@ -26,7 +26,7 @@ const helper = require('./helpers');
 export default function Calendar(props) {
   const { state, getProjectSchedule } = useAppData();
   const project = props.project;
-  const schedule = state.schedule;
+  const schedule = props.schedule;
 
   const projectSchedule = getProjectSchedule(project, schedule);
 
