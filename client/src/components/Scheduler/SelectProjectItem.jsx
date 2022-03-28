@@ -17,7 +17,6 @@ export default function SelectProjectItem(props) {
   const handleListItemClick = (event, selectedIndex) => {
     setSelectedIndex(selectedIndex);
   }
-  console.log("index: ",selectedIndex);
 
   return (
     <ListItemButton
