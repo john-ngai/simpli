@@ -178,7 +178,7 @@ export default function PopupForm(props) {
                   </LocalizationProvider>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <TimePicker
-                      renderInput={(params) => <TextField {...params} />}
+                      renderInput={(params) => <TextField sx={{color: 'white'}} {...params} />}
                       label="End Time"
                       value={valueEndTime}
                       views={["hours"]}
@@ -194,7 +194,7 @@ export default function PopupForm(props) {
                     />
                   </LocalizationProvider>
                 </div>
-                <TextField sx={{ width: '500px'}}
+                <TextField sx={{ width: '500px', color: 'white' }}
                   id="standard-select-day"
                   select
                   label="Select"
