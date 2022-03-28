@@ -72,7 +72,11 @@ export default function User() {
   console.log("TESTING", team);
 
   const teamList = team.map(user => 
-    <Teams />
+    <Teams 
+     key={user.id}
+     teamID={user.team_id}
+     name={user.name}
+     />
     );
   
   return (
