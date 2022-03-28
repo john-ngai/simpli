@@ -64,17 +64,21 @@ export default function User() {
         selectedUsers.push(user);
       }
     }
-    console.log("selected users", selectedUsers);
     return selectedUsers;
   }
 
-  console.log("TESTING", getUsers(users, currentUser));
+  const team = getUsers(users, currentUser);
 
+  console.log("TESTING", team);
+
+  const teamList = team.map(user => 
+    <Teams />
+    );
   
   return (
     <div>
       <h1>Hello World</h1>
-      <Teams />
+      {teamList}
     </div>
   )
 }
