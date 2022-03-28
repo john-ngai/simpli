@@ -105,7 +105,7 @@ export default function PopupForm(props) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 700,
+    width: '500px',
     bgcolor: /*'background.paper',*/ 'red',
     border: '2px solid #000',
     boxShadow: 24,
@@ -125,7 +125,7 @@ export default function PopupForm(props) {
             Schedule a Task
           </Typography>
           
-          <List sx={{ width: '100%', maxWidth: 700 }}>
+          <List sx={{ width: '500px', maxWidth: '500px' }}>
                 <div style={{display:"flex"}} >
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <SelectDeliverable
@@ -141,13 +141,6 @@ export default function PopupForm(props) {
               </Collapse>
               { mode === TASKS && 
               <Fragment>
-              {/* <SelectDeliverable
-              deliverables={deliverables}
-              onChange={setDeliverable} 
-              selectedDel={selectedDel}
-              selectedProject={selectedProject}
-              transition={transition}
-              />  */}
               <SelectTask
                 tasks={tasks}
                 onChange={setTask}
@@ -155,14 +148,14 @@ export default function PopupForm(props) {
                 selectedDel={selectedDel}
                 selectedTask={selectedTask}
               />
-            </Fragment>
+              </Fragment>
                 }
               </div>
             {/* </Collapse> */}
           </List>
           {selectedTask &&
             <div>
-              <FormControl sx={{ width: '50ch' }}>
+              <FormControl sx={{ width: '500px' }}>
                 <div style={{ display: "flex" }} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <TimePicker
@@ -199,7 +192,7 @@ export default function PopupForm(props) {
                     />
                   </LocalizationProvider>
                 </div>
-                <TextField
+                <TextField sx={{ width: '500px'}}
                   id="standard-select-day"
                   select
                   label="Select"
