@@ -81,11 +81,11 @@ export default function Scheduler(props) {
           <br />
           {selectedProject && 
           <div>
-            <span><strong>Project Progress</strong></span>
+            <span><strong>Progress</strong></span>
             <br /><br />
-            <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables</span>
+            <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables Completed</span>
             <br /><br />
-            <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks</span>
+            <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks Completed</span>
             <br /><br />
             <AddCircleIcon id="schedule_task" className="mui_icons"
               onClick={() => {
