@@ -6,6 +6,7 @@ import App from './App';
 import Scheduler from './components/Scheduler';
 import Register from './components/Register';
 import Login from './components/Login';
+import Teams from './user';
 import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById('root');
@@ -17,6 +18,7 @@ render(
       <Route path="scheduler" element={<Scheduler />}/>
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
+      <Route path="user" element={<user />} />
     </Routes>
   </BrowserRouter>,
   rootElement
