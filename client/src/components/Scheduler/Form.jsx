@@ -44,7 +44,6 @@ export default function PopupForm(props) {
   if (props.selectedProject) {
     deliverables2 = getDeliverables(state, props.selectedProject.id);
   }
-  console.log('deliverables2 =', deliverables2); // Remove test code.
 
   function formatAMPM(date) {
     var hours = date.getHours();
