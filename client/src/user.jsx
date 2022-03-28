@@ -6,7 +6,6 @@ import "./Teams.scss";
 export default function User() {
   // console.log("user??", JSON.parse(localStorage.user));
   let currentUser = JSON.parse(localStorage.user);
-  // console.log("CURRENTLY", currentUser.team_id);
 
   // TEST CODE
   const users = [
@@ -77,7 +76,7 @@ export default function User() {
 
   const team = getUsers(users, currentUser);
 
-  console.log("TESTING", team);
+  console.log("TEAM", team);
 
   const teamList = team.map((user) => (
     <Teams 
