@@ -69,7 +69,7 @@ export default function Scheduler(props) {
 
             {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={!open} timeout="auto" unmountOnExit>
               <SelectProject 
               projects={Object.values(state.projects)} 
               onChange={setProject}
