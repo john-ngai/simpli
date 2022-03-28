@@ -25,7 +25,7 @@ export default function Scheduler(props) {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule } = useAppData();
   const {mode, transition} = useVisualMode(null);
   
   const [open, setOpen] = useState(true);
@@ -48,6 +48,8 @@ export default function Scheduler(props) {
   } else {
     user = JSON.parse(localStorage.user);
   }
+
+  // console.log('state.schedule =', state.schedule); // Remove test code.
 
   return (
     <div id="scheduler_container">
@@ -100,6 +102,7 @@ export default function Scheduler(props) {
           handleOpenForm={handleOpenForm}
           selectedTask={selectedTask}
           selectedProject={selectedProject}
+          saveSchedule={saveSchedule}
           value={state.project}
           transition={transition}
           mode={mode}
@@ -107,7 +110,10 @@ export default function Scheduler(props) {
         </div>
         </aside>
 
-        <Calendar project={state.project}/>
+        <Calendar
+          project={state.project}
+          schedule={state.schedule}
+        />
 
       </main>
     </div>
