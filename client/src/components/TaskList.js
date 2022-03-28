@@ -1,9 +1,9 @@
 import React from 'react';
-
 import './TaskList.scss';
 import TaskListItem from './TaskListItem';
 import NewTask from './NewTask';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import useAppData from '../hooks/useAppData';
 import useVisualMode from '../hooks/useVisualMode';
 import LinearProgressWithLabel from './MUI/LinearProgress';
@@ -63,6 +63,10 @@ export default function TaskList(props) {
         />
       </div>
 
+      <KeyboardBackspaceIcon id="back_button" className="mui_icons"
+        onClick={() => { props.transition('DELIVERABLES') }}
+      />
+
       {mode === NEW_TASK &&
         <NewTask
           deliverable={props.deliverable}
@@ -88,7 +92,6 @@ export default function TaskList(props) {
       }
 
       {taskInfo}
-      <button onClick={() => { props.transition('DELIVERABLES') }}>Back</button>
     </section>
   );
 }

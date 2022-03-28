@@ -10,7 +10,6 @@ export default function NewDeliverable(props) {
   const [priority, setPriority] = useState(props.priority || false);
   const [status, setStatus] = useState(props.status || false);
 
-
   const save = () => {
     const deliverable = {
       name: name,
@@ -23,11 +22,13 @@ export default function NewDeliverable(props) {
       axios.put('/deliverables/new', deliverable)
         .then(res => {
           deliverable.id = res.data.id
+          deliverable.count = 0;
           props.saveDeliverable(deliverable)
           props.transition(null);
         })
     } else {
       deliverable.id = props.id;
+      deliverable.count = props.count;
       axios.put(`/deliverables/${deliverable.id}`, deliverable)
         .then(() => {
           props.editDeliverable(deliverable)
