@@ -56,16 +56,20 @@ export default function PopupForm(props) {
 
   const save = () => {
     const scheduleItem = {
+      day_id: day,
+      project_id: props.selectedProject.id,
       start_time: formatAMPM(valueStartTime),
       end_time: formatAMPM(valueEndTime),
-      day_id: day,
-      task_id: selectedTask.id
+      task: {
+        id: selectedTask.id,
+        name: selectedTask.name,
+        description: selectedTask.description
+      }
     }
     axios.put('/schedule/new', scheduleItem)
-      .then(res => {
-        scheduleItem.id = res.data.id
-        // console.log('res: ', res.data)
-        saveSchedule(scheduleItem)
+    .then(res => {
+      scheduleItem.id = res.data.id;
+      props.saveSchedule(scheduleItem);
       })
   }
 
