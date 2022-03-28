@@ -3,8 +3,10 @@ import Teams from './Teams';
 import './App.scss';
 
 export default function User() {
-  console.log("user??", JSON.parse(localStorage.user));
-
+  // console.log("user??", JSON.parse(localStorage.user));
+  let currentUser = JSON.parse(localStorage.user);
+  // console.log("CURRENTLY", currentUser.team_id);
+  
   // TEST CODE
   const users = [
     {
@@ -51,6 +53,17 @@ export default function User() {
       }
   ];
   // TEST CODE
+  let a = Object.values(users);
+  console.log("test", a);
+
+  const getUsers = ()=> {
+    const allUsers = Object.values(users);
+    const selectedUsers = [];
+
+    for (const user of allUsers) {
+
+    }
+  }
 
   
   return (
