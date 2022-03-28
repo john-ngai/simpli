@@ -10,8 +10,8 @@ import authHeader from '../services/authHeader';
 import { Button } from '@mui/material';
 
 export default function Project(props) {
-  const { state } = useAppData();
-  const projects = state.projects;
+  // const { state } = useAppData();
+  // const projects = state.projects;
 
   const [name, setName] = useState(props.name || '');
   const [description, setDescription] = useState(props.description || '');

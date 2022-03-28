@@ -25,10 +25,10 @@ export default function App() {
   const {
     state,
     setProject, getSelectedProject, saveProject, editProject, deleteProject,
-    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable,    setDeliverablesPriority, setTaskPriority, completeTask,
+    getDeliverables, setDeliverable, getSelectedDeliverable, deleteDeliverable, saveDeliverable, editDeliverable, setDeliverablesPriority, setTaskPriority, completeTask,
     setTask, getTasks, getSelectedTask, deleteTask, saveTask, showDelivForm, showTaskForm, editTask, percentComplete, deliverablePercentComplete, completedDeliverables, completedTasks,
   } = useAppData();
-  
+
   const { page, mode, transition, transitionPage, back } = useVisualMode(null);
 
   const selectedProject = getSelectedProject(state);
@@ -49,9 +49,11 @@ export default function App() {
     user = JSON.parse(localStorage.user);
   }
 
+  console.log('state.projects =', state.projects); // Remove test code.
+
   return (
     <div id="container">
-      {user && <NavBar user={user.name}/>}
+      {user && <NavBar user={user.name} />}
 
       <main>
         <ProjectList
@@ -104,45 +106,47 @@ export default function App() {
             completedTasks={completedTasks}
           />}
 
-          {mode === EDIT_TASKS && 
-          <div>
-            <TaskList
-              tasks={tasks}
-              onChange={setTask}
-              deliverable={state.deliverable}
-              project={state.project}
-              selectedProject={selectedProject}
-              selectedDeliverable={selectedDeliverable}
-              selectedTask={selectedTask}
-              deleteTask={deleteTask}
-              showFormBoolean={state.showTaskForm}
-              showDelivForm={showDelivForm}
-              showTaskForm={showTaskForm}
-              deliverablePercentComplete={deliverablePercentComplete}
-              saveTask={saveTask}
-              transition={transition}
-              editTask={editTask}
-              completedTasks={completedTasks}
+          {mode === EDIT_TASKS &&
+            <div>
+              <TaskList
+                tasks={tasks}
+                onChange={setTask}
+                deliverable={state.deliverable}
+                project={state.project}
+                selectedProject={selectedProject}
+                selectedDeliverable={selectedDeliverable}
+                selectedTask={selectedTask}
+                deleteTask={deleteTask}
+                showFormBoolean={state.showTaskForm}
+                showDelivForm={showDelivForm}
+                showTaskForm={showTaskForm}
+                deliverablePercentComplete={deliverablePercentComplete}
+                saveTask={saveTask}
+                transition={transition}
+                editTask={editTask}
+                completedTasks={completedTasks}
               />
-            <NewTask
-              id={selectedTask.id}
-              name={selectedTask.name}
-              description={selectedTask.description}
-              priority={selectedTask.priority}
-              status={selectedTask.status}
-              deliverable={state.deliverable}
-              saveTask={saveTask}
-              editTask={editTask}
-            />
-          </div>
+              <NewTask
+                id={selectedTask.id}
+                name={selectedTask.name}
+                description={selectedTask.description}
+                priority={selectedTask.priority}
+                status={selectedTask.status}
+                deliverable={state.deliverable}
+                saveTask={saveTask}
+                editTask={editTask}
+              />
+            </div>
           }
 
           {mode === NEW_PROJECT && <Project
+            projects={state.projects}
             saveProject={saveProject}
             transition={transition}
           />}
 
           {mode === EDIT_PROJECT && <Project
+            projects={state.projects}
             editProject={editProject}
             transition={transition}
             id={selectedProject.id}
