@@ -1,0 +1,54 @@
+#container_project_new_edit {
+  border: 2px solid grey;
+  border-radius: 5px;
+  background-color: #2f3949;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 200px;
+}
+
+#container_form {
+  // border: 1px solid red; // Remove test code
+  margin: 5px 0 0 10px;
+}
+
+#title {
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+#project_validation {
+  color: rgb(255, 120, 120);
+}
+
+#input_name {
+  width: 500px;
+  border: 1px solid #88a2cf;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+}
+
+#textarea_description {
+  width: 500px;
+  border: 1px solid #88a2cf;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+}
+
+#button_cancel {
+  color: rgb(255, 120, 120);
+  border-color: rgb(255, 120, 120);
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+#button_save {
+  color: green;
+  border-color: green;
+  font-weight: bold;
+}
