@@ -51,6 +51,13 @@ export default function User() {
       password: "plumber79",
       team_id: 1,
     },
+    {
+      id: 7,
+      name: "Vivian",
+      email: "vivian@gmail.com",
+      password: "password",
+      team_id: 1
+      }
   ];
   // TEST CODE
 
@@ -72,12 +79,17 @@ export default function User() {
   console.log("TESTING", team);
 
   const teamList = team.map((user) => (
-    <Teams key={user.id} teamID={user.team_id} name={user.name} />
+    <Teams 
+    key={user.id} 
+    teamID={user.team_id}
+    name={user.name}
+    email={user.email}  
+    />
   ));
 
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1>User's Team</h1>
       <table>
         <thead>
           <tr>
