@@ -4,3 +4,45 @@
   height: 150px;
   margin-bottom: 1px;
 }
+
+#container_form {
+  // border: 1px solid red; // Remove test code
+  margin: 5px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#input_name {
+  width: 500px;
+  border: 1px solid #88a2cf;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+}
+
+#textarea_description {
+  width: 500px;
+  border: 1px solid #88a2cf;
+  border-radius: 5px;
+  background-color: transparent;
+  color: white;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: row;
+}
+#button_cancel {
+  color: rgb(255, 120, 120);
+  border-color: rgb(255, 120, 120);
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+#button_save {
+  color: green;
+  border-color: green;
+  font-weight: bold;
+}
