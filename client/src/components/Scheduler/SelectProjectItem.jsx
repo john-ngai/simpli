@@ -14,13 +14,18 @@ export default function SelectProjectItem(props) {
     setOpen(!open);
   }
 
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
+  const handleListItemClick = (event, selectedIndex) => {
+    setSelectedIndex(selectedIndex);
   }
-  
+  console.log("index: ",selectedIndex);
 
   return (
-    <ListItemButton onClick={handleOpen}> 
+    <ListItemButton
+    id="selected" 
+    selected={selectedIndex === 0}
+    onClick={(event) => {
+      handleListItemClick(event, 0);
+    }}> 
       <ListItemText 
       id={id}
       primary={name} 
@@ -28,7 +33,7 @@ export default function SelectProjectItem(props) {
         textAlign: 'left',
         fontSize: 14
       }}
-      onClick={setProject} />
+      onClick={handleOpen} />
       {/* {!open ? <ExpandMore /> : <ExpandLess />} */}
     </ListItemButton>
   );
