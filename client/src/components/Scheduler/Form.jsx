@@ -111,9 +111,6 @@ export default function PopupForm(props) {
     boxShadow: 24,
     p: 4,
   };
-  // console.log(props.selectedProject)
-  
-  // console.log(props.mode)
   
   return (
     <div>
@@ -129,30 +126,9 @@ export default function PopupForm(props) {
           </Typography>
           
           <List sx={{ width: '100%', maxWidth: 700 }}>
-            {/* <ListItemButton onClick={handleOpen}>
-              <ListItemText
-                // primary="Select Project"
-                primary="Select Deliverable"
-                primaryTypographyProps={{
-                  color: 'primary',
-                  fontWeight: 'bold'
-                }}
-              />
-
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton> */}
-            {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
                 <div style={{display:"flex"}} >
-              {/* <SelectProject 
-              projects={Object.values(state.projects)} 
-              // value={state.project} 
-              onChange={setProject}
-              onClick={handleOpen}
-              transition={transition}
-              /> */}
               <Collapse in={open} timeout="auto" unmountOnExit>
-                
-                <SelectDeliverable
+                { mode === DELIVERABLES && <SelectDeliverable
                 projects={Object.values(state.projects)}
                 deliverables={deliverables2}
                 onChange={setDeliverable} 
@@ -161,7 +137,7 @@ export default function PopupForm(props) {
                 selectedProject={props.selectedProject}
                 onClick={handleOpen}
                 transition={transition}
-                />
+                /> }
               </Collapse>
               { mode === TASKS && 
               <Fragment>
