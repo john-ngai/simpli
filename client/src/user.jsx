@@ -6,7 +6,7 @@ export default function User() {
   // console.log("user??", JSON.parse(localStorage.user));
   let currentUser = JSON.parse(localStorage.user);
   // console.log("CURRENTLY", currentUser.team_id);
-  
+
   // TEST CODE
   const users = [
     {
@@ -21,7 +21,7 @@ export default function User() {
       name: "Lisa Simpson",
       email: "lisa.simpson@gmail.com",
       password: "ehhhhh",
-      team_id: 1
+      team_id: 2
       },
       {
       id: 3,
@@ -35,7 +35,7 @@ export default function User() {
       name: "Simon Bell",
       email: "simon_bel123@mail.ca",
       password: "dracula",
-      team_id: 1
+      team_id: 3
       },
       {
       id: 5,
@@ -53,17 +53,22 @@ export default function User() {
       }
   ];
   // TEST CODE
-  let a = Object.values(users);
-  console.log("test", a);
 
-  const getUsers = ()=> {
+  const getUsers = (users, currentUser)=> {
     const allUsers = Object.values(users);
     const selectedUsers = [];
+    const teamID = currentUser.team_id;
 
     for (const user of allUsers) {
-
+      if (user.team_id === teamID) {
+        selectedUsers.push(user);
+      }
     }
+    console.log("selected users", selectedUsers);
+    return selectedUsers;
   }
+
+  console.log("TESTING", getUsers(users, currentUser));
 
   
   return (
