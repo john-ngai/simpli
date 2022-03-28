@@ -218,9 +218,6 @@ export default function PopupForm(props) {
               <Button variant="outlined" size="small" onClick={() => {
                 save()
                 props.handleOpenForm()
-                // setProject(null)
-                // setDeliverable(null)
-                // setTask(null)
               }}>
                 Save
               </Button>
