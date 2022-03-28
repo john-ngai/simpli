@@ -17,6 +17,7 @@ import { List, ListItemButton, ListItemText, Collapse } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import useVisualMode from '../../hooks/useVisualMode';
+import { withTheme } from '@emotion/react';
 const DELIVERABLES = "DELIVERABLES";
 const TASKS = "TASKS";
 
@@ -43,7 +44,6 @@ export default function PopupForm(props) {
   if (props.selectedProject) {
     deliverables2 = getDeliverables(state, props.selectedProject.id);
   }
-  console.log('deliverables2 =', deliverables2); // Remove test code.
 
   function formatAMPM(date) {
     var hours = date.getHours();
@@ -105,15 +105,13 @@ export default function PopupForm(props) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 700,
-    bgcolor: /*'background.paper',*/ 'red',
+    width: '500px',
+    bgcolor: /*'background.paper',*/ 'darkgrey',
+    color: 'inherit',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
-  // console.log(props.selectedProject)
-  
-  // console.log(props.mode)
   
   return (
     <div>
@@ -128,69 +126,36 @@ export default function PopupForm(props) {
             Schedule a Task
           </Typography>
           
-          <List sx={{ width: '100%', maxWidth: 700 }}>
-            <ListItemButton onClick={handleOpen}>
-              <ListItemText
-                // primary="Select Project"
-                primary="Select Deliverable"
-                primaryTypographyProps={{
-                  color: 'primary',
-                  fontWeight: 'bold'
-                }}
+          <List sx={{ width: '500px', maxWidth: '500px' }}>
+                <div style={{display:"flex"}} >
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <SelectDeliverable
+                projects={Object.values(state.projects)}
+                deliverables={deliverables2}
+                onChange={setDeliverable} 
+                selectedDel={selectedDel}
+                value={selectedProject}
+                selectedProject={props.selectedProject}
+                onClick={handleOpen}
+                transition={transition}
+                /> 
+              </Collapse>
+              { mode === TASKS && 
+              <Fragment>
+              <SelectTask
+                tasks={tasks}
+                onChange={setTask}
+                selectedProject={selectedProject}
+                selectedDel={selectedDel}
+                selectedTask={selectedTask}
               />
-
-              {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <div style={{ display: "flex" }} >
-
-                <SelectProject
-                  projects={Object.values(state.projects)}
-                  value={state.project} 
-                  onChange={setProject}
-                  onClick={handleOpen}
-                  transition={transition}
-                />
-              
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  {mode === DELIVERABLES &&
-                    <Fragment>
-                      <SelectDeliverable
-                        projects={Object.values(state.projects)}
-                        deliverables={deliverables}
-                        onChange={setDeliverable}
-                        selectedDel={selectedDel}
-                        value={selectedProject}
-                        selectedProject={props.selectedProject}
-                        onClick={handleOpen}
-                        transition={transition}
-                      /> </Fragment>}
-                </Collapse>
-                {mode === TASKS &&
-                  <Fragment>
-                    <SelectDeliverable
-                      deliverables={deliverables}
-                      onChange={setDeliverable}
-                      selectedDel={selectedDel}
-                      selectedProject={selectedProject}
-                      transition={transition}
-                    />
-
-                    <SelectTask
-                      tasks={tasks}
-                      onChange={setTask}
-                      selectedProject={selectedProject}
-                      selectedDel={selectedDel}
-                      selectedTask={selectedTask}
-                    />
-                  </Fragment>
+              </Fragment>
                 }
               </div>
-            </Collapse>
           </List>
           {selectedTask &&
             <div>
-              <FormControl sx={{ width: '50ch' }}>
+              <FormControl sx={{ width: '500px' }}>
                 <div style={{ display: "flex" }} >
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <TimePicker
@@ -211,7 +176,7 @@ export default function PopupForm(props) {
                   </LocalizationProvider>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <TimePicker
-                      renderInput={(params) => <TextField {...params} />}
+                      renderInput={(params) => <TextField sx={{color: 'white'}} {...params} />}
                       label="End Time"
                       value={valueEndTime}
                       views={["hours"]}
@@ -227,7 +192,7 @@ export default function PopupForm(props) {
                     />
                   </LocalizationProvider>
                 </div>
-                <TextField
+                <TextField sx={{ width: '500px', color: 'white' }}
                   id="standard-select-day"
                   select
                   label="Select"
@@ -246,9 +211,6 @@ export default function PopupForm(props) {
               <Button variant="outlined" size="small" onClick={() => {
                 save()
                 props.handleOpenForm()
-                // setProject(null)
-                // setDeliverable(null)
-                // setTask(null)
               }}>
                 Save
               </Button>

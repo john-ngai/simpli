@@ -16,7 +16,7 @@ export default function SelectTask(props) {
     
   return(
     <List sx={{ width: 'auto'}} subheader={
-      <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", '&:hover': { backgroundColor: "lightgray" } }} >Tasks</ListSubheader>
+      <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", backgroundColor: "inherit", color: 'white'  }} >Tasks</ListSubheader>
     } >
       {taskList}
     </List>

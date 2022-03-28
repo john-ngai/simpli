@@ -42,12 +42,8 @@ export default function DeliverableListItem(props) {
       
       <span className="deliverable_description">{props.description}</span>
       
-      <span className="deliverable_tasks">{props.count} Tasks Remaining</span>
-      
-      {/* {props.count > 0 ? <aside>Percent Complete: {props.deliverablePercentComplete}%</aside> : <aside>No Tasks Yet! </aside>}
-      { props.count > 0 ? <CircularProgressWithLabel value={props.deliverablePercentComplete}/> : <CircularProgressWithLabel value={0}/> } */}
-      
-      
+      <span className="deliverable_tasks">{(props.count - props.completedTasks)} out of {props.count} Tasks Remaining</span>
+
       <span className="deliverable_updates">
         <EditIcon id="edit_deliverable" className="mui_icons" 
           onClick={event => {
