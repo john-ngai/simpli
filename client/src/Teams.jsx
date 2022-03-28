@@ -5,8 +5,9 @@ export default function Teams(props) {
  
       <tbody>
         <tr>
-          <th>{props.teamID}</th>
-          <th>{props.name}</th>
+          <td>{props.teamID}</td>
+          <td>{props.name}</td>
+          <td>{props.email}</td>
         </tr>
       </tbody>
   )
