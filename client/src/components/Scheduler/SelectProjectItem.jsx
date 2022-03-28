@@ -7,22 +7,29 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 export default function SelectProjectItem(props) {
   const {id, name, setProject} = props;
 
+  const [open, setOpen] = React.useState(true);
+  const [selectedIndex, setSelectedIndex] =React.useState(1);
+
   const handleOpen = () => {
     setOpen(!open);
   }
-  const [open, setOpen] = React.useState(true);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  }
+  
 
   return (
     <ListItemButton onClick={handleOpen}> 
       <ListItemText 
-      id={id} 
+      id={id}
       primary={name} 
       primaryTypographyProps={{
         textAlign: 'left',
         fontSize: 14
       }}
       onClick={setProject} />
-      {!open ? <ExpandMore /> : <ExpandLess />}
+      {/* {!open ? <ExpandMore /> : <ExpandLess />} */}
     </ListItemButton>
   );
 }
