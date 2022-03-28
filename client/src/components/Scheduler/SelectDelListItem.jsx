@@ -15,7 +15,8 @@ export default function SelectDelListItem(props) {
   return (
     <ListItemButton onClick={handleOpen} >
       <ListItemText
-      id={id}
+      // id={id}
+      id="selected"
       primary={name}
       primaryTypographyProps={{
         fontSize: 12
