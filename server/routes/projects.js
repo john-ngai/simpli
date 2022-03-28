@@ -58,8 +58,8 @@ module.exports = (db) => {
       VALUES ($1, $2, $3)
       RETURNING *;
     `;
-    // return db.query(command, values)
-    //   .then(data => res.send(data.rows[0]));
+    return db.query(command, values)
+      .then(data => res.send(data.rows[0]));
   });
 
   // PUT /projects/:id
