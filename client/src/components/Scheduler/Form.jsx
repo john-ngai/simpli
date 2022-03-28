@@ -153,7 +153,6 @@ export default function PopupForm(props) {
               </Fragment>
                 }
               </div>
-            {/* </Collapse> */}
           </List>
           {selectedTask &&
             <div>
