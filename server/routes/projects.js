@@ -53,8 +53,9 @@ module.exports = (db) => {
     const { name, description } = req.body;
     const values = [name, description, team_id];
     const command = `
-      INSERT INTO projects (name, description, team_id)
-      VALUES ($1, $2, $3)
+      INSERT INTO projects
+        (name, description, completed_deliverables, total_deliverables, team_id)
+      VALUES ($1, $2, 0, 0, $3)
       RETURNING *;
     `;
     return db.query(command, values)
