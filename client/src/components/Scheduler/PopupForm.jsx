@@ -102,11 +102,11 @@ export default function PopupForm(props) {
 
   const popupStyle = {
     position: 'absolute',
-    top: '50%',
+    top: '35%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '500px',
-    bgcolor: /*'background.paper',*/ 'darkgrey',
+    bgcolor: 'darkGrey',
     color: 'inherit',
     border: '2px solid #000',
     boxShadow: 24,
