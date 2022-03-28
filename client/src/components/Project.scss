@@ -1,17 +1,27 @@
-.new_task_container {
+#container_project_new_edit {
   border: 2px solid grey;
   border-radius: 5px;
-  height: 150px;
-  margin-bottom: 1px;
+  background-color: #2f3949;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 200px;
 }
 
 #container_form {
   // border: 1px solid red; // Remove test code
   margin: 5px 0 0 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+}
+
+#title {
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+#project_validation {
+  color: rgb(255, 120, 120);
 }
 
 #input_name {
@@ -30,10 +40,6 @@
   color: white;
 }
 
-#buttons {
-  display: flex;
-  flex-direction: row;
-}
 #button_cancel {
   color: rgb(255, 120, 120);
   border-color: rgb(255, 120, 120);

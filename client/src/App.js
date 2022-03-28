@@ -20,7 +20,6 @@ const NEW_PROJECT = 'NEW_PROJECT';
 const EDIT_PROJECT = 'EDIT_PROJECT';
 const NEW_TASK = 'NEW_TASK';
 const EDIT_TASKS = 'EDIT_TASKS'
-const EDIT_DELIVERABLES = 'EDIT_DELIVERABLES'
 
 export default function App() {
   const {
@@ -75,34 +74,12 @@ export default function App() {
             showFormBoolean={state.showDelivForm}
             showDelivForm={showDelivForm}
             saveDeliverable={saveDeliverable}
-            selectedProject={selectedProject}
-            selectedDeliverable={selectedDeliverable}
-            deleteDeliverable={deleteDeliverable}
-            completedDeliverables={completedDeliverables}
-            completedTasks={completedTasks}
-          />}
-
-          {mode === EDIT_DELIVERABLES && <DeliverableList
-            deliverables={deliverables}
-            onChange={setDeliverable}
-            transition={transition}
-            project={state.project}
-            onToggle={setDeliverablesPriority}
-            showFormBoolean={state.showDelivForm}
-            showDelivForm={showDelivForm}
-            saveDeliverable={saveDeliverable}
-            selectedProject={selectedProject}
-            selectedDeliverable={selectedDeliverable}
             editDeliverable={editDeliverable}
+            selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            deleteDeliverable={deleteDeliverable}
             completedDeliverables={completedDeliverables}
             completedTasks={completedTasks}
-
-            id={selectedDeliverable.id}
-            name={selectedDeliverable.name}
-            description={selectedDeliverable.description}
-            priority={selectedDeliverable.priority}
-            status={selectedDeliverable.status}
-            deleteDeliverable={deleteDeliverable}
           />}
 
           {mode === TASKS && <TaskList
@@ -162,13 +139,11 @@ export default function App() {
 
           {mode === NEW_PROJECT && <Project
             saveProject={saveProject}
-            back={back}
             transition={transition}
           />}
 
           {mode === EDIT_PROJECT && <Project
             editProject={editProject}
-            back={back}
             transition={transition}
             id={selectedProject.id}
             name={selectedProject.name}
