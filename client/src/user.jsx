@@ -1,6 +1,7 @@
 import React from "react";
 import Teams from "./Teams";
 import "./App.scss";
+import "./Teams.scss";
 
 export default function User() {
   // console.log("user??", JSON.parse(localStorage.user));
@@ -95,6 +96,7 @@ export default function User() {
           <tr>
             <th>Team ID</th>
             <th>Name</th>
+            <th>Email</th>
           </tr>
         </thead>
         {teamList}
