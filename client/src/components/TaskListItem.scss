@@ -18,7 +18,7 @@
   align-items: center;
   height: 80px;
   margin-bottom: 1px;
-  border-left: solid 5px rgb(79, 221, 146);
+  background-color: rgb(62, 171, 113);
 }
 
 #priority {
@@ -33,6 +33,18 @@
   border-left: solid 5px rgb(255, 200, 100);
 }
 
+#complete_important_task {
+  border: 2px solid grey;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  margin-bottom: 1px;
+  border-left: solid 5px rgb(255, 200, 100);
+  background-color: rgb(62, 171, 113);
+}
 .task_list_item:hover {
   background-color: #2f3949;
 }
