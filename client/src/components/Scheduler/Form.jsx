@@ -128,7 +128,7 @@ export default function PopupForm(props) {
           <List sx={{ width: '100%', maxWidth: 700 }}>
                 <div style={{display:"flex"}} >
               <Collapse in={open} timeout="auto" unmountOnExit>
-                { mode === DELIVERABLES && <SelectDeliverable
+                <SelectDeliverable
                 projects={Object.values(state.projects)}
                 deliverables={deliverables2}
                 onChange={setDeliverable} 
@@ -137,17 +137,17 @@ export default function PopupForm(props) {
                 selectedProject={props.selectedProject}
                 onClick={handleOpen}
                 transition={transition}
-                /> }
+                /> 
               </Collapse>
               { mode === TASKS && 
               <Fragment>
-              <SelectDeliverable
+              {/* <SelectDeliverable
               deliverables={deliverables}
               onChange={setDeliverable} 
               selectedDel={selectedDel}
               selectedProject={selectedProject}
               transition={transition}
-              /> 
+              />  */}
               <SelectTask
                 tasks={tasks}
                 onChange={setTask}
