@@ -5,7 +5,7 @@ CREATE TABLE projects (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
-  completed_deliverables INTERGER,
+  completed_deliverables INTEGER,
   total_deliverables INTEGER,
   team_id INTEGER REFERENCES teams (id) ON DELETE CASCADE
 );
