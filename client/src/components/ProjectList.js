@@ -14,6 +14,8 @@ export default function ProjectList(props) {
       description={project.description}
       count={project.count}
       selected={project.id === props.value}
+      completed_deliverables={project['completed_deliverables']}
+      total_deliverables={project['total_deliverables']}
       percentComplete={percentComplete(state, project.id)}
       completedDeliverables={props.completedDeliverables(state, project.id)}
       setProject={() => {
