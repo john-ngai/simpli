@@ -18,16 +18,17 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import useAppData from '../../hooks/useAppData';
 import useVisualMode from '../../hooks/useVisualMode';
 
-const DELIVERABLES = "DELIVERABLES";
-const TASKS = "TASKS";
+// Modes
+const NEW_EVENT = 'NEW_EVENT';
+const EDIT_EVENT = 'EDIT_EVENT';
 
 export default function Scheduler(props) {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule } = useAppData();
-  const {mode, transition} = useVisualMode(null);
-  
+  const { mode, transition } = useVisualMode(null);
+
   const [open, setOpen] = useState(true);
   const handleOpen = () => {
     setOpen(!open);
@@ -49,7 +50,8 @@ export default function Scheduler(props) {
     user = JSON.parse(localStorage.user);
   }
 
-  // console.log('state.schedule =', state.schedule); // Remove test code.
+  console.log('state.deliverable =', state.deliverable);
+  console.log('state.task =', state.task);
 
   return (
     <div id="scheduler_container">
@@ -58,65 +60,105 @@ export default function Scheduler(props) {
       <main id="scheduler_main">
 
         <aside id="menu">
-        <List sx={{ width: '100%', maxWidth: 300 }}>
+          <List sx={{ width: '100%', maxWidth: 300 }}>
             <ListItemButton onClick={handleOpen}>
-              <ListItemText 
-              primary="Select Project" 
-              primaryTypographyProps={{
-              color: 'primary',
-              fontWeight: 'bold'
-              }} 
+              <ListItemText
+                primary="Select Project"
+                primaryTypographyProps={{
+                  color: 'primary',
+                  fontWeight: 'bold'
+                }}
               />
 
-            {open ? <ExpandLess /> : <ExpandMore />}
+              {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={!open} timeout="auto" unmountOnExit>
-              <SelectProject 
-              projects={Object.values(state.projects)} 
-              onChange={setProject}
-              onClick={handleOpen}
-              transition={transition}
+              <SelectProject
+                projects={Object.values(state.projects)}
+                onChange={setProject}
+                setDeliverable={() => setDeliverable(null)}
+                setTask={() => setTask(null)}
+                onClick={handleOpen}
+                transition={transition}
               />
 
             </Collapse>
           </List>
           <br />
-          {selectedProject && 
-          <div>
-            <span><strong>Progress</strong></span>
-            <br /><br />
-            <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables Completed</span>
-            <br /><br />
-            <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks Completed</span>
-            <br /><br />
-            <AddCircleIcon id="schedule_task" className="mui_icons"
-              onClick={() => {
-                handleOpenForm()
-              }}
-            />
-          </div>
+          {selectedProject &&
+            <div>
+              <span><strong>Progress</strong></span>
+              <br /><br />
+              <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables Completed</span>
+              <br /><br />
+              <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks Completed</span>
+              <br /><br />
+              <AddCircleIcon id="schedule_task" className="mui_icons"
+                onClick={() => {
+                  // handleOpenForm();                  
+                  transition(NEW_EVENT);
+                }}
+              />
+            </div>
           }
-        <div>
-          <PopupForm 
+        </aside>
+
+        {/* <PopupForm
+          state={state}
           openForm={openForm}
           handleOpenForm={handleOpenForm}
+          setDeliverable={setDeliverable}
+          setTask={setTask}
           selectedTask={selectedTask}
           selectedProject={selectedProject}
           saveSchedule={saveSchedule}
           value={state.project}
           transition={transition}
           mode={mode}
+        /> */}
+
+        {mode === NEW_EVENT &&
+          <PopupForm
+            state={state}
+            // openForm={openForm}
+            openForm={true}
+            // handleOpenForm={handleOpenForm}
+            setDeliverable={setDeliverable}
+            setTask={setTask}
+            selectedTask={selectedTask}
+            selectedProject={selectedProject}
+            saveSchedule={saveSchedule}
+            value={state.project}
+            transition={transition}
+            mode={mode}
           />
-        </div>
-        </aside>
+        }
+
+        {mode === EDIT_EVENT &&
+          <PopupForm
+            state={state}
+            // openForm={openForm}
+            openForm={true}
+            // handleOpenForm={handleOpenForm}
+            setDeliverable={setDeliverable}
+            setTask={setTask}
+            selectedTask={selectedTask}
+            selectedProject={selectedProject}
+            saveSchedule={saveSchedule}
+            value={state.project}
+            transition={transition}
+            mode={mode}            
+          />
+        }
 
         <Calendar
           project={state.project}
           schedule={state.schedule}
+          handleOpenForm={handleOpenForm}
         />
 
       </main>
     </div>
-    
+
   );
 }

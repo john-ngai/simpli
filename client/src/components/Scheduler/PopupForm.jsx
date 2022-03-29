@@ -34,7 +34,7 @@ export default function PopupForm(props) {
   }
 
   const selectedProject = getSelectedProject(state);
-  const deliverables = getDeliverables(state, state.project);
+  // const deliverables = getDeliverables(state, state.project);
 
   let selectedDel = getSelectedDeliverable(props.state);
   const tasks = getTasks(props.state, props.state.deliverable);
@@ -124,8 +124,9 @@ export default function PopupForm(props) {
         onClose={() => {
           transition(null);
           props.setDeliverable(null);
-          props.Task(null);
-          props.handleOpenForm();
+          props.setTask(null);
+          // props.handleOpenForm();
+          props.transition(null);
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
