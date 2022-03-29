@@ -36,7 +36,8 @@ module.exports = (db) => {
 
   // PUT /schedule
   router.put('/new', (req,res) => {
-    const {start_time, end_time, day_id, task_id} = req.body;
+    const { start_time, end_time, day_id, task } = req.body;
+    const task_id = task.id;
     const values = [start_time, end_time, day_id, task_id];
     const command = `
     INSERT INTO schedule (start_time, end_time, day_id, task_id)
