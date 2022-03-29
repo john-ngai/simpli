@@ -30,10 +30,7 @@ export default function SelectProject(props) {
     key={project.id}
     id={project.id}
     name={project.name}
-    // selected={project.id === props.value}
     setProject={() => {
-      props.setDeliverable();
-      props.setTask();
       onChange(project.id);
     }}
     />
