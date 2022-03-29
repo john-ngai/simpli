@@ -4,6 +4,7 @@ import ProjectList from './ProjectList'
 import Teams from './Teams'
 import { Avatar } from '@mui/material'
 import './User.scss'
+import "./Teams.scss";
 import useAppData from '../hooks/useAppData'
 import useVisualMode from '../hooks/useVisualMode'
 
@@ -17,12 +18,12 @@ export default function User() {
 
   const team = getUsers(state, user);
 
-  const teamList = team.map((user) => (
+  const teamList = team.map((member) => (
     <Teams
-      key={user.id}
-      teamID={user.team_id}
-      name={user.name}
-      email={user.email}
+      key={member.id}
+      teamID={member.team_id}
+      name={member.name}
+      email={member.email}
     />
   ));
 
