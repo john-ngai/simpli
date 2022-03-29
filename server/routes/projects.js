@@ -64,19 +64,19 @@ module.exports = (db) => {
 
   // PUT /projects/:id
   router.put('/:id', (req, res) => {
-    const token = req.headers['x-access-token'];
-    // Respond with a 401 unauthorized status code if no token is sent.
-    if (!token) {
-      return res.status(401).send();
-    }
-    // Respond with a 401 unauthorized status code if the token verification fails.
-    const user = services.verifyToken(token);
-    if (!user) {
-      return res.status(401).send();
-    }
-    const { team_id } = user;
+    // const token = req.headers['x-access-token'];
+    // // Respond with a 401 unauthorized status code if no token is sent.
+    // if (!token) {
+    //   return res.status(401).send();
+    // }
+    // // Respond with a 401 unauthorized status code if the token verification fails.
+    // const user = services.verifyToken(token);
+    // if (!user) {
+    //   return res.status(401).send();
+    // }
+    // const { team_id } = user;
     const id = req.params.id;
-    const { name, description, completed_deliverables, total_deliverables } = req.body;
+    const { name, description, completed_deliverables, total_deliverables, team_id } = req.body;
     const values = [name, description, completed_deliverables, total_deliverables, team_id, id];
     const command = `
       UPDATE projects

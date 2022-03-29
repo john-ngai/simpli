@@ -8,11 +8,12 @@ import useAppData from '../hooks/useAppData';
 
 export default function TaskListItem(props) {
   const { task, onToggle, onClick } = props;
-
+  const team_id = (JSON.parse(localStorage.getItem("user"))['team_id'])
   return (
     <li className="task_list_item" id={props.selected ? "priority" : "task_list_item"}>
       <CheckCircleOutlineIcon id={props.status ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => {
         onClick(task.id)
+          // console.log((JSON.parse(localStorage.getItem("user"))['team_id']))
         }} />
       {/* <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
         onClick={() => props.setTask()} // Do not remove.
