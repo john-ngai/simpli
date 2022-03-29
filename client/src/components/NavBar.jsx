@@ -13,6 +13,9 @@ export default function Navbar(props) {
       <span className="nav_item">
         <Link to="/scheduler">Scheduler</Link>
       </span>
+      <span>
+        <Link to="/user">User</Link>
+      </span>
       </div>
       <span className="login_nav">
         {!props.user && <Link to="/register">Register</Link>}
