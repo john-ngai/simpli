@@ -280,9 +280,6 @@ export default function useAppData() {
       updDeliv.status = false
     }
 
-    console.log("selected deliverable complete? ", updDeliv.status)
-
-
     const tasks = {
       ...state.tasks,
       [id]: updTask
@@ -297,7 +294,7 @@ export default function useAppData() {
       ...state.projects,
       [projID]: updProj
     }
-    console.log(projects)
+
     axios.put(`/tasks/${id}`, updTask)
     .then(() => {
       setState({ ...state, tasks });
