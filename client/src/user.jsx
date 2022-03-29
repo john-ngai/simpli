@@ -8,61 +8,6 @@ export default function User() {
   // console.log("user??", JSON.parse(localStorage.user));
   let currentUser = JSON.parse(localStorage.user);
   const { state } = useAppData();
-  console.log("users=", state.users);
-
-  // TEST CODE
-  // const users = [
-  //   {
-  //     id: 1,
-  //     name: "Rick Sanchez",
-  //     email: "rick.sandchez@gmail.com",
-  //     password: "picklerick",
-  //     team_id: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Lisa Simpson",
-  //     email: "lisa.simpson@gmail.com",
-  //     password: "ehhhhh",
-  //     team_id: 2,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Link",
-  //     email: "link@yahoo.com",
-  //     password: "hyrule",
-  //     team_id: 1,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Simon Bell",
-  //     email: "simon_bel123@mail.ca",
-  //     password: "dracula",
-  //     team_id: 3,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Ultron",
-  //     email: "all_might@academia.jp",
-  //     password: "plusUltra",
-  //     team_id: 1,
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Mario Marucci",
-  //     email: "mario@mushroomkindom.jp",
-  //     password: "plumber79",
-  //     team_id: 1,
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "Vivian",
-  //     email: "vivian@gmail.com",
-  //     password: "password",
-  //     team_id: 1
-  //     }
-  // ];
-  // TEST CODE
 
   const getUsers = (state, currentUser) => {
     const allUsers = Object.values(state.users);
@@ -78,8 +23,6 @@ export default function User() {
   };
 
   const team = getUsers(state, currentUser);
-
-  console.log("TEAM", team);
 
   const teamList = team.map((user) => (
     <Teams 
