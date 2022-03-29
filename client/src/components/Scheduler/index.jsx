@@ -34,10 +34,11 @@ export default function Scheduler(props) {
     setOpen(!open);
   }
   const selectedProject = getSelectedProject(state);
-  const deliverables = getDeliverables(state, state.project);
-  const selectedDel = getSelectedDeliverable(state);
-  const tasks = getTasks(state, state.deliverable);
+  const selectedDeliverable = getSelectedDeliverable(state);
   const selectedTask = getSelectedTask(state);
+  // const deliverables = getDeliverables(state, state.project);
+  // const selectedDel = getSelectedDeliverable(state);
+  // const tasks = getTasks(state, state.deliverable);
 
   if (!localStorage.user) {
     return (
@@ -50,8 +51,8 @@ export default function Scheduler(props) {
     user = JSON.parse(localStorage.user);
   }
 
-  console.log('state.deliverable =', state.deliverable);
-  console.log('state.task =', state.task);
+  // console.log('state.deliverable =', state.deliverable); // Remove test code.
+  // console.log('state.task =', state.task); // Remove test code.
 
   return (
     <div id="scheduler_container">
@@ -125,8 +126,9 @@ export default function Scheduler(props) {
             // handleOpenForm={handleOpenForm}
             setDeliverable={setDeliverable}
             setTask={setTask}
-            selectedTask={selectedTask}
             selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            selectedTask={selectedTask}
             saveSchedule={saveSchedule}
             value={state.project}
             transition={transition}
@@ -142,8 +144,9 @@ export default function Scheduler(props) {
             // handleOpenForm={handleOpenForm}
             setDeliverable={setDeliverable}
             setTask={setTask}
-            selectedTask={selectedTask}
             selectedProject={selectedProject}
+            selectedDeliverable={selectedDeliverable}
+            selectedTask={selectedTask}
             saveSchedule={saveSchedule}
             value={state.project}
             transition={transition}
@@ -154,7 +157,8 @@ export default function Scheduler(props) {
         <Calendar
           project={state.project}
           schedule={state.schedule}
-          handleOpenForm={handleOpenForm}
+          // setDeliverable={setDeliverable}
+          setTask={setTask}
         />
 
       </main>
