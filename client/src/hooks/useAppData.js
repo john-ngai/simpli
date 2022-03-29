@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import authHeader from '../services/authHeader';
+// import users from "../../../server/routes/users";
 
 export default function useAppData() {
   // Container for the state and all helper functions.
@@ -18,8 +19,7 @@ export default function useAppData() {
     schedule: {},
     showDelivForm: false,
     showTaskForm: false,
-    user: null,
-    users: {},
+    users: {}
   });
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function useAppData() {
       axios.get('/projects', { headers: authHeader() }),
       axios.get('/deliverables', { headers: authHeader() }),
       axios.get('/tasks', { headers: authHeader() }),
-      axios.get('/schedule'), /* Missing JWT authentication!! */
+      axios.get('/schedule') /* Missing JWT authentication!! */,
       axios.get('/users')
     ])
       .then(all => {

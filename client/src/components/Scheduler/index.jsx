@@ -5,7 +5,7 @@ import './index.scss';
 import NavBar from '../NavBar';
 import SelectProject from './SelectProject';
 import Calendar from './Calendar';
-import PopupForm from './Form';
+import PopupForm from './PopupForm';
 import SelectDeliverable from './SelectDeliverable';
 import SelectTask from './SelectTask';
 // Material-UI
@@ -25,7 +25,7 @@ export default function Scheduler(props) {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule } = useAppData();
   const {mode, transition} = useVisualMode(null);
   
   const [open, setOpen] = useState(true);
@@ -48,6 +48,8 @@ export default function Scheduler(props) {
   } else {
     user = JSON.parse(localStorage.user);
   }
+
+  // console.log('state.schedule =', state.schedule); // Remove test code.
 
   return (
     <div id="scheduler_container">
@@ -81,11 +83,11 @@ export default function Scheduler(props) {
           <br />
           {selectedProject && 
           <div>
-            <span><strong>Project Progress</strong></span>
+            <span><strong>Progress</strong></span>
             <br /><br />
-            <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables</span>
+            <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables Completed</span>
             <br /><br />
-            <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks</span>
+            <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks Completed</span>
             <br /><br />
             <AddCircleIcon id="schedule_task" className="mui_icons"
               onClick={() => {
@@ -100,6 +102,7 @@ export default function Scheduler(props) {
           handleOpenForm={handleOpenForm}
           selectedTask={selectedTask}
           selectedProject={selectedProject}
+          saveSchedule={saveSchedule}
           value={state.project}
           transition={transition}
           mode={mode}
@@ -107,7 +110,10 @@ export default function Scheduler(props) {
         </div>
         </aside>
 
-        <Calendar project={state.project}/>
+        <Calendar
+          project={state.project}
+          schedule={state.schedule}
+        />
 
       </main>
     </div>

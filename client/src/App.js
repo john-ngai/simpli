@@ -49,8 +49,6 @@ export default function App() {
     user = JSON.parse(localStorage.user);
   }
 
-  console.log('state.projects =', state.projects); // Remove test code.
-
   return (
     <div id="container">
       {user && <NavBar user={user.name} />}
