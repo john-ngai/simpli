@@ -233,13 +233,21 @@ export default function useAppData() {
   // toggle task complete
   const completeTask = (id) => {
     const allTasks = Object.values(state.tasks);
-    
+    const allDelivs = Object.values (state.deliverables)
     let updTask;
     allTasks.forEach(task => {
       if (task.id === id) {
         task.status = !task.status;
         updTask = task;
-        // console.log("AFTER TASK:", updTask); TEST CODE
+        allDelivs.forEach(deliverable => {
+          if (deliverable.id === task.deliverable_id) {
+            if (task.status === true) {
+              deliverable['completed_tasks']++
+            } else if (task.status === false) {
+              deliverable['completed_tasks']--
+            }
+          }
+        })
       }
     });
 
@@ -248,15 +256,6 @@ export default function useAppData() {
       [id]: updTask
     }
 
-    // const values = Object.values(state.deliverables)
-    // const updateCounter = values.map((deliverable) => {
-    //   const completedTasks=(state, deliverable.id)
-    //   console.log(completedTasks)
-    //   if (updTask.deliverable_id === deliverable.id) {
-    //     return { ...deliverable, completedTasks: completedTasks+1 };
-    //   }
-    //   return deliverable
-    // });
 
     axios.put(`/tasks/${id}`, updTask)
       .then(() => {
