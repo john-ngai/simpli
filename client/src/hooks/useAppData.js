@@ -515,12 +515,6 @@ export default function useAppData() {
   }
   appData.getUsers = getUsers
 
-  // Set the currently selected deliverable and task id.
-  const setDeliverableAndTask = (deliverable, task) => setState({
-    ...state, deliverable, task
-  });
-  appData.setDeliverableAndTask = setDeliverableAndTask;
-
   // Set the currently selected deliverable, task, & scheduleItem id.
   const setScheduleItem = (deliverable, task, scheduleItem) => {
     setState({
