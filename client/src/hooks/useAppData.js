@@ -233,36 +233,85 @@ export default function useAppData() {
   // toggle task complete
   const completeTask = (id) => {
     const allTasks = Object.values(state.tasks);
-
+    const allDelivs = Object.values(state.deliverables)
+    const allProj = Object.values(state.projects)
     let updTask;
+    let updDeliv;
+    let updProj;
+    let delivID;
+    let projID;
     allTasks.forEach(task => {
       if (task.id === id) {
         task.status = !task.status;
         updTask = task;
-        // console.log("AFTER TASK:", updTask); TEST CODE
+        allDelivs.forEach(deliverable => {
+          if (deliverable.id === task.deliverable_id) {
+            delivID = deliverable.id
+            updDeliv = deliverable
+            if (task.status === true) {
+              deliverable['completed_tasks']++
+            } else if (task.status === false) {
+              deliverable['completed_tasks']--
+            }
+          }
+        })
       }
     });
+    
+    if (updDeliv['completed_tasks'] === Number(updDeliv.count)) {
+      updDeliv.status = true
+      allProj.forEach(project => {
+        if (project.id === updDeliv.project_id) {
+          updProj = project
+          projID = project.id
+          project['completed_deliverables']++
+        }
+      })
+    } else {
+      allProj.forEach(project => {
+        if (project.id === updDeliv.project_id) {
+          updProj = project
+          projID = project.id
+          if (updDeliv.status === true) {
+            project['completed_deliverables']--
+          }
+        }
+      })
+      updDeliv.status = false
+    }
 
     const tasks = {
       ...state.tasks,
       [id]: updTask
     }
 
-    // const values = Object.values(state.deliverables)
-    // const updateCounter = values.map((deliverable) => {
-    //   const completedTasks=(state, deliverable.id)
-    //   console.log(completedTasks)
-    //   if (updTask.deliverable_id === deliverable.id) {
-    //     return { ...deliverable, completedTasks: completedTasks+1 };
-    //   }
-    //   return deliverable
-    // });
+    const deliverables = {
+      ...state.deliverables,
+      [delivID]: updDeliv
+    }
+
+    const projects = {
+      ...state.projects,
+      [projID]: updProj
+    }
 
     axios.put(`/tasks/${id}`, updTask)
-      .then(() => {
-        setState({ ...state, tasks });
-      })
-      .catch(err => console.log(err));
+    .then(() => {
+      setState({ ...state, tasks });
+    })
+    .catch(err => console.log(err));
+    
+    axios.put(`/deliverables/${delivID}`, updDeliv)
+    .then(() => {
+      setState({ ...state, deliverables });
+    })
+    .catch(err => console.log(err));
+
+    axios.put(`/projects/${projID}`, updProj)
+    .then(() => {
+      setState({ ...state, projects });
+    })
+    .catch(err => console.log(err));
   }
   appData.completeTask = completeTask;
 

@@ -48,7 +48,7 @@ export default function App() {
   } else {
     user = JSON.parse(localStorage.user);
   }
-// console.log(selectedProject['completed_deliverables'])
+
   return (
     <div id="container">
       {user && <NavBar user={user.name} />}

@@ -43,7 +43,7 @@ export default function DeliverableListItem(props) {
       
       <span className="deliverable_description">{props.description}</span>
       
-      <span className="deliverable_tasks">{(props.count - props.completedTasks)} out of {props.count} Tasks Remaining</span>
+      <span className="deliverable_tasks">{(props.count - props['completed_tasks'])} out of {props.count} Tasks Remaining</span>
 
       <span className="deliverable_updates">
         <EditIcon id="edit_deliverable" className="mui_icons" 
