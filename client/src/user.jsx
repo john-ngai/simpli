@@ -8,6 +8,7 @@ export default function User() {
   // console.log("user??", JSON.parse(localStorage.user));
   let currentUser = JSON.parse(localStorage.user);
   const { state } = useAppData();
+  console.log("users=", state.users);
 
   // TEST CODE
   const users = [
@@ -63,8 +64,8 @@ export default function User() {
   ];
   // TEST CODE
 
-  const getUsers = (users, currentUser) => {
-    const allUsers = Object.values(users);
+  const getUsers = (state, currentUser) => {
+    const allUsers = Object.values(state.users);
     const selectedUsers = [];
     const teamID = currentUser.team_id;
 
@@ -76,7 +77,7 @@ export default function User() {
     return selectedUsers;
   };
 
-  const team = getUsers(users, currentUser);
+  const team = getUsers(state, currentUser);
 
   console.log("TEAM", team);
 
