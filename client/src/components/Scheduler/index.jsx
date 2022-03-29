@@ -22,11 +22,11 @@ import useVisualMode from '../../hooks/useVisualMode';
 const NEW_EVENT = 'NEW_EVENT';
 const EDIT_EVENT = 'EDIT_EVENT';
 
-export default function Scheduler(props) {
+export default function Scheduler() {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, setScheduleItem, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule } = useAppData();
   const { mode, transition } = useVisualMode(null);
 
   const [open, setOpen] = useState(true);
@@ -36,9 +36,9 @@ export default function Scheduler(props) {
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
   const selectedTask = getSelectedTask(state);
-  // const deliverables = getDeliverables(state, state.project);
-  // const selectedDel = getSelectedDeliverable(state);
-  // const tasks = getTasks(state, state.deliverable);
+  // const deliverables = getDeliverables(state, state.project); // Remove legacy code.
+  // const selectedDel = getSelectedDeliverable(state); // Remove legacy code.
+  // const tasks = getTasks(state, state.deliverable); // Remove legacy code.
 
   if (!localStorage.user) {
     return (
@@ -51,13 +51,9 @@ export default function Scheduler(props) {
     user = JSON.parse(localStorage.user);
   }
 
-  // console.log('state.deliverable =', state.deliverable); // Remove test code.
-  // console.log('state.task =', state.task); // Remove test code.
-
   return (
     <div id="scheduler_container">
       {user && <NavBar user={user.name} />}
-
       <main id="scheduler_main">
 
         <aside id="menu">
@@ -70,60 +66,47 @@ export default function Scheduler(props) {
                   fontWeight: 'bold'
                 }}
               />
-
               {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={!open} timeout="auto" unmountOnExit>
               <SelectProject
                 projects={Object.values(state.projects)}
                 onChange={setProject}
-                setDeliverable={() => setDeliverable(null)}
-                setTask={() => setTask(null)}
                 onClick={handleOpen}
                 transition={transition}
               />
-
             </Collapse>
           </List>
+
           <br />
+
           {selectedProject &&
             <div>
               <span><strong>Progress</strong></span>
               <br /><br />
               <span>{completedDeliverables(state, state.project)} of {selectedProject.count} Deliverables Completed</span>
               <br /><br />
+
               <span>{completedTasksForProject(state, state.project)} of {totalTasksForProject(state, state.project)} Tasks Completed</span>
               <br /><br />
+
               <AddCircleIcon id="schedule_task" className="mui_icons"
                 onClick={() => {
-                  // handleOpenForm();                  
+                  setScheduleItem(null, null, null);
                   transition(NEW_EVENT);
+                  // handleOpenForm(); // Remove legacy code.
                 }}
               />
             </div>
           }
         </aside>
 
-        {/* <PopupForm
-          state={state}
-          openForm={openForm}
-          handleOpenForm={handleOpenForm}
-          setDeliverable={setDeliverable}
-          setTask={setTask}
-          selectedTask={selectedTask}
-          selectedProject={selectedProject}
-          saveSchedule={saveSchedule}
-          value={state.project}
-          transition={transition}
-          mode={mode}
-        /> */}
-
         {mode === NEW_EVENT &&
           <PopupForm
             state={state}
-            // openForm={openForm}
+            // openForm={openForm} // Remove legacy code.
             openForm={true}
-            // handleOpenForm={handleOpenForm}
+            // handleOpenForm={handleOpenForm} // Remove legacy code.
             setDeliverable={setDeliverable}
             setTask={setTask}
             selectedProject={selectedProject}
@@ -133,15 +116,16 @@ export default function Scheduler(props) {
             value={state.project}
             transition={transition}
             mode={mode}
+            setScheduleItem={setScheduleItem}
           />
         }
 
         {mode === EDIT_EVENT &&
           <PopupForm
             state={state}
-            // openForm={openForm}
+            // openForm={openForm} // Remove legacy code.
             openForm={true}
-            // handleOpenForm={handleOpenForm}
+            // handleOpenForm={handleOpenForm} // Remove legacy code.
             setDeliverable={setDeliverable}
             setTask={setTask}
             selectedProject={selectedProject}
@@ -150,15 +134,17 @@ export default function Scheduler(props) {
             saveSchedule={saveSchedule}
             value={state.project}
             transition={transition}
-            mode={mode}            
+            mode={mode}
+            edit={true}
+            setScheduleItem={setScheduleItem}
           />
         }
 
         <Calendar
           project={state.project}
           schedule={state.schedule}
-          // setDeliverable={setDeliverable}
-          setTask={setTask}
+          setScheduleItem={setScheduleItem}
+          transition={transition}
         />
 
       </main>
