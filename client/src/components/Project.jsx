@@ -24,12 +24,16 @@ export default function Project(props) {
       axios.put('/projects', project, { headers: authHeader() })
         .then(res => {
           project.id = res.data.id;
+          project['completed_deliverables'] = res.data['completed_deliverables']
+          project['total_deliverables'] = res.data['total_deliverables']
           project['team_id'] = res.data['team_id'];
           props.saveProject(project);
           props.transition('DELIVERABLES');
         })
     } else {
       project.id = props.id;
+      project['completed_deliverables'] = props['completed_deliverables']
+      project['total_deliverables'] = props['total_deliverables']
       axios.put(`projects/${project.id}`, project, { headers: authHeader() })
         .then(res => {
           project['team_id'] = res.data['team_id'];
