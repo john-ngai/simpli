@@ -2,10 +2,12 @@ import React from "react";
 import Teams from "./Teams";
 import "./App.scss";
 import "./Teams.scss";
+import useAppData from "./hooks/useAppData";
 
 export default function User() {
   // console.log("user??", JSON.parse(localStorage.user));
   let currentUser = JSON.parse(localStorage.user);
+  const { state } = useAppData();
 
   // TEST CODE
   const users = [
