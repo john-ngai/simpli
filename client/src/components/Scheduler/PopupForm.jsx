@@ -34,9 +34,8 @@ export default function PopupForm(props) {
   }
 
   const selectedProject = getSelectedProject(state);
-  // const deliverables = getDeliverables(state, state.project);
 
-  let selectedDel = getSelectedDeliverable(props.state);
+  let selectedDel = props.selectedDeliverable;
   const tasks = getTasks(props.state, props.state.deliverable);
   let selectedTask = getSelectedTask(props.state);
 
@@ -67,11 +66,16 @@ export default function PopupForm(props) {
         description: selectedTask.description
       }
     }
-    axios.put('/schedule/new', scheduleItem)
-      .then(res => {
-        scheduleItem.id = res.data.id;
-        props.saveSchedule(scheduleItem);
-      })
+
+    if (!props.edit) {
+      axios.put('/schedule/new', scheduleItem)
+        .then(res => {
+          scheduleItem.id = res.data.id;
+          props.saveSchedule(scheduleItem);
+        });
+    } else {
+      console.log('edit()');
+    }
   }
 
   const days = [
@@ -123,11 +127,9 @@ export default function PopupForm(props) {
       <Modal
         open={props.openForm}
         onClose={() => {
-          transition(null);
-          props.setDeliverable(null);
-          props.setTask(null);
-          // props.handleOpenForm();
+          props.setScheduleItem(null, null, null);
           props.transition(null);
+          // props.handleOpenForm(); // Remove legacy code.
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -142,24 +144,30 @@ export default function PopupForm(props) {
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <SelectDeliverable
                   projects={Object.values(state.projects)}
-                  deliverables={deliverables2}
+                  deliverables={props.edit ? [selectedDel] : deliverables2}
                   onChange={props.setDeliverable}
-                  selectedDel={selectedDel}
-                  value={selectedProject}
-                  selectedProject={props.selectedProject}
+                  selectedDel={props.edit ? null : selectedDel}
                   onClick={handleOpen}
-                  transition={transition}
+                  transition={props.edit ? null : transition}
                 />
               </Collapse>
 
               {mode === TASKS &&
                 <Fragment>
                   <SelectTask
-                    tasks={tasks}
+                    tasks={props.edit ? [selectedTask] : tasks}
                     onChange={props.setTask}
-                    selectedProject={selectedProject}
-                    selectedDel={selectedDel}
-                    selectedTask={selectedTask}
+                    selectedTask={props.edit ? null : selectedTask}
+                  />
+                </Fragment>
+              }
+
+              {props.edit &&
+                <Fragment>
+                  <SelectTask
+                    tasks={props.edit ? [selectedTask] : tasks}
+                    onChange={props.setTask}
+                    selectedTask={props.edit ? null : selectedTask}
                   />
                 </Fragment>
               }
@@ -223,7 +231,7 @@ export default function PopupForm(props) {
               </FormControl>
               <Button variant="outlined" size="small" onClick={() => {
                 save();
-                
+
                 transition(null);
                 props.setDeliverable(null);
                 props.setTask(null);
@@ -231,6 +239,15 @@ export default function PopupForm(props) {
               }}>
                 Save
               </Button>
+
+              {props.edit &&
+                <Fragment>
+                  <Button variant="outlined"
+                    size="small">Completed</Button>
+                  <Button variant="outlined"
+                    size="small">Remove</Button>
+                </Fragment>
+              }
             </div>}
         </Box>
       </Modal>
