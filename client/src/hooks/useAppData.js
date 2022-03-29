@@ -501,6 +501,20 @@ export default function useAppData() {
   }
   appData.totalTasksForProject = totalTasksForProject
 
+  const getUsers = (state, user) => {
+    const allUsers = Object.values(state.users);
+    const selectedUsers = [];
+    const teamID = user.team_id;
+
+    for (const user of allUsers) {
+      if (user.team_id === teamID) {
+        selectedUsers.push(user);
+      }
+    }
+    return selectedUsers;
+  }
+  appData.getUsers = getUsers
+
 
   return appData;
 }
