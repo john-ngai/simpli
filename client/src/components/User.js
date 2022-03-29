@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './NavBar'
 import ProjectList from './ProjectList'
+import Teams from './Teams'
 import { Avatar } from '@mui/material'
 import './User.scss'
 import useAppData from '../hooks/useAppData'
