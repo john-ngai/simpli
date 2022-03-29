@@ -49,9 +49,9 @@ export default function DeliverableList(props) {
         <span id="project_name">{props.selectedProject.name}</span>
         <span id="project_description">{props.selectedProject.description}</span>
 
-        <span id="project_stats">{completedDeliverables(state, props.project)} of {props.selectedProject.count} Deliverables Completed
+        <span id="project_stats">{props.selectedProject['completed_deliverables']} of {props.selectedProject.count} Deliverables Completed
         </span>
-        <span className="deliverable_progress"><LinearProgressWithLabel value={Math.round((completedDeliverables(state, props.project) / props.selectedProject.count) * 100)}/></span>
+        <span className="deliverable_progress"><LinearProgressWithLabel value={Math.round((props.selectedProject['completed_deliverables'] / props.selectedProject.count) * 100)}/></span>
 
         <AddCircleIcon id="new_deliverable" className="mui_icons"
           onClick={() => {
