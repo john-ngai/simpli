@@ -458,8 +458,8 @@ export default function useAppData() {
   }
   appData.getProjectSchedule = getProjectSchedule;
 
-  const saveSchedule = (newScheduleItem) => {
-    const scheduleItem = newScheduleItem.task_id;
+  const saveSchedule = newScheduleItem => {
+    const scheduleItem = newScheduleItem.id;
     const schedule = {
       ...state.schedule,
       [newScheduleItem.id]: newScheduleItem
