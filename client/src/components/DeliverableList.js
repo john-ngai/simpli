@@ -24,6 +24,8 @@ export default function DeliverableList(props) {
       description={deliverable.description}
       count={deliverable.count}
       selected={deliverable.priority}
+      completed_tasks={deliverable['completed_tasks']}
+      total_tasks={deliverable['total_tasks']}
       onToggle={props.onToggle}
       setDeliverable={props.onChange}
       transition={props.transition}
@@ -40,7 +42,7 @@ export default function DeliverableList(props) {
       }}
     />
   );
-
+// console.log(props.selectedDeliverable['total_tasks'])
   return (
     <section>
       <div id="project_details">
@@ -81,9 +83,13 @@ export default function DeliverableList(props) {
           id={props.selectedDeliverable.id}
           name={props.selectedDeliverable.name}
           description={props.selectedDeliverable.description}
-          priority={props.priority}
-          status={props.status}
+          priority={props.selectedDeliverable.priority}
+          status={props.selectedDeliverable.status}
+          count={props.selectedDeliverable.count}
+          completed_tasks={props.selectedDeliverable['completed_tasks']}
+          total_tasks={props.selectedDeliverable['total_tasks']}
           editDeliverable={props.editDeliverable}
+          
         />
       }
 
