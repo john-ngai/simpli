@@ -44,9 +44,9 @@ export default function useAppData() {
   }, [])
   appData.state = state;
 
-    // Set the currently selected user .
-    const setUser = user => setState({ ...state, user });
-    appData.setUser = setUser;
+  // Set the currently selected user .
+  const setUser = user => setState({ ...state, user });
+  appData.setUser = setUser;
 
   // Set the currently selected project id.
   const setProject = project => setState({ ...state, project });
@@ -173,18 +173,18 @@ export default function useAppData() {
   }
   appData.getSelectedDeliverable = getSelectedDeliverable;
 
-    // Return the selected task object.
-    const getSelectedTask = state => {
-      const task_id = state.task;
-      const tasks = Object.values(state.tasks);
-      // return tasks.find(task => task.id === task_id);
-      for (const task of tasks) {
-        if (task.id === state.task) {
-          return task;
-        }
+  // Return the selected task object.
+  const getSelectedTask = state => {
+    const task_id = state.task;
+    const tasks = Object.values(state.tasks);
+    // return tasks.find(task => task.id === task_id);
+    for (const task of tasks) {
+      if (task.id === state.task) {
+        return task;
       }
     }
-    appData.getSelectedTask = getSelectedTask;
+  }
+  appData.getSelectedTask = getSelectedTask;
 
   // Delete the currently selected deliverable id.
   const deleteDeliverable = deliverable_id => {
@@ -211,29 +211,29 @@ export default function useAppData() {
   }
   appData.deleteDeliverable = deleteDeliverable;
 
-    // Edit an existing deliverable.
-    const editDeliverable = deliverable => {
-      const { id, name, description, project_id, priority, status } = deliverable;
-      const deliverables = {
-        ...state.deliverables,
-        [id]: {
-          ...state.deliverables[deliverable.id], // Get the missing count key.
-          id,
-          name,
-          description,
-          project_id,
-          priority,
-          status
-        }
+  // Edit an existing deliverable.
+  const editDeliverable = deliverable => {
+    const { id, name, description, project_id, priority, status } = deliverable;
+    const deliverables = {
+      ...state.deliverables,
+      [id]: {
+        ...state.deliverables[deliverable.id], // Get the missing count key.
+        id,
+        name,
+        description,
+        project_id,
+        priority,
+        status
       }
-      setState({ ...state, deliverables });
     }
-    appData.editDeliverable = editDeliverable;
+    setState({ ...state, deliverables });
+  }
+  appData.editDeliverable = editDeliverable;
 
   // toggle task complete
   const completeTask = (id) => {
     const allTasks = Object.values(state.tasks);
-    
+
     let updTask;
     allTasks.forEach(task => {
       if (task.id === id) {
@@ -333,24 +333,24 @@ export default function useAppData() {
   }
   appData.deleteTask = deleteTask;
 
-    // Edit an existing task.
-    const editTask = task => {
-      const { id, name, description, deliverable_id, priority, status } = task;
-      const tasks = {
-        ...state.tasks,
-        [id]: {
-          ...state.tasks[task.id], // Get the missing count key.
-          id,
-          name,
-          description,
-          deliverable_id,
-          priority,
-          status
-        }
+  // Edit an existing task.
+  const editTask = task => {
+    const { id, name, description, deliverable_id, priority, status } = task;
+    const tasks = {
+      ...state.tasks,
+      [id]: {
+        ...state.tasks[task.id], // Get the missing count key.
+        id,
+        name,
+        description,
+        deliverable_id,
+        priority,
+        status
       }
-      setState({ ...state, tasks });
     }
-    appData.editTask = editTask;
+    setState({ ...state, tasks });
+  }
+  appData.editTask = editTask;
 
   const setTaskPriority = (id) => {
     const allTasks = Object.values(state.tasks);
@@ -366,7 +366,7 @@ export default function useAppData() {
       ...state.tasks,
       [id]: updateTask
     }
-    
+
     // make an axios PUT req to update the task data
     axios.put(`/tasks/${id}`, updateTask)
       .then(() => {
@@ -467,7 +467,7 @@ export default function useAppData() {
     setState({ ...state, scheduleItem, schedule })
   }
   appData.saveSchedule = saveSchedule;
-  
+
 
   const completedTasksForProject = (state, project) => {
     let finishedTasks = 0;
@@ -520,6 +520,14 @@ export default function useAppData() {
     ...state, deliverable, task
   });
   appData.setDeliverableAndTask = setDeliverableAndTask;
+
+  // Set the currently selected deliverable, task, & scheduleItem id.
+  const setScheduleItem = (deliverable, task, scheduleItem) => {
+    setState({
+      ...state, deliverable, task, scheduleItem
+    });
+  }
+  appData.setScheduleItem = setScheduleItem;
 
   return appData;
 }
