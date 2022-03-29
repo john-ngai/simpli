@@ -35,7 +35,7 @@ module.exports = (db) => {
           res.send(formatData(projects));
         }
       });
-  })
+  });
 
   // PUT /projects
   router.put('/', (req, res) => {
@@ -54,8 +54,8 @@ module.exports = (db) => {
     const values = [name, description, team_id];
     const command = `
       INSERT INTO projects
-        (name, description, team_id)
-      VALUES ($1, $2, $3)
+        (name, description, completed_deliverables, total_deliverables, team_id)
+      VALUES ($1, $2, 0, 0, $3)
       RETURNING *;
     `;
     return db.query(command, values)
@@ -76,12 +76,12 @@ module.exports = (db) => {
     }
     const { team_id } = user;
     const id = req.params.id;
-    const { name, description } = req.body;
-    const values = [name, description, team_id, id];
+    const { name, description, completed_deliverables, total_deliverables } = req.body;
+    const values = [name, description, completed_deliverables, total_deliverables, team_id, id];
     const command = `
       UPDATE projects
-      SET name = $1, description = $2, team_id = $3
-      WHERE id = $4
+      SET name = $1, description = $2, completed_deliverables = $3, total_deliverables = $4, team_id = $5
+      WHERE id = $6
       RETURNING *;
     `;
     return db.query(command, values)
