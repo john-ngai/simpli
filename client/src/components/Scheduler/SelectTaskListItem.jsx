@@ -6,7 +6,7 @@ export default function SelectTaskListItem(props) {
   const { id, name, setTask } = props;
   
   return(
-    <ListItemButton >
+    <ListItemButton id="selected">
       <ListItemText 
       id={id}
       primary={name}

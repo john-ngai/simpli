@@ -22,7 +22,7 @@ export default function SelectDelListItem(props) {
       }}
       onClick={setDeliverable} 
       />
-      {!open ? <ExpandMore /> : <ExpandLess />}
+      {/* {!open ? <ExpandMore /> : <ExpandLess />} */}
     </ListItemButton>
   );
 }
