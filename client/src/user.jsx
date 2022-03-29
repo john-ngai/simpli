@@ -3,6 +3,7 @@ import Teams from "./Teams";
 import "./App.scss";
 import "./Teams.scss";
 import useAppData from "./hooks/useAppData";
+import { Link } from "react-router-dom";
 
 export default function User() {
   // console.log("user??", JSON.parse(localStorage.user));
@@ -46,6 +47,10 @@ export default function User() {
         </thead>
         {teamList}
       </table>
+      {/* TEMPORARY BUTTON. DELETE LATER. */}
+      <button>
+        <Link to='/'>Home</Link>
+      </button>
     </div>
   );
 }
