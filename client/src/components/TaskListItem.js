@@ -14,9 +14,6 @@ export default function TaskListItem(props) {
       <CheckCircleOutlineIcon id={props.status ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => {
         onClick(task.id)
         }} />
-      {/* <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
-        onClick={() => props.setTask()} // Do not remove.
-      /> */}
       <div id="task_list_item_container">
         <div id="task_list_item_header">
           <span className="task_name">{props.name}</span>
