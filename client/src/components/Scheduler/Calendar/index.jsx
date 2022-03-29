@@ -34,35 +34,89 @@ export default function Calendar(props) {
     <section id="calendar">
       <table id="table">
         <tbody>
-        <tr>
-          <td className="table header time"><b>Time</b></td>
-          <td className="table header"><b>SUNDAY</b></td>
-          <td className="table header"><b>MONDAY</b></td>
-          <td className="table header"><b>TUESDAY</b></td>
-          <td className="table header"><b>WEDNESDAY</b></td>
-          <td className="table header"><b>THURSDAY</b></td>
-          <td className="table header"><b>FRIDAY</b></td>
-          <td className="table header"><b>SATURDAY</b></td>
-        </tr>
+          <tr>
+            <td className="table header time"><b>Time</b></td>
+            <td className="table header"><b>SUNDAY</b></td>
+            <td className="table header"><b>MONDAY</b></td>
+            <td className="table header"><b>TUESDAY</b></td>
+            <td className="table header"><b>WEDNESDAY</b></td>
+            <td className="table header"><b>THURSDAY</b></td>
+            <td className="table header"><b>FRIDAY</b></td>
+            <td className="table header"><b>SATURDAY</b></td>
+          </tr>
 
-        <_7AM schedule={projectSchedule} setTask={props.setTask} />
-        <_8AM schedule={projectSchedule} setTask={props.setTask} />
-        <_9AM schedule={projectSchedule} setTask={props.setTask} />
-        <_10AM schedule={projectSchedule} setTask={props.setTask} />
-        <_11AM schedule={projectSchedule} setTask={props.setTask} />
-        <_12PM schedule={projectSchedule} setTask={props.setTask} />
-        <_1PM schedule={projectSchedule} setTask={props.setTask} />
-        <_2PM schedule={projectSchedule} setTask={props.setTask} />
-        <_3PM schedule={projectSchedule} setTask={props.setTask} />
-        <_4PM schedule={projectSchedule} setTask={props.setTask} />
-        <_5PM schedule={projectSchedule} setTask={props.setTask} />
-        <_6PM schedule={projectSchedule} setTask={props.setTask} />
-        <_7PM schedule={projectSchedule} setTask={props.setTask} />
-        <_8PM schedule={projectSchedule} setTask={props.setTask} />
-        <_9PM schedule={projectSchedule} setTask={props.setTask} />
-        <_10PM schedule={projectSchedule} setTask={props.setTask} />
-        <_11PM schedule={projectSchedule} setTask={props.setTask} />
-        <_12AM schedule={projectSchedule} setTask={props.setTask} />
+          <_7AM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_8AM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_9AM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_10AM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_11AM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_12PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_1PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_2PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_3PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_4PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_5PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_6PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_7PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_8PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_9PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_10PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_11PM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
+          <_12AM schedule={projectSchedule}
+            setScheduleItem={props.setScheduleItem}
+            transition={() => props.transition('EDIT_EVENT')}
+          />
         </tbody>
       </table>
     </section>
