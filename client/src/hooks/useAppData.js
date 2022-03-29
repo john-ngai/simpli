@@ -18,6 +18,8 @@ export default function useAppData() {
     schedule: {},
     showDelivForm: false,
     showTaskForm: false,
+    user: null,
+    users: {},
   });
 
   useEffect(() => {
@@ -25,20 +27,26 @@ export default function useAppData() {
       axios.get('/projects', { headers: authHeader() }),
       axios.get('/deliverables', { headers: authHeader() }),
       axios.get('/tasks', { headers: authHeader() }),
-      axios.get('/schedule') /* Missing JWT authentication!! */
+      axios.get('/schedule'), /* Missing JWT authentication!! */
+      axios.get('/users')
     ])
       .then(all => {
-        const [projects, deliverables, tasks, schedule] = all;
+        const [projects, deliverables, tasks, schedule, users] = all;
         setState(prev => ({
           ...prev,
           projects: projects.data,
           deliverables: deliverables.data,
           tasks: tasks.data,
           schedule: schedule.data,
+          users: users.data
         }));
       })
   }, [])
   appData.state = state;
+
+    // Set the currently selected user .
+    const setUser = user => setState({ ...state, user });
+    appData.setUser = setUser;
 
   // Set the currently selected project id.
   const setProject = project => setState({ ...state, project });
