@@ -44,6 +44,10 @@ export default function useAppData() {
   }, [])
   appData.state = state;
 
+    // Set the currently selected user .
+    const setUser = user => setState({ ...state, user });
+    appData.setUser = setUser;
+
   // Set the currently selected project id.
   const setProject = project => setState({ ...state, project });
   appData.setProject = setProject;

@@ -6,8 +6,9 @@ import App from './App';
 import Scheduler from './components/Scheduler';
 import Register from './components/Register';
 import Login from './components/Login';
-import User from './user';
+// import User from './user';
 import reportWebVitals from './reportWebVitals';
+import User from './components/User';
 
 const rootElement = document.getElementById('root');
 
