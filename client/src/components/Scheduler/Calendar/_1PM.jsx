@@ -9,7 +9,8 @@ export default function _1PM(props) {
 
   const edit = day => {
     if (day.id) {
-      console.log('task id =', day['task_id']);
+      props.setScheduleItem(day['deliverable_id'], day['task_id'], day.id);
+      props.transition();
     }
   }
 
