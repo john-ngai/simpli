@@ -21,7 +21,6 @@ import { withTheme } from '@emotion/react';
 const DELIVERABLES = "DELIVERABLES";
 const TASKS = "TASKS";
 
-
 export default function PopupForm(props) {
   const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
   const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
@@ -35,14 +34,14 @@ export default function PopupForm(props) {
   }
 
   const selectedProject = getSelectedProject(state);
-  const deliverables = getDeliverables(state, state.project);
-  const selectedDel = getSelectedDeliverable(state);
-  const tasks = getTasks(state, state.deliverable);
-  const selectedTask = getSelectedTask(state);
-  
+
+  let selectedDel = props.selectedDeliverable;
+  const tasks = getTasks(props.state, props.state.deliverable);
+  let selectedTask = getSelectedTask(props.state);
+
   let deliverables2;
   if (props.selectedProject) {
-    deliverables2 = getDeliverables(state, props.selectedProject.id);
+    deliverables2 = getDeliverables(props.state, props.selectedProject.id);
   }
 
   function formatAMPM(date) {
@@ -56,21 +55,27 @@ export default function PopupForm(props) {
 
   const save = () => {
     const scheduleItem = {
-      day_id: day,
-      project_id: props.selectedProject.id,
       start_time: formatAMPM(valueStartTime),
       end_time: formatAMPM(valueEndTime),
+      day_id: day,
+      project_id: props.selectedProject.id,
+      deliverable_id: props.selectedDeliverable.id,
       task: {
         id: selectedTask.id,
         name: selectedTask.name,
         description: selectedTask.description
       }
     }
-    axios.put('/schedule/new', scheduleItem)
-    .then(res => {
-      scheduleItem.id = res.data.id;
-      props.saveSchedule(scheduleItem);
-      })
+
+    if (!props.edit) {
+      axios.put('/schedule/new', scheduleItem)
+        .then(res => {
+          scheduleItem.id = res.data.id;
+          props.saveSchedule(scheduleItem);
+        });
+    } else {
+      console.log('edit()');
+    }
   }
 
   const days = [
@@ -116,12 +121,16 @@ export default function PopupForm(props) {
     boxShadow: 24,
     p: 4,
   };
-  
+
   return (
     <div>
       <Modal
         open={props.openForm}
-        onClose={props.handleOpenForm}
+        onClose={() => {
+          props.setScheduleItem(null, null, null);
+          props.transition(null);
+          // props.handleOpenForm(); // Remove legacy code.
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -129,33 +138,41 @@ export default function PopupForm(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Schedule a Task
           </Typography>
-          
+
           <List sx={{ width: '500px', maxWidth: '500px' }}>
-                <div style={{display:"flex"}} >
+            <div style={{ display: "flex" }} >
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <SelectDeliverable
-                projects={Object.values(state.projects)}
-                deliverables={deliverables2}
-                onChange={setDeliverable} 
-                selectedDel={selectedDel}
-                value={selectedProject}
-                selectedProject={props.selectedProject}
-                onClick={handleOpen}
-                transition={transition}
-                /> 
+                  projects={Object.values(state.projects)}
+                  deliverables={props.edit ? [selectedDel] : deliverables2}
+                  onChange={props.setDeliverable}
+                  selectedDel={props.edit ? null : selectedDel}
+                  onClick={handleOpen}
+                  transition={props.edit ? null : transition}
+                />
               </Collapse>
-              { mode === TASKS && 
-              <Fragment>
-              <SelectTask
-                tasks={tasks}
-                onChange={setTask}
-                selectedProject={selectedProject}
-                selectedDel={selectedDel}
-                selectedTask={selectedTask}
-              />
-              </Fragment>
-                }
-              </div>
+
+              {mode === TASKS &&
+                <Fragment>
+                  <SelectTask
+                    tasks={props.edit ? [selectedTask] : tasks}
+                    onChange={props.setTask}
+                    selectedTask={props.edit ? null : selectedTask}
+                  />
+                </Fragment>
+              }
+
+              {props.edit &&
+                <Fragment>
+                  <SelectTask
+                    tasks={props.edit ? [selectedTask] : tasks}
+                    onChange={props.setTask}
+                    selectedTask={props.edit ? null : selectedTask}
+                  />
+                </Fragment>
+              }
+
+            </div>
           </List>
           {selectedTask &&
             <div>
@@ -180,7 +197,7 @@ export default function PopupForm(props) {
                   </LocalizationProvider>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <TimePicker
-                      renderInput={(params) => <TextField sx={{color: 'white'}} {...params} />}
+                      renderInput={(params) => <TextField sx={{ color: 'white' }} {...params} />}
                       label="End Time"
                       value={valueEndTime}
                       views={["hours"]}
@@ -213,15 +230,27 @@ export default function PopupForm(props) {
                 </TextField>
               </FormControl>
               <Button variant="outlined" size="small" onClick={() => {
-                save()
-                props.handleOpenForm()
+                save();
+
+                transition(null);
+                props.setDeliverable(null);
+                props.setTask(null);
+                props.transition(null);
               }}>
                 Save
               </Button>
+
+              {props.edit &&
+                <Fragment>
+                  <Button variant="outlined"
+                    size="small">Completed</Button>
+                  <Button variant="outlined"
+                    size="small">Remove</Button>
+                </Fragment>
+              }
             </div>}
         </Box>
       </Modal>
     </div>
-
   );
 }

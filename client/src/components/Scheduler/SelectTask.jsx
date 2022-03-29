@@ -10,6 +10,9 @@ export default function SelectTask(props) {
     key={task.id}
     id={task.id}
     name={task.name}
+    selected={
+      props.selectedTask ? task.id === props.selectedTask.id : null
+    }
     setTask={()=>{onChange(task.id)}}
     />
     );

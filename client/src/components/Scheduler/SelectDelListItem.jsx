@@ -7,20 +7,24 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 export default function SelectDelListItem(props) {
   const { id, name, setDeliverable } = props;
 
+  const selected = props.selected ? 'selected_item' : null;
+
   const [open, setOpen] = useState(true);
   const handleOpen = () => {
     setOpen(!open);
   }
 
   return (
-    <ListItemButton id="selected" onClick={handleOpen} >
+    <ListItemButton id={selected}
+      onClick={handleOpen}
+    >
       <ListItemText
-      id={id}
-      primary={name}
-      primaryTypographyProps={{
-        fontSize: 12
-      }}
-      onClick={setDeliverable} 
+        onClick={setDeliverable}
+        id={id}
+        primary={name}
+        primaryTypographyProps={{
+          fontSize: 12
+        }}
       />
       {/* {!open ? <ExpandMore /> : <ExpandLess />} */}
     </ListItemButton>
