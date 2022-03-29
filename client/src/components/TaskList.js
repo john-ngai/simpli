@@ -45,10 +45,10 @@ export default function TaskList(props) {
           {props.selectedProject.name}: {props.selectedDeliverable.name}
         </span>
         <span id="deliverable_description">{props.selectedDeliverable.description}</span>
-        <span id="deliverable_stats">{completedTasks(state, props.deliverable)} of {props.selectedDeliverable.count} Tasks Completed
+        <span id="deliverable_stats">{props.selectedDeliverable['completed_tasks']} of {props.selectedDeliverable.count} Tasks Completed
         </span>
 
-        <span className="task_progress"><LinearProgressWithLabel value={Math.round((completedTasks(state, props.deliverable) / props.selectedDeliverable.count) * 100)}/></span>
+        <span className="task_progress"><LinearProgressWithLabel value={Math.round((props.selectedDeliverable['completed_tasks'] / props.selectedDeliverable.count) * 100)}/></span>
 
 
         <AddCircleIcon id="new_task" className="mui_icons"
