@@ -28,10 +28,7 @@ export default function useAppData() {
       axios.get('/deliverables', { headers: authHeader() }),
       axios.get('/tasks', { headers: authHeader() }),
       axios.get('/schedule') /* Missing JWT authentication!! */,
-<<<<<<< HEAD
-=======
       axios.get('/users')
->>>>>>> main
     ])
       .then(all => {
         const [projects, deliverables, tasks, schedule, users] = all;
