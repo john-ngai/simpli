@@ -11,7 +11,7 @@ export default function TaskListItem(props) {
   let {state, completedTasks} = useAppData();
 
   return (
-    <li className="task_list_item" id={ props.selected ? "priority" : "task_list_item"}>
+    <li className="task_list_item" id={props.selected ? "priority" : "task_list_item"}>
       <CheckCircleOutlineIcon id={props.status ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => {
         onClick(task.id)
         // props.completedTasks = props.completedTasks + 1
