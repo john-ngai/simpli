@@ -247,8 +247,6 @@ export default function useAppData() {
             updDeliv = deliverable
             if (task.status === true) {
               deliverable['completed_tasks']++
-              // console.log("completed: ", deliverable['completed_tasks'])
-              // console.log("count: ", deliverable['count'])
             } else if (task.status === false) {
               deliverable['completed_tasks']--
             }
@@ -256,7 +254,13 @@ export default function useAppData() {
         })
       }
     });
-
+    
+    if (updDeliv['completed_tasks'] === Number(updDeliv.count)) {
+      updDeliv.status = true
+    } else {
+      updDeliv.status = false
+    }
+console.log(updDeliv.status)
     const tasks = {
       ...state.tasks,
       [id]: updTask
@@ -273,11 +277,11 @@ export default function useAppData() {
     })
     .catch(err => console.log(err));
     
-    axios.put(`/delilverables/${delivID}`, updDeliv)
-      .then(() => {
-        setState({...state, deliverables})
-      })
-      .catch(err => console.log(err))
+    axios.put(`/deliverables/${delivID}`, updDeliv)
+    .then(() => {
+      setState({ ...state, deliverables });
+    })
+    .catch(err => console.log(err));
   }
   appData.completeTask = completeTask;
 
