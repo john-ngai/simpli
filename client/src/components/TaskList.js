@@ -13,7 +13,7 @@ const NEW_TASK = 'NEW_TASK';
 const EDIT_TASK = 'EDIT_TASK';
 
 export default function TaskList(props) {
-  const { state, deliverablePercentComplete, completedTasks } = useAppData();
+  const { state } = useAppData();
   const { mode, transition } = useVisualMode(null);
   const taskInfo = props.tasks.map(task => {
     // console.log(completedTasks(state, task.deliverable_id))
@@ -53,7 +53,6 @@ export default function TaskList(props) {
 
         <AddCircleIcon id="new_task" className="mui_icons"
           onClick={() => {
-            // onClick={props.showTaskForm} // Change to transition
             if (!mode) {
               transition(NEW_TASK);
             } else {
