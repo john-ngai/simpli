@@ -17,10 +17,9 @@ export default function ProjectListItem(props) {
       <span className="project_name">{props.name}</span>
       <span className="project_description">{props.description}</span>
       <span className="project_deliverables">{props.count} Deliverables</span>
-      {/* {props.count > 0 ? <aside>Percent Complete: {props.percentComplete}%</aside> : <aside>No Deliverables Yet! </aside>} */}
 
       {props.count > 0 ? <LinearProgressWithLabel className="project_progress"
-        value={Math.round((props.completedDeliverables / props.count) * 100)} /> : <LinearProgressWithLabel className="project_progress" value={0} />}
+        value={Math.round((props['completed_deliverables'] / props.count) * 100)} /> : <LinearProgressWithLabel className="project_progress" value={0} />}
 
 
       {props.selected &&

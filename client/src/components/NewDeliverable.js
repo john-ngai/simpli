@@ -23,16 +23,21 @@ export default function NewDeliverable(props) {
         .then(res => {
           deliverable.id = res.data.id
           deliverable.count = 0;
+          deliverable['completed_tasks'] = res.data['completed_tasks']
+          deliverable['total_tasks'] = res.data['total_tasks']
           props.saveDeliverable(deliverable)
           props.transition(null);
         })
     } else {
       deliverable.id = props.id;
       deliverable.count = props.count;
+      deliverable['completed_tasks'] = props['completed_tasks']
+      deliverable['total_tasks'] = props['total_tasks']
       axios.put(`/deliverables/${deliverable.id}`, deliverable)
-        .then(() => {
-          props.editDeliverable(deliverable)
-          props.transition(null);
+      .then(() => {
+        props.editDeliverable(deliverable)
+        props.transition(null);
+        console.log(deliverable)
         })
     }
   }
