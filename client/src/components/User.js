@@ -27,15 +27,7 @@ export default function User() {
       </div>
       <div class="projects">
         <h3>Ongoing Projects:</h3>
-        <ProjectList
-          projects={Object.values(state.projects)}
-          value={state.project}
-          onChange={setProject}
-          transition={transition}
-          deleteProject={deleteProject}
-          percentComplete={percentComplete}
-          completedDeliverables={completedDeliverables}
-        />
+        
       </div>
     </div>
   )
