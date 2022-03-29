@@ -13,7 +13,6 @@ export default function TaskListItem(props) {
     <li className="task_list_item" id={props.selected ? "priority" : "task_list_item"}>
       <CheckCircleOutlineIcon id={props.status ? "completed_task" : "incomplete_task"} className="mui_icons" onClick={() => {
         onClick(task.id)
-          // console.log((JSON.parse(localStorage.getItem("user"))['team_id']))
         }} />
       {/* <CheckCircleOutlineIcon id="completed_task" className="mui_icons"
         onClick={() => props.setTask()} // Do not remove.
