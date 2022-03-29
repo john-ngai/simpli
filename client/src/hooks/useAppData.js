@@ -515,6 +515,11 @@ export default function useAppData() {
   }
   appData.getUsers = getUsers
 
+  // Set the currently selected deliverable and task id.
+  const setDeliverableAndTask = (deliverable, task) => setState({
+    ...state, deliverable, task
+  });
+  appData.setDeliverableAndTask = setDeliverableAndTask;
 
   return appData;
 }
