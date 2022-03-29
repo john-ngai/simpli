@@ -25,11 +25,11 @@ export default function User() {
   const team = getUsers(state, currentUser);
 
   const teamList = team.map((user) => (
-    <Teams 
-    key={user.id} 
-    teamID={user.team_id}
-    name={user.name}
-    email={user.email}  
+    <Teams
+      key={user.id}
+      teamID={user.team_id}
+      name={user.name}
+      email={user.email}
     />
   ));
 
