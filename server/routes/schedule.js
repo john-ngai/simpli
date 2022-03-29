@@ -7,7 +7,8 @@ module.exports = (db) => {
       SELECT schedule.*,
         tasks.name,
         tasks.description,
-        project_id
+        project_id,
+        deliverable_id
       FROM schedule
         JOIN tasks ON task_id = tasks.id
         JOIN deliverables ON deliverable_id = deliverables.id;
@@ -23,6 +24,7 @@ module.exports = (db) => {
             end_time: element['end_time'],
             day_id: element['day_id'],
             project_id: element['project_id'],
+            deliverable_id: element['deliverable_id'],
             task: {
               id: element['task_id'],
               name: element.name,
@@ -40,10 +42,10 @@ module.exports = (db) => {
     const task_id = task.id;
     const values = [start_time, end_time, day_id, task_id];
     const command = `
-    INSERT INTO schedule (start_time, end_time, day_id, task_id)
-    VALUES ($1, $2, $3, $4)
-    RETURNING *;
-    `;
+      INSERT INTO schedule (start_time, end_time, day_id, task_id)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;    
     return db.query(command, values)
       .then(data => res.send(data.rows[0]));
   });
