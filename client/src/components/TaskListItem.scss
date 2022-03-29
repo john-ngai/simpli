@@ -30,8 +30,8 @@
   align-items: center;
   height: 80px;
   margin-bottom: 1px;
-  // border-left: solid 7px rgb(255, 200, 100);
-  background-color: rgb(246, 213, 82);
+  border-left: solid 10px rgb(255, 200, 100);
+  // background-color: rgb(255, 229, 126);
 }
 
 #complete_important_task {
@@ -43,7 +43,7 @@
   align-items: center;
   height: 80px;
   margin-bottom: 1px;
-  border-left: solid 5px rgb(255, 200, 100);
+  border-left: solid 7px rgb(255, 200, 100);
   background-color: rgb(62, 171, 113);
 }
 .task_list_item:hover {
