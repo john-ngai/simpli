@@ -24,7 +24,7 @@ import _12AM from './_12AM';
 const helper = require('./helpers');
 
 export default function Calendar(props) {
-  const { state, getProjectSchedule } = useAppData();
+  const { getProjectSchedule } = useAppData();
   const project = props.project;
   const schedule = props.schedule;
 
@@ -45,24 +45,24 @@ export default function Calendar(props) {
           <td className="table header"><b>SATURDAY</b></td>
         </tr>
 
-        <_7AM schedule={projectSchedule}/>
-        <_8AM schedule={projectSchedule}/>
-        <_9AM schedule={projectSchedule}/>
-        <_10AM schedule={projectSchedule}/>
-        <_11AM schedule={projectSchedule}/>
-        <_12PM schedule={projectSchedule}/>
-        <_1PM schedule={projectSchedule}/>
-        <_2PM schedule={projectSchedule}/>
-        <_3PM schedule={projectSchedule}/>
-        <_4PM schedule={projectSchedule}/>
-        <_5PM schedule={projectSchedule}/>
-        <_6PM schedule={projectSchedule}/>
-        <_7PM schedule={projectSchedule}/>
-        <_8PM schedule={projectSchedule}/>
-        <_9PM schedule={projectSchedule}/>
-        <_10PM schedule={projectSchedule}/>
-        <_11PM schedule={projectSchedule}/>
-        <_12AM schedule={projectSchedule}/>
+        <_7AM schedule={projectSchedule} setTask={props.setTask} />
+        <_8AM schedule={projectSchedule} setTask={props.setTask} />
+        <_9AM schedule={projectSchedule} setTask={props.setTask} />
+        <_10AM schedule={projectSchedule} setTask={props.setTask} />
+        <_11AM schedule={projectSchedule} setTask={props.setTask} />
+        <_12PM schedule={projectSchedule} setTask={props.setTask} />
+        <_1PM schedule={projectSchedule} setTask={props.setTask} />
+        <_2PM schedule={projectSchedule} setTask={props.setTask} />
+        <_3PM schedule={projectSchedule} setTask={props.setTask} />
+        <_4PM schedule={projectSchedule} setTask={props.setTask} />
+        <_5PM schedule={projectSchedule} setTask={props.setTask} />
+        <_6PM schedule={projectSchedule} setTask={props.setTask} />
+        <_7PM schedule={projectSchedule} setTask={props.setTask} />
+        <_8PM schedule={projectSchedule} setTask={props.setTask} />
+        <_9PM schedule={projectSchedule} setTask={props.setTask} />
+        <_10PM schedule={projectSchedule} setTask={props.setTask} />
+        <_11PM schedule={projectSchedule} setTask={props.setTask} />
+        <_12AM schedule={projectSchedule} setTask={props.setTask} />
         </tbody>
       </table>
     </section>
