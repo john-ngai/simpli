@@ -261,13 +261,22 @@ export default function useAppData() {
     if (updDeliv['completed_tasks'] === Number(updDeliv.count)) {
       updDeliv.status = true
       allProj.forEach(project => {
-        if (project.id === updDeliv.id) {
+        if (project.id === updDeliv.project_id) {
           updProj = project
           projID = project.id
           project['completed_deliverables']++
         }
       })
     } else {
+      allProj.forEach(project => {
+        if (project.id === updDeliv.project_id) {
+          updProj = project
+          projID = project.id
+          if (updDeliv.status === true) {
+            project['completed_deliverables']--
+          }
+        }
+      })
       updDeliv.status = false
     }
 
