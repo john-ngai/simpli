@@ -56,10 +56,11 @@ export default function PopupForm(props) {
 
   const save = () => {
     const scheduleItem = {
-      day_id: day,
-      project_id: props.selectedProject.id,
       start_time: formatAMPM(valueStartTime),
       end_time: formatAMPM(valueEndTime),
+      day_id: day,
+      project_id: props.selectedProject.id,
+      deliverable_id: props.selectedDeliverable.id,
       task: {
         id: selectedTask.id,
         name: selectedTask.name,
@@ -150,7 +151,7 @@ export default function PopupForm(props) {
                   transition={transition}
                 />
               </Collapse>
-              
+
               {mode === TASKS &&
                 <Fragment>
                   <SelectTask
@@ -221,8 +222,12 @@ export default function PopupForm(props) {
                 </TextField>
               </FormControl>
               <Button variant="outlined" size="small" onClick={() => {
-                save()
-                props.handleOpenForm()
+                save();
+                
+                transition(null);
+                props.setDeliverable(null);
+                props.setTask(null);
+                props.transition(null);
               }}>
                 Save
               </Button>
