@@ -21,7 +21,6 @@ import { withTheme } from '@emotion/react';
 const DELIVERABLES = "DELIVERABLES";
 const TASKS = "TASKS";
 
-
 export default function PopupForm(props) {
   const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
   const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
@@ -36,13 +35,14 @@ export default function PopupForm(props) {
 
   const selectedProject = getSelectedProject(state);
   const deliverables = getDeliverables(state, state.project);
-  const selectedDel = getSelectedDeliverable(state);
-  const tasks = getTasks(state, state.deliverable);
-  const selectedTask = getSelectedTask(state);
-  
+
+  let selectedDel = getSelectedDeliverable(props.state);
+  const tasks = getTasks(props.state, props.state.deliverable);
+  let selectedTask = getSelectedTask(props.state);
+
   let deliverables2;
   if (props.selectedProject) {
-    deliverables2 = getDeliverables(state, props.selectedProject.id);
+    deliverables2 = getDeliverables(props.state, props.selectedProject.id);
   }
 
   function formatAMPM(date) {
@@ -67,9 +67,9 @@ export default function PopupForm(props) {
       }
     }
     axios.put('/schedule/new', scheduleItem)
-    .then(res => {
-      scheduleItem.id = res.data.id;
-      props.saveSchedule(scheduleItem);
+      .then(res => {
+        scheduleItem.id = res.data.id;
+        props.saveSchedule(scheduleItem);
       })
   }
 
@@ -116,12 +116,17 @@ export default function PopupForm(props) {
     boxShadow: 24,
     p: 4,
   };
-  
+
   return (
     <div>
       <Modal
         open={props.openForm}
-        onClose={props.handleOpenForm}
+        onClose={() => {
+          transition(null);
+          props.setDeliverable(null);
+          props.Task(null);
+          props.handleOpenForm();
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -129,33 +134,35 @@ export default function PopupForm(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Schedule a Task
           </Typography>
-          
+
           <List sx={{ width: '500px', maxWidth: '500px' }}>
-                <div style={{display:"flex"}} >
+            <div style={{ display: "flex" }} >
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <SelectDeliverable
-                projects={Object.values(state.projects)}
-                deliverables={deliverables2}
-                onChange={setDeliverable} 
-                selectedDel={selectedDel}
-                value={selectedProject}
-                selectedProject={props.selectedProject}
-                onClick={handleOpen}
-                transition={transition}
-                /> 
+                  projects={Object.values(state.projects)}
+                  deliverables={deliverables2}
+                  onChange={props.setDeliverable}
+                  selectedDel={selectedDel}
+                  value={selectedProject}
+                  selectedProject={props.selectedProject}
+                  onClick={handleOpen}
+                  transition={transition}
+                />
               </Collapse>
-              { mode === TASKS && 
-              <Fragment>
-              <SelectTask
-                tasks={tasks}
-                onChange={setTask}
-                selectedProject={selectedProject}
-                selectedDel={selectedDel}
-                selectedTask={selectedTask}
-              />
-              </Fragment>
-                }
-              </div>
+              
+              {mode === TASKS &&
+                <Fragment>
+                  <SelectTask
+                    tasks={tasks}
+                    onChange={props.setTask}
+                    selectedProject={selectedProject}
+                    selectedDel={selectedDel}
+                    selectedTask={selectedTask}
+                  />
+                </Fragment>
+              }
+
+            </div>
           </List>
           {selectedTask &&
             <div>
@@ -180,7 +187,7 @@ export default function PopupForm(props) {
                   </LocalizationProvider>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <TimePicker
-                      renderInput={(params) => <TextField sx={{color: 'white'}} {...params} />}
+                      renderInput={(params) => <TextField sx={{ color: 'white' }} {...params} />}
                       label="End Time"
                       value={valueEndTime}
                       views={["hours"]}
@@ -222,6 +229,5 @@ export default function PopupForm(props) {
         </Box>
       </Modal>
     </div>
-
   );
 }
