@@ -235,14 +235,20 @@ export default function useAppData() {
     const allTasks = Object.values(state.tasks);
     const allDelivs = Object.values (state.deliverables)
     let updTask;
+    let updDeliv;
+    let delivID;
     allTasks.forEach(task => {
       if (task.id === id) {
         task.status = !task.status;
         updTask = task;
         allDelivs.forEach(deliverable => {
           if (deliverable.id === task.deliverable_id) {
+            delivID = deliverable.id
+            updDeliv = deliverable
             if (task.status === true) {
               deliverable['completed_tasks']++
+              // console.log("completed: ", deliverable['completed_tasks'])
+              // console.log("count: ", deliverable['count'])
             } else if (task.status === false) {
               deliverable['completed_tasks']--
             }
@@ -256,12 +262,22 @@ export default function useAppData() {
       [id]: updTask
     }
 
-
+    const deliverables = {
+      ...state.deliverables,
+      [delivID]: updDeliv
+    }
+    
     axios.put(`/tasks/${id}`, updTask)
+    .then(() => {
+      setState({ ...state, tasks });
+    })
+    .catch(err => console.log(err));
+    
+    axios.put(`/delilverables/${delivID}`, updDeliv)
       .then(() => {
-        setState({ ...state, tasks });
+        setState({...state, deliverables})
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }
   appData.completeTask = completeTask;
 
