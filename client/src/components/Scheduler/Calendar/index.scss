@@ -49,9 +49,6 @@
 }
 
 .booked.name {
-  // background-color: lightcyan;
-  // border-bottom: 2px solid lightcyan;
-  // cursor: pointer;
   max-width: 197.4px;
   min-width: 197.4px;
 }
@@ -61,7 +58,7 @@
 }
 
 .completed {
-  background-color: rgb(142, 255, 193);
-  border-bottom: 2px solid rgb(142, 255, 193);
+  background-color: rgb(130, 199, 160);
+  border-bottom: 2px solid rgb(130, 199, 160);
   cursor: pointer; 
 }
