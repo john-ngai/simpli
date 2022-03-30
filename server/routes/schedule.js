@@ -7,6 +7,7 @@ module.exports = (db) => {
       SELECT schedule.*,
         tasks.name,
         tasks.description,
+        tasks.status AS completed,
         project_id,
         deliverable_id
       FROM schedule
@@ -28,7 +29,8 @@ module.exports = (db) => {
             task: {
               id: element['task_id'],
               name: element.name,
-              description: element.description
+              description: element.description,
+              completed: element.completed
             }
           }
         }
