@@ -26,7 +26,7 @@ export default function PopupForm(props) {
     if (!time) {
       return null;
     }
-    
+
     if (time.includes('a')) {
       time = time.split(/(?=a)/g);
     }
@@ -281,27 +281,27 @@ export default function PopupForm(props) {
                   ))}
                 </TextField>
               </FormControl>
-              <Button variant="outlined" size="small" onClick={() => {
-                save();
-                transition(null);
-                props.setScheduleItem(null, null, null);
-                props.transition(null);
-              }}>
-                Save
-              </Button>
+              <Button variant="outlined" size="small"
+                onClick={() => {
+                  save();
+                  transition(null);
+                  props.setScheduleItem(null, null, null);
+                  props.transition(null);
+                }}>Save</Button>
 
               {props.edit &&
                 <Fragment>
-                  <Button variant="outlined"
-                    size="small">Completed</Button>
-                  <Button variant="outlined"
-                    size="small"
+                  <Button id="button_completed"
+                    variant="outlined" size="small"
+                  >Completed</Button>
+                  
+                  <Button id="button_remove"
+                    variant="outlined" size="small"
                     onClick={() => {
                       props.deleteScheduleItem(props.state.scheduleItem);
                       props.setScheduleItem(null, null, null);
                       props.transition(null);
-                    }}
-                  >Remove</Button>
+                    }}>Remove</Button>
                 </Fragment>
               }
             </div>}

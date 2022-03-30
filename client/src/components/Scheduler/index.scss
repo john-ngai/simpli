@@ -35,3 +35,15 @@ body {
 #selected_item {
   background-color: grey;
 }
+
+#button_remove {
+  color: rgb(255, 70, 70);
+  border-color: rgb(255, 70, 70);
+  font-weight: bold;
+}
+
+#button_completed {
+  color: green;
+  border-color: green;
+  font-weight: bold;
+}
