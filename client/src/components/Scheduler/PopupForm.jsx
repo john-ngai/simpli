@@ -293,6 +293,11 @@ export default function PopupForm(props) {
                 <Fragment>
                   <Button id="button_completed"
                     variant="outlined" size="small"
+                    onClick={() => {
+                      props.toggleComplete(props.state.schedule, scheduleItemDetails);
+                      props.setScheduleItem(null, null, null);
+                      props.transition(null);
+                    }}
                   >Completed</Button>
                   
                   <Button id="button_remove"
