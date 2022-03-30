@@ -11,7 +11,7 @@ import useVisualMode from '../hooks/useVisualMode'
 
 export default function User() {
   const user = JSON.parse(localStorage.user)
-  const {state, getUsers, teamInfo} = useAppData();
+  const {state, getUsers} = useAppData();
   const {transition} = useVisualMode();
 
   const team = getUsers(state, user);
@@ -24,17 +24,37 @@ export default function User() {
     />
   ));
 
-  /*const teamName = () => {
-    if (teamInfo) {
-      return teamInfo.name
-    } 
+  const teamCodes = () => {
+    let teamCode;
+    if (user) {
+      for (let team of Object.values(state.teams)) {
+        if (team.id === user.team_id) {
+          teamCode = team.code
+        }
+      }
+    } else {
+      teamCode = "unknown team code"
+    }
+    return teamCode
   }
 
-  const teamCode = () => {
-    if (teamInfo) {
-      return teamInfo.code
-    } 
-  }/**/
+  const teamCode = teamCodes();
+
+  const teamNames = () => {
+    let teamName;
+    if (user) {
+      for (let team of Object.values(state.teams)) {
+        if (team.id === user.team_id) {
+          teamName = team.name
+        }
+      }
+    } else {
+      teamName = "unknown team name"
+    }
+    return teamName
+  }
+
+  const teamName = teamNames();
 
   return (
     <div>
@@ -46,10 +66,8 @@ export default function User() {
           {user.email}
         </div>
         <div id="team-info">
-          {/* <h2>Team Name: <strong>{teamName()}</strong></h2>
-          <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3> */}
-          <h2>Team Name: <strong>Dream Team</strong></h2>
-          <h3>Team Registration Code: <strong>lighthouse</strong> </h3>
+          <h2>Team Name: <strong>{teamName}</strong></h2>
+          <h3>Team Registration Code: <strong>{teamCode}</strong> </h3>
           <h4>Team members: </h4>
           <table>
         <thead>
