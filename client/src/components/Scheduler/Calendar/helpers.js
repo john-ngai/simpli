@@ -143,6 +143,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
         scheduledTasks.sun.id = item.id;
         scheduledTasks.sun['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.sun['task_id'] = item.task.id;
+        scheduledTasks.sun.completed = item.task.completed;
         if (start_time === time) {
           scheduledTasks.sun.name = item.task.name;
           scheduledTasks.sun.description = item.task.description;
@@ -156,6 +157,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
         scheduledTasks.mon.id = item.id;
         scheduledTasks.mon['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.mon['task_id'] = item.task.id;
+        scheduledTasks.mon.completed = item.task.completed;
         if (start_time === time) {
           scheduledTasks.mon.name = item.task.name;
           scheduledTasks.mon.description = item.task.description;
@@ -169,6 +171,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
         scheduledTasks.tues.id = item.id;
         scheduledTasks.tues['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.tues['task_id'] = item.task.id;
+        scheduledTasks.tues.completed = item.task.completed;
         if (start_time === time) {
           scheduledTasks.tues.name = item.task.name;
           scheduledTasks.tues.description = item.task.description;
@@ -182,6 +185,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
         scheduledTasks.wed.id = item.id;
         scheduledTasks.wed['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.wed['task_id'] = item.task.id;
+        scheduledTasks.wed.completed = item.task.completed;
         if (start_time === time) {
           scheduledTasks.wed.name = item.task.name;
           scheduledTasks.wed.description = item.task.description;
@@ -195,6 +199,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
         scheduledTasks.thurs.id = item.id;
         scheduledTasks.thurs['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.thurs['task_id'] = item.task.id;
+        scheduledTasks.thurs.completed = item.task.completed;
         if (start_time === time) {
           scheduledTasks.thurs.name = item.task.name;
           scheduledTasks.thurs.description = item.task.description;
@@ -208,6 +213,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
         scheduledTasks.fri.id = item.id;
         scheduledTasks.fri['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.fri['task_id'] = item.task.id;
+        scheduledTasks.fri.completed = item.task.completed;
         if (start_time === time) {
           scheduledTasks.fri.name = item.task.name;
           scheduledTasks.fri.description = item.task.description;
@@ -221,6 +227,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
         scheduledTasks.sat.id = item.id;
         scheduledTasks.sat['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.sat['task_id'] = item.task.id;
+        scheduledTasks.sat.completed = item.task.completed;
         if (start_time === time) {
           scheduledTasks.sat.name = item.task.name;
           scheduledTasks.sat.description = item.task.description;
