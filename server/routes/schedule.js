@@ -37,7 +37,7 @@ module.exports = (db) => {
   });
 
   // PUT /schedule
-  router.put('/new', (req,res) => {
+  router.put('/', (req,res) => {
     const { start_time, end_time, day_id, task } = req.body;
     const task_id = task.id;
     const values = [start_time, end_time, day_id, task_id];
@@ -48,6 +48,35 @@ module.exports = (db) => {
     `;    
     return db.query(command, values)
       .then(data => res.send(data.rows[0]));
+  });
+
+  // PUT /schedule/:id
+  router.put('/:id', (req,res) => {
+    const id = req.params.id;
+    const { day_id, start_time, end_time, task } = req.body;
+    const task_id = task.id;
+    const values = [day_id, start_time, end_time, task_id, id];
+    const command = `
+      UPDATE schedule
+      SET day_id = $1,
+        start_time = $2, end_time = $3,
+        task_id = $4
+      WHERE id = $5;
+    `;
+    return db.query(command, values)
+      .then(() => res.send());
+  });
+
+  // DELETE /schedule/:id
+  router.delete('/:id', (req,res) => {
+    const values = [req.params.id];
+    const command = `
+      DELETE FROM schedule
+      WHERE id = $1;
+    `;
+    return res.send();
+    return db.query(command, values)
+      .then(() => res.send());
   });
 
   return router;
