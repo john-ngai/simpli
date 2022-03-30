@@ -11,38 +11,47 @@ import useVisualMode from '../hooks/useVisualMode'
 
 export default function User() {
   const user = JSON.parse(localStorage.user)
-  const {state, setProject, deleteProject, percentComplete, completedDeliverables, setUser, getUsers} = useAppData();
+  const {state, getUsers, teamInfo} = useAppData();
   const {transition} = useVisualMode();
-
-  console.log(user)
 
   const team = getUsers(state, user);
 
   const teamList = team.map((member) => (
     <Teams
       key={member.id}
-      teamID={member.team_id}
       name={member.name}
       email={member.email}
     />
   ));
+
+  const teamName = () => {
+    if (teamInfo) {
+      return teamInfo.name
+    } 
+  }
+
+  const teamCode = () => {
+    if (teamInfo) {
+      return teamInfo.code
+    } 
+  }
 
   return (
     <div>
       <Navbar user={user.name} />
       <div className="container">
         <div id="user-info">
-          <Avatar sx={{width: 150, height: 150}} src="https://avatars.githubusercontent.com/u/89871393?v=4"/>
+        <Avatar sx={{width: 150, height: 150}} src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"/>
           <h2>{user.name}</h2>
           {user.email}
         </div>
         <div id="team-info">
-          <h2>Team: {user.team_id}</h2>
+          <h2>Team Name: <strong>{teamName()}</strong></h2>
+          <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3>
           <h4>Team members: </h4>
           <table>
         <thead>
           <tr>
-            <th>Team ID</th>
             <th>Name</th>
             <th>Email</th>
           </tr>
@@ -50,10 +59,6 @@ export default function User() {
         {teamList}
       </table>
         </div>
-      </div>
-      <div className="projects">
-        <h3>Ongoing Projects:</h3>
-        {user.team_code}
       </div>
     </div>
   )
