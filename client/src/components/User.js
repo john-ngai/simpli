@@ -15,7 +15,6 @@ export default function User() {
   const {transition} = useVisualMode();
 
   const team = getUsers(state, user);
-console.log(teamInfo)
 
   const teamList = team.map((member) => (
     <Teams
@@ -37,7 +36,6 @@ console.log(teamInfo)
     } 
   }
 
-console.log(teamName())
   return (
     <div>
       <Navbar user={user.name} />
