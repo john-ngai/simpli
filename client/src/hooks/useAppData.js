@@ -603,5 +603,21 @@ export default function useAppData() {
   }
   appData.deleteScheduleItem = deleteScheduleItem;
 
+  const toggleComplete = (schedule, scheduleItemDetails) => {
+    const item = scheduleItemDetails;
+    item.task.completed = !scheduleItemDetails.task.completed;
+
+    // const taskID = item.task.id;
+    // const taskDetails = state.tasks.taskID;
+    // console.log('taskDetails =', taskDetails);
+
+    setState({
+      ...state,
+      schedule,
+      [item.id]: item
+    });
+  }
+  appData.toggleComplete = toggleComplete;
+
   return appData;
 }
