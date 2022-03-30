@@ -19,7 +19,8 @@ export default function useAppData() {
     schedule: {},
     showDelivForm: false,
     showTaskForm: false,
-    users: {}
+    users: {},
+    teams: {},
   });
 
   useEffect(() => {
@@ -28,17 +29,19 @@ export default function useAppData() {
       axios.get('/deliverables', { headers: authHeader() }),
       axios.get('/tasks', { headers: authHeader() }),
       axios.get('/schedule') /* Missing JWT authentication!! */,
-      axios.get('/users')
+      axios.get('/users'),
+      axios.get('/teams')
     ])
       .then(all => {
-        const [projects, deliverables, tasks, schedule, users] = all;
+        const [projects, deliverables, tasks, schedule, users, teams] = all;
         setState(prev => ({
           ...prev,
           projects: projects.data,
           deliverables: deliverables.data,
           tasks: tasks.data,
           schedule: schedule.data,
-          users: users.data
+          users: users.data,
+          teams: teams.data
         }));
       })
   }, [])
@@ -563,6 +566,19 @@ export default function useAppData() {
     return selectedUsers;
   }
   appData.getUsers = getUsers
+
+  const userTeam = () => {
+    const user = JSON.parse(localStorage.user)
+    for (let team of Object.values(state.teams)) {
+      if (team.id === user.team_id) {
+        return team
+      }
+    }
+  }
+  appData.userTeam = userTeam
+
+  const teamInfo = userTeam()
+  appData.teamInfo = teamInfo
 
 
   return appData;
