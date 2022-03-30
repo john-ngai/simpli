@@ -567,7 +567,6 @@ export default function useAppData() {
   }
   appData.getUsers = getUsers
 
-<<<<<<< HEAD
   const userTeam = () => {
     const user = JSON.parse(localStorage.user)
     for (let team of Object.values(state.teams)) {
@@ -581,7 +580,6 @@ export default function useAppData() {
   const teamInfo = userTeam()
   appData.teamInfo = teamInfo
 
-=======
   // Set the currently selected deliverable, task, & scheduleItem id.
   const setScheduleItem = (deliverable, task, scheduleItem) => {
     setState({
@@ -604,7 +602,6 @@ export default function useAppData() {
       });
   }
   appData.deleteScheduleItem = deleteScheduleItem;
->>>>>>> a2699f3397386c286801b4038852b3114b422b6d
 
   return appData;
 }
