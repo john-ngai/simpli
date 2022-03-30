@@ -11,31 +11,33 @@ import useVisualMode from '../hooks/useVisualMode'
 
 export default function User() {
   const user = JSON.parse(localStorage.user)
-  const {state, setProject, deleteProject, percentComplete, completedDeliverables, setUser, getUsers} = useAppData();
+  const {state, getUsers, teamInfo} = useAppData();
   const {transition} = useVisualMode();
 
-  // console.log(user)
-
   const team = getUsers(state, user);
-
-  // console.log(team[0].team_code)
+console.log(teamInfo)
 
   const teamList = team.map((member) => (
     <Teams
       key={member.id}
-      // teamID={member.team_id}
       name={member.name}
       email={member.email}
     />
   ));
 
-  // const teamCode = () => {
-  //   if (team[0].team_code) {
-  //     return team[0].team_code
-  //   } else {
-  //     return "No team code :("
-  //   }
-  // }
+  const teamName = () => {
+    if (teamInfo) {
+      return teamInfo.name
+    } 
+  }
+
+  const teamCode = () => {
+    if (teamInfo) {
+      return teamInfo.code
+    } 
+  }
+
+console.log(teamName())
   return (
     <div>
       <Navbar user={user.name} />
@@ -46,12 +48,12 @@ export default function User() {
           {user.email}
         </div>
         <div id="team-info">
-          {/* <h2>Team Code: {teamCode} </h2> */}
+          <h2>Team Name: {teamName()}</h2>
+          <h3>Team Registration Code: {teamCode()} </h3>
           <h4>Team members: </h4>
           <table>
         <thead>
           <tr>
-            {/* <th>Team ID</th> */}
             <th>Name</th>
             <th>Email</th>
           </tr>
@@ -60,10 +62,6 @@ export default function User() {
       </table>
         </div>
       </div>
-      {/* <div className="projects">
-        <h3>Ongoing Projects:</h3>
-        {user.team_code}
-      </div> */}
     </div>
   )
 }
