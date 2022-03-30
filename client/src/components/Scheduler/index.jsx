@@ -26,7 +26,7 @@ export default function Scheduler() {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, setScheduleItem, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule, deleteScheduleItem } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, setScheduleItem, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule, deleteScheduleItem, toggleComplete } = useAppData();
   const { mode, transition } = useVisualMode(null);
 
   const [open, setOpen] = useState(true);
@@ -136,6 +136,7 @@ export default function Scheduler() {
             setScheduleItem={setScheduleItem}
 
             deleteScheduleItem={deleteScheduleItem}
+            toggleComplete={toggleComplete}
           />
         }
 
