@@ -28,14 +28,14 @@ INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES (
 INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Re-install the hose', 'Turn on water valve', false, true, 5);
 
 
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Outline user stories', '', false, false, 3);
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Outline routes', '', false, false, 3);
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Draw website mockup and ERDs', '', false, false, 3);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Outline user stories', '', false, false, 6);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Outline routes', '', false, false, 6);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Draw website mockup and ERDs', '', false, false, 6);
 
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Setup Express server', '', false, false, 4);
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Setup React', '', false, false, 4);
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Setup PostgreSQL database', '', false, false, 4);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Setup Express server', '', false, false, 7);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Setup React', '', false, false, 7);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Setup PostgreSQL database', '', false, false, 7);
 
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Create a shortlist of 3-5 courses', '', false, false, 5);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Create a shortlist of 3-5 courses', '', false, false, 8);
 
-INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Create a schedule using Google Sheets', '', FALSE, false, 6);
+INSERT INTO tasks (name, description, priority, status, deliverable_id) VALUES ('Create a schedule using Google Sheets', '', FALSE, false, 9);
