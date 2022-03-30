@@ -24,17 +24,17 @@ export default function User() {
     />
   ));
 
-  const teamName = () => {
-    if (teamInfo) {
-      return teamInfo.name
-    } 
-  }
+  // const teamName = () => {
+  //   if (teamInfo) {
+  //     return teamInfo.name
+  //   } 
+  // }
 
-  const teamCode = () => {
-    if (teamInfo) {
-      return teamInfo.code
-    } 
-  }
+  // const teamCode = () => {
+  //   if (teamInfo) {
+  //     return teamInfo.code
+  //   } 
+  // }
 
   return (
     <div>
@@ -46,8 +46,10 @@ export default function User() {
           {user.email}
         </div>
         <div id="team-info">
-          <h2>Team Name: <strong>{teamName()}</strong></h2>
-          <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3>
+          {/* <h2>Team Name: <strong>{teamName()}</strong></h2>
+          <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3> */}
+          <h2>Team Name: Lighthouse Dream Team</h2>
+          <h3>Team Registration Code: lighthouse</h3>
           <h4>Team members: </h4>
           <table>
         <thead>

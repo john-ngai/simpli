@@ -567,18 +567,18 @@ export default function useAppData() {
   }
   appData.getUsers = getUsers
 
-  const userTeam = () => {
-    const user = JSON.parse(localStorage.user)
-    for (let team of Object.values(state.teams)) {
-      if (team.id === user.team_id) {
-        return team
-      }
-    }
-  }
-  appData.userTeam = userTeam
+  // const userTeam = (user) => {
+  //   // const user = JSON.parse(localStorage.user)
+  //   for (let team of Object.values(state.teams)) {
+  //     if (team.id === user.team_id) {
+  //       return team
+  //     }
+  //   }
+  // }
+  // appData.userTeam = userTeam
 
-  const teamInfo = userTeam()
-  appData.teamInfo = teamInfo
+  // const teamInfo = userTeam()
+  // appData.teamInfo = teamInfo
 
   // Set the currently selected deliverable, task, & scheduleItem id.
   const setScheduleItem = (deliverable, task, scheduleItem) => {
