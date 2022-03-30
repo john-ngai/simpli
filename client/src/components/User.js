@@ -24,7 +24,7 @@ export default function User() {
     />
   ));
 
-  const teamName = () => {
+  /*const teamName = () => {
     if (teamInfo) {
       return teamInfo.name
     } 
@@ -34,7 +34,7 @@ export default function User() {
     if (teamInfo) {
       return teamInfo.code
     } 
-  }
+  }/**/
 
   return (
     <div>
@@ -46,8 +46,10 @@ export default function User() {
           {user.email}
         </div>
         <div id="team-info">
-          <h2>Team Name: <strong>{teamName()}</strong></h2>
-          <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3>
+          {/* <h2>Team Name: <strong>{teamName()}</strong></h2>
+          <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3> */}
+          <h2>Team Name: <strong>Dream Team</strong></h2>
+          <h3>Team Registration Code: <strong>lighthouse</strong> </h3>
           <h4>Team members: </h4>
           <table>
         <thead>
