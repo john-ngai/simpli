@@ -41,7 +41,7 @@ export default function Navbar(props) {
       <span className="login_nav">
         {!props.user && <Link to="/register">Register</Link>}
         {!props.user && <Link to="/login">Login</Link>}
-        {props.user && <a href="" onClick={() => localStorage.removeItem('user')}>Logout</a>}
+        {props.user && <a href="/login" onClick={() => localStorage.removeItem('user')}>Logout</a>}
         {props.user && <Link to="/user"><span className="login_user"><Stack direction="row"><Avatar sx={{width: 24, height: 24}} src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"/> {props.user}</Stack></span></Link>}
       </span>
     </nav>
