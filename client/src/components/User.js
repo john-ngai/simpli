@@ -24,6 +24,7 @@ export default function User() {
     />
   ));
 
+<<<<<<< HEAD
   // const teamName = () => {
   //   if (teamInfo) {
   //     return teamInfo.name
@@ -35,6 +36,19 @@ export default function User() {
   //     return teamInfo.code
   //   } 
   // }
+=======
+  /*const teamName = () => {
+    if (teamInfo) {
+      return teamInfo.name
+    } 
+  }
+
+  const teamCode = () => {
+    if (teamInfo) {
+      return teamInfo.code
+    } 
+  }/**/
+>>>>>>> 8f6bd7f0b954e4b176713e7e9fef4752da0c182e
 
   return (
     <div>
@@ -48,8 +62,13 @@ export default function User() {
         <div id="team-info">
           {/* <h2>Team Name: <strong>{teamName()}</strong></h2>
           <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3> */}
+<<<<<<< HEAD
           <h2>Team Name: Lighthouse Dream Team</h2>
           <h3>Team Registration Code: lighthouse</h3>
+=======
+          <h2>Team Name: <strong>Dream Team</strong></h2>
+          <h3>Team Registration Code: <strong>lighthouse</strong> </h3>
+>>>>>>> 8f6bd7f0b954e4b176713e7e9fef4752da0c182e
           <h4>Team members: </h4>
           <table>
         <thead>
