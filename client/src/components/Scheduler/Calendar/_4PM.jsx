@@ -14,9 +14,6 @@ export default function _4PM(props) {
     }
   }
 
-  const completed = sun.completed;
-  console.log('completed =', completed);
-
   return (
     <tr>
       <td className="table time">4 PM</td>
