@@ -30,39 +30,13 @@ export default function SelectProject(props) {
     key={project.id}
     id={project.id}
     name={project.name}
-    // selected={project.id === props.value}
     setProject={() => {
       onChange(project.id);
-      transition('DELIVERABLES');
     }}
     />
   );
 
-  // const [project, setProject] = React.useState('');
-
-  // const handleChange = event => {
-  //   setProject(event.target.value);
-  // };
-
   return (
-    // <Box sx={{ minWidth: 175 }}>
-    //   <FormControl fullWidth>
-    //     <InputLabel id="demo-simple-select-label">Select Project</InputLabel>
-    //     <Select
-    //       labelId="demo-simple-select-label"
-    //       id="demo-simple-select"
-    //       value={project}
-    //       label="Select Project"
-    //       onChange={handleChange}
-    //     >
-    //       <MenuItem value={'projectID1'}>Project Name #1</MenuItem>
-    //       <MenuItem value={'projectID2'}>Project Name #2</MenuItem>
-    //       <MenuItem value={'projectID3'}>Project Name #3</MenuItem>
-    //     </Select>
-    //   </FormControl>
-    // </Box>
-
-    
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List sx={{width: 'auto'}} component="div">
           {projectList}

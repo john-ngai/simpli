@@ -141,6 +141,7 @@ const getScheduledTasks = (filteredSchedule, time) => {
     switch (day_id) {
       case 1:
         scheduledTasks.sun.id = item.id;
+        scheduledTasks.sun['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.sun['task_id'] = item.task.id;
         if (start_time === time) {
           scheduledTasks.sun.name = item.task.name;
@@ -150,8 +151,10 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.sun.lastHour = true;
         }
         break;
+
       case 2:
         scheduledTasks.mon.id = item.id;
+        scheduledTasks.mon['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.mon['task_id'] = item.task.id;
         if (start_time === time) {
           scheduledTasks.mon.name = item.task.name;
@@ -161,8 +164,10 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.mon.lastHour = true;
         }
         break;
+
       case 3:
         scheduledTasks.tues.id = item.id;
+        scheduledTasks.tues['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.tues['task_id'] = item.task.id;
         if (start_time === time) {
           scheduledTasks.tues.name = item.task.name;
@@ -172,8 +177,10 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.tues.lastHour = true;
         }
         break;
+
       case 4:
         scheduledTasks.wed.id = item.id;
+        scheduledTasks.wed['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.wed['task_id'] = item.task.id;
         if (start_time === time) {
           scheduledTasks.wed.name = item.task.name;
@@ -183,8 +190,10 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.wed.lastHour = true;
         }
         break;
+
       case 5:
         scheduledTasks.thurs.id = item.id;
+        scheduledTasks.thurs['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.thurs['task_id'] = item.task.id;
         if (start_time === time) {
           scheduledTasks.thurs.name = item.task.name;
@@ -194,8 +203,10 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.thurs.lastHour = true;
         }
         break;
+
       case 6:
         scheduledTasks.fri.id = item.id;
+        scheduledTasks.fri['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.fri['task_id'] = item.task.id;
         if (start_time === time) {
           scheduledTasks.fri.name = item.task.name;
@@ -205,8 +216,10 @@ const getScheduledTasks = (filteredSchedule, time) => {
           scheduledTasks.fri.lastHour = true;
         }
         break;
+
       case 7:
         scheduledTasks.sat.id = item.id;
+        scheduledTasks.sat['deliverable_id'] = item['deliverable_id'];
         scheduledTasks.sat['task_id'] = item.task.id;
         if (start_time === time) {
           scheduledTasks.sat.name = item.task.name;

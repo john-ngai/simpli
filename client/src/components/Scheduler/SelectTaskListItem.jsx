@@ -4,16 +4,18 @@ import ListItemText from '@mui/material/ListItemText';
 
 export default function SelectTaskListItem(props) {
   const { id, name, setTask } = props;
-  
-  return(
-    <ListItemButton id="selected">
-      <ListItemText 
-      id={id}
-      primary={name}
-      primaryTypographyProps={{
-        fontSize: 12
-      }}
-      onClick={setTask}
+
+  const selected = props.selected ? 'selected_item' : null;
+
+  return (
+    <ListItemButton id={selected}>
+      <ListItemText
+        id={id}
+        primary={name}
+        primaryTypographyProps={{
+          fontSize: 12
+        }}
+        onClick={setTask}
       />
     </ListItemButton>
   );
