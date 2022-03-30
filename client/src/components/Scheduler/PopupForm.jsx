@@ -22,9 +22,54 @@ const DELIVERABLES = "DELIVERABLES";
 const TASKS = "TASKS";
 
 export default function PopupForm(props) {
-  const [valueStartTime, setValueStartTime] = useState(new Date(0, 0, 0, 7));
-  const [valueEndTime, setValueEndTime] = useState(new Date(0, 0, 0, 8));
-  const [day, setDay] = useState('');
+  const timeFormat = time => {
+    if (!time) {
+      return null;
+    }
+    
+    if (time.includes('a')) {
+      time = time.split(/(?=a)/g);
+    }
+
+    if (time.includes('p')) {
+      time = time.split(/(?=p)/g);
+    }
+
+    if (Number(time[0]) === 12 && time[1] === 'am') {
+      return new Date(0, 0, 0, 0);
+    }
+
+    if (Number(time[0]) !== 12 && time[1] === 'am') {
+      const hour = Number(time[0]);
+      return new Date(0, 0, 0, hour);
+    }
+
+    if (Number(time[0]) === 12 && time[1] === 'pm') {
+      return new Date(0, 0, 0, 12);
+    }
+
+    if (Number(time[0]) !== 12 && time[1] === 'pm') {
+      const hour = Number(time[0]) + 12;
+      return new Date(0, 0, 0, hour);
+    }
+  }
+
+  const scheduleItemDetails = props.state.scheduleItem ?
+    props.state.schedule[props.state.scheduleItem] : null;
+  const scheduledItemStartTime = props.state.scheduleItem ?
+    scheduleItemDetails['start_time'] : null;
+  const scheduledItemEndTime = props.state.scheduleItem ?
+    scheduleItemDetails['end_time'] : null;
+  const scheduledItemDayID = props.state.scheduleItem ?
+    scheduleItemDetails['day_id'] : null;
+
+  const [valueStartTime, setValueStartTime] = useState(
+    timeFormat(scheduledItemStartTime) || new Date(0, 0, 0, 7)
+  );
+  const [valueEndTime, setValueEndTime] = useState(
+    timeFormat(scheduledItemEndTime) || new Date(0, 0, 0, 8)
+  );
+  const [day, setDay] = useState(scheduledItemDayID || '');
   const [task_id, setTask_id] = useState('');
   const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, getTasks, getSelectedTask, saveSchedule } = useAppData();
   const { mode, transition } = useVisualMode(null);
@@ -68,13 +113,20 @@ export default function PopupForm(props) {
     }
 
     if (!props.edit) {
-      axios.put('/schedule/new', scheduleItem)
+      // PUT /schedule - Create a new schedule item.
+      axios.put('/schedule', scheduleItem)
         .then(res => {
           scheduleItem.id = res.data.id;
           props.saveSchedule(scheduleItem);
         });
+      // PUT /schedule/:id - Edit an existing schedule item.
     } else {
-      console.log('edit()');
+      const id = props.state.scheduleItem;
+      scheduleItem.id = id;
+      axios.put(`/schedule/${id}`, scheduleItem)
+        .then(() => {
+          props.saveSchedule(scheduleItem);
+        });
     }
   }
 
@@ -231,10 +283,8 @@ export default function PopupForm(props) {
               </FormControl>
               <Button variant="outlined" size="small" onClick={() => {
                 save();
-
                 transition(null);
-                props.setDeliverable(null);
-                props.setTask(null);
+                props.setScheduleItem(null, null, null);
                 props.transition(null);
               }}>
                 Save
@@ -245,7 +295,13 @@ export default function PopupForm(props) {
                   <Button variant="outlined"
                     size="small">Completed</Button>
                   <Button variant="outlined"
-                    size="small">Remove</Button>
+                    size="small"
+                    onClick={() => {
+                      props.deleteScheduleItem(props.state.scheduleItem);
+                      props.setScheduleItem(null, null, null);
+                      props.transition(null);
+                    }}
+                  >Remove</Button>
                 </Fragment>
               }
             </div>}

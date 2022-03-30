@@ -26,7 +26,7 @@ export default function Scheduler() {
   let user = null;
   const [openForm, setOpenForm] = useState(false);
   const handleOpenForm = () => setOpenForm(!openForm);
-  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, setScheduleItem, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule } = useAppData();
+  const { state, setProject, getSelectedProject, getDeliverables, setDeliverable, getSelectedDeliverable, setTask, setScheduleItem, getTasks, getSelectedTask, completedDeliverables, completedTasksForProject, totalTasksForProject, saveSchedule, deleteScheduleItem } = useAppData();
   const { mode, transition } = useVisualMode(null);
 
   const [open, setOpen] = useState(true);
@@ -36,9 +36,6 @@ export default function Scheduler() {
   const selectedProject = getSelectedProject(state);
   const selectedDeliverable = getSelectedDeliverable(state);
   const selectedTask = getSelectedTask(state);
-  // const deliverables = getDeliverables(state, state.project); // Remove legacy code.
-  // const selectedDel = getSelectedDeliverable(state); // Remove legacy code.
-  // const tasks = getTasks(state, state.deliverable); // Remove legacy code.
 
   if (!localStorage.user) {
     return (
@@ -137,6 +134,8 @@ export default function Scheduler() {
             mode={mode}
             edit={true}
             setScheduleItem={setScheduleItem}
+
+            deleteScheduleItem={deleteScheduleItem}
           />
         }
 
