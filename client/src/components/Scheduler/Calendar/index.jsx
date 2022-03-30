@@ -35,7 +35,7 @@ export default function Calendar(props) {
       <table id="table">
         <tbody>
           <tr>
-            <td className="table header time"><b>Time</b></td>
+            <td className="table header time"><b></b></td>
             <td className="table header"><b>SUNDAY</b></td>
             <td className="table header"><b>MONDAY</b></td>
             <td className="table header"><b>TUESDAY</b></td>
