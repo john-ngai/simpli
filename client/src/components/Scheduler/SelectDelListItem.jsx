@@ -18,7 +18,7 @@ export default function SelectDelListItem(props) {
     <ListItemButton id={selected}
       onClick={handleOpen}
     >
-      <ListItemText
+      <ListItemText className="ListItemText"
         onClick={setDeliverable}
         id={id}
         primary={name}

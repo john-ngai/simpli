@@ -24,7 +24,7 @@
   border: transparent;
   font-weight: bold;
   color: rgb(230, 230, 230);
-  width: 105px;
+  width: 110px;
 }
 
 .header {
@@ -61,7 +61,13 @@
 }
 
 .completed {
-  background-color: rgb(130, 199, 160);
-  border-bottom: 2px solid rgb(130, 199, 160);
+  background-color: rgb(105, 168, 132);
+  border-bottom: 2px solid rgb(105, 168, 132);
+  color: black;
   cursor: pointer; 
+}
+
+.completed.name {
+  max-width: 197.4px;
+  min-width: 197.4px;
 }

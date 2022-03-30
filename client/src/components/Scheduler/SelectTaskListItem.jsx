@@ -9,7 +9,7 @@ export default function SelectTaskListItem(props) {
 
   return (
     <ListItemButton id={selected}>
-      <ListItemText
+      <ListItemText className="ListItemText"
         id={id}
         primary={name}
         primaryTypographyProps={{

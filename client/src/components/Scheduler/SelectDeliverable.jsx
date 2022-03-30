@@ -24,7 +24,7 @@ export default function SelectDeliverable(props) {
 
   return (
     <div>
-      <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", backgroundColor: "inherit", color: 'white' }} >Deliverables</ListSubheader>
+      <ListSubheader sx={{ fontSize: 16, fontWeight: "bold", textDecoration: "underline", backgroundColor: "inherit", color: 'black' }} >Deliverables</ListSubheader>
       {delList}
     </div>
   )
