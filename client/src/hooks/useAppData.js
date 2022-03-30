@@ -257,7 +257,7 @@ export default function useAppData() {
         })
       }
     });
-    
+
     if (updDeliv['completed_tasks'] === Number(updDeliv.count)) {
       updDeliv.status = true
       allProj.forEach(project => {
@@ -296,22 +296,22 @@ export default function useAppData() {
     }
 
     axios.put(`/tasks/${id}`, updTask)
-    .then(() => {
-      setState({ ...state, tasks });
-    })
-    .catch(err => console.log(err));
-    
+      .then(() => {
+        setState({ ...state, tasks });
+      })
+      .catch(err => console.log(err));
+
     axios.put(`/deliverables/${delivID}`, updDeliv)
-    .then(() => {
-      setState({ ...state, deliverables });
-    })
-    .catch(err => console.log(err));
+      .then(() => {
+        setState({ ...state, deliverables });
+      })
+      .catch(err => console.log(err));
 
     axios.put(`/projects/${projID}`, updProj)
-    .then(() => {
-      setState({ ...state, projects });
-    })
-    .catch(err => console.log(err));
+      .then(() => {
+        setState({ ...state, projects });
+      })
+      .catch(err => console.log(err));
   }
   appData.completeTask = completeTask;
 
@@ -571,6 +571,21 @@ export default function useAppData() {
     });
   }
   appData.setScheduleItem = setScheduleItem;
+
+  const deleteScheduleItem = scheduleItem => {
+    const schedule = {};
+    Object.values(state.schedule).forEach(item => {
+      if (item.id !== scheduleItem) {
+        schedule[item.id] = item;
+      }
+      
+    });
+    axios.delete(`/schedule/${scheduleItem}`)
+      .then(() => {
+        setState({ ...state, schedule });
+      });
+  }
+  appData.deleteScheduleItem = deleteScheduleItem;
 
   return appData;
 }
