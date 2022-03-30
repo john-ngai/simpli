@@ -21,20 +21,23 @@
 }
 
 .time {
-  border-radius: 10px;
-  width: 100px;
+  border: transparent;
+  font-weight: bold;
+  color: rgb(230, 230, 230);
+  width: 105px;
 }
 
 .header {
-  border: 2px solid transparent;
-  border-radius: 10px;
+  border: 1px solid transparent;
+  color: rgb(230, 230, 230);
 }
 
 .item {
   font-size: 13px;
   word-wrap: break-all;
-  border-right: 2px solid grey;
-  border-bottom: 2px solid grey;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
 }
 
 .last {
