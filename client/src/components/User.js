@@ -46,8 +46,8 @@ export default function User() {
           {user.email}
         </div>
         <div id="team-info">
-          <h2>Team Name: {teamName()}</h2>
-          <h3>Team Registration Code: {teamCode()} </h3>
+          <h2>Team Name: <strong>{teamName()}</strong></h2>
+          <h3>Team Registration Code: <strong>{teamCode()}</strong> </h3>
           <h4>Team members: </h4>
           <table>
         <thead>
