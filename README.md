@@ -22,6 +22,7 @@ Simpli is a team-based project tracking productivity app. Projects are mapped th
 
 * node.js
 * express
+* psql
 * dotenv
 * pg
 * bcrypt
@@ -29,8 +30,8 @@ Simpli is a team-based project tracking productivity app. Projects are mapped th
 
 ## Getting started
 
-1. `npm install` all of the dependencies inside the server and client directories.
-2. Inside the `server` directory, copy the `.env.example` file and name it `.env`.
-3. Inside `psql`, create a user and database using the info found inside the `.env` file.
+1. `npm install` all of the dependencies inside the `/server` and `/client` directories.
+2. Inside the `server` directory, make a copy of the `.env.example` file and name it `.env`.
+3. Open `psql` and create a user and database using the info found inside the `.env` file.
 4. Create the database tables and rows by inserting all of the files found inside `/server/db/schema` and `/server/db/seeds`.
-5. Open two command-line windows, with one inside `/server`, the other inside `/cient`, and run `npm start` on both of them.
+5. Open two command-line windows, one inside `/server`, the other inside `/cient`, and run `npm start` on both.
