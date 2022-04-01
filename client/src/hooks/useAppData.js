@@ -581,7 +581,7 @@ export default function useAppData() {
       if (item.id !== scheduleItem) {
         schedule[item.id] = item;
       }
-      
+
     });
     axios.delete(`/schedule/${scheduleItem}`)
       .then(() => {
@@ -592,17 +592,18 @@ export default function useAppData() {
 
   const toggleComplete = (schedule, scheduleItemDetails) => {
     const item = scheduleItemDetails;
-    item.task.completed = !scheduleItemDetails.task.completed;
-
-    // const taskID = item.task.id;
-    // const taskDetails = state.tasks.taskID;
-    // console.log('taskDetails =', taskDetails);
-
-    setState({
-      ...state,
-      schedule,
-      [item.id]: item
-    });
+    const newStatus = !scheduleItemDetails.task.completed;
+    item.task.completed = newStatus;
+    const selectedTask = getSelectedTask(state);
+    selectedTask.status = newStatus;
+    axios.put(`/tasks/${selectedTask.id}`, selectedTask)
+      .then(() => {
+        setState({
+          ...state,
+          schedule,
+          [item.id]: item
+        });
+      })
   }
   appData.toggleComplete = toggleComplete;
 
